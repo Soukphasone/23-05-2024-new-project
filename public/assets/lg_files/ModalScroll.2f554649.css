@@ -1,0 +1,23 @@
+.modal-top .vfm__content {
+    background: none;
+    margin: 0 auto;
+    width: 560px
+}
+
+@media only screen and (orientation:portrait) and (max-width:640px) {
+    .modal-top .vfm__content {
+        width: 100%
+    }
+}
+
+.modal-top .modal-top-body {
+    background: var(--card-primary);
+    min-height: 100px
+}
+
+@media only screen and (max-height:400px) {
+    .vfm.vfm--fixed.vfm--inset {
+        align-items: start;
+        padding-top: 20px
+    }
+}

@@ -1,0 +1,56 @@
+.promotion-status-wrapper .PromotionStatusList[data-v-8f507023] {
+    z-index: 3
+}
+
+.promotion-status-wrapper .nuxt-icon.nuxt-icon--fill.icon-satus * {
+    margin-bottom: 0 !important
+}
+
+.promotion-card-wrapper .icon-arrow-card[data-v-d9762dab] {
+    background: var(--card-tertiary);
+    border-radius: 100%
+}
+
+.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+@supports (-webkit-line-clamp:3) {
+    .text {
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal
+    }
+}
+
+.promotion-card-wrapper .nuxt-icon.nuxt-icon--fill.icon-arrow * {
+    height: 20px !important;
+    margin-bottom: 0 !important;
+    width: 20px !important
+}
+
+@media only screen and (orientation:portrait) and (max-width:640px) {
+    .promotion-card-wrapper .nuxt-icon.nuxt-icon--fill.icon-arrow * {
+        height: 15px !important;
+        width: 15px !important
+    }
+}
+
+#get-promotion-modal .card-wrapper {
+    padding: 0 !important
+}
+
+#get-promotion-modal .balance-promotion {
+    background-color: #0ff;
+    padding-top: 34.9462365591%
+}
+
+.nuxt-icon.nuxt-icon--fill.icon-arrow-left * {
+    margin-bottom: 0 !important;
+    margin-top: .125em
+}
