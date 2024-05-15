@@ -13,7 +13,8 @@ function Login() {
   const { data } = useParams();
   const parsed = queryString.parse(history?.location?.search);
   // bank account
-  const { handleRegister } = _LoginController();
+  const { handleLogin, handleRegister } = _LoginController();
+
   const [bankCode, setBankCode] = useState(0);
   const [inputBank, setInputBank] = useState("");
   const [warningBank, setWarningBank] = useState("");
@@ -43,7 +44,7 @@ function Login() {
   const CreateUser = async () => {
     if (inputBank === "") {
       setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
-      return; 
+      return;
     }
 
     try {
@@ -64,8 +65,8 @@ function Login() {
         }
       );
       console.log("============>>>>>>", _res)
-      if (_res) {setMessageCreate(_res?.statusDesc);}
-        
+      if (_res) { setMessageCreate(_res?.statusDesc); }
+
     } catch (error) {
       console.error("Registration error:", error);
       showErrorAlert("เกิดข้อผิดพลาด");
@@ -223,7 +224,6 @@ function Login() {
     }),
   };
   //
-  const { handleLogin, loginPlayNow } = _LoginController();
 
   const NextToHome = async () => {
     const _res = await handleLogin(userNameInput, passwordInput, (response) => {
@@ -510,8 +510,8 @@ function Login() {
                                           ? phoneCheck
                                           : ""
                                         : inputPhonenumber.length < 13
-                                        ? phoneCheck
-                                        : ""
+                                          ? phoneCheck
+                                          : ""
                                       : ""}
                                   </span>
                                 </div>

@@ -70,10 +70,10 @@ const LoginController = () => {
 		inputPassword,
 		inputBank,
 		ref,
-		
+		setLoading
 	) => {
 		try {
-  console.log("TT=====>")
+			console.log("TT=====>")
 			const _date = {
 				s_agent_code: Constant.AGENT_CODE,
 				s_phone: inputPhonenumber,
@@ -87,13 +87,13 @@ const LoginController = () => {
 				s_channel_name: Constant.AGENT_CODE,
 				i_channel: "134",
 			};
-          console.log("DYAA", _date)
+			console.log("DYAA", _date)
 			const _resOne = await axios({
 				method: "post",
 				url: `${Constant.SERVER_URL}/Member/Register/Verify`,
 				data: _date,
 			});
-  console.log("res", _resOne)
+			console.log("res", _resOne)
 			if (_resOne?.data?.statusCode === 0) {
 				console.log("register One: ", _resOne?.data)
 				const _resTwo = await axios({
@@ -129,19 +129,19 @@ const LoginController = () => {
 							Constant.LOGIN_USER_DATA,
 							JSON.stringify(_resTwo?.data?.data),
 						);
-
+						setLoading(false);
 						console.log("DDDDDDDDDDD", _resThree?.data)
-							_loginAfterRegister(
-								_resTwo?.data?.data?.s_username,
-								_resTwo?.data?.data?.s_password,
+						_loginAfterRegister(
+							_resTwo?.data?.data?.s_username,
+							_resTwo?.data?.data?.s_password,
 
-							);
-						
+						);
+
 					}
 				}
 				console.log("register finished: ", _resOne?.data)
 			} else {
-			console.log("register finish: ", _resOne?.data)
+				console.log("register finish: ", _resOne?.data)
 				return _resOne?.data;
 			}
 		} catch (error) {
@@ -251,8 +251,8 @@ const LoginController = () => {
 						balance: _res?.data?.balance,
 					}),
 				);
-					history.push(Constant.AFTER_LOGIN, _res?.data?.data);
-				
+				history.push(Constant.AFTER_LOGIN, _res?.data?.data);
+
 			}
 		} catch (error) {
 			console.log("🚀 ~ const_login= ~ error:", error);
