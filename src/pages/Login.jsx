@@ -2,23 +2,97 @@ import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { BackList } from "../constant/bankList";
 import Select from "react-select";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import _LoginController from "../api/login";
-
+import queryString from "query-string";
+import { useHistory } from "react-router-dom";
+import Constant from "../constant";
+import { showErrorAlert, showSuccessAlert } from "../helper/SweetAlert";
 function Login() {
+  const history = useHistory();
   const { data } = useParams();
-
+  const parsed = queryString.parse(history?.location?.search);
+  // bank account
+  const { handleRegister } = _LoginController();
   const [bankCode, setBankCode] = useState(0);
-  const [activeTab, setActiveTab] = useState(data);
+  const [inputBank, setInputBank] = useState("");
+  const [warningBank, setWarningBank] = useState("");
+
+  const [deviceType, setDeviceType] = useState(false);
+  //register
   const [inputPhonenumber, setInputPhonenumber] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [inputFirstname, setInputFirstname] = useState("");
+  const [inputLastname, setInputLastname] = useState("");
+  const [inputRef, setInputRef] = useState(parsed?.ref);
+  const [warningPassword, setWarningPassword] = useState("");
+  const [warningFirstName, setWarningFirstName] = useState("");
+  const [warningLastName, setWarningLastName] = useState("");
+
+  //
+
+  const [activeTab, setActiveTab] = useState("register");
   const [warningPhone, setWarningPhone] = useState("");
   const [typePhone, setTypePhone] = useState("TH");
   const [selectedOption, setSelectedOption] = useState("เบอร์โทรศัพท์ไทย");
   const [phoneCheck, setPhoneCheck] = useState("");
-  const [userNameInput, setUserNameInput] = useState();
-  const [passwordInput, setPasswordInput] = useState();
-  const [messageCreate, setMessageCreate] = useState();
+  const [userNameWarning, setUserNameWarning] = useState(""); //for login
+  const [userNameInput, setUserNameInput] = useState(""); //for login
+  const [passwordInput, setPasswordInput] = useState("");
+  const [messageCreate, setMessageCreate] = useState("");
+  const CreateUser = async () => {
+    if (inputBank === "") {
+      setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
+      return; 
+    }
 
+    try {
+      const _res = await handleRegister(
+        inputFirstname,
+        inputLastname,
+        inputPhonenumber,
+        inputPassword,
+        inputBank,
+        bankCode,
+        (response) => {
+          if (response === false) {
+            console.log("==================>", response)
+            showSuccessAlert("สำเร็จ");
+          } else {
+            showErrorAlert("ทำรายการไม่สำเร็จ");
+          }
+        }
+      );
+      console.log("============>>>>>>", _res)
+      if (_res) {setMessageCreate(_res?.statusDesc);}
+        
+    } catch (error) {
+      console.error("Registration error:", error);
+      showErrorAlert("เกิดข้อผิดพลาด");
+    }
+  };
+
+  const _clickNextStep = () => {
+    if (inputPhonenumber === "") {
+      setWarningPhone("กรุณากรอกเบอร์โทร");
+    } else if (inputPassword === "") {
+      setWarningPassword("กรุณาป้อนรหัสผ่าน");
+    } else if (inputFirstname === "") {
+      setWarningFirstName("กรุณาป้อนชื่อ");
+    } else if (inputLastname === "") {
+      setWarningLastName("กรุณาป้อนนามสกุล");
+    } else {
+      setActiveTab("bank");
+    }
+  };
+  //handle bank
+
+  const handleChangeBank = useCallback((event) => {
+    const re = /^[0-9\b]+$/;
+    if (event.target.value === "" || re.test(event.target.value)) {
+      setInputBank(event?.target?.value);
+    }
+  });
   const options = [
     {
       value: "เบอร์โทรศัพท์ไทย",
@@ -48,7 +122,7 @@ function Login() {
       setPhoneCheck("กรุณากรอกเบอร์โทรให้ครบ 13 หลัก");
     }
   });
-
+  // style option
   const customStyles = {
     container: (provided, state) => ({
       // ສີພື້ນຫລັງທຳອິດ
@@ -66,10 +140,10 @@ function Login() {
       border: state.isSelected
         ? "rgb(var(--color-primary-DEFAULT)/.4)"
         : "rgb(var(--color-primary-DEFAULT)/.4)",
-      boxShadow: "none", // Removes the box shadow on focus
-      borderColor: state.isFocused ? "transparent" : provided.borderColor, // Disables the border color on focus
+      boxShadow: "none",
+      borderColor: state.isFocused ? "transparent" : provided.borderColor,
       "&:hover": {
-        borderColor: "transparent", // Disables the border color on hover
+        borderColor: "transparent",
       },
     }),
     menu: (provided, state) => ({
@@ -148,42 +222,28 @@ function Login() {
       border: state.isSelected ? "none" : "none",
     }),
   };
-
+  //
   const { handleLogin, loginPlayNow } = _LoginController();
 
-  const NextToHome = async (e) => {
-    const _res = await handleLogin(userNameInput, passwordInput,
-      (response) => {
-        if (response === false) {
-          Swal.fire({
-            icon: 'success',
-            title: "สำเร็จ",
-            showConfirmButton: false,
-            timer: 2000,
-            background: '#242424', // Change to the color you want
-            color: '#fff',
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: "ทำรายการไม่สำเร็จ",
-            showConfirmButton: false,
-            timer: 2000,
-            background: '#242424',
-            color: '#fff',
-          });
-        }
-      });
+  const NextToHome = async () => {
+    const _res = await handleLogin(userNameInput, passwordInput, (response) => {
+      if (response === false) {
+        showSuccessAlert("สำเร็จ");
+      } else {
+        showErrorAlert("ล็อกอินไม่สำเร็จ");
+      }
+    });
     if (_res) setMessageCreate(_res?.statusDesc);
+
   };
-  const handleLoginTab = () => {
+
+  const handleLoginTab = (event) => {
+    event.preventDefault();
     setActiveTab("login");
   };
-  const handleRegisterTab = () => {
+  const handleRegisterTab = (event) => {
+    event.preventDefault();
     setActiveTab("register");
-  };
-  const handleAccountTab = () => {
-    setActiveTab("bank");
   };
   const wrapperClass =
     activeTab === "login"
@@ -206,24 +266,6 @@ function Login() {
           </header>
           <main data-v-19df7d63="" class="min-h-screen">
             <div data-v-19df7d63="" class="w-full mx-auto">
-              <div
-                class="nuxt-loading-indicator"
-                style={{
-                  position: "fixed",
-                  top: "0px",
-                  right: "0px",
-                  left: "0px",
-                  pointerEvents: "none",
-                  width: "auto",
-                  height: "3px",
-                  opacity: "0",
-                  background: "var(--primary)",
-                  transform: "scaleX(0)",
-                  transformOrigin: "left center 0px",
-                  transition: "transform 0.1s, height 0.4s, opacity 0.4s",
-                  zIndex: "999999",
-                }}
-              ></div>
               <main data-v-d8556cff="" class={wrapperClass}>
                 <div
                   data-v-d8556cff=""
@@ -272,7 +314,7 @@ function Login() {
                                   data-v-ea58f736=""
                                   id="auth-advance-tab"
                                   class={changeColorTextL}
-                                  onClick={handleLoginTab}
+                                  onClick={(e) => handleLoginTab(e)}
                                 >
                                   <span
                                     data-v-ea58f736=""
@@ -321,13 +363,22 @@ function Login() {
                                     <input
                                       data-v-d8556cff=""
                                       class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
+                                      value={userNameInput}
                                       type="text"
                                       placeholder="เบอร์โทรศัพท์"
                                       autocomplete="off"
-                                      onChange={(e) => setUserNameInput(e?.target?.value)}
+                                      onChange={(e) =>
+                                        setUserNameInput(e?.target?.value)
+                                      }
                                     />
                                   </div>
+                                  {/* <span style={{ color: "red" }}>
+                                    {userNameInput !== ""
+                                      ? ""
+                                      : setUserNameWarning}
+                                  </span> */}
                                   <div
+                                    style={{ marginTop: "-25px" }}
                                     data-v-d8556cff=""
                                     class="h-[18px]"
                                   ></div>
@@ -351,11 +402,19 @@ function Login() {
                                       class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password"
                                       placeholder="รหัสผ่าน"
-                                      onChange={(e) => setPasswordInput(e?.target?.value)}
+                                      onChange={(e) =>
+                                        setPasswordInput(e?.target?.value)
+                                      }
                                       autocomplete="off"
                                     />
                                   </div>
+                                  <span style={{ color: "red" }}>
+                                    {inputPassword !== ""
+                                      ? ""
+                                      : warningPassword}
+                                  </span>
                                   <div
+                                    style={{ marginTop: "-25px" }}
                                     data-v-d8556cff=""
                                     class="h-[18px]"
                                   ></div>
@@ -390,7 +449,6 @@ function Login() {
                                 data-v-d8556cff=""
                                 class="flex flex-col mt-3"
                               >
-
                                 <div
                                   data-v-d8556cff=""
                                   class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
@@ -430,12 +488,11 @@ function Login() {
                                     />
 
                                     <input
-                                      style={{ marginLeft: "5px" }}
                                       data-v-d8556cff=""
                                       class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="text"
                                       maxLength={typePhone === "TH" ? 10 : 13}
-                                      value={inputPhonenumber}
+                                      // value={inputPhonenumber}
                                       placeholder={selectedOption}
                                       onChange={(event) =>
                                         handleChangePhone(event)
@@ -453,15 +510,10 @@ function Login() {
                                           ? phoneCheck
                                           : ""
                                         : inputPhonenumber.length < 13
-                                          ? phoneCheck
-                                          : ""
+                                        ? phoneCheck
+                                        : ""
                                       : ""}
                                   </span>
-                                  <div
-                                    style={{ marginTop: '-25px' }}
-                                    data-v-d8556cff=""
-                                    class="h-[18px]"
-                                  ></div>
                                 </div>
                                 <div
                                   data-v-d8556cff=""
@@ -480,15 +532,22 @@ function Login() {
                                     <input
                                       data-v-d8556cff=""
                                       class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
+                                      // value={passwordInput}
+                                      name="password"
+                                      id="password"
                                       type="password"
                                       placeholder="รหัสผ่าน"
                                       autocomplete="off"
+                                      onChange={(e) =>
+                                        setInputPassword(e?.target?.value)
+                                      }
                                     />
                                   </div>
-                                  <div
-                                    data-v-d8556cff=""
-                                    class="h-[18px]"
-                                  ></div>
+                                  <span style={{ color: "red" }}>
+                                    {inputPassword !== ""
+                                      ? ""
+                                      : warningPassword}
+                                  </span>
                                 </div>
                                 <div
                                   data-v-d8556cff=""
@@ -505,17 +564,25 @@ function Login() {
                                     class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <input
+                                      style={{ marginLeft: "5px" }}
                                       data-v-d8556cff=""
                                       class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      type="name"
+                                      value={inputFirstname}
+                                      type="text"
+                                      name="s_firstname"
+                                      id="s_firstname"
                                       placeholder="ชื่อ"
                                       autocomplete="off"
+                                      onChange={(e) =>
+                                        setInputFirstname(e?.target?.value)
+                                      }
                                     />
                                   </div>
-                                  <div
-                                    data-v-d8556cff=""
-                                    class="h-[18px]"
-                                  ></div>
+                                  <span style={{ color: "red" }}>
+                                    {inputFirstname !== ""
+                                      ? ""
+                                      : warningFirstName}
+                                  </span>
                                 </div>
                                 <div
                                   data-v-d8556cff=""
@@ -532,27 +599,36 @@ function Login() {
                                     class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <input
+                                      style={{ marginLeft: "5px" }}
                                       data-v-d8556cff=""
                                       class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      type=""
+                                      // value={inputLastname}
+                                      name="s_lastname"
+                                      id="s_lastname"
+                                      type="text"
                                       placeholder="นามสกุล"
                                       autocomplete="off"
+                                      onChange={(e) =>
+                                        setInputLastname(e?.target?.value)
+                                      }
                                     />
                                   </div>
-                                  <div
-                                    data-v-d8556cff=""
-                                    class="h-[18px]"
-                                  ></div>
+                                  <span style={{ color: "red" }}>
+                                    {inputLastname !== ""
+                                      ? ""
+                                      : warningLastName}
+                                  </span>
                                 </div>
                                 <div
-                                  onClick={handleAccountTab}
+                                  onClick={() => _clickNextStep()}
+                                  // onClick={handleAccountTab}
                                   data-v-d8556cff=""
                                 >
                                   <button
                                     data-v-9dec3a92=""
                                     data-v-d8556cff=""
                                     id="btn01"
-                                    type="submit"
+                                    type="button"
                                     class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
                                   >
                                     <div
@@ -860,10 +936,7 @@ function Login() {
                                     aria-hidden="true"
                                   ></span>
                                 </span>
-                                <div
-                                  data-v-d8556cff=""
-                                  class="h-[18px]"
-                                ></div>
+                                <div data-v-d8556cff="" class="h-[18px]"></div>
                               </div>
                               <div
                                 data-v-d8556cff=""
@@ -882,11 +955,22 @@ function Login() {
                                   <input
                                     data-v-d8556cff=""
                                     class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                    type=""
-                                    placeholder=" กลเลขบัญชีธนาคาร"
+                                    name="bank"
+                                    id="bank"
+                                    type="text"
+                                    placeholder=" กรุณากรอกเลขบัญชีธนาคาร"
                                     autocomplete="off"
+                                    onChange={(e) => handleChangeBank(e)}
                                   />
                                 </div>
+                                <span style={{ color: "red" }}>
+                                  {inputBank !== "" ? "" : warningBank}
+                                </span>
+
+                                <div style={{ padding: 10, color: "red" }}>
+                                  {messageCreate}
+                                </div>
+
                                 <div data-v-d8556cff="" class="h-[18px]"></div>
                               </div>
                               <div
@@ -894,7 +978,7 @@ function Login() {
                                 style={{ display: "flex" }}
                               >
                                 <button
-                                  onClick={handleRegisterTab}
+                                  onClick={(e) => handleRegisterTab(e)}
                                   data-v-9dec3a92=""
                                   data-v-d8556cff=""
                                   id="btn01"
@@ -915,11 +999,11 @@ function Login() {
                                 </button>
                                 <div style={{ width: "10px" }} />
                                 <button
-                                  onClick={NextToHome}
+                                  onClick={() => CreateUser()}
                                   data-v-9dec3a92=""
                                   data-v-d8556cff=""
                                   id="btn01"
-                                  type="submit"
+                                  type="button"
                                   class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
                                 >
                                   <div

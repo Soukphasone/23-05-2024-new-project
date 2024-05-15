@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Letter_slide from "../components/Letter_slide";
 import Header from "../components/Header";
-// import { useNavigate } from "react-router-dom";
 import ModalCredit from "../components/Modal/ModalCredit";
 import { createPortal } from "react-dom";
 import ShareLink from "../components/Modal/ShareLink";

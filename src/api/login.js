@@ -70,12 +70,12 @@ const LoginController = () => {
 		inputPassword,
 		inputBank,
 		ref,
-		isMobile,
-		setLoading
+		
 	) => {
 		try {
+  console.log("TT=====>")
 			const _date = {
-				s_agent_code: Constant.AGEN_CODE,
+				s_agent_code: Constant.AGENT_CODE,
 				s_phone: inputPhonenumber,
 				s_password: inputPassword,
 				i_bank: "1", //scb =1
@@ -84,15 +84,18 @@ const LoginController = () => {
 				s_line: "line@",
 				type_shorturl: true,
 				s_ref: ref,
-				s_channel_name: Constant.AGEN_CODE,
+				s_channel_name: Constant.AGENT_CODE,
 				i_channel: "134",
 			};
+          console.log("DYAA", _date)
 			const _resOne = await axios({
 				method: "post",
 				url: `${Constant.SERVER_URL}/Member/Register/Verify`,
 				data: _date,
 			});
+  console.log("res", _resOne)
 			if (_resOne?.data?.statusCode === 0) {
+				console.log("register One: ", _resOne?.data)
 				const _resTwo = await axios({
 					method: "post",
 					url: `${Constant.SERVER_URL}/Member/Register/Confirm`,
@@ -101,7 +104,7 @@ const LoginController = () => {
 						s_firstname: inputFirstname,
 						s_lastname: inputLastname,
 						s_fullname: `${inputFirstname} ${inputLastname}`,
-						s_channel_name: Constant.AGEN_CODE,
+						s_channel_name: Constant.AGENT_CODE,
 						i_channel: "134",
 					},
 				});
@@ -111,11 +114,13 @@ const LoginController = () => {
 						method: "post",
 						url: `${Constant.SERVER_URL}/Member/Balance`,
 						data: {
-							s_agent_code: Constant.AGEN_CODE,
+							s_agent_code: Constant.AGENT_CODE,
 							s_username: _resTwo?.data?.data?.s_username,
 						},
 					});
+
 					if (_resThree?.data.statusCode === 0) {
+
 						localStorage.setItem(
 							Constant.LOGIN_TOKEN_DATA,
 							_resTwo?.data?.data?.token,
@@ -124,32 +129,26 @@ const LoginController = () => {
 							Constant.LOGIN_USER_DATA,
 							JSON.stringify(_resTwo?.data?.data),
 						);
-						if (isMobile === "MOBILE") {
-							setLoading(false);
+
+						console.log("DDDDDDDDDDD", _resThree?.data)
 							_loginAfterRegister(
 								_resTwo?.data?.data?.s_username,
 								_resTwo?.data?.data?.s_password,
-								isMobile
 
 							);
-						} else {
-							setLoading(false);
-							_loginAfterRegister(
-								_resTwo?.data?.data?.s_username,
-								_resTwo?.data?.data?.s_password,
-								isMobile
-							);
-						}
+						
 					}
 				}
+				console.log("register finished: ", _resOne?.data)
 			} else {
+			console.log("register finish: ", _resOne?.data)
 				return _resOne?.data;
 			}
 		} catch (error) {
-			setLoading(false);
 			console.log("🚀 ~ handleRegister ~ error:", error);
 		}
 	};
+
 
 	const _loginAfterRegister = async (username, password, isMobile) => {
 		try {
@@ -157,7 +156,7 @@ const LoginController = () => {
 				method: "post",
 				url: `${Constant.SERVER_URL}/Authen/Login`,
 				data: {
-					agentCode: Constant.AGEN_CODE,
+					agentCode: Constant.AGENT_CODE,
 					username: username,
 					password: password,
 					ip: "1.2.3.4"
@@ -207,7 +206,7 @@ const LoginController = () => {
 			url: `${Constant.SERVER_URL}/Authen/ResetPassword`,
 			data: {
 				token: _dataTokenLocal,
-				agentCode: Constant.AGEN_CODE,
+				agentCode: Constant.AGENT_CODE,
 				username: _dataLocal?.username,
 				password: newPassword,
 				password_original: firstPassword,
@@ -221,7 +220,7 @@ const LoginController = () => {
 		}
 	};
 	// ==================> handleRegister <=================
-	const loginWithToken = async (token, isMobile) => {
+	const loginWithToken = async (token) => {
 		try {
 			const _resDecrypt = EncriptBase64(token);
 			if (
@@ -235,7 +234,7 @@ const LoginController = () => {
 				method: "post",
 				url: `${Constant.SERVER_URL}/Authen/Login`,
 				data: {
-					agentCode: Constant.AGEN_CODE,
+					agentCode: Constant.AGENT_CODE,
 					username: _resDecrypt?.username,
 					password: _resDecrypt?.password,
 					ip: "1.2.3.4",
@@ -252,12 +251,8 @@ const LoginController = () => {
 						balance: _res?.data?.balance,
 					}),
 				);
-				if (isMobile === "MOBILE") {
-					history.push(Constant.AFTER_LOGIN_MOBILE, _res?.data?.data);
-				} else {
 					history.push(Constant.AFTER_LOGIN, _res?.data?.data);
-				}
-				// history.push(Constant.AFTER_LOGIN,_res?.data);
+				
 			}
 		} catch (error) {
 			console.log("🚀 ~ const_login= ~ error:", error);

@@ -20,7 +20,6 @@ function RouterLink() {
       <Router>
         <Switch>
           <PublicRoute exact path={Const.LOGIN} component={Login} />
-
           <Route
             render={({ location, history }) => (
               <React.Fragment>
