@@ -1,14 +1,38 @@
 import React from "react";
+import axios from "axios";
+import Constant from "../../constant";
+import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 
-function GetPromotion({closeModal}) {
+function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
+  console.log("Data_FLG", dataPromotion);
+  const apoverPromotion = async () => {
+    try {
+      const _resAppover = await axios.post(
+        `${Constant.SERVER_URL}/Deposit/Promotion/Select`,
+        {
+          s_agent_code: dataFromLogin?.agent,
+          s_username: dataFromLogin?.username,
+          s_type: "AUTO",
+          s_prm_code: dataPromotion?.s_code,
+          i_ip: "1.2.3.4",
+          actionBy: "ADM",
+        }
+      );
+      console.log("_resAppover", _resAppover)
+      if (_resAppover?.data?.statusCode === 0) {
+        showSuccessAlert("รายการสำเร็จ");
+        return
+      }
+      showErrorAlert(_resAppover?.data?.statusDesc);
+    } catch (error) {
+      showErrorAlert("รายการไม่สำเร็จ");
+    }
+  };
   return (
     <div
-      class="vfm vfm--fixed vfm--inset modal-top"
+      className="vfm vfm--fixed vfm--inset modal-top"
       onClick={(e) => {
-        if (
-          e.target.className ===
-          "vfm vfm--fixed vfm--inset modal-top"
-        ) {
+        if (e.target.className === "vfm vfm--fixed vfm--inset modal-top") {
           closeModal("close");
         }
       }}
@@ -16,21 +40,21 @@ function GetPromotion({closeModal}) {
       aria-modal="true"
       id="see-promotion-modal"
       title=""
-      style={{ Zindex: "1000" }}
+      style={{ Zindex: "9999" }}
     >
       <div
-        class="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
+        className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
         aria-hidden="true"
       ></div>
-      <div class="vfm__content vfm--outline-none absolute inset-0" tabindex="0">
-        <div class="absolute inset-0 h-full overflow-hidden overflow-y-auto">
-          <div class="modal-top-body flex flex-col max-w-[540px] my-12 mx-auto p-4 rounded-lg relative &lt;sm:mx-4">
+      <div className="vfm__content vfm--outline-none absolute inset-0" tabindex="0">
+        <div className="absolute inset-0 h-full overflow-hidden overflow-y-auto">
+          <div className="modal-top-body flex flex-col max-w-[540px] my-12 mx-auto p-4 rounded-lg relative &lt;sm:mx-4">
             <span
-              class="nuxt-icon nuxt-icon--fill absolute bg-[red] top-[-10px] right-[-10px] text-sm p-2 rounded-full z-10 text-xs cursor-pointer"
+              className="nuxt-icon nuxt-icon--fill absolute bg-[red] top-[-10px] right-[-10px] text-sm p-2 rounded-full z-10 text-xs cursor-pointer"
               v-if="true"
             >
               <svg
-              onClick={closeModal}
+                onClick={closeModal}
                 width="100"
                 height="100"
                 viewBox="0 0 100 100"
@@ -54,55 +78,64 @@ function GetPromotion({closeModal}) {
                 </defs>
               </svg>
             </span>
-            <div data-v-ac0eeeb0="" class="w-full">
+            <div data-v-ac0eeeb0="" className="w-full">
               <img
                 data-v-ac0eeeb0=""
-                src="/assets/promotion_files/1710741929243.png"
+                src={`data:image/jpeg;base64,${dataPromotion?.s_source_img}`}
                 alt=""
                 draggable="false"
-                class="bg-cover centent-promote mt-2 mx-auto rounded-base w-full"
+                className="bg-cover centent-promote mt-2 mx-auto rounded-base w-full"
               />
-              <div style={{color:'#FFF'}}
+              {/* <div style={{color:'#FFF'}}
                 data-v-ac0eeeb0=""
-                class="w-full mt-2 text-center font-medium &lt;sm:text-base sm:text-base md:text-lg"
+                className="w-full mt-2 text-center font-medium &lt;sm:text-base sm:text-base md:text-lg"
               >
                 สมาชิกใหม่รับ50%
-              </div>
-              <div data-v-ac0eeeb0="" class="">
-                <div data-v-ac0eeeb0="" class="flex flex-col">
-                  <span
-                    data-v-ac0eeeb0=""
-                    class="text-active font-medium &lt;sm:text-sm sm:text-sm md:text-base"
-                  >
-                    รายละเอียด
-                  </span>
-                  <span
-                    data-v-ac0eeeb0=""
-                    class="mt-2 text-primary overflow-scroll font-normal &lt;sm:text-sm sm:text-sm md:text-base"
-                  >
-                    <p>สมาชิกใหม่รับ50%</p>
-                    <p>&nbsp;</p>
-                    <p>🎀 ฝาก 100 รับ 150 🎀</p>
-                    <p>🌈กติกาถอนเงิน🌈</p>
-                    <ul>
+              </div> */}
+              <div data-v-ac0eeeb0="" className="">
+                {
+                  <div data-v-ac0eeeb0="" className="flex flex-col">
+                    <span
+                      data-v-ac0eeeb0=""
+                      className="text-active font-medium &lt;sm:text-sm sm:text-sm md:text-base"
+                    >
+                      รายละเอียด
+                    </span>
+                    <span
+                      data-v-ac0eeeb0=""
+                      className="mt-2 text-primary overflow-scroll font-normal &lt;sm:text-sm sm:text-sm md:text-base"
+                    >
+                      <p> {dataPromotion?.s_detail}</p>
+                      <p>&nbsp;</p>
+                      <p>
+                        🎀 ฝาก {dataPromotion?.f_max_amount} รับ{" "}
+                        {dataPromotion?.f_percen}{" "}
+                        🎀
+                      </p>
+                      <p>
+                        🌈 จำกัด {dataPromotion?.i_per_day} ครั้ง/วัน 🌈
+                      </p>
+                      {/* <ul>
                       <li>-เล่นได้เฉพาะสล็อตเท่านั้น</li>
                       <li>-ซื้อฟรีสปินได้นะคะ</li>
                       <li>-ทำยอดเครดิตขั้นต่ำ 3 เท่า</li>
                       <li>-ถอนได้สูงสุด 1000 บาท</li>
-                    </ul>
-                    <p>**ห้ามนำเครดิตไปใช้เล่นเกมอื่นที่ไม่ใช่สล็อต</p>
-                    <p>**ห้ามนำเครดิตไปใช้เพื่อการกั๊กฟรีสปิน</p>
-                  </span>
-                </div>
+                    </ul> */}
+                      {/* <p>**ห้ามนำเครดิตไปใช้เล่นเกมอื่นที่ไม่ใช่สล็อต</p>
+                    <p>**ห้ามนำเครดิตไปใช้เพื่อการกั๊กฟรีสปิน</p> */}
+                    </span>
+                  </div>
+                }
               </div>
             </div>
             <button
+              onClick={() => apoverPromotion()}
               data-v-9dec3a92=""
               id="btn01"
               type="submit"
-              class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
+              className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
             >
-              <div data-v-9dec3a92="" class="flex justify-center items-center">
+              <div data-v-9dec3a92="" className="flex justify-center items-center">
                 กดรับ
               </div>
             </button>

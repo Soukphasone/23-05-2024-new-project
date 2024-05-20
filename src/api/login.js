@@ -17,7 +17,7 @@ const LoginController = () => {
 				password,
 				ip: "1.2.3.4",
 			});
-			console.log("data?.data: ", data?.data)
+			// console.log("data?.data: ", data?.data)
 			if (data.statusCode === 0) {
 				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, data.data.token);
 				localStorage.setItem(
@@ -25,7 +25,8 @@ const LoginController = () => {
 					JSON.stringify({
 						agent: data?.data?.agent,
 						username: data?.data?.username,
-						balance: data?.data?.balance
+						balance: data?.data?.balance,
+						info: data?.data?.info,
 					}),
 				);
 				setLoading(false);
@@ -73,7 +74,6 @@ const LoginController = () => {
 		setLoading
 	) => {
 		try {
-			console.log("TT=====>")
 			const _date = {
 				s_agent_code: Constant.AGENT_CODE,
 				s_phone: inputPhonenumber,
@@ -130,7 +130,6 @@ const LoginController = () => {
 							JSON.stringify(_resTwo?.data?.data),
 						);
 						setLoading(false);
-						console.log("DDDDDDDDDDD", _resThree?.data)
 						_loginAfterRegister(
 							_resTwo?.data?.data?.s_username,
 							_resTwo?.data?.data?.s_password,
@@ -139,9 +138,8 @@ const LoginController = () => {
 
 					}
 				}
-				console.log("register finished: ", _resOne?.data)
+
 			} else {
-				console.log("register finish: ", _resOne?.data)
 				return _resOne?.data;
 			}
 		} catch (error) {

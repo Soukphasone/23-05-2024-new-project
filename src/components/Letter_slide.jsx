@@ -15,15 +15,15 @@ function Letter_slide() {
     "--orientation": "scrollX",
   };
   return (
-    <div data-v-3c88d514="" class="vue3-marquee horizontal" style={customStyle}>
-      <div class="transparent-overlay" aria-hidden="true"></div>
-      <div class="marquee">
-        <div class="ml-4">
+    <div data-v-3c88d514="" className="vue3-marquee horizontal" style={customStyle}>
+      <div className="transparent-overlay" aria-hidden="true"></div>
+      <div className="marquee">
+        <div className="ml-4">
           LUCABET88 เว็บไซต์อันดับ 1 ในเอเชีย ระบบฝาก-ถอนออโต้ รองรับทุกธนาคาร
         </div>
       </div>
-      <div class="marquee" aria-hidden="true">
-        <div class="ml-4">
+      <div className="marquee" aria-hidden="true">
+        <div className="ml-4">
           LUCABET88 เว็บไซต์อันดับ 1 ในเอเชีย ระบบฝาก-ถอนออโต้ รองรับทุกธนาคาร
         </div>
       </div>

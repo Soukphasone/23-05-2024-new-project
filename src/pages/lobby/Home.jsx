@@ -1,71 +1,204 @@
-import React from "react";
-import Footer_H from "../../components/Footer_Home";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
+import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Image_slide from "../../components/image_slide";
 import Letter_slide from "../../components/Letter_slide";
+import Constant from "../../constant";
+import { useHistory } from "react-router-dom";
+import _LoginController from "../../api/login";
+import {
+  FillerCategory,
+  OpenNewTabWithHTML,
+  DataLocalStorage,
+} from "../../helper";
 function HomePage() {
-  // const navigate = useNavigate();
-  const NextoSlot = () => {
-    // navigate("/slot");
+  //
+  const history = useHistory();
+  const [dataFromLogin, setDataFromLogin] = useState({});
+  const [categoryGame, setCategoryGame] = useState([]);
+  const [deviceType, setDeviceType] = useState(false);
+  const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
+  const [activeCategory, setActiveCategory] = useState("ALL");
+  const gameType = (TypeGame) => {
+    history.push(Constant.TYPE_GAME, TypeGame);
   };
-  const NextoCasino = () => {
-    // navigate("/casino");
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    const _dataUser = DataLocalStorage();
+    setDataFromLogin(_dataUser);
+  }, []);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    _clickCategoryGame("ALL");
+  }, [dataFromLogin]);
+  useEffect(() => {
+    let hasTouchScreen = false;
+    if ("maxTouchPoints" in navigator) {
+      hasTouchScreen = navigator.maxTouchPoints > 0;
+    } else if ("msMaxTouchPoints" in navigator) {
+      hasTouchScreen = navigator.msMaxTouchPoints > 0;
+    } else {
+      const mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+      if (mQ && mQ.media === "(pointer:coarse)") {
+        hasTouchScreen = !!mQ.matches;
+      } else if ("orientation" in window) {
+        hasTouchScreen = true; // deprecated, but good fallback
+      } else {
+        // Only as a last resort, fall back to user agent sniffing
+        const UA = navigator.userAgent;
+        hasTouchScreen =
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+      }
+    }
+    if (hasTouchScreen) {
+      setDeviceType("Mobile");
+      // console.log("Mobile: ");
+    } else {
+      setDeviceType("Desktop");
+      // console.log("Desktop: ");
+    }
+  }, []);
+  const _clickCategoryGame = async (value) => {
+    // console.log("CATEGORY_ACTIVE: ", value);
+    setActiveCategory(value);
+    setDataGameType(value);
+    FillerCategory(value, setCategoryGame);
   };
-  const NextoFish = () => {
-    // navigate("/fish");
+  const _selectFavorite = async (event) => {
+    const result_sl = event.target.value;
+    // console.log("Choose", result_sl);
+    if (result_sl === "fav") {
+      setDataGameType("FAVORITE");
+      const _getData = await axios({
+        method: "post",
+        url: `${Constant.SERVER_URL}/Game/Brand/List`,
+        data: {
+          s_agent_code: dataFromLogin?.agent,
+          s_username: dataFromLogin?.username,
+        },
+      });
+      // console.log("_GETDATA_facvorite_clik", _getData);
+      if (_getData?.data?.statusCode === 0) {
+        setCategoryGame(_getData?.data?.data?.FAVORITE);
+      }
+    } else {
+      _clickCategoryGame("ALL");
+    }
   };
-  const NextoSport = () => {
-    // navigate("/sports");
+
+  const _getDataGame = async (value) => {
+    // console.log("Value get game 1: ", value)
+    if (value?.s_type === "CASINO" || value?.s_type === "SPORT") {
+      _getDataGamePlayGame(value);
+    } else {
+      gameType({
+        type: value?.s_type,
+        dataGame: value,
+        dataFromLogin: dataFromLogin,
+      });
+    }
   };
-  const gameType = () => {
-    // navigate("/gametype");
+
+  const _getDataGamePlayGame = async (value) => {
+    // console.log("PLAY_GAME_HOME", value)
+    try {
+      const _data = {
+        s_game_code:
+          value?.s_type === "CASINO"
+            ? "B001"
+            : value?.s_type === "SPORT"
+            ? "B001"
+            : value?.s_game_code,
+        s_brand_code: value?.s_brand_code,
+        s_username: dataFromLogin?.username,
+        s_agent_code: Constant?.AGENT_CODE,
+        isMobile: deviceType === "Mobile" ? "true" : "false",
+        ip_client: "184.22.14.167",
+        s_lang: "th",
+      };
+      // console.log("DATA 2 playgame", _data)
+      // Send the data to the server to get the game URL
+      const _res = await axios({
+        method: "post",
+        url: `${Constant.SERVER_URL}/Game/Access`,
+        data: _data,
+      });
+
+      if (_res?.data?.url) {
+        setTimeout(() => {
+          window.open(_res?.data?.url, "_blank");
+        });
+      }
+      if (_res?.data?.res_html) {
+        setTimeout(() => {
+          OpenNewTabWithHTML(_res?.data?.res_html);
+        });
+      }
+    } catch (error) {
+      console.error("Error playing the game:", error);
+    }
   };
   return (
-    <body class="overflow-x-hidden overflow-y-auto text-primary">
+    <body className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
           <main
             data-v-3c88d514=""
-            class="min-h-screen overflow-scroll pb-[80px]"
+            className="min-h-screen overflow-scroll pb-[80px]"
           >
-            <div data-v-3c88d514="" class="w-full mx-auto base-container pb-2">
-              <Letter_slide />
-              <div class="flex flex-col gap-y-2">
+            <div
+              data-v-3c88d514=""
+              className="w-full mx-auto base-container pb-2"
+            >
+              {/* <Letter_slide /> */}
+              <div className="flex flex-col gap-y-2">
                 <Image_slide />
-                <div class="text-[red] flex space-x-2">
-                  <div class="relative w-full">
+                <div className="text-[red] flex space-x-2">
+                  <div className="relative w-full">
                     <select
-                      class="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
+                      className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                       id="nuid-1"
+                      onChange={_selectFavorite}
                     >
-                      <option value="" selected="selected">
+                      <option value="all" selected="selected">
                         หมวดหมู่เกม
                       </option>
-                      <option value="new">เป๊นที่นิยม</option>
                       <option value="fav">เกมโปรด</option>
                     </select>
-                    <span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
+                    <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
                       <span
-                        class="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
+                        className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
                         aria-hidden="true"
                       ></span>
                     </span>
                   </div>
                 </div>
                 <div>
-                  <div class="flex-row flex">
-                    <div class="block">
-                      <div class="space-y-2 mr-2">
+                  <div className="flex-row flex">
+                    <div className="block">
+                      <div className="space-y-2 mr-2">
                         <div
+                          onClick={() => _clickCategoryGame("ALL")}
                           data-v-d320b445=""
-                          class="borderGradient w-full gradient-border"
+                          className={
+                            activeCategory === "ALL"
+                              ? "borderGradient w-full gradient-border"
+                              : " w-full gradient-border"
+                          }
                         >
                           <a
                             aria-current="page"
-                            class="router-link-active router-link-exact-active gradient-box rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                            className={
+                              activeCategory === "ALL"
+                                ? "router-link-active router-link-exact-active gradient-box rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                                : "rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                            }
                           >
-                            <span class="nuxt-icon my-1">
+                            <span className="nuxt-icon nuxt-icon--fill my-1">
                               <svg
                                 width="20"
                                 height="20"
@@ -151,15 +284,26 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p class="text-sm text-center">หน้าหลัก</p>
+                            <p className="text-sm text-center">หน้าหลัก</p>
                           </a>
                         </div>
-                        <div data-v-d320b445="" class="w-full gradient-border">
+                        <div
+                          data-v-d320b445=""
+                          className={
+                            activeCategory === "SLOT"
+                              ? "borderGradient w-full gradient-border"
+                              : " w-full gradient-border"
+                          }
+                          onClick={() => _clickCategoryGame("SLOT")}
+                        >
                           <a
-                            onClick={NextoSlot}
-                            class="rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                            className={
+                              activeCategory === "SLOT"
+                                ? "router-link-active router-link-exact-active gradient-box rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                                : "rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                            }
                           >
-                            <span class="nuxt-icon nuxt-icon--fill my-1">
+                            <span className="nuxt-icon nuxt-icon--fill my-1">
                               <svg
                                 width="20"
                                 height="17"
@@ -281,16 +425,26 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p class="text-sm text-center">สล็อต</p>
+                            <p className="text-sm text-center">สล็อต</p>
                           </a>
                         </div>
                         <div
-                          onClick={NextoCasino}
                           data-v-d320b445=""
-                          class="w-full gradient-border"
+                          className={
+                            activeCategory === "CASINO"
+                              ? "borderGradient w-full gradient-border"
+                              : " w-full gradient-border"
+                          }
+                          onClick={() => _clickCategoryGame("CASINO")}
                         >
-                          <a class="rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]">
-                            <span class="nuxt-icon nuxt-icon--fill my-1">
+                          <a
+                            className={
+                              activeCategory === "CASINO"
+                                ? "router-link-active router-link-exact-active gradient-box rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                                : "rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                            }
+                          >
+                            <span className="nuxt-icon nuxt-icon--fill my-1">
                               <svg
                                 width="20"
                                 height="20"
@@ -346,12 +500,26 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p class="text-sm text-center">คาสิโน</p>
+                            <p className="text-sm text-center">คาสิโน</p>
                           </a>
                         </div>
-                        <div onClick={NextoSport} data-v-d320b445="" class="w-full gradient-border">
-                          <a class="rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]">
-                            <span class="nuxt-icon nuxt-icon--fill my-1">
+                        <div
+                          data-v-d320b445=""
+                          className={
+                            activeCategory === "SPORT"
+                              ? "borderGradient w-full gradient-border"
+                              : " w-full gradient-border"
+                          }
+                          onClick={() => _clickCategoryGame("SPORT")}
+                        >
+                          <a
+                            className={
+                              activeCategory === "SPORT"
+                                ? "router-link-active router-link-exact-active gradient-box rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                                : "rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                            }
+                          >
+                            <span className="nuxt-icon nuxt-icon--fill my-1">
                               <svg
                                 width="20"
                                 height="20"
@@ -658,16 +826,26 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p class="text-sm text-center">กีฬา</p>
+                            <p className="text-sm text-center">กีฬา</p>
                           </a>
                         </div>
                         <div
-                          onClick={NextoFish}
                           data-v-d320b445=""
-                          class="w-full gradient-border"
+                          className={
+                            activeCategory === "FISHING"
+                              ? "borderGradient w-full gradient-border"
+                              : " w-full gradient-border"
+                          }
+                          onClick={() => _clickCategoryGame("FISHING")}
                         >
-                          <a class="rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]">
-                            <span class="nuxt-icon nuxt-icon--fill my-1">
+                          <a
+                            className={
+                              activeCategory === "FISHING"
+                                ? "router-link-active router-link-exact-active gradient-box rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                                : "rounded-[10px] text-[var(--input-disabled)] flex flex-col items-center justify-center w-[60px] h-[55px] md:w-[4.125rem] md:h-[3.5rem]"
+                            }
+                          >
+                            <span className="nuxt-icon nuxt-icon--fill my-1">
                               <svg
                                 width="20"
                                 height="20"
@@ -723,180 +901,63 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p class="text-sm text-center">ยิงปลา</p>
+                            <p className="text-sm text-center">ยิงปลา</p>
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div class="w-full auto-rows-max gap-2 grid grid-cols-2 @xs:grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 lg:grid-cols-6">
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          onClick={gameType}
-                          src="./assets/home_files/24467008-3317-40c8-b312-fe46ead2eabf.png"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/b9df3389-fe77-4839-8649-a9ebfd282e4f"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="./assets/home_files/007fcaf7-8df8-41d8-9e3e-f1a5e347ad92.png"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/e0c71fcc-31e3-4ce7-acd6-b5a5f1df29c7"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/dfbe5711-b196-479d-a14e-9ed9917b6194"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/3329193c-f121-4493-84c7-93253598c1f9"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/f0dc30fb-2695-49c7-a1c4-4b9ae05906ab"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/f53a0c4f-6cd6-4c0b-9a8a-cc7703e583d7"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="./assets/home_files/99a31823-8b98-412b-9728-596cc08a5ef5.png"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/29f6edb5-6191-409d-816c-c419135ba217"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3"></div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/bde29619-6eb3-4f55-9c94-429a3a6399f2"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3"></div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="https://d3lz4f0irhj096.cloudfront.net/fba5a1f4-b730-4de9-aacd-c370065da6ec"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                          <div class="hits text-white p-1">ฮิต</div>
-                          <div class="new text-white p-1">ใหม่</div>
-                        </div>
-                      </div>
-                      <div class="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]">
-                        <img
-                          src="./assets/home_files/47a0090a-7d62-46d6-ad19-242cadf76b43.png"
-                          alt="img-cover"
-                          loading="lazy"
-                          data-nuxt-img=""
-                          class="w-full providerCard min-h-14 relative rounded-base"
-                        />
-                        <div class="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3"></div>
-                      </div>
+                    <div className="w-full auto-rows-max gap-2 grid grid-cols-2 @xs:grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 lg:grid-cols-6">
+                      {categoryGame?.length > 0 &&
+                        categoryGame?.map((item, index) => (
+                          <div
+                            key={item?.index}
+                            className="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]"
+                          >
+                            {item?.s_img !== undefined ? (
+                              <img
+                                src={item?.s_img}
+                                alt="img-cover"
+                                loading="lazy"
+                                data-nuxt-img=""
+                                className="w-full providerCard min-h-14 relative rounded-base"
+                                onKeyDown={() => ""}
+                                onClick={() =>
+                                  dataGameType === "FAVORITE" ||
+                                  // dataGameType === "HOTHIT" ||
+                                  dataGameType === "FISHING"
+                                    ? _getDataGamePlayGame(item, "FISHING")
+                                    : _getDataGame(item)
+                                }
+                              />
+                            ) : (
+                              <img
+                                src={item?.s_lobby_url}
+                                alt="img-cover"
+                                loading="lazy"
+                                data-nuxt-img=""
+                                className="w-full providerCard min-h-14 relative rounded-base"
+                                onKeyDown={() => ""}
+                                onClick={() =>
+                                  dataGameType === "FAVORITE"
+                                    ? // dataGameType === "HOTHIT"
+                                      _getDataGamePlayGame(item)
+                                    : _getDataGame(item)
+                                }
+                              />
+                            )}
+                            <div className="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
+                              <div className="hits text-white p-1">ฮิต</div>
+                              <div className="new text-white p-1">ใหม่</div>
+                            </div>
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </main>
-          <Footer_H />
+          <Footer />
         </div>
       </div>
     </body>

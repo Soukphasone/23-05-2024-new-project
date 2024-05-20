@@ -1,48 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from './Modal/ModalNav'
+import { DataLocalStorage} from "../helper";
+import Constant from '../constant';
 function Header() {
   const [openModal, setOpenModal] = useState(false)
+  const [dataFromLogin, setDataFromLogin] = useState({});
+
+  useEffect(() => {
+    const userData = DataLocalStorage();
+    if (userData) {
+      setDataFromLogin(userData);
+    }
+  }, []);
+  const NextToHome=()=>{
+window.location = (Constant.AFTER_LOGIN)
+  }
   return (
-    <header data-v-3c88d514="" class="w-full z-10">
-    <div data-v-3c88d514="" class="w-full mx-auto">
+    <header data-v-3c88d514="" className="w-full z-10">
+    <div data-v-3c88d514="" className="w-full mx-auto">
       <div
         data-v-4b602944=""
         data-v-3c88d514=""
-        class="top-0 z-40 w-full flex-none transition-colors duration-300 lg:z-50"
+        className="top-0 z-40 w-full flex-none transition-colors duration-300 lg:z-50"
       >
         <div
           data-v-4b602944=""
-          class="w-full mx-auto base-container flex items-center justify-between"
+          className="w-full mx-auto base-container flex items-center justify-between"
         >
           <div
             data-v-4b602944=""
-            class="flex space-x-4 items-center justify-center w-full &lt;sm:justify-around"
+            className="flex space-x-4 items-center justify-center w-full &lt;sm:justify-around"
           >
-           <a href='/'>
+           <a 
+           onClick={NextToHome}>
            <img
               data-v-4b602944=""
-              class="cursor-pointer object-contain h-auto max-h-[80px] max-w-[120px]"
-              src="https://d29xpgmn3rqne6.cloudfront.net/lucabet88/other/1674807129586"
+              className="cursor-pointer object-contain h-auto max-h-[80px] max-w-[120px]"
+              src={
+                  `data:image/jpeg;base64,${dataFromLogin?.info?.configLobby?.s_logo}`
+              }
               alt="center menu"
             />
            </a>
             <div
               data-v-4b602944=""
-              class="walletWrapper px-4 flex items-center py-2 text-xs cursor-pointer"
+              className="walletWrapper px-4 flex items-center py-2 text-xs cursor-pointer"
             >
-              <div data-v-4b602944="" class="">
+              <div data-v-4b602944="" className="">
                 <div
                   data-v-4b602944=""
-                  class="text-[var(--balance-wrapper-text1)] justify-between flex gap-x-2"
+                  className="text-[var(--balance-wrapper-text1)] justify-between flex gap-x-2"
                 >
                   <p data-v-4b602944="">เงิน</p>
                   <p
                     data-v-4b602944=""
-                    class="text-right flex justify-center items-center"
+                    className="text-right flex justify-center items-center"
                   >
                     <span
                       data-v-4b602944=""
-                      class="nuxt-icon nuxt-icon--fill"
+                      className="nuxt-icon nuxt-icon--fill"
                     >
                       <svg
                         width="100"
@@ -57,55 +73,21 @@ function Header() {
                         ></path>
                       </svg>
                     </span>{" "}
-                    0.00
+                   {dataFromLogin?.balance?.amount || 0}
                   </p>
                 </div>
                 <div
                   data-v-4b602944=""
-                  class="goldLine my-1 h-[0.5px]"
+                  className="goldLine my-1 h-[0.5px]"
                 ></div>
-                <div
-                  data-v-4b602944=""
-                  class="text-[var(--balance-wrapper-text2)] justify-between flex gap-x-2"
-                >
-                  <p data-v-4b602944="">เครดิต</p>
-                  <p data-v-4b602944="" class="text-right">
-                    0.00
-                  </p>
-                </div>
-              </div>
-              <div
-                data-v-4b602944=""
-                class="grid place-content-center rounded-full w-[20px] ml-2 transferIcon h-[20px] bg-[var(--primary)]"
-              >
-                <span
-                  data-v-4b602944=""
-                  class="nuxt-icon nuxt-icon--fill text-[var(--main-icon-color)]"
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M14.8535 4.64649L11.8535 1.64649C11.7105 1.50349 11.496 1.46149 11.3085 1.53799C11.1215 1.61549 11 1.79799 11 1.99999V3.49999H3.5C2.6715 3.49999 2 4.17149 2 4.99999C2 5.82849 2.6715 6.49999 3.5 6.49999H11V7.99999C11 8.20199 11.1215 8.38449 11.3085 8.46199C11.4965 8.53949 11.711 8.49599 11.8535 8.35349L14.8535 5.35349C15.049 5.15849 15.049 4.84149 14.8535 4.64649Z"
-                      fill="black"
-                    ></path>
-                    <path
-                      d="M12.5 9.49999H4.99999V7.99999C4.99999 7.79799 4.87849 7.61549 4.69149 7.53799C4.50449 7.46049 4.28999 7.50299 4.14649 7.64649L1.14649 10.6465C0.951494 10.8415 0.951494 11.1585 1.14649 11.3535L4.14649 14.3535C4.28899 14.496 4.50349 14.5395 4.69149 14.462C4.87849 14.3845 4.99999 14.202 4.99999 14V12.5H12.5C13.3285 12.5 14 11.8285 14 11C14 10.1715 13.3285 9.49999 12.5 9.49999Z"
-                      fill="black"
-                    ></path>
-                  </svg>
-                </span>
+           
               </div>
             </div>
           </div>
           
           <span
             data-v-4b602944=""
-            class="nuxt-icon nuxt-icon--fill cursor-pointer text-primary text-[23px]"
+            className="nuxt-icon nuxt-icon--fill cursor-pointer text-primary text-[23px]"
          onClick={()=>{setOpenModal(true)}}
          >
             <svg

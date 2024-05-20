@@ -19,6 +19,7 @@ export const showSuccessAlert = (message) => {
           showConfirmButton: false,
           timer: 3000,
           background: "#242424",
+          color:'#FFF'
     });
 };
 

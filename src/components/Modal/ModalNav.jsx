@@ -1,44 +1,54 @@
-import React from "react";
-// import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import Constant from "../../constant";
+import { LogoutClearLocalStorage, DataLocalStorage } from "../../helper";
 function Modal({ closeModal }) {
-  // const navigate = useNavigate();
-  const data = 'login';
+  const [dataFromLogin, setDataFromLogin] = useState({});
+
+  useEffect(() => {
+    const userData = DataLocalStorage();
+    if (userData) {
+      setDataFromLogin(userData);
+    }
+  }, []);
   const LogOut = () => {
-    // navigate(`/login/${data}`);
+    LogoutClearLocalStorage();
   };
   const NextToProfile = () => {
-    //  window.location = '/profile'
-  }
+    window.location = Constant.PROFILE;
+  };
+  const NextToPromotion = () => {
+    window.location = Constant.PROMOTION;
+  };
   const NextoDeposit = () => {
-    // navigate("/bank/deposit");
+    window.location = Constant.DEPOSIT;
   };
   const NextoWithdraw = () => {
-    // navigate("/bank/withdraw");
+    window.location = Constant.WITHDRAW;
   };
   return (
     <div
-      class="vfm vfm--fixed vfm--inset"
+      className="vfm vfm--fixed vfm--inset"
       style={{ zIndex: 1000 }}
       role="dialog"
       aria-modal="true"
     >
       <div
-        class="vfm__content vfm--outline-none w-full h-full flex bg-[var(--body)] flex-col space-y-2"
+        className="vfm__content vfm--outline-none w-full h-full flex bg-[var(--body)] flex-col space-y-2"
         tabindex="0"
       >
-        <div data-v-910a7880="" class="px-6 w-full max-w-lg mx-auto">
+        <div data-v-910a7880="" className="px-6 w-full max-w-lg mx-auto">
           <img
             data-v-910a7880=""
-            class="cursor-pointer h-[3.75rem] md:h-20 mt-5 mx-auto"
-            src="./assets/home_files/1674807129586.png"
+            className="cursor-pointer h-[3.75rem] md:h-20 mt-5 mx-auto"
+            src="/assets/home_files/1674807129586.png"
             alt="center menu"
           />
           <div
             data-v-910a7880=""
-            class="mt-4 flex space-x-4 justify-between items-center"
+            className="mt-4 flex space-x-4 justify-between items-center"
           >
-            <div data-v-910a7880="" class="flex items-center space-x-2">
-              <span data-v-910a7880="" class="nuxt-icon text-[44.48px]">
+            <div data-v-910a7880="" className="flex items-center space-x-2">
+              <span data-v-910a7880="" className="nuxt-icon text-[44.48px]">
                 <svg
                   width="45"
                   height="45"
@@ -55,15 +65,9 @@ function Modal({ closeModal }) {
               <div data-v-910a7880="">
                 <p
                   data-v-910a7880=""
-                  class="text-[var(--primary)] max-w-xl truncate font-medium text-base"
+                  className="text-[var(--primary)] max-w-xl truncate font-medium text-base"
                 >
-                  test test111
-                </p>
-                <p
-                  data-v-910a7880=""
-                  class="text-primary max-w-xl truncate font-medium text-base"
-                >
-                  bet88379365048
+                  {dataFromLogin?.username}
                 </p>
               </div>
             </div>
@@ -73,29 +77,29 @@ function Modal({ closeModal }) {
               data-v-910a7880=""
               id="btn01"
               type="button"
-              class="base-button-wrapper v-rounded btn-primary btn-md btn-secondary cursor-pointer"
+              className="base-button-wrapper v-rounded btn-primary btn-md btn-secondary cursor-pointer"
             >
-              <div data-v-8bd2676d="" class="flex justify-center items-center">
+              <div data-v-8bd2676d="" className="flex justify-center items-center">
                 ดูโปรไฟล์
               </div>
             </button>
           </div>
-          <div data-v-910a7880="" class="dash mt-4"></div>
-          <div data-v-910a7880="" class="flex w-full mt-6 gap-x-3">
+          <div data-v-910a7880="" className="dash mt-4"></div>
+          <div data-v-910a7880="" className="flex w-full mt-6 gap-x-3">
             <div
               onClick={NextoDeposit}
               data-v-c1e135f9=""
               data-v-910a7880=""
               id="btn-topup-auto"
-              class="btn w-full cursor-pointer"
+              className="btn w-full cursor-pointer"
             >
               <div
                 data-v-c1e135f9=""
-                class="flex text-white flex-row items-center justify-evenly w-full"
+                className="flex text-white flex-row items-center justify-evenly w-full"
               >
                 <span
                   data-v-c1e135f9=""
-                  class="nuxt-icon nuxt-icon--fill text-4xl"
+                  className="nuxt-icon nuxt-icon--fill text-4xl"
                 >
                   <svg
                     width="26"
@@ -118,7 +122,7 @@ function Modal({ closeModal }) {
                     ></path>
                   </svg>
                 </span>
-                <p data-v-c1e135f9="" class="text">
+                <p data-v-c1e135f9="" className="text">
                   ฝากเงิน
                 </p>
               </div>
@@ -128,15 +132,15 @@ function Modal({ closeModal }) {
               data-v-33945a64=""
               data-v-910a7880=""
               id="btn-withdraw"
-              class="w-full cursor-pointer btn"
+              className="w-full cursor-pointer btn"
             >
               <div
                 data-v-33945a64=""
-                class="flex text-white flex-row items-center justify-evenly w-full"
+                className="flex text-white flex-row items-center justify-evenly w-full"
               >
                 <span
                   data-v-33945a64=""
-                  class="nuxt-icon nuxt-icon--fill text-4xl"
+                  className="nuxt-icon nuxt-icon--fill text-4xl"
                 >
                   <svg
                     width="34"
@@ -175,18 +179,18 @@ function Modal({ closeModal }) {
                     ></path>
                   </svg>
                 </span>
-                <p data-v-33945a64="" class="text">
+                <p data-v-33945a64="" className="text">
                   ถอนเงิน
                 </p>
               </div>
             </div>
           </div>
-          <div data-v-910a7880="" class="mt-6 space-y-4">
-            <div
+          <div data-v-910a7880="" className="mt-6 space-y-4">
+            {/* <div
               data-v-910a7880=""
-              class="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
+              className="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
             >
-              <span class="nuxt-icon nuxt-icon--fill text-[19px]">
+              <span className="nuxt-icon nuxt-icon--fill text-[19px]">
                 <svg
                   width="19"
                   height="19"
@@ -202,13 +206,14 @@ function Modal({ closeModal }) {
                   ></path>
                 </svg>
               </span>
-              <p class="text-base text-primary font-normal">เข้าสู่เว็บไซต์</p>
-            </div>
+              <p className="text-base text-primary font-normal">เข้าสู่เว็บไซต์</p>
+            </div> */}
             <div
+            onClick={NextToPromotion}
               data-v-910a7880=""
-              class="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
+              className="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
             >
-              <span class="nuxt-icon nuxt-icon--fill text-[19px]">
+              <span className="nuxt-icon nuxt-icon--fill text-[19px]">
                 <svg
                   width="19"
                   height="19"
@@ -222,13 +227,13 @@ function Modal({ closeModal }) {
                   ></path>
                 </svg>
               </span>
-              <p class="text-base text-primary font-normal">โปรโมชั่น</p>
+              <p className="text-base text-primary font-normal">โปรโมชั่น</p>
             </div>
             <div
               data-v-910a7880=""
-              class="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
+              className="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
             >
-              <span class="nuxt-icon nuxt-icon--fill text-[19px]">
+              <span className="nuxt-icon nuxt-icon--fill text-[19px]">
                 <svg
                   width="20"
                   height="19"
@@ -242,14 +247,14 @@ function Modal({ closeModal }) {
                   ></path>
                 </svg>
               </span>
-              <p class="text-base text-primary font-normal">ติดต่อแอดมิน</p>
+              <p className="text-base text-primary font-normal">ติดต่อแอดมิน</p>
             </div>
             <div
               onClick={LogOut}
               data-v-910a7880=""
-              class="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
+              className="bg-[var(--card-primary)] text-primary py-3 cursor-pointer rounded-base flex px-6 items-center space-x-4 w-full"
             >
-              <span class="nuxt-icon nuxt-icon--fill text-[19px]">
+              <span className="nuxt-icon nuxt-icon--fill text-[19px]">
                 <svg
                   width="19"
                   height="19"
@@ -274,17 +279,17 @@ function Modal({ closeModal }) {
                   </defs>
                 </svg>
               </span>
-              <p class="text-base text-primary font-normal">ออกจากระบบ</p>
+              <p className="text-base text-primary font-normal">ออกจากระบบ</p>
             </div>
           </div>
         </div>
 
         <button
           data-v-910a7880=""
-          class="absolute top-6 text-primary cursor-pointer right-1 px-2"
+          className="absolute top-6 text-primary cursor-pointer right-1 px-2"
           onClick={() => closeModal(false)}
         >
-          <span data-v-910a7880="" class="nuxt-icon nuxt-icon--fill">
+          <span data-v-910a7880="" className="nuxt-icon nuxt-icon--fill">
             <svg
               width="20"
               height="20"

@@ -1,5 +1,6 @@
 import Constant from "../constant";
-// import { dataCradGame } from "./listCardGame";
+import { dataCradGame } from "./listCardGame";
+import { dataCradGame2 } from "./gameTypeDetail";
 import moment from "moment";
 var Buffer = require("buffer/").Buffer;
 
@@ -14,16 +15,26 @@ export const _clickTabDeposit = (tab, setTabs, setTabName) => {
   }
 };
 
-// export const FillerCategory = async (value, setCategoryGame) => {
-//   if (value === "ALL") setCategoryGame(dataCradGame?.ALL);
-//   if (value === "CASINO") setCategoryGame(dataCradGame?.CASINO);
-//   if (value === "FAVORITE") setCategoryGame(dataCradGame?.FAVORITE);
-//   if (value === "FISHING") setCategoryGame(dataCradGame?.FISHING);
-//   if (value === "HOTHIT") setCategoryGame(dataCradGame?.HOTHIT);
-//   if (value === "LOTTO") setCategoryGame(dataCradGame?.LOTTO);
-//   if (value === "SLOT") setCategoryGame(dataCradGame?.SLOT);
-//   if (value === "SPORT") setCategoryGame(dataCradGame?.SPORT);
-// };
+export const FillerCategory = async (value, setCategoryGame) => {
+  if (value === "ALL") setCategoryGame(dataCradGame?.ALL);
+  if (value === "CASINO") setCategoryGame(dataCradGame?.CASINO);
+  if (value === "FAVORITE") setCategoryGame(dataCradGame?.FAVORITE);
+  if (value === "FISHING") setCategoryGame(dataCradGame?.FISHING);
+  if (value === "HOTHIT") setCategoryGame(dataCradGame?.HOTHIT);
+  if (value === "LOTTO") setCategoryGame(dataCradGame?.LOTTO);
+  if (value === "SLOT") setCategoryGame(dataCradGame?.SLOT);
+  if (value === "SPORT") setCategoryGame(dataCradGame?.SPORT);
+};
+export const FillerCategory2 = async (value, setCategoryGame) => {
+  if (value === "ALL") setCategoryGame(dataCradGame2?.ALL);
+  if (value === "CASINO") setCategoryGame(dataCradGame2?.CASINO);
+  if (value === "FAVORITE") setCategoryGame(dataCradGame2?.FAVORITE);
+  if (value === "FISHING") setCategoryGame(dataCradGame2?.FISHING);
+  if (value === "HOTHIT") setCategoryGame(dataCradGame2?.HOTHIT);
+  if (value === "LOTTO") setCategoryGame(dataCradGame2?.LOTTO);
+  if (value === "SLOT") setCategoryGame(dataCradGame2?.SLOT);
+  if (value === "SPORT") setCategoryGame(dataCradGame2?.SPORT);
+};
 
 export const EncriptBase64 = (date) => {
   const tokens = date;

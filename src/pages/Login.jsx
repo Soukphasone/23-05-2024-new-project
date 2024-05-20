@@ -2,11 +2,9 @@ import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { BackList } from "../constant/bankList";
 import Select from "react-select";
-import Swal from "sweetalert2";
 import _LoginController from "../api/login";
 import queryString from "query-string";
 import { useHistory } from "react-router-dom";
-import Constant from "../constant";
 import { showErrorAlert, showSuccessAlert } from "../helper/SweetAlert";
 function Login() {
   const history = useHistory();
@@ -32,12 +30,11 @@ function Login() {
 
   //
 
-  const [activeTab, setActiveTab] = useState("register");
+  const [activeTab, setActiveTab] = useState("login");
   const [warningPhone, setWarningPhone] = useState("");
   const [typePhone, setTypePhone] = useState("TH");
   const [selectedOption, setSelectedOption] = useState("เบอร์โทรศัพท์ไทย");
   const [phoneCheck, setPhoneCheck] = useState("");
-  const [userNameWarning, setUserNameWarning] = useState(""); //for login
   const [userNameInput, setUserNameInput] = useState(""); //for login
   const [passwordInput, setPasswordInput] = useState("");
   const [messageCreate, setMessageCreate] = useState("");
@@ -57,18 +54,15 @@ function Login() {
         bankCode,
         (response) => {
           if (response === false) {
-            console.log("==================>", response)
             showSuccessAlert("สำเร็จ");
           } else {
             showErrorAlert("ทำรายการไม่สำเร็จ");
           }
         }
       );
-      console.log("============>>>>>>", _res)
       if (_res) { setMessageCreate(_res?.statusDesc); }
 
     } catch (error) {
-      console.error("Registration error:", error);
       showErrorAlert("เกิดข้อผิดพลาด");
     }
   };
@@ -126,7 +120,6 @@ function Login() {
   // style option
   const customStyles = {
     container: (provided, state) => ({
-      // ສີພື້ນຫລັງທຳອິດ
       ...provided,
       background: state.isSelected
         ? "rgb(var(--color-primary-DEFAULT)/.4)"
@@ -236,7 +229,6 @@ function Login() {
     if (_res) setMessageCreate(_res?.statusDesc);
 
   };
-
   const handleLoginTab = (event) => {
     event.preventDefault();
     setActiveTab("login");
@@ -258,49 +250,49 @@ function Login() {
       ? "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full active"
       : "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full";
   return (
-    <body class="overflow-x-hidden overflow-y-auto text-primary">
+    <body className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
         <div data-v-19df7d63="">
-          <header data-v-19df7d63="" class="w-full z-10">
-            <div data-v-19df7d63="" class="w-full mx-auto"></div>
+          <header data-v-19df7d63="" className="w-full z-10">
+            <div data-v-19df7d63="" className="w-full mx-auto"></div>
           </header>
-          <main data-v-19df7d63="" class="min-h-screen">
-            <div data-v-19df7d63="" class="w-full mx-auto">
-              <main data-v-d8556cff="" class={wrapperClass}>
+          <main data-v-19df7d63="" className="min-h-screen">
+            <div data-v-19df7d63="" className="w-full mx-auto">
+              <main data-v-d8556cff="" className={wrapperClass}>
                 <div
                   data-v-d8556cff=""
-                  class="flex flex-col items-center justify-start min-h-screen relative overflow-hidden bg-wrapper px-4 pt-12 md:pt-24"
+                  className="flex flex-col items-center justify-start min-h-screen relative overflow-hidden bg-wrapper px-4 pt-12 md:pt-24"
                 >
                   <img
                     data-v-d8556cff=""
-                    class="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
+                    className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
                     src="/assets/lg_files/1674807129586"
                     alt="center menu"
                   />
                   <div
                     data-v-d8556cff=""
-                    class="w-full max-w-[500px] bg-card-primary mb-24 border-0 rounded-base mx-auto px-4 py-2"
+                    className="w-full max-w-[500px] bg-card-primary mb-24 border-0 rounded-base mx-auto px-4 py-2"
                   >
-                    <div data-v-d8556cff="" class="mt-0">
-                      <div data-v-d8556cff="" class="">
+                    <div data-v-d8556cff="" className="mt-0">
+                      <div data-v-d8556cff="" className="">
                         <div
                           data-v-d8556cff=""
-                          class="w-full flex flex-col items-center justify-center"
+                          className="w-full flex flex-col items-center justify-center"
                         >
                           <div
                             data-v-ea58f736=""
                             data-v-d8556cff=""
                             id="auth-advance-tab"
-                            class="w-full"
+                            className="w-full"
                           >
-                            <div data-v-ea58f736="" class="tabsWrapper w-full">
+                            <div data-v-ea58f736="" className="tabsWrapper w-full">
                               <div
                                 data-v-ea58f736=""
-                                class="tabs relative flex items-center justify-center tab-secondary w-full"
+                                className="tabs relative flex items-center justify-center tab-secondary w-full"
                               >
                                 <div
                                   data-v-ea58f736=""
-                                  class="w-full absolute bottom-0 left-0 rounded-full slide auth-advance-tab"
+                                  className="w-full absolute bottom-0 left-0 rounded-full slide auth-advance-tab"
                                   style={{
                                     width: "50%",
                                     left: activeTab === "login" ? "0px" : "50%",
@@ -308,17 +300,17 @@ function Login() {
                                 ></div>
                                 <div
                                   data-v-ea58f736=""
-                                  class="w-full absolute bottom-0 left-0 rounded-full slide-border auth-advance-tab"
+                                  className="w-full absolute bottom-0 left-0 rounded-full slide-border auth-advance-tab"
                                 ></div>
                                 <div
                                   data-v-ea58f736=""
                                   id="auth-advance-tab"
-                                  class={changeColorTextL}
+                                  className={changeColorTextL}
                                   onClick={(e) => handleLoginTab(e)}
                                 >
                                   <span
                                     data-v-ea58f736=""
-                                    class="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                                    className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                                   >
                                     เข้าสู่ระบบ
                                   </span>
@@ -326,12 +318,12 @@ function Login() {
                                 <div
                                   data-v-ea58f736=""
                                   id="auth-advance-tab"
-                                  class={changeColorTextR}
+                                  className={changeColorTextR}
                                   onClick={handleRegisterTab}
                                 >
                                   <span
                                     data-v-ea58f736=""
-                                    class="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                                    className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                                   >
                                     สมัครสมาชิก
                                   </span>
@@ -341,29 +333,28 @@ function Login() {
                           </div>
 
                           {activeTab === "login" ? (
-                            <div data-v-d8556cff="" class="w-full mt-4">
+                            <div data-v-d8556cff="" className="w-full mt-4">
                               <form
                                 data-v-d8556cff=""
-                                class="flex flex-col mt-3"
+                                className="flex flex-col mt-3"
                               >
                                 <div
                                   data-v-d8556cff=""
-                                  class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
+                                  className="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
                                 >
                                   <h5
                                     data-v-d8556cff=""
-                                    class="text-sm mb-2 text-primary"
+                                    className="text-sm mb-2 text-primary"
                                   >
                                     เบอร์โทรศัพท์
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
-                                    class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                                    className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <input
                                       data-v-d8556cff=""
-                                      class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      value={userNameInput}
+                                      className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="text"
                                       placeholder="เบอร์โทรศัพท์"
                                       autocomplete="off"
@@ -380,26 +371,26 @@ function Login() {
                                   <div
                                     style={{ marginTop: "-25px" }}
                                     data-v-d8556cff=""
-                                    class="h-[18px]"
+                                    className="h-[18px]"
                                   ></div>
                                 </div>
                                 <div
                                   data-v-d8556cff=""
-                                  class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
+                                  className="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
                                 >
                                   <h5
                                     data-v-d8556cff=""
-                                    class="text-sm mb-2 text-primary"
+                                    className="text-sm mb-2 text-primary"
                                   >
                                     รหัสผ่าน
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
-                                    class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                                    className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <input
                                       data-v-d8556cff=""
-                                      class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
+                                      className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password"
                                       placeholder="รหัสผ่าน"
                                       onChange={(e) =>
@@ -416,7 +407,7 @@ function Login() {
                                   <div
                                     style={{ marginTop: "-25px" }}
                                     data-v-d8556cff=""
-                                    class="h-[18px]"
+                                    className="h-[18px]"
                                   ></div>
                                 </div>
                                 <div data-v-d8556cff="">
@@ -426,15 +417,15 @@ function Login() {
                                     id="btn01"
                                     type="button"
                                     onClick={NextToHome}
-                                    class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
+                                    className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
                                   >
                                     <div
                                       data-v-9dec3a92=""
-                                      class="flex justify-center items-center"
+                                      className="flex justify-center items-center"
                                     >
                                       <span
                                         data-v-d8556cff=""
-                                        class="text-[var(--btn-login)]"
+                                        className="text-[var(--btn-login)]"
                                       >
                                         เข้าสู่ระบบ
                                       </span>
@@ -444,24 +435,24 @@ function Login() {
                               </form>
                             </div>
                           ) : activeTab === "register" ? (
-                            <div data-v-d8556cff="" class="w-full mt-4">
+                            <div data-v-d8556cff="" className="w-full mt-4">
                               <form
                                 data-v-d8556cff=""
-                                class="flex flex-col mt-3"
+                                className="flex flex-col mt-3"
                               >
                                 <div
                                   data-v-d8556cff=""
-                                  class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
+                                  className="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
                                 >
                                   <h5
                                     data-v-d8556cff=""
-                                    class="text-sm mb-2 text-primary"
+                                    className="text-sm mb-2 text-primary"
                                   >
                                     เบอร์โทรศัพท์
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
-                                    class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                                    className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <Select
                                       onChange={handleChangeSelect}
@@ -489,10 +480,9 @@ function Login() {
 
                                     <input
                                       data-v-d8556cff=""
-                                      class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
+                                      className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="text"
                                       maxLength={typePhone === "TH" ? 10 : 13}
-                                      // value={inputPhonenumber}
                                       placeholder={selectedOption}
                                       onChange={(event) =>
                                         handleChangePhone(event)
@@ -517,21 +507,21 @@ function Login() {
                                 </div>
                                 <div
                                   data-v-d8556cff=""
-                                  class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
+                                  className="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
                                 >
                                   <h5
                                     data-v-d8556cff=""
-                                    class="text-sm mb-2 text-primary"
+                                    className="text-sm mb-2 text-primary"
                                   >
                                     รหัสผ่าน
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
-                                    class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                                    className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <input
                                       data-v-d8556cff=""
-                                      class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
+                                      className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       // value={passwordInput}
                                       name="password"
                                       id="password"
@@ -551,23 +541,22 @@ function Login() {
                                 </div>
                                 <div
                                   data-v-d8556cff=""
-                                  class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
+                                  className="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
                                 >
                                   <h5
                                     data-v-d8556cff=""
-                                    class="text-sm mb-2 text-primary"
+                                    className="text-sm mb-2 text-primary"
                                   >
                                     ชื่อ
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
-                                    class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                                    className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <input
                                       style={{ marginLeft: "5px" }}
                                       data-v-d8556cff=""
-                                      class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      value={inputFirstname}
+                                      className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="text"
                                       name="s_firstname"
                                       id="s_firstname"
@@ -586,23 +575,22 @@ function Login() {
                                 </div>
                                 <div
                                   data-v-d8556cff=""
-                                  class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
+                                  className="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
                                 >
                                   <h5
                                     data-v-d8556cff=""
-                                    class="text-sm mb-2 text-primary"
+                                    className="text-sm mb-2 text-primary"
                                   >
                                     นามสกุล
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
-                                    class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                                    className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <input
                                       style={{ marginLeft: "5px" }}
                                       data-v-d8556cff=""
-                                      class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      // value={inputLastname}
+                                      className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       name="s_lastname"
                                       id="s_lastname"
                                       type="text"
@@ -621,7 +609,6 @@ function Login() {
                                 </div>
                                 <div
                                   onClick={() => _clickNextStep()}
-                                  // onClick={handleAccountTab}
                                   data-v-d8556cff=""
                                 >
                                   <button
@@ -629,15 +616,15 @@ function Login() {
                                     data-v-d8556cff=""
                                     id="btn01"
                                     type="button"
-                                    class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
+                                    className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
                                   >
                                     <div
                                       data-v-9dec3a92=""
-                                      class="flex justify-center items-center"
+                                      className="flex justify-center items-center"
                                     >
                                       <span
                                         data-v-d8556cff=""
-                                        class="text-[var(--btn-login)]"
+                                        className="text-[var(--btn-login)]"
                                       >
                                         ถัดไป
                                       </span>
@@ -647,7 +634,7 @@ function Login() {
                               </form>
                             </div>
                           ) : (
-                            <div data-v-d8556cff="" class="w-full mt-4">
+                            <div data-v-d8556cff="" className="w-full mt-4">
                               <div className="banking-list">
                                 <div
                                   style={{ opacity: bankCode === 2 ? 1 : 0.5 }}
@@ -903,17 +890,17 @@ function Login() {
                                 </div>
                               </div>
                               <div
-                                class="relative w-full"
+                                className="relative w-full"
                                 style={{ marginTop: "10px" }}
                               >
                                 <h5
                                   data-v-d8556cff=""
-                                  class="text-sm mb-2 text-primary"
+                                  className="text-sm mb-2 text-primary"
                                 >
                                   กรุณาเลือกธนาคารของคุณ
                                 </h5>
                                 <select
-                                  class="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
+                                  className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                                   id="nuid-1"
                                   value={bankCode}
                                   placeholder="เลขบัญชีธนาคาร"
@@ -930,31 +917,31 @@ function Login() {
                                     </option>
                                   ))}
                                 </select>
-                                <span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
+                                <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
                                   <span
-                                    class="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
+                                    className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
                                     aria-hidden="true"
                                   ></span>
                                 </span>
-                                <div data-v-d8556cff="" class="h-[18px]"></div>
+                                <div data-v-d8556cff="" className="h-[18px]"></div>
                               </div>
                               <div
                                 data-v-d8556cff=""
-                                class="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
+                                className="login-input-wrapper w-full text-[var(--primary)] w-full rounded-[10px] mb-2"
                               >
                                 <h5
                                   data-v-d8556cff=""
-                                  class="text-sm mb-2 text-primary"
+                                  className="text-sm mb-2 text-primary"
                                 >
                                   เลขบัญชีธนาคาร
                                 </h5>
                                 <div
                                   data-v-d8556cff=""
-                                  class="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                                  className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                 >
                                   <input
                                     data-v-d8556cff=""
-                                    class="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
+                                    className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                     name="bank"
                                     id="bank"
                                     type="text"
@@ -971,7 +958,7 @@ function Login() {
                                   {messageCreate}
                                 </div>
 
-                                <div data-v-d8556cff="" class="h-[18px]"></div>
+                                <div data-v-d8556cff="" className="h-[18px]"></div>
                               </div>
                               <div
                                 data-v-d8556cff=""
@@ -983,15 +970,15 @@ function Login() {
                                   data-v-d8556cff=""
                                   id="btn01"
                                   type="submit"
-                                  class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
+                                  className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
                                 >
                                   <div
                                     data-v-9dec3a92=""
-                                    class="flex justify-center items-center"
+                                    className="flex justify-center items-center"
                                   >
                                     <span
                                       data-v-d8556cff=""
-                                      class="text-[var(--btn-login)]"
+                                      className="text-[var(--btn-login)]"
                                     >
                                       กลับ
                                     </span>
@@ -1004,15 +991,15 @@ function Login() {
                                   data-v-d8556cff=""
                                   id="btn01"
                                   type="button"
-                                  class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
+                                  className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
                                 >
                                   <div
                                     data-v-9dec3a92=""
-                                    class="flex justify-center items-center"
+                                    className="flex justify-center items-center"
                                   >
                                     <span
                                       data-v-d8556cff=""
-                                      class="text-[var(--btn-login)]"
+                                      className="text-[var(--btn-login)]"
                                     >
                                       ยืนยัน
                                     </span>

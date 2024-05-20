@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function History({ closeModal }) {
+function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw }) {
   const [active, setActive] = useState("deposit");
   const handleDeposit = () => {
     setActive("deposit");
@@ -41,16 +41,12 @@ function History({ closeModal }) {
       style={{ zIndex: 1000 }}
     >
       <div
-        class="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
-        aria-hidden="true"
-      ></div>
-      <div
-        class="vfm__content vfm--outline-none flex flex-col bg-white rounded-lg max-w-[540px] mx-4"
+        className="vfm__content vfm--outline-none flex flex-col bg-white rounded-lg max-w-[540px] mx-4"
         tabindex="0"
       >
         <span
           onClick={closeModal}
-          class="nuxt-icon nuxt-icon--fill absolute bg-[red] top-[-10px] right-[-10px] text-sm p-2 rounded-full z-10 text-xs cursor-pointer"
+          className="nuxt-icon nuxt-icon--fill absolute bg-[red] top-[-10px] right-[-10px] text-sm p-2 rounded-full z-10 text-xs cursor-pointer"
         >
           <svg
             width="100"
@@ -76,28 +72,29 @@ function History({ closeModal }) {
             </defs>
           </svg>
         </span>
-        <div>
+        <div className="scroll-container ">
           <div>
-            <div data-v-ea58f736="" id="affiliate-advance-tab" class="w-full">
-              <div data-v-ea58f736="" class="tabsWrapper">
+            <div data-v-ea58f736="" id="affiliate-advance-tab" className="w-full">
+              <div data-v-ea58f736="" className="tabsWrapper">
                 <div
+                  style={{
+                    width: "100%",
+                    padding: "15px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                   data-v-ea58f736=""
-                  class="tabs relative flex items-center justify-center tab-primary w-max"
+                  className="tabs relative flex items-center justify-center tab-primary w-max"
                 >
-                  {/* <div
-                    data-v-ea58f736=""
-                    class="w-full absolute bottom-0 left-0 rounded-full slide affiliate-advance-tab"
-                  ></div> */}
                   <div
                     onClick={handleDeposit}
                     data-v-ea58f736=""
                     id="affiliate-advance-tab"
-                    class={Class_Depodit}
+                    className={Class_Depodit}
                   >
                     <span
                       data-v-ea58f736=""
-                      class="font-normal &lt;sm:text-base sm:text-base md:text-lg"
-                      style={{ marginRight: "6rem" }}
+                      className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                     >
                       ฝาก
                     </span>
@@ -106,12 +103,11 @@ function History({ closeModal }) {
                     onClick={handleWithdraw}
                     data-v-ea58f736=""
                     id="affiliate-advance-tab"
-                    class={Class_Withdraw}
+                    className={Class_Withdraw}
                   >
                     <span
                       data-v-ea58f736=""
-                      class="font-normal &lt;sm:text-base sm:text-base md:text-lg"
-                      style={{}}
+                      className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                     >
                       ถอน
                     </span>
@@ -120,12 +116,11 @@ function History({ closeModal }) {
                     onClick={handleBonus}
                     data-v-ea58f736=""
                     id="affiliate-advance-tab"
-                    class={Class_Bonus}
+                    className={Class_Bonus}
                   >
                     <span
                       data-v-ea58f736=""
-                      class="font-normal &lt;sm:text-base sm:text-base md:text-lg"
-                      style={{ marginLeft: "6rem" }}
+                      className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                     >
                       โบนัส
                     </span>
@@ -134,15 +129,95 @@ function History({ closeModal }) {
               </div>
             </div>
           </div>
-          <div class="flex justify-center mb-4">
-            {/* <span class="text-gray-500">( 5 รายการล่าสุด )</span> */}
-          </div>
-          <div class="w-full my-2 min-h-[356px] flex flex-col items-center">
-            <div class="text-base mx-auto text-secondary flex flex-col justify-center items-center">
+          {/* <div className="flex justify-center mb-4">
+            <span className="text-red-500">( 5 รายการล่าสุด )</span>
+          </div> */}
+          <div className="w-full my-2 min-h-[356px] flex flex-col items-center">
+            <div
+              className="text-base mx-auto text-secondary flex flex-col justify-center items-center"
+              style={{
+                width: "100%",
+              }}
+            >
               {active === "deposit" ? (
-                <h1>ฝาก</h1>
+                <div className="history-list">
+                  {dataHistoryDeposit?.length > 0 &&
+                    dataHistoryDeposit?.map((deposit, index) => (
+                      <div
+                        key={deposit?.index}
+                        className="deposit-withdraw-list"
+                      >
+                        <div className="h-list-left">
+                          <p>รายการฝาก</p>
+                          <p> {deposit?.f_amount}</p>
+                          <p>หมายเหตุ : {deposit?.s_remark}</p>
+                        </div>
+                        <div className="h-right">
+                        
+                          <div 
+                          className={
+                            deposit?.s_status === "Y"
+                              ? "text-success"
+                              : deposit?.s_status === "C"
+                              ? "text-cancel"
+                              : "not-success"
+                          }
+                         >
+                            <p>
+                              {deposit?.s_status === "Y"
+                                ? "สำเร็จ"
+                                : deposit?.s_status === "C"
+                                ? "ยกเลิก"
+                                : "ไม่สำเร็จ"}
+                            </p>
+                            <p>
+                              {deposit?.d_datetime}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                
               ) : active === "withdraw" ? (
-                <h1> ถอน</h1>
+                <div className="history-list">
+                {dataHistoryWithdraw?.length > 0 &&
+                  dataHistoryWithdraw?.map((withdraw, index) => (
+                    <div
+                      key={withdraw?.index}
+                      className="deposit-withdraw-list"
+                    >
+                      <div className="h-list-left">
+                        <p>รายการฝาก</p>
+                        <p> {withdraw?.f_amount} บาท</p>
+                        <p>หมายเหตุ : {withdraw?.s_remark}</p>
+                      </div>
+                      <div className="h-right">
+                      
+                        <div 
+                        className={
+                          withdraw?.s_status === "Y"
+                            ? "text-success"
+                            : withdraw?.s_status === "C"
+                            ? "text-cancel"
+                            : "text-not-success"
+                        }
+                       >
+                          <p>
+                            {withdraw?.s_status === "Y"
+                              ? "สำเร็จ"
+                              : withdraw?.s_status === "C"
+                              ? "ยกเลิก"
+                              : "ไม่สำเร็จ"}
+                          </p>
+                          <p>
+                            {withdraw?.d_datetime}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
               ) : active === "bonus" ? (
                 <h1>โบนัส</h1>
               ) : null}

@@ -1,4 +1,34 @@
-function ModalCredit({closeModal }) {
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
+import { DataLocalStorage } from "../../helper";
+import Constant from "../../constant";
+
+function ModalCredit({ closeModal }) {
+  const [reMessage, setReMessage] = useState("");
+  const [dataFromLogin, setDataFromLogin] = useState({});
+  const [codeCupon, setCodeCupon] = useState("");
+  useEffect(() => {
+    const userData = DataLocalStorage();
+    if (userData) {
+      setDataFromLogin(userData);
+    }
+  }, []);
+  const _addCupon = async () => {
+    console.log("ADD_CUPON");
+    try {
+      const _data = await axios.post(`${Constant.SERVER_URL}/Coupon/Receive`, {
+        s_agent_code: Constant?.AGENT_CODE,
+        s_username: dataFromLogin?.username,
+        s_code: codeCupon,
+        actionBy: "ADM",
+      });
+      if (_data?.data) {
+        setReMessage(_data?.data?.statusDesc);
+      }
+    } catch (error) {
+    }
+  };
   return (
     <div
       className="vfm vfm--fixed vfm--inset flex justify-center items-center dialog"
@@ -17,56 +47,61 @@ function ModalCredit({closeModal }) {
       title=""
     >
       <div
-        class="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
+        className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
         aria-hidden="true"
       ></div>
       <div
-        class="vfm__content vfm--outline-none flex flex-col bg-white rounded-lg max-w-[540px] mx-4"
+        className="vfm__content vfm--outline-none flex flex-col bg-white rounded-lg max-w-[540px] mx-4"
         tabindex="0"
       >
         <div data-v-e339f85c="">
-          <div data-v-e339f85c="" class="text-center text-primary">
+          <div data-v-e339f85c="" className="text-center text-primary">
             ใส่โค้ดรับเครดิตฟรี
           </div>
-          <div data-v-e339f85c="" class="w-full flex justify-between mt-3">
+          <div data-v-e339f85c="" className="w-full flex justify-between mt-3">
             <div
               data-v-d0ca5c5c=""
               data-v-e339f85c=""
-              class="input-sm base-input-wrapper w-full mb-1 input-primary pr-4"
+              className="input-sm base-input-wrapper w-full mb-1 input-primary pr-4"
               id="code"
               rounded="5px"
               background="black"
             >
-              <span data-v-d0ca5c5c="" class="text-sm mb-1 relative"></span>
+              <span data-v-d0ca5c5c="" className="text-sm mb-1 relative"></span>
               <div
                 data-v-d0ca5c5c=""
-                class="main-input !bg-[var(--input-bg)] text-[var(--primary)] w-full rounded-[10px] flex items-center"
+                className="main-input !bg-[var(--input-bg)] text-[var(--primary)] w-full rounded-[10px] flex items-center"
               >
                 <div
                   data-v-d0ca5c5c=""
-                  class="flex justify-center -mt-2 items-center pointer-events-none"
+                  className="flex justify-center -mt-2 items-center pointer-events-none"
                 ></div>
                 <input
+                  onChange={(e) => setCodeCupon(e.target.value)}
                   data-v-d0ca5c5c=""
-                  class="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
+                  className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
                   type="text"
                   placeholder="ใส่โค้ดที่นี่"
                   autocomplete=""
                   maxlength="false"
                 />
               </div>
-              <div data-v-d0ca5c5c="" class=""></div>
+              <div data-v-d0ca5c5c="" className=""></div>
+              <div style={{ textAlign: "center", color: "red" }}>
+                {reMessage}
+              </div>
             </div>
             <button
+              onClick={() => _addCupon()}
               data-v-9dec3a92=""
               data-v-e339f85c=""
               id="btn01"
               type="submit"
-              disabled="true"
-              class="base-button-wrapper v-rounded btn-primary btn-lg btn-primary cursor-pointer <sm:text-base sm:text-base md:text-lg"
+              disabled={codeCupon === ''  ? true : false}
+              className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary cursor-pointer <sm:text-base sm:text-base md:text-lg"
             >
-              <div data-v-9dec3a92="" class="flex justify-center items-center">
-                ตรวจสอบ
+              <div data-v-9dec3a92="" className="flex justify-center items-center">
+                ยืนยัน
               </div>
             </button>
           </div>
