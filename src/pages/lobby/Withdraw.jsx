@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
 // import Slide_bank from "../../components/slide_bank";
-import Letter_slide from "../../components/Letter_slide";
+// import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { showSuccessAlert } from "../../helper/SweetAlert";
 function Withdraw() {
+  const bank = "BANK";
   // const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataUser, setDataUser] = useState();
@@ -99,7 +100,7 @@ function Withdraw() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
-              <Letter_slide />
+              {/* <Letter_slide /> */}
 
               <div
                 data-v-6307fb48=""
@@ -155,7 +156,7 @@ function Withdraw() {
               </div>
             </div>
           </main>
-          <Footer />
+          <Footer Active={bank}/>
         </div>
       </div>
     </body>

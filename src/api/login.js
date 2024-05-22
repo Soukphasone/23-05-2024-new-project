@@ -7,7 +7,6 @@ import { DataLocalStorage, TokenLocalStorage } from "../helper";
 
 const LoginController = () => {
 	const history = useHistory();
-
 	// ==================> handleLogin <=================
 	const handleLogin = async (username, password, setLoading) => {
 		try {
@@ -25,6 +24,7 @@ const LoginController = () => {
 					JSON.stringify({
 						agent: data?.data?.agent,
 						username: data?.data?.username,
+						password: password,
 						balance: data?.data?.balance,
 						info: data?.data?.info,
 					}),
@@ -40,7 +40,6 @@ const LoginController = () => {
 			console.log("🚀 ~ handleLogin ~ error:", error);
 		}
 	};
-
 	const loginPlayNow = async (username, password) => {
 		console.log("first: ", username)
 		console.log("second: ", password)
@@ -87,15 +86,12 @@ const LoginController = () => {
 				s_channel_name: Constant.AGENT_CODE,
 				i_channel: "134",
 			};
-			console.log("DYAA", _date)
 			const _resOne = await axios({
 				method: "post",
 				url: `${Constant.SERVER_URL}/Member/Register/Verify`,
 				data: _date,
 			});
-			console.log("res", _resOne)
 			if (_resOne?.data?.statusCode === 0) {
-				console.log("register One: ", _resOne?.data)
 				const _resTwo = await axios({
 					method: "post",
 					url: `${Constant.SERVER_URL}/Member/Register/Confirm`,
@@ -148,48 +144,29 @@ const LoginController = () => {
 	};
 
 
-	const _loginAfterRegister = async (username, password, isMobile) => {
+	const _loginAfterRegister = async (username, password) => {
 		try {
-			const _res = await axios({
-				method: "post",
-				url: `${Constant.SERVER_URL}/Authen/Login`,
-				data: {
-					agentCode: Constant.AGENT_CODE,
-					username: username,
-					password: password,
-					ip: "1.2.3.4"
-				}
+			const { data } = await axios.post(`${Constant.SERVER_URL}/Authen/Login`, {
+				agentCode: Constant.AGENT_CODE,
+				username,
+				password,
+				ip: "1.2.3.4",
 			});
-			if (_res?.data?.statusCode === 0) {
-				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, _res.data.token);
+			if (data?.statusCode === 0) {
+				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, data.data.token);
 				localStorage.setItem(
 					Constant.LOGIN_USER_DATA,
 					JSON.stringify({
-						agent: _res?.data?.agent,
-						username: _res?.data?.username,
-						balance: _res?.data?.balance,
-						info: {
-							bankDeposit: _res?.data?.info?.bankDeposit,
-							bankList: _res?.data?.info?.bankList,
-							brandList: _res?.data?.info?.brandList,
-							cashback: _res?.data?.info?.cashback,
-							profile: _res?.data?.info?.profile,
-							promotionList: _res?.data?.info?.promotionList,
-							slide: _res?.data?.info?.slide,
-							shorturl: _res?.data?.info?.shorturl,
-						},
+						agent: data?.data?.agent,
+						username: data?.data?.username,
+						balance: data?.data?.balance,
+						info: data?.data?.info,
 					}),
 				);
-				if (isMobile === "MOBILE") {
-					console.log("mobile: ", _res?.data)
-					history.push(Constant.AFTER_LOGIN_MOBILE, _res?.data?.data);
-				} else {
-					console.log("computer: ", _res?.data?.data)
-					history.push(Constant.AFTER_LOGIN, _res?.data?.data);
-				}
+				history.push(Constant.AFTER_LOGIN, data?.data);
 				return null;
 			}
-			return _res;
+			return data;
 		} catch (error) {
 			console.log("🚀 ~ const_login= ~ error:", error);
 		}

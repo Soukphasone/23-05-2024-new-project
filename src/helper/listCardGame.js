@@ -428,39 +428,7 @@ export let dataCradGame = {
   ],
   "LOTTO": [],
   "ALL": [
-    {
-      "s_type": "CASINO",
-      "s_pbrand_code": "SA",
-      "s_brand_code": "B001",
-      "s_brand_name": "SAGame",
-      "s_status": "A",
-      "s_status_agent": "A",
-      "s_lobby_flg": "N",
-      "s_lobby_url": "/assets/images/cradCategoryGame/sa.webp",
-      "s_endpoint_access": "/SA/LoginRequest"
-    },
-    {
-      "s_type": "CASINO",
-      "s_pbrand_code": "SEXY",
-      "s_brand_code": "B003",
-      "s_brand_name": "SexyGame",
-      "s_status": "A",
-      "s_status_agent": "A",
-      "s_lobby_flg": "N",
-      "s_lobby_url": "/assets/images/cradCategoryGame/sexxy.webp",
-      "s_endpoint_access": "/SEXY/LoginRequest"
-    },
-    {
-      "s_type": "CASINO",
-      "s_pbrand_code": "PP",
-      "s_brand_code": "B008",
-      "s_brand_name": "PragmaticPlay - Live",
-      "s_status": "A",
-      "s_status_agent": "A",
-      "s_lobby_flg": "N",
-      "s_lobby_url": "/assets/images/cradCategoryGame/ppscasino.webp",
-      "s_endpoint_access": "/PP/LIVE/LoginRequest"
-    },
+   
     {
       "s_type": "SLOT",
       "s_pbrand_code": "PG",
@@ -570,7 +538,52 @@ export let dataCradGame = {
       "s_lobby_flg": "Y",
       "s_lobby_url": "/assets/images/cradCategoryGame/playgo.webp ",
       "s_endpoint_access": "/DCS/LoginRequest"
-    }
+    },
+    {
+      "s_type": "CASINO",
+      "s_pbrand_code": "SA",
+      "s_brand_code": "B001",
+      "s_brand_name": "SAGame",
+      "s_status": "A",
+      "s_status_agent": "A",
+      "s_lobby_flg": "N",
+      "s_lobby_url": "/assets/images/cradCategoryGame/sa.webp",
+      "s_endpoint_access": "/SA/LoginRequest"
+    },
+    {
+      "s_type": "CASINO",
+      "s_pbrand_code": "SEXY",
+      "s_brand_code": "B003",
+      "s_brand_name": "SexyGame",
+      "s_status": "A",
+      "s_status_agent": "A",
+      "s_lobby_flg": "N",
+      "s_lobby_url": "/assets/images/cradCategoryGame/sexxy.webp",
+      "s_endpoint_access": "/SEXY/LoginRequest"
+    },
+    {
+      "s_type": "CASINO",
+      "s_pbrand_code": "PP",
+      "s_brand_code": "B008",
+      "s_brand_name": "PragmaticPlay - Live",
+      "s_status": "A",
+      "s_status_agent": "A",
+      "s_lobby_flg": "N",
+      "s_lobby_url": "/assets/images/cradCategoryGame/ppscasino.webp",
+      "s_endpoint_access": "/PP/LIVE/LoginRequest"
+    },
+    {
+      "s_type": "SPORT",
+      "s_pbrand_code": "SBO",
+      "s_brand_code": "B012",
+      "s_brand_name": "Sbobet",
+      "s_status": "A",
+      "s_status_agent": "A",
+      "s_lobby_flg": "N",
+      "s_lobby_url": "/assets/images/cradCategoryGame/sbobet.webp",
+      "s_endpoint_access": "/SBO/LoginRequest"
+    },
+    
 
   ],
   "HOTHIT": [],

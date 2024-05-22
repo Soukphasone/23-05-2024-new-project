@@ -4,7 +4,6 @@ import Constant from "../../constant";
 import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 
 function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
-  console.log("Data_FLG", dataPromotion);
   const apoverPromotion = async () => {
     try {
       const _resAppover = await axios.post(

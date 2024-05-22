@@ -32,16 +32,19 @@ function ShareLink({ closeModal, dataFromLogin }) {
         <div data-v-e339f85c="">
           <div data-v-e339f85c="" className="text-center text-primary">
             ลิ้งค์แนะนำเพื่อน
-            <div style={{fontSize:'12px'}}>คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน</div>
+            <p className="text-center mt-1 text-secondary text-xs">
+            คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน
+        </p>
+            {/* <div style={{fontSize:'12px'}}>คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน</div> */}
           </div>
 
           <span className="text-active text-base font-medium">
             <div className="mt-[10px] w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
-              <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
+              <span className="text-sm text-left w-[25%] text-[var(--text-link)]" >
                 ลิงก์ชวนเพื่อน
               </span>
-              <div className="w-full flex items-center gap-x-4 justify-between">
-                <span className="text-primary text-left w-full max-w-40 truncate text-sm">
+              <div className="w-full flex items-center gap-x-4 justify-between" >
+                <span className="text-primary text-left w-full max-w-100 truncate text-sm">
                   <input
                     data-v-d0ca5c5c=""
                     className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"

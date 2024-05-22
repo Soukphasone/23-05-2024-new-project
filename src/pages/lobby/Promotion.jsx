@@ -11,6 +11,7 @@ function Promotion() {
   const [dataPromotion, setDataPromotion] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedPromotion, setSelectedPromotion] = useState(null);
+  const promotion = "PROMOTION";
 
   const handleButtonClick1 = (item) => {
     setSelectedPromotion(item);
@@ -123,7 +124,7 @@ function Promotion() {
               </div>
             </div>
           </main>
-          <Footer />
+          <Footer Active={promotion} />
         </div>
       </div>
       {openModal &&

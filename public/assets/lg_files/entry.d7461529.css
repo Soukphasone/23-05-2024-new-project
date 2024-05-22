@@ -32293,35 +32293,46 @@ ul {
 .text-not-success {
     color: #FF003A;
 }
-.history-list{
+
+.history-list {
     width: 100%;
 }
-.deposit-withdraw-list{
+
+.deposit-withdraw-list {
     width: 100%;
-   justify-content: space-between;
+    justify-content: space-between;
     display: flex;
     margin-bottom: 15px;
     border-bottom: 2px solid gray;
     padding: 10px 0,
 }
+
 .scroll-container {
     width: 100%;
     height: 450px;
     overflow-y: scroll;
-  }
-  
-  .breadcrumb-wrapper__item[data-v-fe9de6ba]:last-child {
+}
+
+.breadcrumb-wrapper__item[data-v-fe9de6ba]:last-child {
     color: var(--primary);
     text-transform: uppercase;
 }
+.text-message-warning{
+    color: red;
+    padding: 10px 10px 10px 15px;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
-    .percentage{
+    .percentage {
         font-size: 15px;
     }
 }
 
 @media (max-width: 480px) {
-    .percentage{
+    .percentage {
         font-size: 13px;
     }
 }

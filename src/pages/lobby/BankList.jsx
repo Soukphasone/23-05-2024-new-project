@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "../../components/Header";
-import Letter_slide from "../../components/Letter_slide";
+// import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import {showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 function BankList() {
+  const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
   const _copyText = (text) => {
@@ -25,7 +26,7 @@ function BankList() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
-              <Letter_slide />
+              {/* <Letter_slide /> */}
               <div className="base-container-small">
                 <div
                 onClick={Back}
@@ -154,7 +155,7 @@ function BankList() {
               </div>
             </div>
           </main>
-          <Footer />
+          <Footer Active={bank}/>
         </div>
       </div>
     </body>

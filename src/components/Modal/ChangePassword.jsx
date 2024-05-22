@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import _LoginController from "../../api/login";
 import { LogoutClearLocalStorage } from "../../helper";
-function ChangePassword({ closeModal }) {
+import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
+
+function ChangePassword({ closeModal, oldPassword }) {
   const { ChangePassword } = _LoginController();
   const [reMessage, setReMessage] = useState("");
-  const [oldPassword, setOldPassword] = useState("");
   const [NewPassword, setNewPassword] = useState("");
   const [NewPasswordVery, setNewPasswordVery] = useState("");
   const _ChangePassword = async () => {
@@ -17,6 +18,7 @@ function ChangePassword({ closeModal }) {
       if (_data?.data) {
         setReMessage(_data?.data?.statusDesc);
         if (_data?.data.statusCode === 0) {
+          showSuccessAlert("สำเร็จ")
           LogoutClearLocalStorage();
         }
       }
@@ -49,11 +51,14 @@ function ChangePassword({ closeModal }) {
         className="vfm__content vfm--outline-none flex flex-col bg-white rounded-lg max-w-[540px] mx-4"
         tabindex="0"
       >
-        <p className="text-center text-primary text-base">เปลี่ยนรหัสผ่านเข้าเกม</p>
+        <p className="text-center text-primary text-base">
+          เปลี่ยนรหัสผ่านเข้าเกม
+        </p>
         <p className="text-center mt-1 text-secondary text-xs">
           กรุณากรอกรหัสผ่านใหม่และกดยืนยัน
         </p>
         <div
+        style={{display:'none'}}
           data-v-d0ca5c5c=""
           className="input-sm base-input-wrapper w-full mb-1 input-primary mt-2"
           id="password"
@@ -71,7 +76,7 @@ function ChangePassword({ closeModal }) {
               data-v-d0ca5c5c=""
               className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
               type="password"
-              onChange={(e) => setOldPassword(e.target.value)}
+              value={oldPassword}
               placeholder="กรุณากรอกรหัสเก่า"
               autocomplete=""
               maxlength="false"
@@ -97,7 +102,7 @@ function ChangePassword({ closeModal }) {
               data-v-d0ca5c5c=""
               className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
               type="password"
-              onChange={(e) =>  setNewPassword(e.target.value)}
+              onChange={(e) => setNewPassword(e.target.value)}
               placeholder="กรุณากรอกรหัสผ่านใหม่"
               autocomplete=""
               maxlength="false"
@@ -140,7 +145,10 @@ function ChangePassword({ closeModal }) {
             type="submit"
             className="base-button-wrapper v-rounded btn-primary btn-md btn-secondary cursor-pointer w-full &lt;sm:text-base sm:text-base md:text-lg"
           >
-            <div data-v-9dec3a92="" className="flex justify-center items-center">
+            <div
+              data-v-9dec3a92=""
+              className="flex justify-center items-center"
+            >
               ปิด
             </div>
           </button>
@@ -149,14 +157,22 @@ function ChangePassword({ closeModal }) {
             data-v-9dec3a92=""
             id="btn01"
             type="submit"
-            disabled={oldPassword === '' || NewPassword === '' || NewPasswordVery === ''? true:false}
+            disabled={
+              oldPassword === "" || NewPassword === "" || NewPasswordVery === ""
+                ? true
+                : false
+            }
             className="base-button-wrapper v-rounded btn-primary btn-md btn-primary cursor-pointer w-full &lt;sm:text-base sm:text-base md:text-lg"
           >
-            <div data-v-9dec3a92="" className="flex justify-center items-center">
+            <div
+              data-v-9dec3a92=""
+              className="flex justify-center items-center"
+            >
               ยืนยัน
             </div>
           </button>
         </div>
+        <span className="text-message-warning">{reMessage}</span>
       </div>
     </div>
   );

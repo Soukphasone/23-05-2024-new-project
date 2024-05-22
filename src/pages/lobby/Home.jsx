@@ -15,6 +15,8 @@ import {
 function HomePage() {
   //
   const history = useHistory();
+  const home = "HOME"
+  const [activeHome, setActivehome] = useState("HOME")
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [categoryGame, setCategoryGame] = useState([]);
   const [deviceType, setDeviceType] = useState(false);
@@ -28,7 +30,6 @@ function HomePage() {
     const _dataUser = DataLocalStorage();
     setDataFromLogin(_dataUser);
   }, []);
-
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     _clickCategoryGame("ALL");
@@ -906,7 +907,9 @@ function HomePage() {
                         </div>
                       </div>
                     </div>
-                    <div className="w-full auto-rows-max gap-2 grid grid-cols-2 @xs:grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 lg:grid-cols-6">
+                    <div
+                      className="w-full auto-rows-max gap-2 grid grid-cols-2 @xs:grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 lg:grid-cols-6"
+                    >
                       {categoryGame?.length > 0 &&
                         categoryGame?.map((item, index) => (
                           <div
@@ -957,7 +960,7 @@ function HomePage() {
               </div>
             </div>
           </main>
-          <Footer />
+          <Footer Active = {home}/>
         </div>
       </div>
     </body>

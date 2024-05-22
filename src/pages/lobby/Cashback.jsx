@@ -8,6 +8,7 @@ import axios from "axios";
 import { DataLocalStorage, CheckLevelCashBack } from "../../helper";
 import Constant from "../../constant";
 function Cashback() {
+  const bag= "BAG"
   const [openModal, setOpenModal] = useState(false);
   const [reMessage, setReMessage] = useState("");
   const [maxLevel, setmaxLevel] = useState();
@@ -31,17 +32,6 @@ function Cashback() {
     setOpenModal(false);
   };
   const _getData = async () => {
-    // const _res = await axios({
-    //   method: "post",
-    //   url: `${Constant.SERVER_URL}/Member/Balance`,
-    //   data: {
-    //     s_agent_code: dataFromLogin?.agent,
-    //     s_username: dataFromLogin?.username,
-    //   },
-    // });
-    // if (_res?.data?.statusCode === 0) {
-    //   setDataUser(_res?.data?.data);
-    // }
     const _level = await CheckLevelCashBack(dataFromLogin?.info?.cashback);
     if (_level) setmaxLevel(_level);
     const _resHistoryCashBack = await axios({
@@ -52,7 +42,6 @@ function Cashback() {
         s_username: dataFromLogin?.username,
       },
     });
-    console.log("Cash_Back", _resHistoryCashBack);
     if (_resHistoryCashBack?.data?.statusCode === 0) {
       setHistoryCashBack(_resHistoryCashBack?.data?.data);
     }
@@ -73,7 +62,7 @@ function Cashback() {
         setReMessage(_res?.data?.statusDesc);
       }
       if (_res?.data?.statusCode === 0) {
-        // _getData();
+        _getData();
       }
     } catch (error) {
       console.log("🚀 ~ const_login= ~ error:", error);
@@ -89,7 +78,7 @@ function Cashback() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div data-v-a828f7ed="" className="w-full mx-auto base-container pb-2">
-              <Letter_slide />
+              {/* <Letter_slide /> */}
               <div
                 data-v-82953e26=""
                 className="base-container-small flex flex-col justify-center"
@@ -185,7 +174,7 @@ function Cashback() {
               </div>
             </div>
           </main>
-          <Footer />
+          <Footer Active={bag} />
         </div>
       </div>
       {openModal &&

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import Letter_slide from "../../components/Letter_slide";
+// import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 function Deposit() {
+  const bank = "BANK";
   const history = useHistory();
   const [depositBankList, setDepositBankList] = useState({});
   const [bankList, setBankList] = useState("");
@@ -29,7 +30,7 @@ function Deposit() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
-              <Letter_slide />
+              {/* <Letter_slide /> */}
               <div className="base-container-small">
                 <div className="flex flex-col items-center space-y-3 justify-center w-full rounded-base bg-card-primary p-4 text-center">
                   <span className="text-base text-active">เลือกธนาคาร</span>
@@ -78,7 +79,7 @@ function Deposit() {
                       <p className="text-sm">บัญชีของคุณ: </p>
                       <div className="w-[45px] h-[45px] mt-4 text-white">
                         <div
-                          style={{ backgroundColor: "rgb(19, 143, 45)" }}
+                          // style={{ backgroundColor: "rgb(19, 143, 45)" }}
                           className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center"
                         >
                           <span
@@ -135,7 +136,7 @@ function Deposit() {
               </div>
             </div>
           </main>
-          <Footer />
+          <Footer  Active={bank}/>
         </div>
       </div>
     </body>

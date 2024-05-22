@@ -9,7 +9,7 @@ module.exports = {
   LOGIN: "/login",
   PAGE_LOGIN_CAN_LOGIN_PLAY: "/api/v1/Authen/Token",
   // AFTER_LOGIN: "/lobby",
-  AFTER_LOGIN: "/lobby",
+  AFTER_LOGIN: "/",
   TYPE_GAME: "/lobby/type-game",
   PROFILE: "/lobby/profile",
   PROMOTION: "/lobby/promotion",
