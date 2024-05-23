@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Letter_slide from "../../components/Letter_slide";
 import ChangePassword from "../../components/Modal/ChangePassword";
 import { createPortal } from "react-dom";
 import { DataLocalStorage } from "../../helper";
-import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
+import { showSuccessAlert } from "../../helper/SweetAlert";
+import Constant from "../../constant";
 
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
   const [username, setUsername] = useState("");
-  const [bankList, setBanklist] = useState("");
+  const [bankList, setBankList] = useState("");
   const [Password, setOldPassword] = useState("");
   useEffect(() => {
     const userData = DataLocalStorage();
+    const lcsBankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
+
     setUsername(userData.username);
-    setBanklist(userData?.info?.bankList);
+    setBankList(lcsBankList);
     setOldPassword(userData?.password)
   }, []);
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
-   showSuccessAlert('คัดลอกสำเร็จ')
+    showSuccessAlert('คัดลอกสำเร็จ')
   };
   const handleButtonClick1 = () => {
     setOpenModal(false);
@@ -112,7 +114,7 @@ function Profile() {
                           </span>
                           <span className="nuxt-icon nuxt-icon--fill cursor-pointer text-[var(--primary)]">
                             <svg
-                            onClick={()=> _copyText(username)}
+                              onClick={() => _copyText(username)}
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"
@@ -186,7 +188,7 @@ function Profile() {
                           </span>
                           <span className="nuxt-icon nuxt-icon--fill cursor-pointer text-[var(--primary)]">
                             <svg
-                            onClick={()=> _copyText(Password)}
+                              onClick={() => _copyText(Password)}
                               width="16"
                               height="16"
                               viewBox="0 0 16 16"
@@ -219,33 +221,33 @@ function Profile() {
                     </div>
                   ) : (
                     <div className="space-y-[10px]">
-                      <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
+                      <div className="w-full flex justify-center items-center bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
                           ธนาคาร
                         </span>
-                        {bankList.length > 0 &&
-                          bankList.map((item, index) => (
-                            <div
-                              key={index}
-                              className="w-full flex items-center gap-x-4 justify-between"
-                            >
-                              <span
-                                className="text-primary text-left w-full max-w-40 truncate text-sm"
-                                style={{
-                                  display: "flex",
-                                  gap: "10px",
-                                  textTransform: "uppercase",
-                                }}
-                              >
-                                {item?.s_icon.split(".")[0]}{" "}
-                                <img
-                                  src={`/assets/images/bank/${item?.s_icon}`}
-                                  alt="logo bank"
-                                  className="result"
-                                />
-                              </span>
-                            </div>
-                          ))}
+                        {/* {bankList.length > 0 &&
+                          bankList.map((item, index) => ( */}
+                        <div
+                          className="w-full flex items-center justify-center gap-x-4"
+                        >
+                          <span
+                            className="text-primary text-left w-full max-w-40 truncate text-sm flex items-center justify-between gap-10"
+                            style={{
+                              display: "flex",
+                              gap: "10px",
+                              textTransform: "uppercase",
+                            }}
+                          >
+                            {bankList[0]?.s_icon.split(".")[0]}{" "}
+                            <img
+                              src={`/assets/images/bank/${bankList[0]?.s_icon}`}
+                              alt="logo bank"
+                              className="result"
+                              style={{ width: 30, height: 30 }}
+                            />
+                          </span>
+                        </div>
+                        {/* ))} */}
                       </div>
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
@@ -278,7 +280,7 @@ function Profile() {
       </div>
       {openModal &&
         createPortal(
-          <ChangePassword closeModal={handleButtonClick1} oldPassword={Password}/>,
+          <ChangePassword closeModal={handleButtonClick1} oldPassword={Password} />,
           document.body
         )}
     </body>

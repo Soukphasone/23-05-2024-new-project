@@ -40,8 +40,6 @@ function ChangePassword({ closeModal, oldPassword }) {
       style={{ Zindex: "1000" }}
       role="dialog"
       aria-modal="true"
-      id=""
-      title=""
     >
       <div
         className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
@@ -58,7 +56,7 @@ function ChangePassword({ closeModal, oldPassword }) {
           กรุณากรอกรหัสผ่านใหม่และกดยืนยัน
         </p>
         <div
-        style={{display:'none'}}
+          style={{ display: 'none' }}
           data-v-d0ca5c5c=""
           className="input-sm base-input-wrapper w-full mb-1 input-primary mt-2"
           id="password"

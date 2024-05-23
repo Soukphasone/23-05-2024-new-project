@@ -41,6 +41,7 @@ function Bag() {
       _getData();
     }
   }, [dataFromLogin]);
+
   const _getData = async () => {
     const _resHistoryMoney = await axios({
       method: "post",
@@ -78,7 +79,7 @@ function Bag() {
                       className="flex flex-col text-center justify-center items-center cursor-pointer"
                       id="btn-referral"
                     >
-                      <a className="">
+                      <a>
                         <div
                           data-v-d320b445=""
                           className="borderGradient w-full gradient-border w-[75px] rounded-full h-[75px] bg-card-primary flex light-theme-box-shadow justify-center items-center"

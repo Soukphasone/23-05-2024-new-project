@@ -15,12 +15,10 @@ function GameType() {
   const [deviceType, setDeviceType] = useState(false);
   const typeGame = history?.location?.state;
   const [dataGameList, setDataGameList] = useState([]);
-  const [categoryGame1, setCategoryGame1] = useState([]);
   const [categoryGame, setCategoryGame] = useState([]);
   const [activeTypeGame, setActiveTypeGame] = useState("");
   const [percentageData, setPercentageData] = useState([]);
   useEffect(() => {
-    // console.log("Type_Game", typeGame)
     _clickCategoryGame(typeGame?.type);
     _getDataGame(typeGame?.dataGame);
     setActiveTypeGame(typeGame?.dataGame?.s_brand_name);
@@ -90,8 +88,8 @@ function GameType() {
           value?.s_type === "CASINO"
             ? "B001"
             : value?.s_type === "SPORT"
-            ? "B001"
-            : value?.s_game_code,
+              ? "B001"
+              : value?.s_game_code,
         s_brand_code: value?.s_brand_code,
         s_username: typeGame?.dataFromLogin?.username,
         s_agent_code: Constant?.AGENT_CODE,
@@ -171,12 +169,12 @@ function GameType() {
       );
       setDataGameList(filteredData);
     }
-    else{
+    else {
       _clickCategoryGame(typeGame?.type);
       _getDataGame(typeGame?.dataGame);
       setActiveTypeGame(typeGame?.dataGame?.s_brand_name);
     }
-    
+
   };
   const _copyAccountNo = (accountNo) => {
     navigator.clipboard.writeText(accountNo);
@@ -218,7 +216,7 @@ function GameType() {
                         className="splide__list"
                         id="splide44-list"
                         role="presentation"
-                        // style={{ transform: "translateX(0px)" }}
+                      // style={{ transform: "translateX(0px)" }}
                       >
                         {categoryGame?.length > 0 &&
                           categoryGame?.map((item, index) => (

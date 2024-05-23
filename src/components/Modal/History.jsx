@@ -153,22 +153,22 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw }) {
                           <p>หมายเหตุ : {deposit?.s_remark}</p>
                         </div>
                         <div className="h-right">
-                        
-                          <div 
-                          className={
-                            deposit?.s_status === "Y"
-                              ? "text-success"
-                              : deposit?.s_status === "C"
-                              ? "text-cancel"
-                              : "not-success"
-                          }
-                         >
+
+                          <div
+                            className={
+                              deposit?.s_status === "Y"
+                                ? "text-success"
+                                : deposit?.s_status === "C"
+                                  ? "text-cancel"
+                                  : "not-success"
+                            }
+                          >
                             <p>
                               {deposit?.s_status === "Y"
                                 ? "สำเร็จ"
                                 : deposit?.s_status === "C"
-                                ? "ยกเลิก"
-                                : "ไม่สำเร็จ"}
+                                  ? "ยกเลิก"
+                                  : "ไม่สำเร็จ"}
                             </p>
                             <p>
                               {deposit?.d_datetime}
@@ -178,46 +178,46 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw }) {
                       </div>
                     ))}
                 </div>
-                
+
               ) : active === "withdraw" ? (
                 <div className="history-list">
-                {dataHistoryWithdraw?.length > 0 &&
-                  dataHistoryWithdraw?.map((withdraw, index) => (
-                    <div
-                      key={withdraw?.index}
-                      className="deposit-withdraw-list"
-                    >
-                      <div className="h-list-left">
-                        <p>รายการฝาก</p>
-                        <p> {withdraw?.f_amount} บาท</p>
-                        <p>หมายเหตุ : {withdraw?.s_remark}</p>
-                      </div>
-                      <div className="h-right">
-                      
-                        <div 
-                        className={
-                          withdraw?.s_status === "Y"
-                            ? "text-success"
-                            : withdraw?.s_status === "C"
-                            ? "text-cancel"
-                            : "text-not-success"
-                        }
-                       >
-                          <p>
-                            {withdraw?.s_status === "Y"
-                              ? "สำเร็จ"
-                              : withdraw?.s_status === "C"
-                              ? "ยกเลิก"
-                              : "ไม่สำเร็จ"}
-                          </p>
-                          <p>
-                            {withdraw?.d_datetime}
-                          </p>
+                  {dataHistoryWithdraw?.length > 0 &&
+                    dataHistoryWithdraw?.map((withdraw, index) => (
+                      <div
+                        key={withdraw?.index}
+                        className="deposit-withdraw-list"
+                      >
+                        <div className="h-list-left">
+                          <p>รายการฝาก</p>
+                          <p> {withdraw?.f_amount} บาท</p>
+                          <p>หมายเหตุ : {withdraw?.s_remark}</p>
+                        </div>
+                        <div className="h-right">
+
+                          <div
+                            className={
+                              withdraw?.s_status === "Y"
+                                ? "text-success"
+                                : withdraw?.s_status === "C"
+                                  ? "text-cancel"
+                                  : "text-not-success"
+                            }
+                          >
+                            <p>
+                              {withdraw?.s_status === "Y"
+                                ? "สำเร็จ"
+                                : withdraw?.s_status === "C"
+                                  ? "ยกเลิก"
+                                  : "ไม่สำเร็จ"}
+                            </p>
+                            <p>
+                              {withdraw?.d_datetime}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-              </div>
+                    ))}
+                </div>
               ) : active === "bonus" ? (
                 <h1>โบนัส</h1>
               ) : null}

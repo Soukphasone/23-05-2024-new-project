@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
-import Letter_slide from "../../components/Letter_slide";
 import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import Footer from "../../components/Footer";
@@ -40,7 +39,7 @@ function DepositWithdraw() {
                 <div className="pt-2 pb-4"></div>
                 <div className="flex w-full gap-x-3">
                   <div
-                  onClick={NextoDeposit}
+                    onClick={NextoDeposit}
                     data-v-c1e135f9=""
                     id="btn-topup-auto"
                     className="btn w-full cursor-pointer"
@@ -138,7 +137,7 @@ function DepositWithdraw() {
                   </a>
                 </div>
                 <div onClick={() => setOpenModalgetcredit(true)}
-                data-v-e339f85c="" style={{marginTop:'30px'}}>
+                  data-v-e339f85c="" style={{ marginTop: '30px' }}>
                   <div
                     data-v-e339f85c=""
                     class="bg-[var(--card-primary)] text-primary flex light-theme-box-shadow cursor-pointer rounded-base flex-row w-full h-[54px] Wrapper mt-3 items-center justify-between"
@@ -197,7 +196,7 @@ function DepositWithdraw() {
               </div>
             </div>
           </main>
-          <Footer Active={bank}/>
+          <Footer Active={bank} />
         </div>
       </div>
       {modalgetCredit &&

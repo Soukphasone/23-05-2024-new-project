@@ -8,8 +8,10 @@ function Footer({ Active }) {
   const [activePageTab, setActivePageTab] = useState(Active);
   useEffect(() => {
     const userData = DataLocalStorage();
-    if (userData) {
-      setContactUs(userData?.info?.configLobby?.s_line);
+    const _configLobby = JSON.parse(localStorage.getItem(Constant.CONFIG_LOBBY));
+
+    if (userData && _configLobby) {
+      setContactUs(_configLobby?.s_line);
     }
   }, []);
   const _activePage = (value) => {
@@ -353,7 +355,7 @@ function Footer({ Active }) {
                       </svg>
                     </span>
                     <span class="text-[var(--primary)] gradientText text-[12px]">
-                      กิจกรรม
+                      กระเป่า
                     </span>
                   </div>
                 </a>

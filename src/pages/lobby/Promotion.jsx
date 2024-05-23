@@ -5,6 +5,7 @@ import GetPromotion from "../../components/Modal/GetPromotion";
 import { createPortal } from "react-dom";
 import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
+import Constant from "../../constant";
 
 function Promotion() {
   const [dataFromLogin, setDataFromLogin] = useState({});
@@ -25,9 +26,10 @@ function Promotion() {
 
   useEffect(() => {
     const userData = DataLocalStorage();
+    const _promotion = JSON.parse(localStorage.getItem(Constant.DATA_PROMOTION));
     if (userData) {
       setDataFromLogin(userData);
-      setDataPromotion(userData?.info?.promotionList);
+      setDataPromotion(_promotion);
     }
   }, []);
 

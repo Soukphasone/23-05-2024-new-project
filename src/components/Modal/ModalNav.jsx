@@ -8,10 +8,12 @@ function Modal({ closeModal }) {
 
   useEffect(() => {
     const userData = DataLocalStorage();
-    if (userData) {
+    const _configLobby = JSON.parse(localStorage.getItem(Constant.CONFIG_LOBBY));
+
+    if (userData && _configLobby) {
       setUsername(userData?.username);
-      setContactUs(userData?.info?.configLobby?.s_line);
-      setLogoweb(userData?.info?.configLobby?.s_logo);
+      setContactUs(_configLobby?.s_line);
+      setLogoweb(_configLobby?.s_logo);
     }
   }, []);
   const LogOut = () => {

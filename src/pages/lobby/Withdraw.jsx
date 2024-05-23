@@ -16,6 +16,8 @@ function Withdraw() {
   const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataUser, setDataUser] = useState();
+  const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
+
   useEffect(() => {
     const userData = DataLocalStorage();
     if (userData) {
@@ -75,7 +77,7 @@ function Withdraw() {
         s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
         f_amount: dataUser?.amount,
-        i_bank: dataFromLogin?.info?.bankList[0]?.id,
+        i_bank: _bankList?.bankList[0]?.id,
         i_ip: "1.2.3.4",
         actionBy: "adm",
       };
@@ -92,7 +94,7 @@ function Withdraw() {
       } else {
         setReMessage(_res?.data?.statusDesc);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (

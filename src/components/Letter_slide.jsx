@@ -19,12 +19,12 @@ function Letter_slide() {
       <div className="transparent-overlay" aria-hidden="true"></div>
       <div className="marquee">
         <div className="ml-4">
-          LUCABET88 เว็บไซต์อันดับ 1 ในเอเชีย ระบบฝาก-ถอนออโต้ รองรับทุกธนาคาร
+          SHUN808 เว็บไซต์อันดับ 1 ในเอเชีย ระบบฝาก-ถอนออโต้ รองรับทุกธนาคาร
         </div>
       </div>
       <div className="marquee" aria-hidden="true">
         <div className="ml-4">
-          LUCABET88 เว็บไซต์อันดับ 1 ในเอเชีย ระบบฝาก-ถอนออโต้ รองรับทุกธนาคาร
+          SHUN808 เว็บไซต์อันดับ 1 ในเอเชีย ระบบฝาก-ถอนออโต้ รองรับทุกธนาคาร
         </div>
       </div>
     </div>

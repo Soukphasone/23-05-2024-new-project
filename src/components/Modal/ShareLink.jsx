@@ -4,7 +4,7 @@ function ShareLink({ closeModal, dataFromLogin }) {
     navigator.clipboard.writeText(text);
     showSuccessAlert("คัดลอกสำเร็จ");
     closeModal("close");
-    
+
   };
   return (
     <div
@@ -35,8 +35,8 @@ function ShareLink({ closeModal, dataFromLogin }) {
           <div data-v-e339f85c="" className="text-center text-primary">
             ลิ้งค์แนะนำเพื่อน
             <p className="text-center mt-1 text-secondary text-xs">
-            คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน
-        </p>
+              คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน
+            </p>
             {/* <div style={{fontSize:'12px'}}>คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน</div> */}
           </div>
 
@@ -50,12 +50,12 @@ function ShareLink({ closeModal, dataFromLogin }) {
                   <input
                     data-v-d0ca5c5c=""
                     className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
-                    value={dataFromLogin?.info?.shorturl}
+                    value={dataFromLogin?.shortUrl}
                   />
                 </span>
                 <span className="nuxt-icon nuxt-icon--fill cursor-pointer text-[var(--primary)]">
                   <svg
-                    onClick={() => _copyText(dataFromLogin?.info?.shorturl)}
+                    onClick={() => _copyText(dataFromLogin?.shortUrl)}
                     width="16"
                     height="16"
                     viewBox="0 0 16 16"

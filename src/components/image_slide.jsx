@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DataLocalStorage } from "../helper";
+import Constant from "../constant";
 
 function Image_slide() {
   const [imageSlide, setImageSlide] = useState([]);
@@ -10,9 +11,11 @@ function Image_slide() {
   const [current, setCurrent] = useState(0);
   useEffect(() => {
     const userData = DataLocalStorage();
-    if (userData && userData.info) {
-      const slideArray = userData?.info?.slide
-        ? Object.values(userData?.info?.slide)
+    const _slide = JSON.parse(localStorage.getItem(Constant.SLIDE));
+
+    if (userData) {
+      const slideArray = _slide
+        ? Object.values(_slide)
         : [];
       setSliderData(slideArray);
     }
@@ -64,7 +67,7 @@ function Image_slide() {
   return (
     <div>
       <div className="hidden md:block">
-      <div className="brand">
+        <div className="brand">
           <div className="slideshow-container-after-login-pc">
             <div className="mySlides">
               <div

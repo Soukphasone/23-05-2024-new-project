@@ -34,6 +34,7 @@ function HomePage() {
   useEffect(() => {
     _clickCategoryGame("ALL");
   }, [dataFromLogin]);
+
   useEffect(() => {
     let hasTouchScreen = false;
     if ("maxTouchPoints" in navigator) {
@@ -111,8 +112,8 @@ function HomePage() {
           value?.s_type === "CASINO"
             ? "B001"
             : value?.s_type === "SPORT"
-            ? "B001"
-            : value?.s_game_code,
+              ? "B001"
+              : value?.s_game_code,
         s_brand_code: value?.s_brand_code,
         s_username: dataFromLogin?.username,
         s_agent_code: Constant?.AGENT_CODE,
@@ -926,8 +927,8 @@ function HomePage() {
                                 onKeyDown={() => ""}
                                 onClick={() =>
                                   dataGameType === "FAVORITE" ||
-                                  // dataGameType === "HOTHIT" ||
-                                  dataGameType === "FISHING"
+                                    // dataGameType === "HOTHIT" ||
+                                    dataGameType === "FISHING"
                                     ? _getDataGamePlayGame(item, "FISHING")
                                     : _getDataGame(item)
                                 }
@@ -943,7 +944,7 @@ function HomePage() {
                                 onClick={() =>
                                   dataGameType === "FAVORITE"
                                     ? // dataGameType === "HOTHIT"
-                                      _getDataGamePlayGame(item)
+                                    _getDataGamePlayGame(item)
                                     : _getDataGame(item)
                                 }
                               />
@@ -960,7 +961,7 @@ function HomePage() {
               </div>
             </div>
           </main>
-          <Footer Active = {home}/>
+          <Footer Active={home} />
         </div>
       </div>
     </body>

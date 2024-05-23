@@ -1,9 +1,9 @@
 import React from "react";
 function ModalHistoryCredit({ closeModal }) {
-  
+
   return (
     <div
-    className="vfm vfm--fixed vfm--inset flex justify-center items-center dialog"
+      className="vfm vfm--fixed vfm--inset flex justify-center items-center dialog"
       onClick={(e) => {
         if (
           e.target.className ===
@@ -26,7 +26,7 @@ function ModalHistoryCredit({ closeModal }) {
         className="vfm__content vfm--outline-none flex flex-col bg-white rounded-lg max-w-[540px] mx-4"
         tabindex="0"
       >
-        <div data-v-82953e26="" className="history-title flex justify-between mt-2">
+        <div data-v-82953e26="" className="history-title flex justify-center mt-2">
           <div className="text-primary font-medium &lt;sm:text-base sm:text-base md:text-lg">
             ประวัติการรับเครดิต
           </div>
@@ -39,18 +39,18 @@ function ModalHistoryCredit({ closeModal }) {
           data-v-82953e26=""
           className="w-full flex justify-center items-center gap-2 mb-4"
         >
-     
-          <span className="text-primary font-medium &lt;sm:text-base sm:text-base md:text-lg" 
-                       
-           style={{display: 'flex', justifyContent: "space-between", width:'100%', padding: '10px 0'}}>
+
+          <span className="text-primary font-medium &lt;sm:text-base sm:text-base md:text-lg"
+
+            style={{ display: 'flex', justifyContent: "space-between", width: '100%', padding: '10px 0' }}>
             {/* No Item */}
-            <div>วันที</div>
+            <div>วันที่</div>
             <div>จำนวนเงิน</div>
           </span>
         </div>
         <div onClick={closeModal} data-v-82953e26="" className="w-full flex justify-center items-center">
           <button
-          style={{border:'1px solid orang'}}
+            style={{ border: '1px solid orang' }}
             data-v-9dec3a92=""
             data-v-82953e26=""
             id="btn01"

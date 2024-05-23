@@ -10,13 +10,17 @@ function Deposit() {
   const history = useHistory();
   const [depositBankList, setDepositBankList] = useState({});
   const [bankList, setBankList] = useState("");
+  const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
+  const _bankDeposit = JSON.parse(localStorage.getItem(Constant.BANK_DEPOSIT));
+
   useEffect(() => {
     const userData = DataLocalStorage();
     if (userData) {
-      setDepositBankList(userData?.info?.bankDeposit);
-      setBankList(userData?.info?.bankList?.[0]);
+      setDepositBankList(_bankDeposit);
+      setBankList(_bankList?.[0]);
     }
-  }, []);
+  }, [_bankDeposit, _bankList]);
+
   const NextoBankList = (bank) => {
     history.push(Constant.BANK_LIST, bank);
   };
@@ -35,8 +39,8 @@ function Deposit() {
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
               {/* <Letter_slide /> */}
               <div className="base-container-small">
-              <div
-                onClick={Back}
+                <div
+                  onClick={Back}
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
@@ -44,7 +48,7 @@ function Deposit() {
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                   <img src="/assets/images/icons/icon-arrow-left.png" alt="arrow-lft" />
+                    <img src="/assets/images/icons/icon-arrow-left.png" alt="arrow-lft" />
                   </span>
                   <span
                     data-v-fe9de6ba=""
@@ -107,9 +111,8 @@ function Deposit() {
                             id="kbank"
                           >
                             <img
-                              src={`/assets/images/bank/${
-                                bankList && bankList?.s_icon
-                              }`}
+                              src={`/assets/images/bank/${bankList && bankList?.s_icon
+                                }`}
                               alt="scb"
                               id="image0_5_3"
                               width="512"
@@ -120,10 +123,10 @@ function Deposit() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm" 
-                      style={{textTransform: 'uppercase' }}
+                      <p className="text-sm"
+                        style={{ textTransform: 'uppercase' }}
                       >
-                      { bankList?.s_icon?.split(".")[0]}
+                        {bankList?.s_icon?.split(".")[0]}
                       </p>
                       <p className="text-lg mt-2 text-active font-bold">
                         {bankList?.s_account_no}
@@ -156,7 +159,7 @@ function Deposit() {
               </div>
             </div>
           </main>
-          <Footer  Active={bank}/>
+          <Footer Active={bank} />
         </div>
       </div>
     </body>

@@ -19,16 +19,28 @@ const LoginController = () => {
 			// console.log("data?.data: ", data?.data)
 			if (data.statusCode === 0) {
 				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, data.data.token);
-				localStorage.setItem(
-					Constant.LOGIN_USER_DATA,
+
+				localStorage.setItem(Constant.DATA_PROFILE, JSON.stringify(data?.data?.info?.profile))
+				localStorage.setItem(Constant.DATA_BANK_LIST, JSON.stringify(data?.data?.info?.bankList))
+				localStorage.setItem(Constant.DATA_PROMOTION, JSON.stringify(data?.data?.info?.promotionList))
+				localStorage.setItem(Constant.BRAND_LIST, JSON.stringify(data?.data?.info?.brandList))
+				localStorage.setItem(Constant.CASHBACK, JSON.stringify(data?.data?.info?.cashback))
+				localStorage.setItem(Constant.CONFIG_CASHBACK, JSON.stringify(data?.data?.info?.configCash))
+				localStorage.setItem(Constant.CONFIG_LINE, JSON.stringify(data?.data?.info?.configLine))
+				localStorage.setItem(Constant.CONFIG_LOBBY, JSON.stringify(data?.data?.info?.configLobby))
+				localStorage.setItem(Constant.CONFIG_WITHDRAW, JSON.stringify(data?.data?.info?.configWithdraw))
+				localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide))
+				localStorage.setItem(Constant.BANK_DEPOSIT, JSON.stringify(data?.data?.info?.bankDeposit))
+				localStorage.setItem(Constant.LOGIN_USER_DATA,
 					JSON.stringify({
 						agent: data?.data?.agent,
 						username: data?.data?.username,
 						password: password,
 						balance: data?.data?.balance,
-						info: data?.data?.info,
+						shortUrl: data?.data?.info?.shorturl
 					}),
 				);
+
 				setLoading(false);
 				history.push(Constant.AFTER_LOGIN, data?.data);
 			} else {

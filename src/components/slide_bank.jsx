@@ -13,7 +13,7 @@ function Slide_bank() {
           <div
             className="splide__track splide__track--loop splide__track--ltr splide__track--draggable"
             id="splide03-track"
-            style={{paddingLeft: '0px', paddingRight: '0px'}}
+            style={{ paddingLeft: '0px', paddingRight: '0px' }}
             aria-live="polite"
             aria-atomic="true"
           >
@@ -21,7 +21,7 @@ function Slide_bank() {
               className="splide__list"
               id="splide03-list"
               role="presentation"
-              style={{transform: 'translateX(-1286px)'}}
+              style={{ transform: 'translateX(-1286px)' }}
             >
               <li
                 className="splide__slide splide__slide--clone"
@@ -29,7 +29,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="23 of 24"
-                style={{marginRight: '3px', width: 'calc(100% + 0px)'}}
+                style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
               >
                 <div className="">
@@ -51,7 +51,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="24 of 24"
-                style={{marginRight: '3px', width: 'calc(100% + 0px)'}}
+                style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
               >
                 <div className="">
@@ -74,7 +74,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="1 of 24"
-                style={{marginRight: '3px', width: 'calc(100% + 0px)'}}
+                style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
               >
                 <div className="">
@@ -96,7 +96,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="2 of 24"
-                style={{marginRight: '3px', width: 'calc(100% + 0px)'}}
+                style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
               >
                 <div className="">
@@ -126,7 +126,7 @@ function Slide_bank() {
           <div
             className="splide__track splide__track--loop splide__track--ltr splide__track--draggable"
             id="splide04-track"
-           style={{paddingLeft: '0px', paddingRight: '0px'}}
+            style={{ paddingLeft: '0px', paddingRight: '0px' }}
             aria-live="off"
             aria-atomic="true"
           >
@@ -134,7 +134,7 @@ function Slide_bank() {
               className="splide__list"
               id="splide04-list"
               role="presentation"
-              style={{transform: 'translateX(-4.3px)'}}
+              style={{ transform: 'translateX(-4.3px)' }}
             >
               <li
                 className="splide__slide splide__slide--clone is-visible is-active"
@@ -142,7 +142,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="19 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -163,7 +163,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="20 of 24"
-                style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -184,7 +184,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="21 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -205,7 +205,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="22 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -227,7 +227,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="1 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -248,7 +248,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="2 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -269,7 +269,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="1 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -290,7 +290,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="2 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">
@@ -311,7 +311,7 @@ function Slide_bank() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label="3 of 24"
-               style={{marginRight: '4px', width: 'calc(33.3333% - 2.66667px)'}}
+                style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
                   <div className="h-[63px] w-full md:h-[167px] relative cursor-pointer">

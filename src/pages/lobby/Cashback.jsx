@@ -8,12 +8,13 @@ import axios from "axios";
 import { DataLocalStorage, CheckLevelCashBack } from "../../helper";
 import Constant from "../../constant";
 function Cashback() {
-  const bag= "BAG"
+  const bag = "BAG"
   const [openModal, setOpenModal] = useState(false);
   const [reMessage, setReMessage] = useState("");
   const [maxLevel, setmaxLevel] = useState();
   const [historyCashBack, setHistoryCashBack] = useState([]);
   const [dataFromLogin, setDataFromLogin] = useState({});
+  const _cashback = JSON.parse(localStorage.getItem(Constant.CASHBACK));
 
   useEffect(() => {
     const userData = DataLocalStorage();
@@ -26,13 +27,14 @@ function Cashback() {
     if (dataFromLogin) {
       _getData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataFromLogin]);
 
   const handleButtonClick1 = () => {
     setOpenModal(false);
   };
   const _getData = async () => {
-    const _level = await CheckLevelCashBack(dataFromLogin?.info?.cashback);
+    const _level = await CheckLevelCashBack(_cashback);
     if (_level) setmaxLevel(_level);
     const _resHistoryCashBack = await axios({
       method: "post",
@@ -114,12 +116,12 @@ function Cashback() {
                     อัพเดทล่าสุด
                   </p>
                   <p>
-                  {historyCashBack?.length > 0 &&
+                    {historyCashBack?.length > 0 &&
                       historyCashBack[historyCashBack?.length - 1]?.d_create}
                   </p>
 
                   <button
-                  style={{marginTop:'10px'}}
+                    style={{ marginTop: '10px' }}
                     onClick={() => _resiveCashBack()}
                     data-v-9dec3a92=""
                     data-v-82953e26=""
