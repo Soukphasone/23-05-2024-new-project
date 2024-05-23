@@ -16,7 +16,9 @@ function Header() {
 window.location = (Constant.AFTER_LOGIN)
   }
   return (
-    <header data-v-3c88d514="" className="w-full z-10">
+    <header data-v-3c88d514="" className="w-full z-10" 
+    // style={{position:'fixed'}}
+    >
     <div data-v-3c88d514="" className="w-full mx-auto">
       <div
         data-v-4b602944=""

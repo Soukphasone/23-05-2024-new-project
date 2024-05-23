@@ -16,7 +16,7 @@ function ModalHistoryCredit({ closeModal }) {
       aria-modal="true"
       id="cash-back-history-modal"
       title=""
-      style={{ zIndex: 1000 }}
+      style={{ zIndex: 1000, transition: 'opacity 300ms ease-in-out' }}
     >
       <div
         className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"

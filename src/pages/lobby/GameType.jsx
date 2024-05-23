@@ -218,7 +218,7 @@ function GameType() {
                         className="splide__list"
                         id="splide44-list"
                         role="presentation"
-                        style={{ transform: "translateX(0px)" }}
+                        // style={{ transform: "translateX(0px)" }}
                       >
                         {categoryGame?.length > 0 &&
                           categoryGame?.map((item, index) => (

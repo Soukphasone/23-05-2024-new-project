@@ -28303,7 +28303,8 @@ select {
 
 .splide.is-initialized,
 .splide.is-rendered {
-    visibility: visible
+    visibility: visible;
+
 }
 
 .splide__slide {
@@ -32200,7 +32201,6 @@ ul {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
 }
-
 .active[data-v-97788f98] {
     border: 1px solid var(--primary);
     color: var(--primary)
