@@ -29741,7 +29741,7 @@ ul {
 }
 
 .h-30 {
-    height: 6.5rem
+    height: 6rem
 }
 
 .h-86 {
@@ -32335,4 +32335,101 @@ ul {
     .percentage {
         font-size: 11px;
     }
+}
+/* Slide */
+  .slideshow-container-after-login {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    height: 100%;
+  }
+ 
+  .slideshow-container-after-login .mySlides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slideshow-container-after-login .mySlides .slide1 img {
+    width: 100%;
+    height: 138px;
+  }
+  .slideshow-container-after-login-pc {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    height: 100%;
+  }
+
+  .slideshow-container-after-login-pc .mySlides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slideshow-container-after-login-pc .mySlides .slide1 img {
+    width: 100%;
+    height: 230px;
+  }
+
+  .right-arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    font-size: 2rem;
+    background: -webkit-linear-gradient(180deg, #ffc757 0%, #a76f00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    font-size: 2rem;
+    z-index: 10;
+    cursor: pointer;
+    color: #a76f00;
+    user-select: none;
+    background: -webkit-linear-gradient(180deg, #ffc757 0%, #a76f00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+.slider-image {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide1.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
+  .slide-image {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .slide-image .active {
+    width: 80px;
+    border-radius: 10px;
+    min-width: 25%;
+    padding: 2px;
+    background: var(--gradient-gold);
+  }
+  
+  .slide-image .none-active {
+    width: 80px;
+    border-radius: 10px;
+    border: 2px solid #ffff;
+    min-width: 25%;
+    background-color: #ffff;
+  }
+  .slide-active,
+.dot:hover {
+  background-color: #fff;
 }
