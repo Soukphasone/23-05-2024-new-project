@@ -29741,7 +29741,7 @@ ul {
 }
 
 .h-30 {
-    height: 7.5rem
+    height: 6.5rem
 }
 
 .h-86 {
@@ -29939,7 +29939,7 @@ ul {
 
 .my-8 {
     margin-bottom: 2rem;
-    margin-top: 2rem
+    margin-top: 1.5rem
 }
 
 .mx-4 {
@@ -32327,12 +32327,12 @@ ul {
 
 @media (max-width: 768px) {
     .percentage {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .percentage {
-        font-size: 13px;
+        font-size: 11px;
     }
 }

@@ -3,6 +3,8 @@ function ShareLink({ closeModal, dataFromLogin }) {
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
     showSuccessAlert("คัดลอกสำเร็จ");
+    closeModal("close");
+    
   };
   return (
     <div
@@ -40,9 +42,9 @@ function ShareLink({ closeModal, dataFromLogin }) {
 
           <span className="text-active text-base font-medium">
             <div className="mt-[10px] w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
-              <span className="text-sm text-left w-[25%] text-[var(--text-link)]" >
+              {/* <span className="text-sm text-left w-[25%] text-[var(--text-link)]" >
                 ลิงก์ชวนเพื่อน
-              </span>
+              </span> */}
               <div className="w-full flex items-center gap-x-4 justify-between" >
                 <span className="text-primary text-left w-full max-w-100 truncate text-sm">
                   <input

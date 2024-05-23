@@ -7,9 +7,13 @@ import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { showSuccessAlert } from "../../helper/SweetAlert";
+import { useHistory } from "react-router-dom";
+
 function Withdraw() {
+  const history = useHistory();
+
   const bank = "BANK";
-  // const [reMessage, setReMessage] = useState("");
+  const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataUser, setDataUser] = useState();
   useEffect(() => {
@@ -17,12 +21,12 @@ function Withdraw() {
     if (userData) {
       setDataFromLogin(userData);
     }
-  },[]);
+  }, []);
   useEffect(() => {
     if (dataFromLogin) {
       _getData();
     }
-  },[dataFromLogin]);
+  }, [dataFromLogin]);
   const _getData = async () => {
     const _res = await axios({
       method: "post",
@@ -75,21 +79,22 @@ function Withdraw() {
         i_ip: "1.2.3.4",
         actionBy: "adm",
       };
-    // Send the data to the server to get the game URL
+      // Send the data to the server to get the game URL
       const _res = await axios({
         method: "post",
         url: `${Constant.SERVER_URL}/Withdraw/CreateTransaction`,
         data: _data,
       });
       if (_res?.data?.statusCode === 0) {
-        showSuccessAlert('ถอนสำเร็จ')
+        showSuccessAlert("ถอนสำเร็จ");
         _getData();
+        history.push(Constant.DEPOSIT_WITHDRAW);
       } else {
-        // setReMessage(_res?.data?.statusDesc);
+        setReMessage(_res?.data?.statusDesc);
       }
     } catch (error) {}
   };
-  
+
   return (
     <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
@@ -99,7 +104,10 @@ function Withdraw() {
             data-v-3c88d514=""
             className="min-h-screen overflow-scroll pb-[80px]"
           >
-            <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
+            <div
+              data-v-3c88d514=""
+              className="w-full mx-auto base-container pb-2"
+            >
               {/* <Letter_slide /> */}
 
               <div
@@ -115,7 +123,10 @@ function Withdraw() {
                     data-v-6307fb48=""
                     className="text-xl text-active flex justify-center items-center"
                   >
-                    <span data-v-6307fb48="" className="nuxt-icon nuxt-icon--fill">
+                    <span
+                      data-v-6307fb48=""
+                      className="nuxt-icon nuxt-icon--fill"
+                    >
                       <svg
                         width="100"
                         height="100"
@@ -136,11 +147,11 @@ function Withdraw() {
                     ถอนขั้นต่ำ 1.00 บาท{" "}
                   </p>
                   <button
-                  onClick={_withdrawMoney}
+                    onClick={_withdrawMoney}
                     data-v-9dec3a92=""
                     data-v-6307fb48=""
                     id="btn-withdraw"
-                    disabled={dataUser?.amount >= 1? false : true}
+                    disabled={dataUser?.amount >= 1 ? false : true}
                     type="submit"
                     className="base-button-wrapper v-rounded btn-primary btn-md btn-primary mb-[10px] cursor-pointer w-full"
                     label="ถอนเงิน"
@@ -153,10 +164,11 @@ function Withdraw() {
                     </div>
                   </button>
                 </div>
+                <span className="text-message-warning">{reMessage}</span>
               </div>
             </div>
           </main>
-          <Footer Active={bank}/>
+          <Footer Active={bank} />
         </div>
       </div>
     </body>

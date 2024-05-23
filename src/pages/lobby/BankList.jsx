@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 // import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
-import {showSuccessAlert } from "../../helper/SweetAlert";
+import { showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 function BankList() {
   const bank = "BANK";
@@ -12,10 +12,11 @@ function BankList() {
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
     showSuccessAlert("คัดลอกสำเร็จ");
+    history.push(Constant.DEPOSIT_WITHDRAW);
   };
-  const Back =()=>{
-    history.push(Constant.DEPOSIT)
-  }
+  const Back = () => {
+    history.push(Constant.DEPOSIT);
+  };
   return (
     <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
@@ -25,11 +26,14 @@ function BankList() {
             data-v-3c88d514=""
             className="min-h-screen overflow-scroll pb-[80px]"
           >
-            <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
+            <div
+              data-v-3c88d514=""
+              className="w-full mx-auto base-container pb-2"
+            >
               {/* <Letter_slide /> */}
               <div className="base-container-small">
                 <div
-                onClick={Back}
+                  onClick={Back}
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
@@ -37,13 +41,10 @@ function BankList() {
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                    เติมเงิน {" "}
-                  </span>
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm text-primary"
-                  >
-                    /{ banklist?.s_icon?.split(".")[0]}
+                    <img
+                      src="/assets/images/icons/icon-arrow-left.png"
+                      alt="arrow-lft"
+                    />
                   </span>
                 </div>
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
@@ -56,7 +57,7 @@ function BankList() {
                         <div
                           data-v-ea58f736=""
                           className="w-full absolute bottom-0 left-0 rounded-full slide depositTab"
-                          style={{ width: "608px", left: "0px" }}
+                          style={{ width: "100%", left: "0px" }}
                         ></div>
                         <div
                           data-v-ea58f736=""
@@ -101,7 +102,9 @@ function BankList() {
                     <div className="flex flex-col items-center justify-center w-full rounded-base bg-card-primary text-center mt-4">
                       <div className="flex flex-row w-full justify-between">
                         <div className="flex flex-col">
-                          <p className="text-active text-sm">บัญชีที่ต้องโอน: </p>
+                          <p className="text-active text-sm">
+                            บัญชีที่ต้องโอน:{" "}
+                          </p>
                           <div className="w-[45px] h-[45px] mt-4 text-white">
                             <div
                               style={{ backgroundColor: "rgb(78, 46, 127)" }}
@@ -155,7 +158,7 @@ function BankList() {
               </div>
             </div>
           </main>
-          <Footer Active={bank}/>
+          <Footer Active={bank} />
         </div>
       </div>
     </body>

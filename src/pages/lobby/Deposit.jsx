@@ -20,6 +20,9 @@ function Deposit() {
   const NextoBankList = (bank) => {
     history.push(Constant.BANK_LIST, bank);
   };
+  const Back = () => {
+    history.push(Constant.DEPOSIT_WITHDRAW);
+  };
   return (
     <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
@@ -32,6 +35,23 @@ function Deposit() {
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
               {/* <Letter_slide /> */}
               <div className="base-container-small">
+              <div
+                onClick={Back}
+                  data-v-fe9de6ba=""
+                  className="breadcrumb-wrapper py-3 w-max overflow-hidden"
+                >
+                  <span
+                    data-v-fe9de6ba=""
+                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                  >
+                   <img src="/assets/images/icons/icon-arrow-left.png" alt="arrow-lft" />
+                  </span>
+                  <span
+                    data-v-fe9de6ba=""
+                    className="breadcrumb-wrapper__item font-medium text-sm text-primary"
+                  >
+                  </span>
+                </div>
                 <div className="flex flex-col items-center space-y-3 justify-center w-full rounded-base bg-card-primary p-4 text-center">
                   <span className="text-base text-active">เลือกธนาคาร</span>
                   {depositBankList?.length > 0 &&
