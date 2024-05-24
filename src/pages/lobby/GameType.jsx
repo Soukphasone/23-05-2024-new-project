@@ -222,7 +222,6 @@ function GameType() {
                               data-v-db4e30f1=""
                               className="splide__slide is-active is-visible"
                               id="splide44-slide01"
-                              role="group"
                               aria-roledescription="slide"
                               aria-label="1 of 61"
                               style={{ marginRight: "4px"}}
