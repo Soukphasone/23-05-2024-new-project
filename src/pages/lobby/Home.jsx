@@ -15,8 +15,7 @@ import {
 function HomePage() {
   //
   const history = useHistory();
-  const home = "HOME"
-  const [activeHome, setActivehome] = useState("HOME")
+  const home = "HOME";
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [categoryGame, setCategoryGame] = useState([]);
   const [deviceType, setDeviceType] = useState(false);
@@ -112,8 +111,8 @@ function HomePage() {
           value?.s_type === "CASINO"
             ? "B001"
             : value?.s_type === "SPORT"
-              ? "B001"
-              : value?.s_game_code,
+            ? "B001"
+            : value?.s_game_code,
         s_brand_code: value?.s_brand_code,
         s_username: dataFromLogin?.username,
         s_agent_code: Constant?.AGENT_CODE,
@@ -908,9 +907,7 @@ function HomePage() {
                         </div>
                       </div>
                     </div>
-                    <div
-                      className="w-full auto-rows-max gap-2 grid grid-cols-2 @xs:grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 lg:grid-cols-6"
-                    >
+                    <div className="w-full auto-rows-max gap-2 grid grid-cols-2 @xs:grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 lg:grid-cols-6">
                       {categoryGame?.length > 0 &&
                         categoryGame?.map((item, index) => (
                           <div
@@ -927,8 +924,8 @@ function HomePage() {
                                 onKeyDown={() => ""}
                                 onClick={() =>
                                   dataGameType === "FAVORITE" ||
-                                    // dataGameType === "HOTHIT" ||
-                                    dataGameType === "FISHING"
+                                  // dataGameType === "HOTHIT" ||
+                                  dataGameType === "FISHING"
                                     ? _getDataGamePlayGame(item, "FISHING")
                                     : _getDataGame(item)
                                 }
@@ -944,15 +941,106 @@ function HomePage() {
                                 onClick={() =>
                                   dataGameType === "FAVORITE"
                                     ? // dataGameType === "HOTHIT"
-                                    _getDataGamePlayGame(item)
+                                      _getDataGamePlayGame(item)
                                     : _getDataGame(item)
                                 }
                               />
                             )}
-                            <div className="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
-                              <div className="hits text-white p-1">ฮิต</div>
-                              <div className="new text-white p-1">ใหม่</div>
-                            </div>
+                            {item?.s_img !== undefined 
+                            && item?.s_flg_favorite ?
+                             (
+                              <div className="absolute z-[20] flex flex-col space-y-1 text-center text-[10px] top-0 right-2">
+                                <span
+                                  // onClick={() =>
+                                  //   _addFavorite(game, activeTypeGame)
+                                  // }
+                                  onKeyDown={() => ""}
+                                  // className={
+                                  //   game?.s_flg_favorite === "Y"
+                                  //     ? "nuxt-icon nuxt-icon--fill text-danger text-2xl"
+                                  //     : "nuxt-icon text-2xl"
+                                  // }
+                                >
+                                  <div className="favorite-svg">
+                                    <svg
+                                      className="icon-svg"
+                                      width="23"
+                                      height="20"
+                                      viewBox="0 0 23 20"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <g filter="url(#filter0_d_365_17196)">
+                                        <path
+                                          d="M15.376 3.00014C17.9246 3.01262 19.9876 5.08783 20 7.65157C20 12.3486 11.5 17 11.5 17C11.5 17 3 12.2802 3 7.65157C3 5.08268 5.07022 3.00014 7.62401 3.00014C9.18728 2.98788 10.6488 3.77881 11.5 5.09782C12.3571 3.78523 13.8148 2.99634 15.376 3.00014Z"
+                                          fill="#ECECEC"
+                                          fill-opacity="0.4"
+                                          shape-rendering="crispEdges"
+                                        ></path>
+                                        <path
+                                          d="M11.6122 16.3597C11.5723 16.3832 11.5354 16.4046 11.5017 16.4241C11.4678 16.4042 11.4305 16.3823 11.3902 16.3583C11.1624 16.223 10.8357 16.0238 10.4432 15.7702C9.65718 15.2624 8.61175 14.5394 7.56878 13.6763C6.52338 12.8112 5.49524 11.8174 4.7322 10.7705C3.96516 9.71802 3.5 8.65855 3.5 7.65157C3.5 5.35603 5.34915 3.50014 7.62401 3.50016L7.62794 3.50013C9.01913 3.48921 10.321 4.19306 11.0799 5.36895L11.4976 6.0161L11.9187 5.37119C12.6835 4.19983 13.9833 3.49697 15.3741 3.50014C17.6451 3.51158 19.4883 5.3613 19.5 7.6528C19.4996 8.67793 19.0333 9.74596 18.2674 10.7999C17.5047 11.8494 16.4771 12.8406 15.4322 13.7012C14.3896 14.5598 13.3446 15.2762 12.5588 15.7786C12.1664 16.0294 11.8399 16.2261 11.6122 16.3597Z"
+                                          stroke="#ECECEC"
+                                          shape-rendering="crispEdges"
+                                        ></path>
+                                      </g>
+                                      <defs>
+                                        <filter
+                                          id="filter0_d_365_17196"
+                                          x="0"
+                                          y="0"
+                                          width="23"
+                                          height="20"
+                                          filterUnits="userSpaceOnUse"
+                                          color-interpolation-filters="sRGB"
+                                        >
+                                          <feFlood
+                                            flood-opacity="0"
+                                            result="BackgroundImageFix"
+                                          ></feFlood>
+                                          <feColorMatrix
+                                            in="SourceAlpha"
+                                            type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                            result="hardAlpha"
+                                          ></feColorMatrix>
+                                          <feOffset></feOffset>
+                                          <feGaussianBlur stdDeviation="1.5"></feGaussianBlur>
+                                          <feComposite
+                                            in2="hardAlpha"
+                                            operator="out"
+                                          ></feComposite>
+                                          <feColorMatrix
+                                            type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"
+                                          ></feColorMatrix>
+                                          <feBlend
+                                            mode="normal"
+                                            in2="BackgroundImageFix"
+                                            result="effect1_dropShadow_365_17196"
+                                          ></feBlend>
+                                          <feBlend
+                                            mode="normal"
+                                            in="SourceGraphic"
+                                            in2="effect1_dropShadow_365_17196"
+                                            result="shape"
+                                          ></feBlend>
+                                        </filter>
+                                      </defs>
+                                    </svg>
+                                  </div>
+                                </span>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                            {item?.s_img !== undefined ? (
+                              ""
+                            ) : (
+                              <div className="absolute flex flex-col space-y-1 w-max h-[16px] text-center text-[10px] bottom-8 left-3">
+                                <div className="hits text-white p-1">ฮิต</div>
+                                <div className="new text-white p-1">ใหม่</div>
+                              </div>
+                            )}
                           </div>
                         ))}
                     </div>

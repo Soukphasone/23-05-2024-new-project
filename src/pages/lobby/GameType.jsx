@@ -375,11 +375,11 @@ function GameType() {
                           className="animate__animated animate__fadeInUp animate__faster"
                         >
                           <div className="percentage">
-                            RTP{" "}
+                            <p style={{padding:'3px'}}>RTP{" "}
                             {(percentageData[index]?.percentage * 100).toFixed(
                               2
                             )}{" "}
-                            %
+                            %</p>
                           </div>
                           <div className="min-h-14 relative cursor-pointer">
                             <img
@@ -392,7 +392,6 @@ function GameType() {
                               className="rounded-base z-[9] w-full relative min-h-26"
                             />
 
-                            <div className="absolute flex flex-col z-10 space-y-1 w-auto min-w-[30px] h-[16px] text-center text-[10px] top-2 left-2"></div>
                             <div className="absolute z-[20] flex flex-col space-y-1 text-center text-[10px] top-0 right-2">
                               <span
                                 onClick={() =>
