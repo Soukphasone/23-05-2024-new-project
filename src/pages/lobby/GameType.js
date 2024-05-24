@@ -8,7 +8,7 @@ import Constant from "../../constant";
 import _LoginController from "../../api/login";
 import { FillerCategory, FillerCategory2 } from "../../helper";
 import { showSuccessAlert } from "../../helper/SweetAlert";
-
+import _ from 'lodash';
 import { OpenNewTabWithHTML } from "../../helper";
 function GameType() {
   const history = useHistory();
@@ -18,11 +18,15 @@ function GameType() {
   const [categoryGame, setCategoryGame] = useState([]);
   const [activeTypeGame, setActiveTypeGame] = useState("");
   const [percentageData, setPercentageData] = useState([]);
+  const [favoriteOption, setFavoriteOption] = useState("all");
+  const [balueBrandCode, setValueBrandCode] = useState("");
+
   useEffect(() => {
     _clickCategoryGame(typeGame?.type);
     _getDataGame(typeGame?.dataGame);
     setActiveTypeGame(typeGame?.dataGame?.s_brand_name);
   }, []);
+
   useEffect(() => {
     let hasTouchScreen = false;
     if ("maxTouchPoints" in navigator) {
@@ -56,31 +60,7 @@ function GameType() {
     FillerCategory2(value, setCategoryGame);
   };
 
-  const _getDataGame = async (value, activeTypeGame) => {
-    if (value?.s_brand_name === undefined) {
-      setActiveTypeGame(activeTypeGame);
-    } else {
-      setActiveTypeGame(value?.s_brand_name);
-    }
-    const _res = await axios({
-      method: "post",
-      url: `${Constant.SERVER_URL}/Game/ListGame`,
-      data: {
-        s_agent_code: Constant.AGENT_CODE,
-        s_brand_code: value?.s_brand_code,
-        s_username: typeGame?.dataFromLogin?.username,
-      },
-    });
-    if (_res?.data?.statusCode === 0) {
-      setDataGameList(_res?.data?.data);
-      let dataLength = _res?.data?.data?.length;
-      generatePercentageData(dataLength);
-      const intervalId = setInterval(() => {
-        generatePercentageData(dataLength);
-      }, 5000);
-      return () => clearInterval(intervalId);
-    }
-  };
+
   const _getDataGamePlayGame = async (value) => {
     try {
       const _data = {
@@ -118,6 +98,7 @@ function GameType() {
       console.error("Error playing the game:", error);
     }
   };
+
   const _addFavorite = async (value, activeTypeGame) => {
     const _getData = await axios({
       method: "post",
@@ -142,44 +123,86 @@ function GameType() {
     }
     setPercentageData(data);
   };
-  // const _selectFavorite = async (event) => {
-  //   const result_sl = event.target.value;
-  //   if (result_sl === "fav") {
-  //     const _getData = await axios({
-  //       method: "post",
-  //       url: `${Constant.SERVER_URL}/Game/Brand/List`,
-  //       data: {
-  //         s_agent_code: typeGame?.dataFromLogin?.agent,
-  //         s_username: typeGame?.dataFromLogin?.username,
-  //       },
-  //     });
-  //     if (_getData?.data?.statusCode === 0) {
-  //       setCategoryGame1(_getData?.data?.data?.FAVORITE);
-  //     }
-  //   } else {
-  //     // _clickCategoryGame("ALL");
-  //   }
-  // };
-  const _selectFavorite = (event) => {
+
+  const _selectFavorite = async (event) => {
     const result_sl = event.target.value;
+    setFavoriteOption(result_sl)
     if (result_sl === "fav") {
       let filteredData = dataGameList.filter(
         (game) => game?.s_flg_favorite === "Y"
       );
       setDataGameList(filteredData);
-
-    }
-    else {
+    } else {
       _clickCategoryGame(typeGame?.type);
-      _getDataGame(typeGame?.dataGame);
-      setActiveTypeGame(typeGame?.dataGame?.s_brand_name);
-    }
+      // _getDataGame(typeGame?.dataGame);
+      setActiveTypeGame(activeTypeGame);
+      const _res = await axios({
+        method: "post",
+        url: `${Constant.SERVER_URL}/Game/ListGame`,
+        data: {
+          s_agent_code: Constant.AGENT_CODE,
+          s_brand_code: balueBrandCode,
+          s_username: typeGame?.dataFromLogin?.username,
+        },
+      });
+      if (_res?.data?.statusCode === 0) {
+        setDataGameList(_res?.data?.data);
+        let dataLength = _res?.data?.data?.length;
+        generatePercentageData(dataLength);
+        const intervalId = setInterval(() => {
+          generatePercentageData(dataLength);
+        }, 5000);
+        return () => clearInterval(intervalId);
 
+
+
+      }
+    }
   };
   const _copyAccountNo = (accountNo) => {
     navigator.clipboard.writeText(accountNo);
     showSuccessAlert("สำเร็จ");
   };
+
+  const _getDataGame = async (value, activeTypeGame) => {
+    if (value?.s_brand_name === undefined) {
+      setActiveTypeGame(activeTypeGame);
+      setValueBrandCode(value?.s_brand_code);
+    } else {
+      setActiveTypeGame(value?.s_brand_name);
+      setValueBrandCode(value?.s_brand_code);
+    }
+
+    const _res = await axios({
+      method: "post",
+      url: `${Constant.SERVER_URL}/Game/ListGame`,
+      data: {
+        s_agent_code: Constant.AGENT_CODE,
+        s_brand_code: value?.s_brand_code,
+        s_username: typeGame?.dataFromLogin?.username,
+      },
+    });
+    if (_res?.data?.statusCode === 0) {
+      if (favoriteOption === 'fav') {
+        let filteredData = _res?.data?.data.filter(
+          (game) => game?.s_flg_favorite === "Y"
+        )
+        setDataGameList(filteredData);
+      } else {
+        setDataGameList(_res?.data?.data);
+        let dataLength = _res?.data?.data?.length;
+        generatePercentageData(dataLength);
+        const intervalId = setInterval(() => {
+          generatePercentageData(dataLength);
+        }, 5000);
+        return () => clearInterval(intervalId);
+      }
+    }
+  };
+
+  const _selectGameName = (event) => {
+
+  }
   return (
     <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
@@ -275,11 +298,9 @@ function GameType() {
                       <select
                         className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                         id="nuid-1"
-                        onChange={_selectFavorite}
+                        onChange={(event) => _selectFavorite(event)}
                       >
-                        <option
-                          value="all"
-                        >
+                        <option value="all">
                           หมวดหมู่เกม
                         </option>
                         <option value="fav">เกมโปรด</option>
@@ -355,8 +376,7 @@ function GameType() {
                             className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
                             type="text"
                             placeholder="ค้นหาเกม"
-                            autocomplete=""
-                            maxlength="false"
+                            onChange={(event) => _selectGameName(event?.target?.value)}
                           />
                         </div>
                         <div data-v-d0ca5c5c="" className=""></div>
@@ -375,11 +395,11 @@ function GameType() {
                           className="animate__animated animate__fadeInUp animate__faster"
                         >
                           <div className="percentage">
-                            <p style={{padding:'3px'}}>RTP{" "}
-                            {(percentageData[index]?.percentage * 100).toFixed(
-                              2
-                            )}{" "}
-                            %</p>
+                            <p style={{ padding: '3px' }}>RTP{" "}
+                              {(percentageData[index]?.percentage * 100).toFixed(
+                                2
+                              )}{" "}
+                              %</p>
                           </div>
                           <div className="min-h-14 relative cursor-pointer">
                             <img
