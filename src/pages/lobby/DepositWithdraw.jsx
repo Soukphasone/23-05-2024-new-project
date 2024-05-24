@@ -7,7 +7,7 @@ import ModalCredit from "../../components/Modal/ModalCredit";
 import { createPortal } from "react-dom";
 function DepositWithdraw() {
   const history = useHistory();
-  const bank = "BANK"
+  const bank = "BANK";
   const [modalgetCredit, setOpenModalgetcredit] = useState(false);
   const ModalGetCredit = () => {
     setOpenModalgetcredit(false);
@@ -29,6 +29,7 @@ function DepositWithdraw() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div
+              style={{ marginTop: "3rem" }}
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
@@ -136,8 +137,11 @@ function DepositWithdraw() {
                     </div>
                   </a>
                 </div>
-                <div onClick={() => setOpenModalgetcredit(true)}
-                  data-v-e339f85c="" style={{ marginTop: '30px' }}>
+                <div
+                  onClick={() => setOpenModalgetcredit(true)}
+                  data-v-e339f85c=""
+                  style={{ marginTop: "30px" }}
+                >
                   <div
                     data-v-e339f85c=""
                     class="bg-[var(--card-primary)] text-primary flex light-theme-box-shadow cursor-pointer rounded-base flex-row w-full h-[54px] Wrapper mt-3 items-center justify-between"

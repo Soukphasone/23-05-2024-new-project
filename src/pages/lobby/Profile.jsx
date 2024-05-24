@@ -53,7 +53,9 @@ function Profile() {
           >
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
               {/* <Letter_slide /> */}
-              <div className="animate__animated max-w-[420px] mx-auto animate__fadeIn">
+              <div 
+              style={{marginTop:'6rem'}}
+              className="animate__animated max-w-[420px] mx-auto animate__fadeIn">
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
                   <div data-v-ea58f736="" id="profileTab" className="w-full">
                     <div data-v-ea58f736="" className="tabsWrapper w-full">

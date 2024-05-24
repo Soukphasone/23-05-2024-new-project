@@ -17,8 +17,8 @@ function Header() {
     window.location = (Constant.AFTER_LOGIN)
   }
   return (
-    <header data-v-3c88d514="" className="w-full z-10"
-    // style={{position:'fixed'}}
+    <div className='header'>
+      <header data-v-3c88d514="" className="w-full z-10"
     >
       <div data-v-3c88d514="" className="w-full mx-auto">
         <div
@@ -119,6 +119,7 @@ function Header() {
         </div>
       </div>
     </header>
+    </div>
   )
 }
 

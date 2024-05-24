@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw }) {
+function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHistoryBonus }) {
   const [active, setActive] = useState("deposit");
   const handleDeposit = () => {
     setActive("deposit");
@@ -219,7 +219,44 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw }) {
                     ))}
                 </div>
               ) : active === "bonus" ? (
-                <h1>โบนัส</h1>
+                <div className="history-list">
+                {dataHistoryBonus?.length > 0 &&
+                  dataHistoryBonus?.map((bonus, index) => (
+                    <div
+                      key={bonus?.index}
+                      className="deposit-withdraw-list"
+                    >
+                      <div className="h-list-left">
+                        <p>รายการโบนัส</p>
+                        <p>หมายเหตุ : {bonus?.s_remark}</p>
+                      </div>
+                      <div className="h-right">
+
+                        <div
+                        style={{marginTop:'-20px'}}
+                          className={
+                            bonus?.s_status === "Y"
+                              ? "text-success"
+                              : bonus?.s_status === "C"
+                                ? "text-cancel"
+                                : "text-not-success"
+                          }
+                        >
+                          <p>
+                            {bonus?.s_status === "Y"
+                              ? "สำเร็จ"
+                              : bonus?.s_status === "C"
+                                ? "ยกเลิก"
+                                : "ไม่สำเร็จ"}
+                          </p>
+                          <p>
+                            {bonus?.d_datetime}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
               ) : null}
             </div>
           </div>

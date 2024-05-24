@@ -26,7 +26,9 @@ function Promotion() {
 
   useEffect(() => {
     const userData = DataLocalStorage();
-    const _promotion = JSON.parse(localStorage.getItem(Constant.DATA_PROMOTION));
+    const _promotion = JSON.parse(
+      localStorage.getItem(Constant.DATA_PROMOTION)
+    );
     if (userData) {
       setDataFromLogin(userData);
       setDataPromotion(_promotion);
@@ -48,6 +50,7 @@ function Promotion() {
             >
               {/* <Letter_slide /> */}
               <div
+              style={{ marginTop: "5rem" }}
                 data-v-ac0eeeb0=""
                 className="promotion-wrapper animate__animated animate__slideInLeft animate__fast base-container-small space-y-2 flex flex-col justify-center"
               >

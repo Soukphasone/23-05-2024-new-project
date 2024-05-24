@@ -82,6 +82,8 @@ function Cashback() {
             <div data-v-a828f7ed="" className="w-full mx-auto base-container pb-2">
               {/* <Letter_slide /> */}
               <div
+              style={{marginTop:'5rem'}}
+
                 data-v-82953e26=""
                 className="base-container-small flex flex-col justify-center"
               >

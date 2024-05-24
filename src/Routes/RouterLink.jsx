@@ -22,6 +22,7 @@ import BankList from "../pages/lobby/BankList";
 import Withdraw from "../pages/lobby/Withdraw";
 import Bag from "../pages/lobby/Bag";
 import Cashback from "../pages/lobby/Cashback";
+import UploadSleep from "../pages/lobby/UploadSleep";
 
 function RouterLink() {
   return (
@@ -43,6 +44,7 @@ function RouterLink() {
                   <PrivateRoute exact path={Const.BANK_LIST} component={BankList} />
                   <PrivateRoute exact path={Const.BAG } component={Bag} />
                   <PrivateRoute exact path={Const.CASH_BACK } component={Cashback} />
+                  <PrivateRoute exact path={Const.UPLOAD_SLEEP } component={UploadSleep} />
                   {/* <PrivateRoute exact path={Const.AFTER_LOGIN_MOBILE} component={AfterLoginMobile} />
                   <PrivateRoute exact path={Const.GAME_LIST_MOBILE} component={AfterLoginMobileAllGame} /> */}
                 </> 

@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header";
 // import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
+import UploadSleep from "../../components/Modal/UploadSleep";
+import { createPortal } from "react-dom";
 function BankList() {
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
+  const [openModalUpSleep, setOpenModal] = useState(false);
+  const ModalSleep = () => {
+    setOpenModal(false);
+  };
+
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
     showSuccessAlert("คัดลอกสำเร็จ");
@@ -17,8 +24,12 @@ function BankList() {
   const Back = () => {
     history.push(Constant.DEPOSIT);
   };
+  const UploadSleep=()=>{
+    history.push(Constant.UPLOAD_SLEEP);
+
+  }
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
+    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{zIndex:'-10'}}>
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -31,7 +42,10 @@ function BankList() {
               className="w-full mx-auto base-container pb-2"
             >
               {/* <Letter_slide /> */}
-              <div className="base-container-small">
+              <div
+                style={{ marginTop: "4rem" }}
+                className="base-container-small"
+              >
                 <div
                   onClick={Back}
                   data-v-fe9de6ba=""
@@ -57,7 +71,7 @@ function BankList() {
                         <div
                           data-v-ea58f736=""
                           className="w-full absolute bottom-0 left-0 rounded-full slide depositTab"
-                          style={{ width: "100%", left: "0px" }}
+                          style={{ width: "100%"}}
                         ></div>
                         <div
                           data-v-ea58f736=""
@@ -152,7 +166,41 @@ function BankList() {
                         </div>
                       </button>
                     </div>
-                    <div className="h-[1px] mt-4 bg-[#38383A]"></div>
+                  </div>
+                  <div>
+                    <div
+                     onClick={UploadSleep}
+                     className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2">
+                      <div
+                        style={{
+                          width: "100%",
+                          justifyContent: "center",
+                          textAlign: "center",
+                        }}
+                      >
+                        <p className="text-danger text-lg font-bold">
+                          {" "}
+                          แจ้งเงินไม่เข้า/แบบสลีป{" "}
+                        </p>
+                      </div>
+                      <span
+                        data-v-c89fa524=""
+                        className="nuxt-icon text-[22px]"
+                      >
+                        <svg
+                          width="7"
+                          height="12"
+                          viewBox="0 0 7 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0.594919 11.9047L0.0896837 11.3682C-0.0298946 11.2413 -0.0298947 11.0354 0.0896836 10.9084L4.7008 6L0.0896828 1.09165C-0.0298955 0.964666 -0.0298956 0.758771 0.0896827 0.63176L0.594918 0.0952376C0.714496 -0.0317461 0.908383 -0.0317461 1.02799 0.0952375L6.37186 5.77004C6.49143 5.89703 6.49143 6.10292 6.37186 6.22993L1.02799 11.9047C0.908384 12.0318 0.714497 12.0318 0.594919 11.9047Z"
+                            fill="var(--primary)"
+                          ></path>
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -161,6 +209,14 @@ function BankList() {
           <Footer Active={bank} />
         </div>
       </div>
+      {openModalUpSleep &&
+        createPortal(
+          <UploadSleep
+            closeModal={ModalSleep}
+            // dataFromLogin={dataFromLogin}
+          />,
+          document.body
+        )}
     </body>
   );
 }

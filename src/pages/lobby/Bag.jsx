@@ -17,6 +17,8 @@ function Bag() {
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataHistoryWithdraw, setDataHistoryWithdraw] = useState([]);
   const [dataHistoryDeposit, setDataHistoryDeposit] = useState([]);
+  const [dataHistoryBonus, setDataHistoryBonus] = useState([]);
+
   const [openModalSharelink, setOpenModasharelink] = useState(false);
   const [openModalHis, setOpenModalHis] = useState(false);
   const ModalSharelink = () => {
@@ -53,7 +55,7 @@ function Bag() {
     });
     if (_resHistoryMoney?.data?.statusCode === 0) {
       setDataHistoryDeposit(_resHistoryMoney?.data?.data?.deposit);
-      // setDataHistoryBonus(_resHistoryMoney?.data?.data?.bonus);
+      setDataHistoryBonus(_resHistoryMoney?.data?.data?.bonus);
       setDataHistoryWithdraw(_resHistoryMoney?.data?.data?.withdraw);
     }
   };
@@ -71,7 +73,9 @@ function Bag() {
               className="w-full mx-auto base-container pb-2"
             >
               {/* <Letter_slide /> */}
-              <div className="events-wrapper animate__animated animate__slideInLeft animate__fast base-container-small">
+              <div
+              style={{ marginTop: "5rem" }}
+               className="events-wrapper animate__animated animate__slideInLeft animate__fast base-container-small">
                 <div>
                   <div className="grid-cols-4 md:grid-cols-6 grid my-4 gap-3">
                     <div
@@ -1034,6 +1038,7 @@ function Bag() {
             closeModal={ModalHistory}
             dataHistoryDeposit={dataHistoryDeposit}
             dataHistoryWithdraw={dataHistoryWithdraw}
+            dataHistoryBonus={dataHistoryBonus}
           />,
           document.body
         )}

@@ -385,7 +385,7 @@ function Login() {
                                     <input
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      type="text"
+                                      type="number"
                                       placeholder="เบอร์โทรศัพท์"
                                       onChange={(e) =>
                                         setUserNameInput(e?.target?.value)
@@ -515,6 +515,7 @@ function Login() {
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="text"
                                       maxLength={typePhone === "TH" ? 10 : 13}
+                                      value={inputPhonenumber}
                                       placeholder={selectedOption}
                                       onChange={(event) =>
                                         handleChangePhone(event)

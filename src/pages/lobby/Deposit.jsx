@@ -38,7 +38,9 @@ function Deposit() {
           >
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
               {/* <Letter_slide /> */}
-              <div className="base-container-small">
+              <div 
+              style={{marginTop:'4rem'}}
+              className="base-container-small">
                 <div
                   onClick={Back}
                   data-v-fe9de6ba=""

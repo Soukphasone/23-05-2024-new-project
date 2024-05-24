@@ -113,6 +113,8 @@ function Withdraw() {
               {/* <Letter_slide /> */}
 
               <div
+              style={{marginTop:'6rem'}}
+
                 data-v-6307fb48=""
                 className="base-container-small flex flex-col justify-center"
               >

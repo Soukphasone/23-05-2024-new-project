@@ -132,7 +132,6 @@ function GameType() {
 
     if (_getData?.data?.statusCode === 0) {
       _getDataGame(value, activeTypeGame);
-      showSuccessAlert("สำเร็จ");
     }
   };
   const generatePercentageData = (count) => {
@@ -168,6 +167,7 @@ function GameType() {
         (game) => game?.s_flg_favorite === "Y"
       );
       setDataGameList(filteredData);
+
     }
     else {
       _clickCategoryGame(typeGame?.type);
@@ -195,28 +195,25 @@ function GameType() {
             >
               {/* <Letter_slide /> */}
 
-              <div className="mb-24">
+              <div 
+              style={{ marginTop: "6rem" }}
+              className="mb-24">
                 <div data-v-db4e30f1="">
-                  <div
+                 <div
                     data-v-db4e30f1=""
                     className="splide is-overflow is-initialized splide--slide splide--ltr splide--draggable is-active"
-                    on="(e,m,d)=&gt;{y.value=e.Components.Move}"
-                    id="splide44"
-                    role="region"
-                    aria-roledescription="carousel"
                   >
                     <div
                       className="splide__track splide__track--slide splide__track--ltr splide__track--draggable"
                       id="splide44-track"
                       aria-live="polite"
                       aria-atomic="true"
-                      style={{ paddingLeft: "0px", paddingRight: "0px" }}
                     >
                       <ul
+                        style={{overflowX:'scroll'}}
                         className="splide__list"
                         id="splide44-list"
                         role="presentation"
-                      // style={{ transform: "translateX(0px)" }}
                       >
                         {categoryGame?.length > 0 &&
                           categoryGame?.map((item, index) => (
@@ -228,7 +225,7 @@ function GameType() {
                               role="group"
                               aria-roledescription="slide"
                               aria-label="1 of 61"
-                              style={{ marginRight: "4px" }}
+                              style={{ marginRight: "4px"}}
                               onClick={() => _getDataGame(item)}
                             >
                               <div
@@ -269,12 +266,8 @@ function GameType() {
                             </li>
                           ))}
                       </ul>
-                    </div>
                   </div>
-                  <div
-                    data-v-db4e30f1=""
-                    className="w-full flex gap-4 mt-3 justify-center items-start mb-4"
-                  ></div>
+                 </div>
                   <div
                     data-v-db4e30f1=""
                     className="w-full flex gap-4 mt-3 justify-center items-start mb-4"

@@ -26,23 +26,16 @@ export const showSuccessAlert = (message) => {
 
 export const showConfirmationAlert = (onConfirm) => {
     Swal.fire({
-        title: 'ຢືນຢັນ?',
+        title: 'คุณต้องการออกจากระบบหรือไม่?',
         icon: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#d33',
         confirmButtonColor: '#3085d6',
-        cancelButtonText: 'ຍົກເລີກ',
-        confirmButtonText: 'ຕົກລົງ'
+        cancelButtonText: 'ยกเลิก',
+        confirmButtonText: 'ยืนยัน'
     }).then((result) => {
         if (result.isConfirmed) {
             onConfirm();
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: 'ສຳເລັດ!',
-                showConfirmButton: false,
-                timer: 1500
-            });
         }
     });
 };

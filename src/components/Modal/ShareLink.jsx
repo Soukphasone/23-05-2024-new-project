@@ -33,7 +33,7 @@ function ShareLink({ closeModal, dataFromLogin }) {
       >
         <div data-v-e339f85c="">
           <div data-v-e339f85c="" className="text-center text-primary">
-            ลิ้งค์แนะนำเพื่อน
+           <p> ลิ้งค์แนะนำเพื่อน</p>
             <p className="text-center mt-1 text-secondary text-xs">
               คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน
             </p>
