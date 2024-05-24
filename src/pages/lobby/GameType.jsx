@@ -195,11 +195,11 @@ function GameType() {
             >
               {/* <Letter_slide /> */}
 
-              <div 
-              style={{ marginTop: "6rem" }}
-              className="mb-24">
+              <div
+                style={{ marginTop: "6rem" }}
+                className="mb-24">
                 <div data-v-db4e30f1="">
-                 <div
+                  <div
                     data-v-db4e30f1=""
                     className="splide is-overflow is-initialized splide--slide splide--ltr splide--draggable is-active"
                   >
@@ -210,7 +210,7 @@ function GameType() {
                       aria-atomic="true"
                     >
                       <ul
-                        style={{overflowX:'scroll'}}
+                        style={{ overflowX: 'scroll' }}
                         className="splide__list"
                         id="splide44-list"
                         role="presentation"
@@ -224,7 +224,7 @@ function GameType() {
                               id="splide44-slide01"
                               aria-roledescription="slide"
                               aria-label="1 of 61"
-                              style={{ marginRight: "4px"}}
+                              style={{ marginRight: "4px" }}
                               onClick={() => _getDataGame(item)}
                             >
                               <div
@@ -265,8 +265,8 @@ function GameType() {
                             </li>
                           ))}
                       </ul>
+                    </div>
                   </div>
-                 </div>
                   <div
                     data-v-db4e30f1=""
                     className="w-full flex gap-4 mt-3 justify-center items-start mb-4"
