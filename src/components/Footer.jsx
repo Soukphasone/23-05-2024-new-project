@@ -289,11 +289,11 @@ function Footer({ Active }) {
             >
               {activePageTab === "BAG" ? (
                 <a
-                  class="router-link-active router-link-exact-active"
+                  className="router-link-active router-link-exact-active"
                   aria-current="page"
                 >
                   <div>
-                    <span class="nuxt-icon text-[var(--primary)] gradientText text-[23px]">
+                    <span className="nuxt-icon text-[var(--primary)] gradientText text-[23px]">
                       <svg
                         width="24"
                         height="24"

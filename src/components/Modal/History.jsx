@@ -188,7 +188,7 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                         className="deposit-withdraw-list"
                       >
                         <div className="h-list-left">
-                          <p>รายการฝาก</p>
+                          <p>รายการถอน</p>
                           <p> {withdraw?.f_amount} บาท</p>
                           <p>หมายเหตุ : {withdraw?.s_remark}</p>
                         </div>

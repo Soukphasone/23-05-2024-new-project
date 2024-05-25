@@ -27542,11 +27542,14 @@ a:focus-visible {
 }
 
 ::-moz-selection {
-    background-color: rgb(var(--color-primary-DEFAULT)/.4)
+    background-color: #3C6146;
+    /* background-color: rgb(var(--color-primary-DEFAULT)/.4) */
 }
 
 ::selection {
-    background-color: rgb(var(--color-primary-DEFAULT)/.4)
+    background-color: #3C6146;
+
+    /* background-color: rgb(var(--color-primary-DEFAULT)/.4) */
 }
 
 select {
@@ -27569,7 +27572,7 @@ select {
 
 .icon-svg {
     position: absolute;
-    margin: -5px 0 0 15px;
+    margin: -3px 0 0 13px;
 }
 
 .favorite-svg svg {
@@ -32201,6 +32204,7 @@ ul {
         grid-template-columns: repeat(2, minmax(0, 1fr))
     }
 }
+
 .active[data-v-97788f98] {
     border: 1px solid var(--primary);
     color: var(--primary)
@@ -32260,7 +32264,7 @@ ul {
     font-family: 'TimeNewRoman';
     position: absolute;
     margin-top: 3px;
-    left: 7px;
+    left: 2px;
     z-index: 10;
     padding: 8;
     background: linear-gradient(336deg, rgba(246, 224, 35, 1) 0%, rgba(255, 232, 109, 1) 21%, rgba(252, 197, 17, 1) 52%, rgba(255, 229, 128, 1) 82%, rgba(246, 224, 35, 1) 100%);
@@ -32268,7 +32272,7 @@ ul {
     font-weight: 600;
     height: auto;
     border-bottom-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-top-left-radius: 15px;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -32318,7 +32322,8 @@ ul {
     color: var(--primary);
     text-transform: uppercase;
 }
-.text-message-warning{
+
+.text-message-warning {
     color: red;
     padding: 10px 10px 10px 15px;
     width: 100%;
@@ -32337,46 +32342,49 @@ ul {
         font-size: 11px;
     }
 }
+
 /* Slide */
-.brand{
+.brand {
     margin-top: 5rem;
 }
-  .slideshow-container-after-login {
+
+.slideshow-container-after-login {
     position: relative;
     margin: auto;
     width: 90%;
     height: 100%;
-  }
- 
-  .slideshow-container-after-login .mySlides {
+}
+
+.slideshow-container-after-login .mySlides {
     position: relative;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .slideshow-container-after-login .mySlides .slide1 img {
+.slideshow-container-after-login .mySlides .slide1 img {
     width: 100%;
     height: 138px;
-  }
-  .slideshow-container-after-login-pc {
+}
+
+.slideshow-container-after-login-pc {
     position: relative;
     margin: auto;
     width: 90%;
     height: 100%;
-  }
+}
 
-  .slideshow-container-after-login-pc .mySlides {
+.slideshow-container-after-login-pc .mySlides {
     position: relative;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .slideshow-container-after-login-pc .mySlides .slide1 img {
+.slideshow-container-after-login-pc .mySlides .slide1 img {
     width: 100%;
     height: 230px;
-  }
+}
 
-  .right-arrow {
+.right-arrow {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -32387,9 +32395,9 @@ ul {
     z-index: 10;
     cursor: pointer;
     user-select: none;
-  }
+}
 
-  .left-arrow {
+.left-arrow {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -32401,48 +32409,49 @@ ul {
     background: -webkit-linear-gradient(180deg, #ffc757 0%, #a76f00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
+}
+
 .slider-image {
-  opacity: 0;
-  transition-duration: 1s ease;
+    opacity: 0;
+    transition-duration: 1s ease;
 }
 
 .slide1.active {
-  opacity: 1;
-  transition-duration: 1s;
-  transform: scale(1.08);
+    opacity: 1;
+    transition-duration: 1s;
+    transform: scale(1.08);
 }
-  .slide-image {
+
+.slide-image {
     display: flex;
     justify-content: center;
     gap: 8px;
-  }
-  
-  .slide-image .active {
+}
+
+.slide-image .active {
     width: 80px;
     border-radius: 10px;
     min-width: 25%;
     padding: 2px;
     background: var(--gradient-gold);
-  }
-  
-  .slide-image .none-active {
+}
+
+.slide-image .none-active {
     width: 80px;
     border-radius: 10px;
     border: 2px solid #ffff;
     min-width: 25%;
     background-color: #ffff;
-  }
-  .slide-active,
-.dot:hover {
-  background-color: #fff;
 }
-.header{
+
+.slide-active,
+.dot:hover {
+    background-color: #fff;
+}
+
+.header {
     width: 100%;
     position: fixed;
     z-index: 100;
-    background-color:#252525;
+    background-color: #252525;
 }
-/* p {
-    cursor: text;
-  } */

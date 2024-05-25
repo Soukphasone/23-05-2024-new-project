@@ -1,1 +1,8 @@
-.activeLang{border:1px solid var(--primary)}.wrapper[data-v-704c3ab0]{background:var(--card-secondary);border-radius:80px}
+.activeLang {
+    border: 1px solid var(--primary)
+}
+
+.wrapper[data-v-704c3ab0] {
+    background: var(--card-secondary);
+    border-radius: 80px
+}

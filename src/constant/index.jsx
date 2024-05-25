@@ -16,7 +16,7 @@ module.exports = {
   BANK_LIST: "/lobby/deposit/bank-list",
   BAG: "/lobby/bag",
   CASH_BACK: "/lobby/bag/cashback",
-  UPLOAD_SLEEP:'/upload',
+  UPLOAD_SLIP:'/upload',
   GAME_LIST: "/game-list",
   // GAME_LIST_MOBILE: "/game-list-mobile",
 

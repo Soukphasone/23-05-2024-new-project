@@ -5,6 +5,8 @@ import Constant from "../../constant";
 import Footer from "../../components/Footer";
 import ModalCredit from "../../components/Modal/ModalCredit";
 import { createPortal } from "react-dom";
+import Image_slide from "../../components/image_slide";
+
 function DepositWithdraw() {
   const history = useHistory();
   const bank = "BANK";
@@ -29,15 +31,13 @@ function DepositWithdraw() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div
-              style={{ marginTop: "3rem" }}
+              style={{ marginTop: "6rem" }}
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
               {/* <Letter_slide /> */}
               <div className="bank-wrapper animate__animated animate__slideInLeft animate__fast base-container-small">
                 {/* <Slide_bank/> */}
-                <div className="pt-2 pb-4"></div>
-                <div className="pt-2 pb-4"></div>
                 <div className="flex w-full gap-x-3">
                   <div
                     onClick={NextoDeposit}

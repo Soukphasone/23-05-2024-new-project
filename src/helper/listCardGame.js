@@ -114,17 +114,6 @@ export let dataCradGame = {
     },
     {
       "s_type": "SLOT",
-      "s_pbrand_code": "RSG",
-      "s_brand_code": "B032",
-      "s_brand_name": "Royal Slot Gaming",
-      "s_status": "A",
-      "s_status_agent": "A",
-      "s_lobby_flg": "Y",
-      "s_lobby_url": "/assets/images/cradCategoryGame/rsg.webp",
-      "s_endpoint_access": "/RSG/LoginRequest"
-    },
-    {
-      "s_type": "SLOT",
       "s_pbrand_code": "YG",
       "s_brand_code": "B019",
       "s_brand_name": "Ygg",
@@ -144,7 +133,18 @@ export let dataCradGame = {
       "s_lobby_flg": "Y",
       "s_lobby_url": "/assets/images/cradCategoryGame/playgo.webp ",
       "s_endpoint_access": "/DCS/LoginRequest"
-    }
+    },
+    {
+      "s_type": "SLOT",
+      "s_pbrand_code": "RSG",
+      "s_brand_code": "B032",
+      "s_brand_name": "Royal Slot Gaming",
+      "s_status": "A",
+      "s_status_agent": "A",
+      "s_lobby_flg": "Y",
+      "s_lobby_url": "/assets/images/cradCategoryGame/royal-slot.webp",
+      "s_endpoint_access": "/RSG/LoginRequest"
+    },
 
   ],
   "SPORT": [
@@ -508,17 +508,6 @@ export let dataCradGame = {
     },
     {
       "s_type": "SLOT",
-      "s_pbrand_code": "RSG",
-      "s_brand_code": "B032",
-      "s_brand_name": "Royal Slot Gaming",
-      "s_status": "A",
-      "s_status_agent": "A",
-      "s_lobby_flg": "Y",
-      "s_lobby_url": "/assets/images/cradCategoryGame/rsg.webp",
-      "s_endpoint_access": "/RSG/LoginRequest"
-    },
-    {
-      "s_type": "SLOT",
       "s_pbrand_code": "YG",
       "s_brand_code": "B019",
       "s_brand_name": "Ygg",
@@ -583,7 +572,17 @@ export let dataCradGame = {
       "s_lobby_url": "/assets/images/cradCategoryGame/sbobet.webp",
       "s_endpoint_access": "/SBO/LoginRequest"
     },
-    
+    {
+      "s_type": "SLOT",
+      "s_pbrand_code": "RSG",
+      "s_brand_code": "B032",
+      "s_brand_name": "Royal Slot Gaming",
+      "s_status": "A",
+      "s_status_agent": "A",
+      "s_lobby_flg": "Y",
+      "s_lobby_url": "/assets/images/cradCategoryGame/royal-slot.webp",
+      "s_endpoint_access": "/RSG/LoginRequest"
+    },
 
   ],
   "HOTHIT": [],

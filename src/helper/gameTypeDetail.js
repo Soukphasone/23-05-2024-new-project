@@ -120,7 +120,7 @@ export let dataCradGame2 = {
         "s_status": "A",
         "s_status_agent": "A",
         "s_lobby_flg": "Y",
-        "s_lobby_url": "/assets/images/cradCategoryGame/royal-g.webp",
+        "s_lobby_url": "/assets/images/cradCategoryGame/logo-rsg.svg",
         "s_endpoint_access": "/RSG/LoginRequest"
       },
       {

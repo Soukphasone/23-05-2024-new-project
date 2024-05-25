@@ -21,15 +21,15 @@ function HomePage() {
   const [deviceType, setDeviceType] = useState(false);
   const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [selectedFav, setSelectedFav] = useState('');
   const gameType = (TypeGame) => {
     history.push(Constant.TYPE_GAME, TypeGame);
   };
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const _dataUser = DataLocalStorage();
     setDataFromLogin(_dataUser);
   }, []);
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+ 
   useEffect(() => {
     _clickCategoryGame("ALL");
   }, [dataFromLogin]);
@@ -68,27 +68,27 @@ function HomePage() {
     setDataGameType(value);
     FillerCategory(value, setCategoryGame);
   };
-  const _selectFavorite = async (event) => {
-    const result_sl = event.target.value;
-    // console.log("Choose", result_sl);
-    if (result_sl === "fav") {
-      setDataGameType("FAVORITE");
-      const _getData = await axios({
-        method: "post",
-        url: `${Constant.SERVER_URL}/Game/Brand/List`,
-        data: {
-          s_agent_code: dataFromLogin?.agent,
-          s_username: dataFromLogin?.username,
-        },
-      });
-      // console.log("_GETDATA_facvorite_clik", _getData);
-      if (_getData?.data?.statusCode === 0) {
-        setCategoryGame(_getData?.data?.data?.FAVORITE);
-      }
-    } else {
-      _clickCategoryGame("ALL");
-    }
-  };
+  // const _selectFavorite = async (event) => {
+  //   const result_sl = event.target.value;
+  //   console.log("Choose", result_sl);
+  //   setSelectedFav(result_sl)
+  //   if (result_sl === "fav") {
+  //     setDataGameType("FAVORITE");
+  //     const _getData = await axios({
+  //       method: "post",
+  //       url: `${Constant.SERVER_URL}/Game/Brand/List`,
+  //       data: {
+  //         s_agent_code: dataFromLogin?.agent,
+  //         s_username: dataFromLogin?.username,
+  //       },
+  //     });
+  //     if (_getData?.data?.statusCode === 0) {
+  //       setCategoryGame(_getData?.data?.data?.FAVORITE);
+  //     }
+  //   } else {
+  //     _clickCategoryGame("ALL");
+  //   }
+  // };
 
   const _getDataGame = async (value) => {
     // console.log("Value get game 1: ", value)
@@ -158,14 +158,15 @@ function HomePage() {
               {/* <Letter_slide /> */}
               <div className="flex flex-col gap-y-2">
                 <Image_slide />
-                <div className="text-[red] flex space-x-2">
-                  <div className="relative w-full">
+                <div style={{marginTop:'2px'}} className="text-[red] flex space-x-2">
+                  {/* <div className="relative w-full">
                     <select
                       className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                       id="nuid-1"
+                      value={selectedFav}
                       onChange={_selectFavorite}
                     >
-                      <option value="all" selected="selected">
+                      <option value="">
                         หมวดหมู่เกม
                       </option>
                       <option value="fav">เกมโปรด</option>
@@ -176,7 +177,7 @@ function HomePage() {
                         aria-hidden="true"
                       ></span>
                     </span>
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <div className="flex-row flex">
@@ -946,20 +947,15 @@ function HomePage() {
                                 }
                               />
                             )}
-                            {item?.s_img !== undefined 
-                            && item?.s_flg_favorite ?
-                             (
+                            {item?.s_img !== undefined &&
+                            item?.status === "Y" ? (
                               <div className="absolute z-[20] flex flex-col space-y-1 text-center text-[10px] top-0 right-2">
                                 <span
                                   // onClick={() =>
                                   //   _addFavorite(game, activeTypeGame)
                                   // }
                                   onKeyDown={() => ""}
-                                  // className={
-                                  //   game?.s_flg_favorite === "Y"
-                                  //     ? "nuxt-icon nuxt-icon--fill text-danger text-2xl"
-                                  //     : "nuxt-icon text-2xl"
-                                  // }
+                                  className= "nuxt-icon nuxt-icon--fill text-danger text-2xl"
                                 >
                                   <div className="favorite-svg">
                                     <svg

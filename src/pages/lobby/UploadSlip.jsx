@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
@@ -8,9 +7,10 @@ import { showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 import jsQR from "jsqr";
 
-function BankList() {
+function Upslip() {
   const bank = "BANK";
   const history = useHistory();
+  const banklist = history?.location?.state;
   const _bankDeposit = JSON.parse(localStorage.getItem(Constant.BANK_DEPOSIT));
   const _promotion = JSON.parse(localStorage.getItem(Constant.DATA_PROMOTION));
   const dataFromLogin = JSON.parse(
@@ -23,7 +23,7 @@ function BankList() {
   const [ipAddress, setIpAddress] = useState("");
 
   const Back = () => {
-    history.push(Constant.BANK_LIST);
+    history.push(Constant.BANK_LIST, banklist);
   };
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -140,15 +140,23 @@ function BankList() {
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
-                  >
-                    <img
-                      src="/assets/images/icons/icon-arrow-left.png"
-                      alt="arrow-lft"
-                    />
-                  </span>
+                  <div style={{ display: "flex" }}>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <img
+                        src="/assets/images/icons/icon-arrow-left.png"
+                        alt="arrow-lft"
+                      />
+                    </span>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <p>ย้อนกลับ</p>
+                    </span>
+                  </div>
                 </div>
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
                   <div>
@@ -156,30 +164,20 @@ function BankList() {
                       style={{ marginBottom: "20px" }}
                       className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2"
                     >
-                      <p className="text-danger text-lg font-bold">
+                      <p className="text-danger text-lg " style={{textAlign:'left'}}>
                         {" "}
-                        ใช้ในกรณีที่ธนาคารมีปัญหาหรือยอดฝากไม่เข้า{" "}
+                        * หากเครดิตไม่เข้าภายใน 3-5 นาที
+                        <br/>
+                        * กรุณาอัพโหลดสลิป
+                        <br/>
+                        * ติดต่อแอดมิน{" "}
                       </p>
-                      <span className="nuxt-icon nuxt-icon--fill text-danger">
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V9H11V15ZM11 7H9V5H11V7Z"
-                            fill="#D72F3C"
-                          ></path>
-                        </svg>
-                      </span>
-                    </div>
+                     </div>
                     <div
                       style={{ marginBottom: "10px" }}
                       className="text-[red] flex space-x-2"
                     >
-                      <div className="relative w-full">
+                      {/* <div className="relative w-full">
                         <select
                           onChange={(event) =>
                             setBankAgentCode(event?.target?.value)
@@ -202,7 +200,7 @@ function BankList() {
                             aria-hidden="true"
                           ></span>
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                     <div
                       style={{ marginBottom: "10px" }}
@@ -280,4 +278,4 @@ function BankList() {
   );
 }
 
-export default BankList;
+export default Upslip;
