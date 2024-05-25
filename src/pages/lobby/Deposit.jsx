@@ -46,17 +46,23 @@ function Deposit() {
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
+                  <div style={{display:'flex'}}>
                   <span
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                    <img src="/assets/images/icons/icon-arrow-left.png" alt="arrow-lft" />
+                    <img
+                      src="/assets/images/icons/icon-arrow-left.png"
+                      alt="arrow-lft"
+                    />
                   </span>
                   <span
                     data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm text-primary"
+                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
+                    <p>ย้อนกลับ</p>
                   </span>
+                  </div>
                 </div>
                 <div className="flex flex-col items-center space-y-3 justify-center w-full rounded-base bg-card-primary p-4 text-center">
                   <span className="text-base text-active">เลือกธนาคาร</span>
@@ -139,23 +145,10 @@ function Deposit() {
                     </div>
                   </div>
                   <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2 mt-4">
-                    <p className="text-danger text-lg font-bold">
+                    <p className="text-danger text-lg" style={{textAlign:'center', width:'100%'}}>
                       “กรุณาใช้บัญชีที่ท่านสมัครโอนมาเท่านั้น”
                     </p>
-                    <span className="nuxt-icon nuxt-icon--fill text-danger">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V9H11V15ZM11 7H9V5H11V7Z"
-                          fill="#D72F3C"
-                        ></path>
-                      </svg>
-                    </span>
+                    
                   </div>
                 </div>
               </div>

@@ -16,9 +16,9 @@ module.exports = {
   BANK_LIST: "/lobby/deposit/bank-list",
   BAG: "/lobby/bag",
   CASH_BACK: "/lobby/bag/cashback",
-  UPLOAD_SLEEP:'/upload',
+  UPLOAD_SLIP:'/upload',
   GAME_LIST: "/game-list",
-  // GAME_LIST_MOBILE: "/game-list-mobile",
+  WHEEL: "/lobby/bag/wheel",
 
   LOGIN_TOKEN_DATA: "TOX_LOBBY_TOKEN",
   LOGIN_USER_DATA: "TOX_LOBBY_DATA",

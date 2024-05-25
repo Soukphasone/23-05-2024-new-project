@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Constant from "../../constant";
 import _LoginController from "../../api/login";
-import { FillerCategory, FillerCategory2 } from "../../helper";
+import { FillerCategory2 } from "../../helper";
 import { showSuccessAlert } from "../../helper/SweetAlert";
 import _ from 'lodash';
 import { OpenNewTabWithHTML } from "../../helper";
@@ -200,12 +199,6 @@ function GameType() {
     }
   };
 
-  const _selectGameName = (event) => {
-    const searchData = dataGameList.includes((data => data?.s_game_name === event))
-    console.log("searchData::: ", searchData)
-    // includes
-
-  }
   return (
     <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
@@ -315,7 +308,7 @@ function GameType() {
                         ></span>
                       </span>
                     </div>
-                    <div data-v-db4e30f1="" className="!w-full relative">
+                    {/* <div data-v-db4e30f1="" className="!w-full relative">
                       <div
                         data-v-d0ca5c5c=""
                         data-v-db4e30f1=""
@@ -384,7 +377,7 @@ function GameType() {
                         </div>
                         <div data-v-d0ca5c5c="" className=""></div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div
                     data-v-db4e30f1=""

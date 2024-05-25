@@ -11,13 +11,14 @@ import { useHistory } from "react-router-dom";
 
 function Withdraw() {
   const history = useHistory();
-
   const bank = "BANK";
   const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataUser, setDataUser] = useState();
   const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
-
+  const Back = () => {
+    history.push(Constant.DEPOSIT_WITHDRAW);
+  };
   useEffect(() => {
     const userData = DataLocalStorage();
     if (userData) {
@@ -34,41 +35,14 @@ function Withdraw() {
       method: "post",
       url: `${Constant.SERVER_URL}/Member/Balance`,
       data: {
-        s_agent_code: dataFromLogin?.agent,
+        s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
       },
     });
     if (_res?.data?.statusCode === 0) {
       setDataUser(_res?.data?.data);
     }
-    // const _level = await CheckLevelCashBack(dataFromLogin?.info?.cashback);
-    // if (_level) setmaxLevel(_level);
-    // const _resHistoryCashBack = await axios({
-    //   method: "post",
-    //   url: `${Constant.SERVER_URL}/Cashback/History`,
-    //   data: {
-    //     s_agent_code: dataFromLogin?.agent,
-    //     s_username: dataFromLogin?.username,
-    //   },
-    // });
-
-    // if (_resHistoryCashBack?.data?.statusCode === 0) {
-    //   setHistoryCashBack(_resHistoryCashBack?.data?.data);
-    // }
-    // const _resHistoryMoney = await axios({
-    //   method: "post",
-    //   url: `${Constant.SERVER_URL}/Member/History/Finance`,
-    //   data: {
-    //     s_agent_code: AGENT_CODE,
-    //     s_username: dataFromLogin?.username,
-    //   },
-    // });
-
-    // if (_resHistoryMoney?.data?.statusCode === 0) {
-    //   setDataHistoryDeposit(_resHistoryMoney?.data?.data?.deposit);
-    //   setDataHistoryBonus(_resHistoryMoney?.data?.data?.bonus);
-    //   setDataHistoryWithdraw(_resHistoryMoney?.data?.data?.withdraw);
-    // }
+    
   };
 
   const _withdrawMoney = async () => {
@@ -94,7 +68,7 @@ function Withdraw() {
       } else {
         setReMessage(_res?.data?.statusDesc);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (
@@ -113,11 +87,33 @@ function Withdraw() {
               {/* <Letter_slide /> */}
 
               <div
-              style={{marginTop:'6rem'}}
-
+                style={{ marginTop: "4rem" }}
                 data-v-6307fb48=""
                 className="base-container-small flex flex-col justify-center"
               >
+                <div
+                  onClick={Back}
+                  data-v-fe9de6ba=""
+                  className="breadcrumb-wrapper py-3 w-max overflow-hidden"
+                >
+                  <div style={{ display: "flex" }}>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <img
+                        src="/assets/images/icons/icon-arrow-left.png"
+                        alt="arrow-lft"
+                      />
+                    </span>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <p>ย้อนกลับ</p>
+                    </span>
+                  </div>
+                </div>
                 <div
                   data-v-6307fb48=""
                   className="cash-back-content border border-primary bg-card-primary card-wrapper gap-y-2 w-full flex flex-col justify-center items-center"

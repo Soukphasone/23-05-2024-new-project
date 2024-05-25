@@ -23,7 +23,10 @@ function ModalCredit({ closeModal }) {
         s_code: codeCupon,
         actionBy: "ADM",
       });
-      if (_data?.data) {
+      if (_data?.data?.statusCode === 0) {
+        showSuccessAlert("สำเร็จ")
+        closeModal("close");
+      }else{
         setReMessage(_data?.data?.statusDesc);
       }
     } catch (error) {

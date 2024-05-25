@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
-import { showSuccessAlert } from "../../helper/SweetAlert";
+import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 import jsQR from "jsqr";
 
-function BankList() {
+function Upslip() {
   const bank = "BANK";
   const history = useHistory();
-  const _bankDeposit = JSON.parse(localStorage.getItem(Constant.BANK_DEPOSIT));
+  const banklist = history?.location?.state;
   const _promotion = JSON.parse(localStorage.getItem(Constant.DATA_PROMOTION));
   const dataFromLogin = JSON.parse(
     localStorage.getItem(Constant.LOGIN_USER_DATA)
@@ -20,11 +19,15 @@ function BankList() {
   const [promotionCode, setPromotionCode] = useState("");
   const [errorTextUploadSlip, setErrorTextUploadSlip] = useState("");
   const [file, setFile] = useState(null);
-  const [ipAddress, setIpAddress] = useState("");
+
+  useEffect(() => {
+    _getBankAgentCode();
+  }, [banklist]);
 
   const Back = () => {
-    history.push(Constant.BANK_LIST);
+    history.push(Constant.BANK_LIST, banklist);
   };
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -34,7 +37,7 @@ function BankList() {
 
     const _URL = window.URL || window.webkitURL;
     const url = _URL.createObjectURL(file);
-    console.log("A");
+    // console.log("A");
     const imgData = await uploadSlip(url);
     document.getElementById("fileslip").value = "";
     if (imgData != null) {
@@ -47,14 +50,16 @@ function BankList() {
             s_username: dataFromLogin?.username,
             qrcode: imgData.data,
             i_bank_agent: bankAgentCode,
-            i_ip: ipAddress,
+            i_ip: "1.2.3.4",
             s_prm_code: promotionCode,
           }
         );
         console.log("response: ", response);
         setErrorTextUploadSlip(response?.data?.statusDesc);
         notify(response.data);
+        showSuccessAlert('สำเร็จ')
       } catch (error) {
+        showErrorAlert("เกิดข้อผิดพลาด")
         console.error("AAAA", error);
       }
     } else {
@@ -63,7 +68,7 @@ function BankList() {
   };
 
   const uploadSlip = async (url) => {
-    console.log("url: ", url);
+    // console.log("url: ", url);
     let imgData = null;
     const minScale = 0.75;
     const maxScale = 5;
@@ -76,6 +81,7 @@ function BankList() {
 
     return imgData;
   };
+
   const addImageProcess = (src, scale) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -118,6 +124,31 @@ function BankList() {
     console.log(data);
   };
 
+  const _getBankAgentCode = () => {
+    let data = JSON.stringify({
+      data: banklist?.id,
+    });
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${Constant.SERVER_URL}/Decrypt`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        setBankAgentCode(response.data.decrypt);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <body className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
@@ -140,41 +171,45 @@ function BankList() {
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
-                  >
-                    <img
-                      src="/assets/images/icons/icon-arrow-left.png"
-                      alt="arrow-lft"
-                    />
-                  </span>
+                  <div style={{ display: "flex" }}>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <img
+                        src="/assets/images/icons/icon-arrow-left.png"
+                        alt="arrow-lft"
+                      />
+                    </span>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <p>ย้อนกลับ</p>
+                    </span>
+                  </div>
                 </div>
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
                   <div>
                     <div
-                      style={{ marginBottom: "20px" }}
+                      style={{ marginBottom: "20px", height: "auto" }}
                       className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2"
                     >
-                      <p className="text-danger text-lg font-bold">
+                      <p
+                        className="text-danger text-lg "
+                        style={{ textAlign: "left", width: "100%" }}
+                      >
                         {" "}
-                        ใช้ในกรณีที่ธนาคารมีปัญหาหรือยอดฝากไม่เข้า{" "}
+                        * หากเครดิตไม่เข้าภายใน 3-5 นาที
+                        <br />
+                        * กรุณาอัพโหลดสลิป
+                        <br />* ติดต่อแอดมิน{" "}
                       </p>
-                      <span className="nuxt-icon nuxt-icon--fill text-danger">
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V9H11V15ZM11 7H9V5H11V7Z"
-                            fill="#D72F3C"
-                          ></path>
-                        </svg>
-                      </span>
                     </div>
+                    <div
+                      style={{ marginBottom: "10px" }}
+                      className="text-[red] flex space-x-2"
+                    ></div>
                     <div
                       style={{ marginBottom: "10px" }}
                       className="text-[red] flex space-x-2"
@@ -182,37 +217,10 @@ function BankList() {
                       <div className="relative w-full">
                         <select
                           onChange={(event) =>
-                            setBankAgentCode(event?.target?.value)
+                            setPromotionCode(event?.target?.value)
                           }
                           className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                           id="nuid-1"
-                          //   onChange={_selectFavorite}
-                        >
-                          <option>เลือกธนาคาร</option>
-                          {_bankDeposit?.length > 0 &&
-                            _bankDeposit?.map((bank) => (
-                              <option key={bank?.index} value={bank?.i_bank}>
-                                {bank?.s_fname_th}
-                              </option>
-                            ))}
-                        </select>
-                        <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
-                          <span
-                            className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
-                            aria-hidden="true"
-                          ></span>
-                        </span>
-                      </div>
-                    </div>
-                    <div
-                      style={{ marginBottom: "10px" }}
-                      className="text-[red] flex space-x-2"
-                    >
-                      <div className="relative w-full">
-                        <select
-                          className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
-                          id="nuid-1"
-                          //   onChange={_selectFavorite}
                         >
                           <option>เลือกโปรโมชั่น</option>
                           {_promotion?.length > 0 &&
@@ -257,6 +265,11 @@ function BankList() {
                         data-v-9dec3a92=""
                         id="btn01"
                         type="submit"
+                        disabled={
+                          file === null|| promotionCode === ""
+                            ? true
+                            : false
+                        }
                         className="base-button-wrapper v-rounded btn-primary btn-md mt-4 font-medium text-base cursor-pointer border border-fontPrimary w-full rounded-base btn-primary h-[38px] flex items-center justify-center"
                       >
                         <div
@@ -268,7 +281,6 @@ function BankList() {
                       </button>
                     </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
@@ -280,4 +292,4 @@ function BankList() {
   );
 }
 
-export default BankList;
+export default Upslip;

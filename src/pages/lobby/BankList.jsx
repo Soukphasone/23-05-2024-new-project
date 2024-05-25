@@ -5,7 +5,6 @@ import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
-import UploadSleep from "../../components/Modal/UploadSleep";
 import { createPortal } from "react-dom";
 function BankList() {
   const bank = "BANK";
@@ -19,13 +18,12 @@ function BankList() {
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
     showSuccessAlert("คัดลอกสำเร็จ");
-    history.push(Constant.DEPOSIT_WITHDRAW);
   };
   const Back = () => {
     history.push(Constant.DEPOSIT);
   };
   const UploadSleep=()=>{
-    history.push(Constant.UPLOAD_SLEEP);
+    history.push(Constant.UPLOAD_SLIP, banklist);
 
   }
   return (
@@ -51,6 +49,7 @@ function BankList() {
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
+                  <div style={{display:'flex'}}>
                   <span
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
@@ -60,6 +59,13 @@ function BankList() {
                       alt="arrow-lft"
                     />
                   </span>
+                  <span
+                    data-v-fe9de6ba=""
+                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                  >
+                    <p>ย้อนกลับ</p>
+                  </span>
+                  </div>
                 </div>
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
                   <div data-v-ea58f736="" id="depositTab" className="w-full">
@@ -94,9 +100,8 @@ function BankList() {
                   </div>
                   <div>
                     <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2">
-                      <p className="text-danger text-lg font-bold">
-                        {" "}
-                        เติมเงินขั้นต่ำ 1 บาท{" "}
+                      <p className="text-danger text-lg font-bold" style={{textAlign:'center', width:'100%'}}>
+                        เติมเงินขั้นต่ำ 1 บาท
                       </p>
                       <span className="nuxt-icon nuxt-icon--fill text-danger">
                         <svg
