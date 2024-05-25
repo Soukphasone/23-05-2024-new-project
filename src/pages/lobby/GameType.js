@@ -201,6 +201,9 @@ function GameType() {
   };
 
   const _selectGameName = (event) => {
+    const searchData = dataGameList.includes((data => data?.s_game_name === event))
+    console.log("searchData::: ", searchData)
+    // includes
 
   }
   return (
