@@ -23,6 +23,7 @@ import Withdraw from "../pages/lobby/Withdraw";
 import Bag from "../pages/lobby/Bag";
 import Cashback from "../pages/lobby/Cashback";
 import Upslip from "../pages/lobby/UploadSlip";
+import Wheel from "../pages/lobby/Wheel";
 function RouterLink() {
   return (
     <>
@@ -44,8 +45,7 @@ function RouterLink() {
                   <PrivateRoute exact path={Const.BAG } component={Bag} />
                   <PrivateRoute exact path={Const.CASH_BACK } component={Cashback} />
                   <PrivateRoute exact path={Const.UPLOAD_SLIP } component={Upslip} />
-                  {/* <PrivateRoute exact path={Const.AFTER_LOGIN_MOBILE} component={AfterLoginMobile} />
-                  <PrivateRoute exact path={Const.GAME_LIST_MOBILE} component={AfterLoginMobileAllGame} /> */}
+                  <PrivateRoute exact path={Const.WHEEL } component={Wheel} />
                 </> 
               </React.Fragment>
             )}

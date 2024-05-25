@@ -35,41 +35,14 @@ function Withdraw() {
       method: "post",
       url: `${Constant.SERVER_URL}/Member/Balance`,
       data: {
-        s_agent_code: dataFromLogin?.agent,
+        s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
       },
     });
     if (_res?.data?.statusCode === 0) {
       setDataUser(_res?.data?.data);
     }
-    // const _level = await CheckLevelCashBack(dataFromLogin?.info?.cashback);
-    // if (_level) setmaxLevel(_level);
-    // const _resHistoryCashBack = await axios({
-    //   method: "post",
-    //   url: `${Constant.SERVER_URL}/Cashback/History`,
-    //   data: {
-    //     s_agent_code: dataFromLogin?.agent,
-    //     s_username: dataFromLogin?.username,
-    //   },
-    // });
-
-    // if (_resHistoryCashBack?.data?.statusCode === 0) {
-    //   setHistoryCashBack(_resHistoryCashBack?.data?.data);
-    // }
-    // const _resHistoryMoney = await axios({
-    //   method: "post",
-    //   url: `${Constant.SERVER_URL}/Member/History/Finance`,
-    //   data: {
-    //     s_agent_code: AGENT_CODE,
-    //     s_username: dataFromLogin?.username,
-    //   },
-    // });
-
-    // if (_resHistoryMoney?.data?.statusCode === 0) {
-    //   setDataHistoryDeposit(_resHistoryMoney?.data?.data?.deposit);
-    //   setDataHistoryBonus(_resHistoryMoney?.data?.data?.bonus);
-    //   setDataHistoryWithdraw(_resHistoryMoney?.data?.data?.withdraw);
-    // }
+    
   };
 
   const _withdrawMoney = async () => {

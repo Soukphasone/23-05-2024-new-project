@@ -100,7 +100,7 @@ function BankList() {
                   </div>
                   <div>
                     <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2">
-                      <p className="text-danger text-lg font-bold" style={{textAlign:'center', justifyContent:'center', width:'100%'}}>
+                      <p className="text-danger text-lg font-bold" style={{textAlign:'center', width:'100%'}}>
                         เติมเงินขั้นต่ำ 1 บาท
                       </p>
                       <span className="nuxt-icon nuxt-icon--fill text-danger">

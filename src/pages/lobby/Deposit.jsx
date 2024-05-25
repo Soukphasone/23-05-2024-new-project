@@ -145,7 +145,7 @@ function Deposit() {
                     </div>
                   </div>
                   <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2 mt-4">
-                    <p className="text-danger text-lg" style={{textAlign:'center', justifyContent:'center', width:'100%'}}>
+                    <p className="text-danger text-lg" style={{textAlign:'center', width:'100%'}}>
                       “กรุณาใช้บัญชีที่ท่านสมัครโอนมาเท่านั้น”
                     </p>
                     

@@ -436,7 +436,8 @@ function Login() {
                                     className="h-[18px]"
                                   ></div>
                                 </div>
-                                <div data-v-d8556cff="">
+                                <div 
+                                data-v-d8556cff="">
                                   <button
                                     data-v-9dec3a92=""
                                     data-v-d8556cff=""
@@ -634,7 +635,7 @@ function Login() {
                                   </span>
                                 </div>
                                 <div
-                                  style={{ marginBottom: "17px" }}
+                                  // style={{ marginBottom: "17px" }}
                                   onClick={() => _clickNextStep()}
                                   data-v-d8556cff=""
                                 >

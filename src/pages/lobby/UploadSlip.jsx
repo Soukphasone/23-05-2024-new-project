@@ -3,7 +3,7 @@ import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
-import { showSuccessAlert } from "../../helper/SweetAlert";
+import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 import jsQR from "jsqr";
 
@@ -11,7 +11,6 @@ function Upslip() {
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
-  const _bankDeposit = JSON.parse(localStorage.getItem(Constant.BANK_DEPOSIT));
   const _promotion = JSON.parse(localStorage.getItem(Constant.DATA_PROMOTION));
   const dataFromLogin = JSON.parse(
     localStorage.getItem(Constant.LOGIN_USER_DATA)
@@ -20,11 +19,15 @@ function Upslip() {
   const [promotionCode, setPromotionCode] = useState("");
   const [errorTextUploadSlip, setErrorTextUploadSlip] = useState("");
   const [file, setFile] = useState(null);
-  const [ipAddress, setIpAddress] = useState("");
+
+  useEffect(() => {
+    _getBankAgentCode();
+  }, [banklist]);
 
   const Back = () => {
     history.push(Constant.BANK_LIST, banklist);
   };
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -34,7 +37,7 @@ function Upslip() {
 
     const _URL = window.URL || window.webkitURL;
     const url = _URL.createObjectURL(file);
-    console.log("A");
+    // console.log("A");
     const imgData = await uploadSlip(url);
     document.getElementById("fileslip").value = "";
     if (imgData != null) {
@@ -47,14 +50,16 @@ function Upslip() {
             s_username: dataFromLogin?.username,
             qrcode: imgData.data,
             i_bank_agent: bankAgentCode,
-            i_ip: ipAddress,
+            i_ip: "1.2.3.4",
             s_prm_code: promotionCode,
           }
         );
         console.log("response: ", response);
         setErrorTextUploadSlip(response?.data?.statusDesc);
         notify(response.data);
+        showSuccessAlert('สำเร็จ')
       } catch (error) {
+        showErrorAlert("เกิดข้อผิดพลาด")
         console.error("AAAA", error);
       }
     } else {
@@ -63,7 +68,7 @@ function Upslip() {
   };
 
   const uploadSlip = async (url) => {
-    console.log("url: ", url);
+    // console.log("url: ", url);
     let imgData = null;
     const minScale = 0.75;
     const maxScale = 5;
@@ -76,6 +81,7 @@ function Upslip() {
 
     return imgData;
   };
+
   const addImageProcess = (src, scale) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -116,6 +122,31 @@ function Upslip() {
   };
   const notify = (data) => {
     console.log(data);
+  };
+
+  const _getBankAgentCode = () => {
+    let data = JSON.stringify({
+      data: banklist?.id,
+    });
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${Constant.SERVER_URL}/Decrypt`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        setBankAgentCode(response.data.decrypt);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -161,56 +192,35 @@ function Upslip() {
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
                   <div>
                     <div
-                      style={{ marginBottom: "20px" }}
+                      style={{ marginBottom: "20px", height: "auto" }}
                       className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2"
                     >
-                      <p className="text-danger text-lg " style={{textAlign:'left'}}>
+                      <p
+                        className="text-danger text-lg "
+                        style={{ textAlign: "left", width: "100%" }}
+                      >
                         {" "}
                         * หากเครดิตไม่เข้าภายใน 3-5 นาที
-                        <br/>
+                        <br />
                         * กรุณาอัพโหลดสลิป
-                        <br/>
-                        * ติดต่อแอดมิน{" "}
+                        <br />* ติดต่อแอดมิน{" "}
                       </p>
-                     </div>
+                    </div>
                     <div
                       style={{ marginBottom: "10px" }}
                       className="text-[red] flex space-x-2"
-                    >
-                      {/* <div className="relative w-full">
-                        <select
-                          onChange={(event) =>
-                            setBankAgentCode(event?.target?.value)
-                          }
-                          className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
-                          id="nuid-1"
-                          //   onChange={_selectFavorite}
-                        >
-                          <option>เลือกธนาคาร</option>
-                          {_bankDeposit?.length > 0 &&
-                            _bankDeposit?.map((bank) => (
-                              <option key={bank?.index} value={bank?.i_bank}>
-                                {bank?.s_fname_th}
-                              </option>
-                            ))}
-                        </select>
-                        <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
-                          <span
-                            className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
-                            aria-hidden="true"
-                          ></span>
-                        </span>
-                      </div> */}
-                    </div>
+                    ></div>
                     <div
                       style={{ marginBottom: "10px" }}
                       className="text-[red] flex space-x-2"
                     >
                       <div className="relative w-full">
                         <select
+                          onChange={(event) =>
+                            setPromotionCode(event?.target?.value)
+                          }
                           className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                           id="nuid-1"
-                          //   onChange={_selectFavorite}
                         >
                           <option>เลือกโปรโมชั่น</option>
                           {_promotion?.length > 0 &&
@@ -255,6 +265,11 @@ function Upslip() {
                         data-v-9dec3a92=""
                         id="btn01"
                         type="submit"
+                        disabled={
+                          file === null|| promotionCode === ""
+                            ? true
+                            : false
+                        }
                         className="base-button-wrapper v-rounded btn-primary btn-md mt-4 font-medium text-base cursor-pointer border border-fontPrimary w-full rounded-base btn-primary h-[38px] flex items-center justify-center"
                       >
                         <div
@@ -266,7 +281,6 @@ function Upslip() {
                       </button>
                     </div>
                   </div>
-                  <div></div>
                 </div>
               </div>
             </div>
