@@ -126,19 +126,15 @@ function BankList() {
                           </p>
                           <div className="w-[45px] h-[45px] mt-4 text-white">
                             <div
-                              style={{ backgroundColor: "rgb(78, 46, 127)" }}
                               className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center"
                             >
                               <span
                                 className="nuxt-icon text-[2.4rem] text-white"
-                                id="scb"
                               >
                                 <img
                                   src={`/assets/images/bank/${
                                     banklist && banklist?.s_icon
                                   }`}
-                                  alt="scb"
-                                  id="image0_5_3"
                                   width="512"
                                   height="512"
                                 />

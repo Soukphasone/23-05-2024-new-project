@@ -109,6 +109,10 @@ export const formatDateTimeDDMMYYYY = (today) => {
   const todays = moment(today).format("DD/MM/YYYY hh:mm");
   return todays;
 };
+export const formatMontYear = (today) => {
+  const todays = moment(today).format("YYYY-MM");
+  return todays;
+};
 
 export const openUrlInNewWindow = (url) => {
   console.log("url: ", url)
@@ -123,3 +127,35 @@ export const openUrlInNewWindow = (url) => {
     console.error('Failed to open URL in a new window.');
   }
 }
+
+
+export const convertBankCode = (bankCode) => {
+  let res = "";
+  switch (bankCode) {
+    case 26:
+      res = "BCEL";
+      break;
+    case 25:
+      res = "LDB";
+      break;
+    case 24:
+      res = "APB";
+      break;
+    case 23:
+      res = "STB";
+      break;
+    case 22:
+      res = "IDB";
+      break;
+    case 21:
+      res = "LVB";
+      break;
+    case 20:
+      res = "JDB";
+      break;
+    default:
+      res = "";
+      break;
+  }
+  return res;
+};

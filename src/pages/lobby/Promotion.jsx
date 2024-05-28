@@ -129,7 +129,7 @@ function Promotion() {
               </div>
             </div>
           </main>
-          <Footer Active={promotion} />
+          {openModal?'':(<Footer Active={promotion} style/>)}
         </div>
       </div>
       {openModal &&

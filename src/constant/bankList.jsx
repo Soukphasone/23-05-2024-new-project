@@ -1,14 +1,15 @@
 export const BackList = [
     {
-        code: 2,
+        code: 1,
         bankName: "ธนาคารไทยพาณิชย์",
         backgroundColor: "rgba(62, 0, 72, 1)"
     },
     {
-        code: 1,
+        code: 2,
         bankName: "ธนาคารกสิกรไทย",
         backgroundColor: "rgb(7,162,78)"
     },
+   
     {
         code: 3,
         bankName: "ธนาคารกรุงไทย",

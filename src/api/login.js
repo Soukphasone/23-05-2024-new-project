@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Constant from "../constant";
 import { EncriptBase64 } from "../helper";
 import { DataLocalStorage, TokenLocalStorage } from "../helper";
-
+import { showSuccessAlert } from "../helper/SweetAlert";
 const LoginController = () => {
 	const history = useHistory();
 	// ==================> handleLogin <=================
@@ -17,9 +17,8 @@ const LoginController = () => {
 				ip: "1.2.3.4",
 			});
 			// console.log("data?.data: ", data?.data)
-			if (data.statusCode === 0) {
+			if (data?.statusCode === 0) {
 				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, data.data.token);
-
 				localStorage.setItem(Constant.DATA_PROFILE, JSON.stringify(data?.data?.info?.profile))
 				localStorage.setItem(Constant.DATA_BANK_LIST, JSON.stringify(data?.data?.info?.bankList))
 				localStorage.setItem(Constant.DATA_PROMOTION, JSON.stringify(data?.data?.info?.promotionList))
@@ -76,20 +75,23 @@ const LoginController = () => {
 	}
 	// ==================> handleRegister <=================
 	const handleRegister = async (
+
 		inputFirstname,
 		inputLastname,
 		inputPhonenumber,
 		inputPassword,
 		inputBank,
+		iBank,
 		ref,
 		setLoading
 	) => {
+		// console.log("REGISTER");
 		try {
 			const _date = {
 				s_agent_code: Constant.AGENT_CODE,
 				s_phone: inputPhonenumber,
 				s_password: inputPassword,
-				i_bank: "1", //scb =1
+				i_bank: iBank,
 				s_account_no: inputBank,
 				s_channel: "GOOGLE",
 				s_line: "line@",
@@ -116,7 +118,7 @@ const LoginController = () => {
 						i_channel: "134",
 					},
 				});
-				console.log("🚀 ~ CreateUser ~ _resTwo:", _resTwo?.data);
+				// console.log("🚀 ~ CreateUser ~ _resTwo:", _resTwo?.data);
 				if (_resTwo?.data.statusCode === 0) {
 					const _resThree = await axios({
 						method: "post",
@@ -137,7 +139,7 @@ const LoginController = () => {
 							Constant.LOGIN_USER_DATA,
 							JSON.stringify(_resTwo?.data?.data),
 						);
-						setLoading(false);
+						// setLoading(true);
 						_loginAfterRegister(
 							_resTwo?.data?.data?.s_username,
 							_resTwo?.data?.data?.s_password,
@@ -166,15 +168,27 @@ const LoginController = () => {
 			});
 			if (data?.statusCode === 0) {
 				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, data.data.token);
-				localStorage.setItem(
-					Constant.LOGIN_USER_DATA,
+				localStorage.setItem(Constant.DATA_PROFILE, JSON.stringify(data?.data?.info?.profile))
+				localStorage.setItem(Constant.DATA_BANK_LIST, JSON.stringify(data?.data?.info?.bankList))
+				localStorage.setItem(Constant.DATA_PROMOTION, JSON.stringify(data?.data?.info?.promotionList))
+				localStorage.setItem(Constant.BRAND_LIST, JSON.stringify(data?.data?.info?.brandList))
+				localStorage.setItem(Constant.CASHBACK, JSON.stringify(data?.data?.info?.cashback))
+				localStorage.setItem(Constant.CONFIG_CASHBACK, JSON.stringify(data?.data?.info?.configCash))
+				localStorage.setItem(Constant.CONFIG_LINE, JSON.stringify(data?.data?.info?.configLine))
+				localStorage.setItem(Constant.CONFIG_LOBBY, JSON.stringify(data?.data?.info?.configLobby))
+				localStorage.setItem(Constant.CONFIG_WITHDRAW, JSON.stringify(data?.data?.info?.configWithdraw))
+				localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide))
+				localStorage.setItem(Constant.BANK_DEPOSIT, JSON.stringify(data?.data?.info?.bankDeposit))
+				localStorage.setItem(Constant.LOGIN_USER_DATA,
 					JSON.stringify({
 						agent: data?.data?.agent,
 						username: data?.data?.username,
+						password: password,
 						balance: data?.data?.balance,
-						info: data?.data?.info,
+						shortUrl: data?.data?.info?.shorturl
 					}),
 				);
+				showSuccessAlert('สำเร็จ')
 				history.push(Constant.AFTER_LOGIN, data?.data);
 				return null;
 			}

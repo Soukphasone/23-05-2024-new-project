@@ -40,15 +40,17 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
       aria-modal="true"
       id="see-promotion-modal"
       title=""
-      style={{ Zindex: "9999", marginTop:'4rem'}}
+      style={{ Zindex: "10000", marginTop:'4rem'}}
     >
       <div
         className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
         aria-hidden="true"
       ></div>
       <div className="vfm__content vfm--outline-none absolute inset-0" tabindex="0">
-        <div className="absolute inset-0 h-full overflow-hidden overflow-y-auto">
-          <div className="modal-top-body flex flex-col max-w-[540px] my-12 mx-auto p-4 rounded-lg relative &lt;sm:mx-4">
+        <div style={{overflowY:'scroll'}}
+        className="absolute inset-0 h-full overflow-hidden overflow-y-auto">
+          <div 
+          className="modal-top-body flex flex-col max-w-[540px] my-12 mx-auto p-4 rounded-lg relative &lt;sm:mx-4">
             <span
               className="nuxt-icon nuxt-icon--fill absolute bg-[red] top-[-10px] right-[-10px] text-sm p-2 rounded-full z-10 text-xs cursor-pointer"
               v-if="true"
@@ -86,12 +88,6 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                 draggable="false"
                 className="bg-cover centent-promote mt-2 mx-auto rounded-base w-full"
               />
-              {/* <div style={{color:'#FFF'}}
-                data-v-ac0eeeb0=""
-                className="w-full mt-2 text-center font-medium &lt;sm:text-base sm:text-base md:text-lg"
-              >
-                สมาชิกใหม่รับ50%
-              </div> */}
               <div data-v-ac0eeeb0="" className="">
                 {
                   <div data-v-ac0eeeb0="" className="flex flex-col">
@@ -115,14 +111,6 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                       <p>
                         🌈 จำกัด {dataPromotion?.i_per_day} ครั้ง/วัน 🌈
                       </p>
-                      {/* <ul>
-                      <li>-เล่นได้เฉพาะสล็อตเท่านั้น</li>
-                      <li>-ซื้อฟรีสปินได้นะคะ</li>
-                      <li>-ทำยอดเครดิตขั้นต่ำ 3 เท่า</li>
-                      <li>-ถอนได้สูงสุด 1000 บาท</li>
-                    </ul> */}
-                      {/* <p>**ห้ามนำเครดิตไปใช้เล่นเกมอื่นที่ไม่ใช่สล็อต</p>
-                    <p>**ห้ามนำเครดิตไปใช้เพื่อการกั๊กฟรีสปิน</p> */}
                     </span>
                   </div>
                 }

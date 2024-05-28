@@ -3,15 +3,15 @@ import axios from "axios";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Image_slide from "../../components/image_slide";
-import Letter_slide from "../../components/Letter_slide";
 import Constant from "../../constant";
 import { useHistory } from "react-router-dom";
 import _LoginController from "../../api/login";
 import {
   FillerCategory,
   OpenNewTabWithHTML,
-  DataLocalStorage,
+  DataLocalStorage,TokenLocalStorage
 } from "../../helper";
+
 function HomePage() {
   //
   const history = useHistory();
@@ -21,12 +21,14 @@ function HomePage() {
   const [deviceType, setDeviceType] = useState(false);
   const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
   const [activeCategory, setActiveCategory] = useState("ALL");
-  const [selectedFav, setSelectedFav] = useState('');
   const gameType = (TypeGame) => {
     history.push(Constant.TYPE_GAME, TypeGame);
   };
   useEffect(() => {
     const _dataUser = DataLocalStorage();
+    const _Token = TokenLocalStorage();
+    // console.log("Token", _Token)
+    if(_dataUser)
     setDataFromLogin(_dataUser);
   }, []);
  

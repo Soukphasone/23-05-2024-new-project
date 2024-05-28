@@ -39,7 +39,6 @@ const Roulette = ({ data, setOutputSpin, username, setCurrentPoint }) => {
             "s_agent_code": AGENT_CODE,
             "eventCode": eventCode
         });
-
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
@@ -118,7 +117,7 @@ const Roulette = ({ data, setOutputSpin, username, setCurrentPoint }) => {
                         </div>
                       </button>
                     </div>
-                <div style={{ color: "red", marginTop: 10 }}>{errorText}</div>
+                {/* <div style={{ color: "red", marginTop: 10 }}>{errorText}</div> */}
             </div>
         </>
     );

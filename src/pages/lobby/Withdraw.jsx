@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
-import { showSuccessAlert } from "../../helper/SweetAlert";
+import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
 
 function Withdraw() {
@@ -14,6 +14,7 @@ function Withdraw() {
   const bank = "BANK";
   const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
+  // console.log("DataFromLogin", dataFromLogin);
   const [dataUser, setDataUser] = useState();
   const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
   const Back = () => {
@@ -42,7 +43,6 @@ function Withdraw() {
     if (_res?.data?.statusCode === 0) {
       setDataUser(_res?.data?.data);
     }
-    
   };
 
   const _withdrawMoney = async () => {
@@ -51,16 +51,17 @@ function Withdraw() {
         s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
         f_amount: dataUser?.amount,
-        i_bank: _bankList?.bankList[0]?.id,
+        i_bank: _bankList?.[0]?.id,
         i_ip: "1.2.3.4",
         actionBy: "adm",
       };
-      // Send the data to the server to get the game URL
+      console.log("data_for_withdraw", _data);
+
       const _res = await axios({
         method: "post",
         url: `${Constant.SERVER_URL}/Withdraw/CreateTransaction`,
         data: _data,
-      });
+    });
       if (_res?.data?.statusCode === 0) {
         showSuccessAlert("ถอนสำเร็จ");
         _getData();
@@ -68,7 +69,10 @@ function Withdraw() {
       } else {
         setReMessage(_res?.data?.statusDesc);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Withdraw Error:", error);
+      showErrorAlert("การถอนล้มเหลว");
+    }
   };
 
   return (
@@ -84,8 +88,6 @@ function Withdraw() {
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
-              {/* <Letter_slide /> */}
-
               <div
                 style={{ marginTop: "4rem" }}
                 data-v-6307fb48=""
@@ -147,7 +149,8 @@ function Withdraw() {
                     ถอนขั้นต่ำ 1.00 บาท{" "}
                   </p>
                   <button
-                    onClick={_withdrawMoney}
+                    onClick={() => _withdrawMoney()}
+                    onKeyDown={() => ""}
                     data-v-9dec3a92=""
                     data-v-6307fb48=""
                     id="btn-withdraw"

@@ -24,6 +24,7 @@ import Bag from "../pages/lobby/Bag";
 import Cashback from "../pages/lobby/Cashback";
 import Upslip from "../pages/lobby/UploadSlip";
 import Wheel from "../pages/lobby/Wheel";
+import Affiliate from "../pages/lobby/Affiliate";
 function RouterLink() {
   return (
     <>
@@ -46,6 +47,7 @@ function RouterLink() {
                   <PrivateRoute exact path={Const.CASH_BACK } component={Cashback} />
                   <PrivateRoute exact path={Const.UPLOAD_SLIP } component={Upslip} />
                   <PrivateRoute exact path={Const.WHEEL } component={Wheel} />
+                  <PrivateRoute exact path={Const.AFFILIATE} component={Affiliate} />
                 </> 
               </React.Fragment>
             )}

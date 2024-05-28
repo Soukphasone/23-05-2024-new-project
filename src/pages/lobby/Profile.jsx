@@ -6,23 +6,29 @@ import { createPortal } from "react-dom";
 import { DataLocalStorage } from "../../helper";
 import { showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
-
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
   const [username, setUsername] = useState("");
   const [bankList, setBankList] = useState("");
+  console.log("BANK NAME: ", bankList)
   const [Password, setOldPassword] = useState("");
+  //
+  //
+
+ 
   useEffect(() => {
     const userData = DataLocalStorage();
-    const lcsBankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
+    const lcsBankList = JSON.parse(
+      localStorage.getItem(Constant.DATA_BANK_LIST)
+    );
 
     setUsername(userData.username);
     setBankList(lcsBankList);
-    setOldPassword(userData?.password)
+    setOldPassword(userData?.password);
   }, []);
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
-    showSuccessAlert('คัดลอกสำเร็จ')
+    showSuccessAlert("คัดลอกสำเร็จ");
   };
   const handleButtonClick1 = () => {
     setOpenModal(false);
@@ -51,11 +57,15 @@ function Profile() {
             data-v-3c88d514=""
             className="min-h-screen overflow-scroll pb-[80px]"
           >
-            <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
+            <div
+              data-v-3c88d514=""
+              className="w-full mx-auto base-container pb-2"
+            >
               {/* <Letter_slide /> */}
-              <div 
-              style={{marginTop:'6rem'}}
-              className="animate__animated max-w-[420px] mx-auto animate__fadeIn">
+              <div
+                style={{ marginTop: "6rem" }}
+                className="animate__animated max-w-[420px] mx-auto animate__fadeIn"
+              >
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
                   <div data-v-ea58f736="" id="profileTab" className="w-full">
                     <div data-v-ea58f736="" className="tabsWrapper w-full">
@@ -229,9 +239,7 @@ function Profile() {
                         </span>
                         {/* {bankList.length > 0 &&
                           bankList.map((item, index) => ( */}
-                        <div
-                          className="w-full flex items-center justify-center gap-x-4"
-                        >
+                        <div className="w-full flex items-center justify-center gap-x-4">
                           <span
                             className="text-primary text-left w-full max-w-40 truncate text-sm flex items-center justify-between gap-10"
                             style={{
@@ -240,7 +248,7 @@ function Profile() {
                               textTransform: "uppercase",
                             }}
                           >
-                            {bankList[0]?.s_icon.split(".")[0]}{" "}
+                            {bankList[0]?.s_icon.split(".")[0]==='kk'?'kkp':bankList[0]?.s_icon.split(".")[0]}{" "} 
                             <img
                               src={`/assets/images/bank/${bankList[0]?.s_icon}`}
                               alt="logo bank"
@@ -282,7 +290,10 @@ function Profile() {
       </div>
       {openModal &&
         createPortal(
-          <ChangePassword closeModal={handleButtonClick1} oldPassword={Password} />,
+          <ChangePassword
+            closeModal={handleButtonClick1}
+            oldPassword={Password}
+          />,
           document.body
         )}
     </body>

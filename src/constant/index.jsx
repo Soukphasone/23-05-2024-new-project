@@ -2,7 +2,6 @@ module.exports = {
   AGENT_CODE: "AG019",
   SERVER_URL:
     "https://2ov8dxycl0.execute-api.ap-southeast-1.amazonaws.com/api/v1",
-  
   LOGIN: "/login",
   PAGE_LOGIN_CAN_LOGIN_PLAY: "/api/v1/Authen/Token",
   // AFTER_LOGIN: "/lobby",
@@ -19,7 +18,7 @@ module.exports = {
   UPLOAD_SLIP:'/upload',
   GAME_LIST: "/game-list",
   WHEEL: "/lobby/bag/wheel",
-
+  AFFILIATE: "/lobby/bag/affiliate",
   LOGIN_TOKEN_DATA: "TOX_LOBBY_TOKEN",
   LOGIN_USER_DATA: "TOX_LOBBY_DATA",
   DATA_PROFILE: "DATA_PROFILE",

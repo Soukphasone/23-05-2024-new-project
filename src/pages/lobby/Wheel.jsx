@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
-// import Slide_bank from "../../components/slide_bank";
-// import Letter_slide from "../../components/Letter_slide";
-import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
-import { showSuccessAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
 import Roulette from "../../components/Roulette";
 
 function Wheel() {
   const history = useHistory();
-  const bag = "BAG";
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataSpinWheel, setDataSpinWheel] = useState([]);
   const [limitSpinWheel, setLimitSpinWheel] = useState({});
   const [outputSpin, setOutputSpin] = useState("");
   const [currentPoint, setCurrentPoint] = useState({});
-
   const Back = () => {
     history.push(Constant.BAG);
   };
@@ -33,11 +27,10 @@ function Wheel() {
     let data = JSON.stringify({
       s_agent_code: Constant?.AGENT_CODE,
     });
-
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://2ov8dxycl0.execute-api.ap-southeast-1.amazonaws.com/api/v1/LuckyWheel/Inquiry?XDEBUG_SESSION_START=netbeans-xdebug",
+      url: `${Constant.SERVER_URL}/LuckyWheel/Inquiry?XDEBUG_SESSION_START=netbeans-xdebug`,
       headers: {
         "authorization-agent": "{{AUTHEN-VALUE-AGENT}}",
         "authorization-token": "{{AUTHEN-VALUE-TOKEN}}",
@@ -70,8 +63,6 @@ function Wheel() {
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
-              {/* <Letter_slide /> */}
-
               <div
                 style={{ marginTop: "4rem" }}
                 data-v-6307fb48=""
@@ -104,18 +95,13 @@ function Wheel() {
                   data-v-6307fb48=""
                   className="cash-back-content border border-primary bg-card-primary card-wrapper gap-y-2 w-full flex flex-col justify-center items-center"
                 >
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
-                  >
-                    <p>วงล้อลุ้นโชค</p>
-                  </span>
+                    <h1>วงล้อลุ้นโชค</h1>
                   <span
                     style={{ width: "100%", textAlign: "left" }}
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                    <p>แต้มทั้งหมด</p>
+                    <p>แต้มทั้งหมด:  {currentPoint?.currentPoint}</p>
                   </span>
                   {dataSpinWheel.length > 0 && (
                     <Roulette
@@ -151,7 +137,6 @@ function Wheel() {
               </div>
             </div>
           </main>
-          {/* <Footer Active={bag} /> */}
         </div>
       </div>
     </body>

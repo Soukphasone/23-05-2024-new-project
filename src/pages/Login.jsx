@@ -1,10 +1,14 @@
 import React, { useState, useCallback } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BackList } from "../constant/bankList";
 import Select from "react-select";
 import _LoginController from "../api/login";
 import { useHistory } from "react-router-dom";
 import { showErrorAlert, showSuccessAlert } from "../helper/SweetAlert";
+import { convertBankCode } from "../helper";
+import Constant from "../constant";
+
 function Login() {
   const history = useHistory();
   const { data } = useParams();
@@ -13,6 +17,8 @@ function Login() {
   const [bankCode, setBankCode] = useState(0);
   const [inputBank, setInputBank] = useState("");
   const [warningBank, setWarningBank] = useState("");
+  const [warningBankCode, setWarningBankCode] = useState("");
+
   //register
   const [inputPhonenumber, setInputPhonenumber] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -31,6 +37,9 @@ function Login() {
   const [messageCreate, setMessageCreate] = useState("");
   const [warningUsername, setUserNameWarning] = useState("");
   const [warningPasswordLg, setWarningPasswordLg] = useState("");
+  //bank
+  const [textWarning, setTextWarning] = useState(false);
+
   const _clickNextStep = () => {
     if (
       inputPhonenumber === "" ||
@@ -54,7 +63,7 @@ function Login() {
   };
   //handle bank
 
-  const handleChangeBank = useCallback((event) => {
+  const _handlecheckphone = useCallback((event) => {
     const re = /^[0-9\b]+$/;
     if (event.target.value === "" || re.test(event.target.value)) {
       setInputBank(event?.target?.value);
@@ -220,12 +229,11 @@ function Login() {
     }
   };
   const CreateUser = async () => {
-    if (inputBank === "") {
-      setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
-      setTimeout(() => setWarningBank(""), 5000);
-      return;
-    }
-
+    // if (inputBank === "") {
+    //   setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
+    //   setTimeout(() => setWarningBank(""), 5000);
+    //   // return;
+    // }
     try {
       const _res = await handleRegister(
         inputFirstname,
@@ -233,14 +241,7 @@ function Login() {
         inputPhonenumber,
         inputPassword,
         inputBank,
-        bankCode,
-        (response) => {
-          if (response === false) {
-            showSuccessAlert("สำเร็จ");
-          } else {
-            showErrorAlert("ทำรายการไม่สำเร็จ");
-          }
-        }
+        bankCode.toString()
       );
       if (_res) {
         setMessageCreate(_res?.statusDesc);
@@ -260,6 +261,62 @@ function Login() {
     event.preventDefault();
     setActiveTab("register");
   };
+
+  const handleChangeBank = useCallback((event) => {
+    setInputBank(event?.target?.value);
+  });
+
+  const checkBank = async () => {
+    console.log("NUMBER PHONE", inputPhonenumber.length);
+    if (inputBank === "") {
+        setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
+        setTimeout(() => setWarningBank(""), 5000);
+        return;
+    }
+
+    if (inputPhonenumber.length >= 13) {
+        console.log("WELCOME TO LAOS");
+        const bankCodeText = convertBankCode(bankCode);
+        const data = JSON.stringify({
+            bankCode: bankCodeText,
+            recipientAcctNo: inputBank,
+        });
+
+        const config = {
+            method: "post",
+            maxBodyLength: Infinity,
+            url: `${Constant.SERVER_URL}/check-number-account`,
+            headers: {
+                "User-Agent": "Dart/3.1 (dart:io)",
+                "Accept-Encoding": "gzip, deflate, br",
+                Connection: "close",
+                "Content-Type": "application/json",
+            },
+            data: data,
+        };
+        // console.log("DATA_BANK", data);
+        try {
+            const response = await axios.request(config);
+            // console.log("RESPON_BANK_LAOS", response.data.data);
+            if (response.data.data.respDesc !== "Success") {
+                setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
+                // console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
+                setTimeout(() => {
+                    setTextWarning("");
+                }, 5000);
+            } else {
+                console.log("RESPON_BANK_SUCCESS", response.data.data);
+                CreateUser(response.data.data.receipient);
+                console.log("THIS ACCOUNT LAOS");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        CreateUser();
+        console.log("THIS ACCOUNT THAILAND");
+    }
+};
 
   const wrapperClass =
     activeTab === "login"
@@ -436,8 +493,7 @@ function Login() {
                                     className="h-[18px]"
                                   ></div>
                                 </div>
-                                <div 
-                                data-v-d8556cff="">
+                                <div data-v-d8556cff="">
                                   <button
                                     data-v-9dec3a92=""
                                     data-v-d8556cff=""
@@ -459,9 +515,6 @@ function Login() {
                                     </div>
                                   </button>
                                 </div>
-                                <span className="text-message-warning">
-                                  {messageCreate}
-                                </span>
                               </form>
                             </div>
                           ) : activeTab === "register" ? (
@@ -485,6 +538,7 @@ function Login() {
                                     className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
                                     <Select
+                                      isSearchable={false}
                                       onChange={handleChangeSelect}
                                       options={options}
                                       styles={customStyles}
@@ -507,7 +561,6 @@ function Login() {
                                         </div>
                                       )}
                                     />
-
                                     <input
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
@@ -664,14 +717,14 @@ function Login() {
                           ) : (
                             <div data-v-d8556cff="" className="w-full mt-4">
                               <div className="banking-list">
-                                <div
-                                  style={{ opacity: bankCode === 2 ? 1 : 0.5 }}
+                              <div
+                                  style={{ opacity: bankCode === 1 ? 1 : 0.5 }}
                                   className={
-                                    bankCode === 2 ? "active-bank" : ""
+                                    bankCode === 1 ? "active-bank" : ""
                                   }
                                 >
                                   <img
-                                    onClick={() => setBankCode(2)}
+                                    onClick={() => setBankCode(1)}
                                     onKeyDown={() => ""}
                                     className="bank-item"
                                     src="/assets/images/icon-bank-active/scb2.png"
@@ -680,13 +733,13 @@ function Login() {
                                   />
                                 </div>
                                 <div
-                                  style={{ opacity: bankCode === 1 ? 1 : 0.5 }}
+                                  style={{ opacity: bankCode === 2 ? 1 : 0.5 }}
                                   className={
-                                    bankCode === 1 ? "active-bank" : ""
+                                    bankCode === 2 ? "active-bank" : ""
                                   }
                                 >
                                   <img
-                                    onClick={() => setBankCode(1)}
+                                    onClick={() => setBankCode(2)}
                                     onKeyDown={() => ""}
                                     className="bank-item"
                                     src="/assets/images/icon-bank-active/kbank1.png"
@@ -844,7 +897,7 @@ function Login() {
                                     alt="icon"
                                   />
                                 </div>
-                                <div
+                                {/* <div
                                   style={{ opacity: bankCode === 15 ? 1 : 0.5 }}
                                   className={
                                     bankCode === 15 ? "active-bank" : ""
@@ -858,8 +911,8 @@ function Login() {
                                     id="bank1"
                                     alt="icon"
                                   />
-                                </div>
-                                <div
+                                </div> */}
+                                {/* <div
                                   style={{ opacity: bankCode === 16 ? 1 : 0.5 }}
                                   className={
                                     bankCode === 16 ? "active-bank" : ""
@@ -873,7 +926,7 @@ function Login() {
                                     id="bank1"
                                     alt="icon"
                                   />
-                                </div>
+                                </div> */}
                                 <div
                                   style={{ opacity: bankCode === 18 ? 1 : 0.5 }}
                                   className={
@@ -1074,8 +1127,8 @@ function Login() {
                                 <span style={{ color: "red" }}>
                                   {inputBank !== "" ? "" : warningBank}
                                 </span>
-
                                 <div style={{ padding: 10, color: "red" }}>
+                                  {textWarning}
                                   {messageCreate}
                                 </div>
 
@@ -1110,7 +1163,8 @@ function Login() {
                                 </button>
                                 <div style={{ width: "10px" }} />
                                 <button
-                                  onClick={() => CreateUser()}
+                                  // onClick={() => CreateUser()}
+                                  onClick={() => checkBank()}
                                   data-v-9dec3a92=""
                                   data-v-d8556cff=""
                                   id="btn01"
@@ -1165,7 +1219,6 @@ function Login() {
           </main>
         </div>
       </div>
-      
     </body>
   );
 }

@@ -234,20 +234,10 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
 
                         <div
                         style={{marginTop:'-20px'}}
-                          className={
-                            bonus?.s_status === "Y"
-                              ? "text-success"
-                              : bonus?.s_status === "C"
-                                ? "text-cancel"
-                                : "text-not-success"
-                          }
+                          className="text-success"
                         >
                           <p>
-                            {bonus?.s_status === "Y"
-                              ? "สำเร็จ"
-                              : bonus?.s_status === "C"
-                                ? "ยกเลิก"
-                                : "ไม่สำเร็จ"}
+                          สำเร็จ     
                           </p>
                           <p>
                             {bonus?.d_datetime}
