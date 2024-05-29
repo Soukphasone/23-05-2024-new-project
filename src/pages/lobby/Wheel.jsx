@@ -5,6 +5,7 @@ import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { useHistory } from "react-router-dom";
 import Roulette from "../../components/Roulette";
+import { showSuccessAlert } from "../../helper/SweetAlert";
 
 function Wheel() {
   const history = useHistory();
@@ -48,6 +49,16 @@ function Wheel() {
       .catch((error) => {
         console.log(error);
       });
+  };
+  useEffect(() => {
+    if (!outputSpin) return;
+    if (outputSpin !== undefined || outputSpin !== "" || outputSpin === null) {
+      _ShowpopupSpin();
+    }
+  }, [outputSpin]);
+
+  const _ShowpopupSpin = () => {
+    showSuccessAlert(outputSpin);
   };
 
   return (
@@ -95,13 +106,13 @@ function Wheel() {
                   data-v-6307fb48=""
                   className="cash-back-content border border-primary bg-card-primary card-wrapper gap-y-2 w-full flex flex-col justify-center items-center"
                 >
-                    <h1>วงล้อลุ้นโชค</h1>
+                  <h1>วงล้อลุ้นโชค</h1>
                   <span
                     style={{ width: "100%", textAlign: "left" }}
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                    <p>แต้มทั้งหมด:  {currentPoint?.currentPoint}</p>
+                    <p>แต้มทั้งหมด: {currentPoint?.currentPoint}</p>
                   </span>
                   {dataSpinWheel.length > 0 && (
                     <Roulette
@@ -111,28 +122,29 @@ function Wheel() {
                       setCurrentPoint={setCurrentPoint}
                     />
                   )}
-                 <div style={{width:'100%', textAlign:'left'}}>
-                 <p style={{ margin: "none", marginTop: 10 }}>
-                    เครดิตกงล้อ : {outputSpin}
-                  </p>
-                  <div
-                    style={{
-                      color:'#FFE1A6',
-                      fontWeight: 500,
-                      fontSize: 16,
-                      textDecoration: "underline",
-                    }}
-                  >
-                    รายละเอียด
+                  <div style={{ width: "100%", textAlign: "left" }}>
+                    <p style={{ margin: "none", marginTop: 10 }}>
+                      เครดิตกงล้อ : {outputSpin}
+                    </p>
+                    <div
+                      style={{
+                        color: "#FFE1A6",
+                        fontWeight: 500,
+                        fontSize: 16,
+                        textDecoration: "underline",
+                      }}
+                    >
+                      รายละเอียด
+                    </div>
+                    <p style={{ margin: "none" }}>
+                      หมุนวงล้อได้ทั้งหมด {limitSpinWheel?.i_max} ครั้ง
+                      ใช้สิทธิไปแล้ว 3 ครั้ง
+                    </p>
+                    <p style={{ margin: "none" }}>
+                      ภายในวันสามารถใข้สิทธิได้ {limitSpinWheel?.i_per_day}{" "}
+                      ครั้ง
+                    </p>
                   </div>
-                  <p style={{ margin: "none" }}>
-                    หมุนวงล้อได้ทั้งหมด {limitSpinWheel?.i_max} ครั้ง
-                    ใช้สิทธิไปแล้ว 3 ครั้ง
-                  </p>
-                  <p style={{ margin: "none" }}>
-                    ภายในวันสามารถใข้สิทธิได้ {limitSpinWheel?.i_per_day} ครั้ง
-                  </p>
-                 </div>
                 </div>
               </div>
             </div>

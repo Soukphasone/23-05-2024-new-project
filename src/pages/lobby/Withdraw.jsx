@@ -52,8 +52,6 @@ function Withdraw() {
         i_ip: "1.2.3.4",
         actionBy: "adm",
       };
-      console.log("data_for_withdraw", _data);
-
       const _res = await axios({
         method: "post",
         url: `${Constant.SERVER_URL}/Withdraw/CreateTransaction`,
@@ -67,7 +65,6 @@ function Withdraw() {
         setReMessage(_res?.data?.statusDesc);
       }
     } catch (error) {
-      console.error("Withdraw Error:", error);
       showErrorAlert("การถอนล้มเหลว");
     }
   };

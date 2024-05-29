@@ -37,7 +37,6 @@ function Upslip() {
 
     const _URL = window.URL || window.webkitURL;
     const url = _URL.createObjectURL(file);
-    // console.log("A");
     const imgData = await uploadSlip(url);
     document.getElementById("fileslip").value = "";
     if (imgData != null) {
@@ -60,7 +59,6 @@ function Upslip() {
         showSuccessAlert('สำเร็จ')
       } catch (error) {
         showErrorAlert("เกิดข้อผิดพลาด")
-        console.error("AAAA", error);
       }
     } else {
       notify({ statusDesc: "Failed to read QR code" });
@@ -150,7 +148,7 @@ function Upslip() {
   };
 
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary">
+    <div className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -163,7 +161,7 @@ function Upslip() {
               className="w-full mx-auto base-container pb-2"
             >
               <div
-                style={{ marginTop: "4rem" }}
+                style={{ marginTop: "5rem" }}
                 className="base-container-small"
               >
                 <div
@@ -288,7 +286,7 @@ function Upslip() {
           <Footer Active={bank} />
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 

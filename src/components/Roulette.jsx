@@ -107,6 +107,7 @@ const Roulette = ({ data, setOutputSpin, username, setCurrentPoint }) => {
                         data-v-9dec3a92=""
                         id="btn01"
                         type="submit"
+                        disabled={errorText === 'แต้มหมุนของคุณหมดแล้วไม่สามารถทำรายการได้'? true:false}
                         className="base-button-wrapper v-rounded btn-primary btn-md mt-4 font-medium text-base cursor-pointer border border-fontPrimary w-full rounded-base btn-primary h-[38px] flex items-center justify-center"
                       >
                         <div

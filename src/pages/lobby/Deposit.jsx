@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-// import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { DataLocalStorage } from "../../helper";
@@ -28,7 +27,7 @@ function Deposit() {
     history.push(Constant.DEPOSIT_WITHDRAW);
   };
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
+    <div className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -37,9 +36,8 @@ function Deposit() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
-              {/* <Letter_slide /> */}
               <div 
-              style={{marginTop:'4rem'}}
+              style={{marginTop:'5rem'}}
               className="base-container-small">
                 <div
                   onClick={Back}
@@ -111,7 +109,6 @@ function Deposit() {
                       <p className="text-sm">บัญชีของคุณ: </p>
                       <div className="w-[45px] h-[45px] mt-4 text-white">
                         <div
-                          // style={{ backgroundColor: "rgb(19, 143, 45)" }}
                           className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center"
                         >
                           <span
@@ -157,7 +154,7 @@ function Deposit() {
           <Footer Active={bank} />
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 

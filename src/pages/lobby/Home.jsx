@@ -145,7 +145,7 @@ function HomePage() {
     }
   };
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary">
+    <div className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -1050,7 +1050,7 @@ function HomePage() {
           <Footer Active={home} />
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 

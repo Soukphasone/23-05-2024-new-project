@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Letter_slide from "../../components/Letter_slide";
 import Header from "../../components/Header";
 import ModalHistoryCashBack from "../../components/Modal/ModalHistoryCashback";
 import { createPortal } from "react-dom";
@@ -30,7 +29,6 @@ function Cashback() {
     if (dataFromLogin) {
       _getData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataFromLogin]);
 
   const handleButtonClick1 = () => {

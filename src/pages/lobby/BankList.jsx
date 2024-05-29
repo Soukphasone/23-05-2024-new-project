@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../../components/Header";
-// import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
-import { createPortal } from "react-dom";
 function BankList() {
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
-  const [openModalUpSleep, setOpenModal] = useState(false);
-  const ModalSleep = () => {
-    setOpenModal(false);
-  };
-
+ 
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
     showSuccessAlert("คัดลอกสำเร็จ");
@@ -27,7 +21,7 @@ function BankList() {
 
   }
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{zIndex:'-10'}}>
+    <div className="overflow-x-hidden overflow-y-auto text-primary" style={{zIndex:'-10'}}>
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -39,9 +33,8 @@ function BankList() {
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
-              {/* <Letter_slide /> */}
               <div
-                style={{ marginTop: "4rem" }}
+                style={{ marginTop: "5rem" }}
                 className="base-container-small"
               >
                 <div
@@ -210,15 +203,7 @@ function BankList() {
           <Footer Active={bank} />
         </div>
       </div>
-      {openModalUpSleep &&
-        createPortal(
-          <UploadSleep
-            closeModal={ModalSleep}
-            // dataFromLogin={dataFromLogin}
-          />,
-          document.body
-        )}
-    </body>
+    </div>
   );
 }
 
