@@ -17,7 +17,6 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
           actionBy: "ADM",
         }
       );
-      console.log("_resAppover", _resAppover)
       if (_resAppover?.data?.statusCode === 0) {
         showSuccessAlert("รายการสำเร็จ");
         return

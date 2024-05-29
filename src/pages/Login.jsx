@@ -289,10 +289,8 @@ function Login() {
         },
         data: data,
       };
-      // console.log("DATA_BANK", data);
       try {
         const response = await axios.request(config);
-        // console.log("RESPON_BANK_LAOS", response.data.data);
         if (response.data.data.respDesc !== "Success") {
           setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
           console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
-// import Slide_bank from "../../components/slide_bank";
-// import Letter_slide from "../../components/Letter_slide";
 import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
@@ -14,7 +12,6 @@ function Withdraw() {
   const bank = "BANK";
   const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
-  // console.log("DataFromLogin", dataFromLogin);
   const [dataUser, setDataUser] = useState();
   const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
   const Back = () => {
@@ -76,7 +73,7 @@ function Withdraw() {
   };
 
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
+    <div className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -89,7 +86,7 @@ function Withdraw() {
               className="w-full mx-auto base-container pb-2"
             >
               <div
-                style={{ marginTop: "4rem" }}
+                style={{ marginTop: "5rem" }}
                 data-v-6307fb48=""
                 className="base-container-small flex flex-col justify-center"
               >
@@ -174,7 +171,7 @@ function Withdraw() {
           <Footer Active={bank} />
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 

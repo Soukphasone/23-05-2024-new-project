@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Letter_slide from "../../components/Letter_slide";
 import Header from "../../components/Header";
-import ModalHistoryCredit from "../../components/Modal/ModalHistoryCredit";
+import ModalHistoryCashBack from "../../components/Modal/ModalHistoryCashback";
 import { createPortal } from "react-dom";
 import Footer from "../../components/Footer";
 import axios from "axios";
 import { DataLocalStorage, CheckLevelCashBack } from "../../helper";
 import Constant from "../../constant";
+import { useHistory } from "react-router-dom";
+
 function Cashback() {
   const bag = "BAG"
+  const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
   const [reMessage, setReMessage] = useState("");
   const [maxLevel, setmaxLevel] = useState();
@@ -42,6 +45,7 @@ function Cashback() {
       data: {
         s_agent_code: dataFromLogin?.agent,
         s_username: dataFromLogin?.username,
+       
       },
     });
     if (_resHistoryCashBack?.data?.statusCode === 0) {
@@ -70,8 +74,11 @@ function Cashback() {
       console.log("🚀 ~ const_login= ~ error:", error);
     }
   };
+  const Back =()=>{
+    history.push(Constant.BAG)
+  }
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
+    <div className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
         <div data-v-a828f7ed="">
           <Header />
@@ -80,14 +87,36 @@ function Cashback() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div data-v-a828f7ed="" className="w-full mx-auto base-container pb-2">
-              {/* <Letter_slide /> */}
               <div
               style={{marginTop:'5rem'}}
-
                 data-v-82953e26=""
                 className="base-container-small flex flex-col justify-center"
               >
+                   <div
+                  onClick={Back}
+                  data-v-fe9de6ba=""
+                  className="breadcrumb-wrapper py-3 w-max overflow-hidden"
+                >
+                  <div style={{ display: "flex" }}>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <img
+                        src="/assets/images/icons/icon-arrow-left.png"
+                        alt="arrow-lft"
+                      />
+                    </span>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <p>ย้อนกลับ</p>
+                    </span>
+                  </div>
+                </div>
                 <div
+                style={{marginTop:'-5px'}}
                   data-v-82953e26=""
                   className="cash-back-content bg-card-primary card-wrapper w-full flex-col justify-center flex items-center my-4"
                 >
@@ -183,10 +212,10 @@ function Cashback() {
       </div>
       {openModal &&
         createPortal(
-          <ModalHistoryCredit closeModal={handleButtonClick1} />,
+          <ModalHistoryCashBack closeModal={handleButtonClick1} historyCashBack ={historyCashBack} />,
           document.body
         )}
-    </body>
+    </div>
   );
 }
 
