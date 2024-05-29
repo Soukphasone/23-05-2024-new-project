@@ -10,12 +10,7 @@ function Profile() {
   const [openModal, setOpenModal] = useState(false);
   const [username, setUsername] = useState("");
   const [bankList, setBankList] = useState("");
-  console.log("BANK NAME: ", bankList)
   const [Password, setOldPassword] = useState("");
-  //
-  //
-
- 
   useEffect(() => {
     const userData = DataLocalStorage();
     const lcsBankList = JSON.parse(
@@ -237,8 +232,6 @@ function Profile() {
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
                           ธนาคาร
                         </span>
-                        {/* {bankList.length > 0 &&
-                          bankList.map((item, index) => ( */}
                         <div className="w-full flex items-center justify-center gap-x-4">
                           <span
                             className="text-primary text-left w-full max-w-40 truncate text-sm flex items-center justify-between gap-10"
@@ -257,7 +250,6 @@ function Profile() {
                             />
                           </span>
                         </div>
-                        {/* ))} */}
                       </div>
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">

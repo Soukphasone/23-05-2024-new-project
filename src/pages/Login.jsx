@@ -229,11 +229,6 @@ function Login() {
     }
   };
   const CreateUser = async () => {
-    // if (inputBank === "") {
-    //   setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
-    //   setTimeout(() => setWarningBank(""), 5000);
-    //   // return;
-    // }
     try {
       const _res = await handleRegister(
         inputFirstname,
@@ -269,54 +264,55 @@ function Login() {
   const checkBank = async () => {
     console.log("NUMBER PHONE", inputPhonenumber.length);
     if (inputBank === "") {
-        setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
-        setTimeout(() => setWarningBank(""), 5000);
-        return;
+      setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
+      setTimeout(() => setWarningBank(""), 5000);
+      return;
     }
 
     if (inputPhonenumber.length >= 13) {
-        console.log("WELCOME TO LAOS");
-        const bankCodeText = convertBankCode(bankCode);
-        const data = JSON.stringify({
-            bankCode: bankCodeText,
-            recipientAcctNo: inputBank,
-        });
+      console.log("WELCOME TO LAOS");
+      const bankCodeText = convertBankCode(bankCode);
+      const data = JSON.stringify({
+        bankCode: bankCodeText,
+        recipientAcctNo: inputBank,
+      });
 
-        const config = {
-            method: "post",
-            maxBodyLength: Infinity,
-            url: `${Constant.SERVER_URL}/check-number-account`,
-            headers: {
-                "User-Agent": "Dart/3.1 (dart:io)",
-                "Accept-Encoding": "gzip, deflate, br",
-                Connection: "close",
-                "Content-Type": "application/json",
-            },
-            data: data,
-        };
-        // console.log("DATA_BANK", data);
-        try {
-            const response = await axios.request(config);
-            // console.log("RESPON_BANK_LAOS", response.data.data);
-            if (response.data.data.respDesc !== "Success") {
-                setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
-                // console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
-                setTimeout(() => {
-                    setTextWarning("");
-                }, 5000);
-            } else {
-                console.log("RESPON_BANK_SUCCESS", response.data.data);
-                CreateUser(response.data.data.receipient);
-                console.log("THIS ACCOUNT LAOS");
-            }
-        } catch (error) {
-            console.log(error);
+      const config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `${Constant.SERVER_URL}/check-number-account`,
+        headers: {
+          "User-Agent": "Dart/3.1 (dart:io)",
+          "Accept-Encoding": "gzip, deflate, br",
+          Connection: "close",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      // console.log("DATA_BANK", data);
+      try {
+        const response = await axios.request(config);
+        // console.log("RESPON_BANK_LAOS", response.data.data);
+        if (response.data.data.respDesc !== "Success") {
+          setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
+          console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
+          setTimeout(() => {
+            setTextWarning("");
+          }, 5000);
+        } else {
+          console.log("RESPON_BANK_SUCCESS", response.data.data);
+          setInputFirstname(response.data.data.receipient);
+          CreateUser();
+          console.log("THIS ACCOUNT LAOS");
         }
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-        CreateUser();
-        console.log("THIS ACCOUNT THAILAND");
+      CreateUser();
+      console.log("THIS ACCOUNT THAILAND");
     }
-};
+  };
 
   const wrapperClass =
     activeTab === "login"
@@ -717,7 +713,7 @@ function Login() {
                           ) : (
                             <div data-v-d8556cff="" className="w-full mt-4">
                               <div className="banking-list">
-                              <div
+                                <div
                                   style={{ opacity: bankCode === 1 ? 1 : 0.5 }}
                                   className={
                                     bankCode === 1 ? "active-bank" : ""

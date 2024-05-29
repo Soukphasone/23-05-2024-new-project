@@ -19,6 +19,7 @@ module.exports = {
   GAME_LIST: "/game-list",
   WHEEL: "/lobby/bag/wheel",
   AFFILIATE: "/lobby/bag/affiliate",
+  TOKEN_EXPIRE: "TOX_LOBBY_TOKEN_EXPIRE",
   LOGIN_TOKEN_DATA: "TOX_LOBBY_TOKEN",
   LOGIN_USER_DATA: "TOX_LOBBY_DATA",
   DATA_PROFILE: "DATA_PROFILE",

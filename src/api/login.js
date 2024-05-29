@@ -75,7 +75,6 @@ const LoginController = () => {
 	}
 	// ==================> handleRegister <=================
 	const handleRegister = async (
-
 		inputFirstname,
 		inputLastname,
 		inputPhonenumber,

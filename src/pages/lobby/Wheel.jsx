@@ -51,7 +51,7 @@ function Wheel() {
   };
 
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
+    <div className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -64,7 +64,7 @@ function Wheel() {
               className="w-full mx-auto base-container pb-2"
             >
               <div
-                style={{ marginTop: "4rem" }}
+                style={{ marginTop: "5rem" }}
                 data-v-6307fb48=""
                 className="base-container-small flex flex-col justify-center"
               >
@@ -139,7 +139,7 @@ function Wheel() {
           </main>
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 

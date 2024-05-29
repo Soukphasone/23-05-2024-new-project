@@ -70,7 +70,7 @@ function Bag() {
     }
   };
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
+    <div className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -1054,7 +1054,7 @@ function Bag() {
           />,
           document.body
         )}
-    </body>
+    </div>
   );
 }
 

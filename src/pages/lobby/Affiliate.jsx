@@ -7,7 +7,6 @@ import axios from "axios";
 function Affiliate() {
   const history = useHistory();
   const dataFromLogin = history?.location?.state;
-  // console.log("DATA_LG", dataFromLogin)
   const [dataOverview, setDataOverview] = useState([]);
   const [dataOverviewYears, setDataOverviewYears] = useState([]);
   const [tabNameAffiliate, setTabNameAffiliate] = useState("overview");
@@ -148,7 +147,7 @@ function Affiliate() {
               className="w-full mx-auto base-container pb-2"
             >
               <div
-                style={{ marginTop: "4rem" }}
+                style={{ marginTop: "5rem" }}
                 data-v-6307fb48=""
                 className="base-container-small flex flex-col justify-center"
               >
