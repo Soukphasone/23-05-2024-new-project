@@ -1181,7 +1181,7 @@ function Login() {
                             </div>
                           )}
                         </div>
-                        <div
+                        {/* <div
                           data-v-cbca53d4=""
                           class="flex w-full mt-4 justify-center"
                         >
@@ -1203,7 +1203,7 @@ function Login() {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

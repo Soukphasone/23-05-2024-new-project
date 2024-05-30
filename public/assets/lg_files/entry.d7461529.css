@@ -31978,9 +31978,9 @@ ul {
         justify-content: center
     }
 
-    .\<sm\:justify-around {
+    /* .\<sm\:justify-around {
         justify-content: space-around
-    }
+    } */
 
     .\<sm\:font-normal {
         font-weight: 400
@@ -32338,6 +32338,14 @@ ul {
 @media (max-width: 480px) {
     .percentage {
         font-size: 9px;
+    }
+}
+@media (max-width: 400px) {
+    .max-w-\[200px\] {
+        max-width: 150px;
+    }
+    .max-h-\[80px\] {
+        height: 80px;
     }
 }
 
