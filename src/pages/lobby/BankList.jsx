@@ -8,7 +8,6 @@ function BankList() {
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
- 
   const _copyText = (text) => {
     navigator.clipboard.writeText(text);
     showSuccessAlert("คัดลอกสำเร็จ");

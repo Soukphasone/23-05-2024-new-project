@@ -682,7 +682,6 @@ function Login() {
                                   </span>
                                 </div>
                                 <div
-                                  // style={{ marginBottom: "17px" }}
                                   onClick={() => _clickNextStep()}
                                   data-v-d8556cff=""
                                 >
@@ -1157,7 +1156,6 @@ function Login() {
                                 </button>
                                 <div style={{ width: "10px" }} />
                                 <button
-                                  // onClick={() => CreateUser()}
                                   onClick={() => checkBank()}
                                   data-v-9dec3a92=""
                                   data-v-d8556cff=""
@@ -1181,7 +1179,7 @@ function Login() {
                             </div>
                           )}
                         </div>
-                        <div
+                        {/* <div
                           data-v-cbca53d4=""
                           class="flex w-full mt-4 justify-center"
                         >
@@ -1203,7 +1201,7 @@ function Login() {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
