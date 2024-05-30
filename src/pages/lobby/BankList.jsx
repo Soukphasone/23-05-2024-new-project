@@ -9,9 +9,23 @@ function BankList() {
   const history = useHistory();
   const banklist = history?.location?.state;
 
-  const _copyText = (text) => {
-    navigator.clipboard
-      .writeText(text)
+  const _copyText = async (text) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText('text');
+        showSuccessAlert("คัดลอกสำเร็จ");
+
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+    } else {
+      console.error('Clipboard API not available');
+    }
+
+
+    console.log("text:: ", text)
+    navigator.clipboard.writeText(text)
+
       .then(() => {
         showSuccessAlert("คัดลอกสำเร็จ");
       })
@@ -132,9 +146,8 @@ function BankList() {
                             <div className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center">
                               <span className="nuxt-icon text-[2.4rem] text-white">
                                 <img
-                                  src={`/assets/images/bank/${
-                                    banklist && banklist?.s_icon
-                                  }`}
+                                  src={`/assets/images/bank/${banklist && banklist?.s_icon
+                                    }`}
                                   width="512"
                                   height="512"
                                 />
