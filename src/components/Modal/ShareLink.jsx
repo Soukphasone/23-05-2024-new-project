@@ -1,10 +1,16 @@
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 function ShareLink({ closeModal, dataFromLogin }) {
+  
   const _copyText = (text) => {
-    navigator.clipboard.writeText(text);
-    showSuccessAlert("คัดลอกสำเร็จ");
-    closeModal("close");
-
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        showSuccessAlert("คัดลอกสำเร็จ");
+        closeModal("close")
+      })
+      .catch((err) => {
+        showErrorAlert("คัดลอกไม่สำเร็จ");
+      });
   };
   return (
     <div
