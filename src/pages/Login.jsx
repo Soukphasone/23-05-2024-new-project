@@ -325,7 +325,7 @@ function Login() {
       ? "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full active"
       : "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full";
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary">
+    <div className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
         <div data-v-19df7d63="">
           <header data-v-19df7d63="" className="w-full z-10">
@@ -1213,7 +1213,7 @@ function Login() {
           </main>
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 

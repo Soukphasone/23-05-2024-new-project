@@ -2,26 +2,34 @@ import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
-import { showSuccessAlert } from "../../helper/SweetAlert";
+import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 function BankList() {
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
- 
+
   const _copyText = (text) => {
-    navigator.clipboard.writeText(text);
-    showSuccessAlert("คัดลอกสำเร็จ");
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        showSuccessAlert("คัดลอกสำเร็จ");
+      })
+      .catch((err) => {
+        showErrorAlert("คัดลอกไม่สำเร็จ");
+      });
   };
   const Back = () => {
     history.push(Constant.DEPOSIT);
   };
-  const UploadSleep=()=>{
+  const UploadSleep = () => {
     history.push(Constant.UPLOAD_SLIP, banklist);
-
-  }
+  };
   return (
-    <div className="overflow-x-hidden overflow-y-auto text-primary" style={{zIndex:'-10'}}>
+    <div
+      className="overflow-x-hidden overflow-y-auto text-primary"
+      style={{ zIndex: "-10" }}
+    >
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -42,22 +50,22 @@ function BankList() {
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
-                  <div style={{display:'flex'}}>
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
-                  >
-                    <img
-                      src="/assets/images/icons/icon-arrow-left.png"
-                      alt="arrow-lft"
-                    />
-                  </span>
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
-                  >
-                    <p>ย้อนกลับ</p>
-                  </span>
+                  <div style={{ display: "flex" }}>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <img
+                        src="/assets/images/icons/icon-arrow-left.png"
+                        alt="arrow-lft"
+                      />
+                    </span>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <p>ย้อนกลับ</p>
+                    </span>
                   </div>
                 </div>
                 <div className="p-4 rounded-base space-y-4 bg-[var(--card-primary)]">
@@ -70,7 +78,7 @@ function BankList() {
                         <div
                           data-v-ea58f736=""
                           className="w-full absolute bottom-0 left-0 rounded-full slide depositTab"
-                          style={{ width: "100%"}}
+                          style={{ width: "100%" }}
                         ></div>
                         <div
                           data-v-ea58f736=""
@@ -93,7 +101,10 @@ function BankList() {
                   </div>
                   <div>
                     <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2">
-                      <p className="text-danger text-lg font-bold" style={{textAlign:'center', width:'100%'}}>
+                      <p
+                        className="text-danger text-lg font-bold"
+                        style={{ textAlign: "center", width: "100%" }}
+                      >
                         เติมเงินขั้นต่ำ 1 บาท
                       </p>
                       <span className="nuxt-icon nuxt-icon--fill text-danger">
@@ -118,12 +129,8 @@ function BankList() {
                             บัญชีที่ต้องโอน:{" "}
                           </p>
                           <div className="w-[45px] h-[45px] mt-4 text-white">
-                            <div
-                              className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center"
-                            >
-                              <span
-                                className="nuxt-icon text-[2.4rem] text-white"
-                              >
+                            <div className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center">
+                              <span className="nuxt-icon text-[2.4rem] text-white">
                                 <img
                                   src={`/assets/images/bank/${
                                     banklist && banklist?.s_icon
@@ -163,8 +170,9 @@ function BankList() {
                   </div>
                   <div>
                     <div
-                     onClick={UploadSleep}
-                     className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2">
+                      onClick={UploadSleep}
+                      className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2"
+                    >
                       <div
                         style={{
                           width: "100%",

@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import ChangePassword from "../../components/Modal/ChangePassword";
 import { createPortal } from "react-dom";
 import { DataLocalStorage } from "../../helper";
-import { showSuccessAlert } from "../../helper/SweetAlert";
+import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
@@ -22,8 +22,11 @@ function Profile() {
     setOldPassword(userData?.password);
   }, []);
   const _copyText = (text) => {
-    navigator.clipboard.writeText(text);
-    showSuccessAlert("คัดลอกสำเร็จ");
+    navigator.clipboard.writeText(text).then(() => {
+      showSuccessAlert("คัดลอกสำเร็จ");
+    }).catch(err => {
+     showErrorAlert("คัดลอกไม่สำเร็จ")
+    });
   };
   const handleButtonClick1 = () => {
     setOpenModal(false);
@@ -44,7 +47,7 @@ function Profile() {
       ? "tabslinks relative cursor-pointer flex items-center justify-center bankInfo w-full active"
       : "tabslinks relative cursor-pointer flex items-center justify-center bankInfo w-full";
   return (
-    <body className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
+    <div className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
         <div data-v-3c88d514="">
           <Header />
@@ -56,7 +59,6 @@ function Profile() {
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
-              {/* <Letter_slide /> */}
               <div
                 style={{ marginTop: "6rem" }}
                 className="animate__animated max-w-[420px] mx-auto animate__fadeIn"
@@ -288,7 +290,7 @@ function Profile() {
           />,
           document.body
         )}
-    </body>
+    </div>
   );
 }
 export default Profile;
