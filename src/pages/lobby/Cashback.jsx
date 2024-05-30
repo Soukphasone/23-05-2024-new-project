@@ -54,7 +54,7 @@ function Cashback() {
     try {
       const _res = await axios({
         method: "post",
-        url: `${Constant.SERVER_URL}/Affiliate/Receive`,
+        url: `${Constant.SERVER_URL}/Cashback/Receive`,
         data: {
           s_agent_code: dataFromLogin?.agent,
           s_username: dataFromLogin?.username,

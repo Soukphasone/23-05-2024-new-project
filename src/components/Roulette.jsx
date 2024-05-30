@@ -48,13 +48,13 @@ const Roulette = ({
         eventCode: eventCode,
       },
     });
-    console.log("RANDOM_RESPON", _res)
+    // console.log("RANDOM_RESPON", _res)
     if (_res.data.statusCode === 0) {
       setCurrentPoint(_res?.data?.data?.currentPoint);
       setNotCurrentPoint(_res?.data?.data?.day);
       setTimeout(() => {
         setOutputSpin(rouletteData[prizeNumber].completeOption);
-      }, 2000);
+      }, 3000);
     } else {
       showErrorAlert(_res.data.statusDesc);
     }

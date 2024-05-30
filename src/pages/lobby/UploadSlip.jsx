@@ -19,7 +19,6 @@ function Upslip() {
   const [promotionCode, setPromotionCode] = useState("");
   const [errorTextUploadSlip, setErrorTextUploadSlip] = useState("");
   const [file, setFile] = useState(null);
-
   useEffect(() => {
     _getBankAgentCode();
   }, [banklist]);
@@ -27,20 +26,18 @@ function Upslip() {
   const Back = () => {
     history.push(Constant.BANK_LIST, banklist);
   };
-
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
-
   const uploadFile = async () => {
     if (!file) return;
-
     const _URL = window.URL || window.webkitURL;
     const url = _URL.createObjectURL(file);
     const imgData = await uploadSlip(url);
     document.getElementById("fileslip").value = "";
     if (imgData != null) {
       try {
+        console.log(dataFromLogin?.username);
         const response = await axios.post(
           `${Constant.SERVER_URL}/Deposit/Slip`,
           {
@@ -53,15 +50,8 @@ function Upslip() {
             s_prm_code: promotionCode,
           }
         );
-        console.log("response: ", response);
-        setErrorTextUploadSlip(response?.data?.statusDesc);
-        notify(response.data);
-        showSuccessAlert('สำเร็จ')
-      } catch (error) {
-        showErrorAlert("เกิดข้อผิดพลาด")
-      }
-    } else {
-      notify({ statusDesc: "Failed to read QR code" });
+        showErrorAlert(response?.data?.statusDesc);
+      } catch (error) {}
     }
   };
 
@@ -140,7 +130,6 @@ function Upslip() {
       .request(config)
       .then((response) => {
         setBankAgentCode(response.data.decrypt);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -264,9 +253,7 @@ function Upslip() {
                         id="btn01"
                         type="submit"
                         disabled={
-                          file === null|| promotionCode === ""
-                            ? true
-                            : false
+                          file === null || promotionCode === "" ? true : false
                         }
                         className="base-button-wrapper v-rounded btn-primary btn-md mt-4 font-medium text-base cursor-pointer border border-fontPrimary w-full rounded-base btn-primary h-[38px] flex items-center justify-center"
                       >
@@ -278,6 +265,7 @@ function Upslip() {
                         </div>
                       </button>
                     </div>
+                    {errorTextUploadSlip}
                   </div>
                 </div>
               </div>

@@ -2,8 +2,10 @@ import React from "react";
 import axios from "axios";
 import Constant from "../../constant";
 import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
+import { useHistory } from "react-router-dom";
 
 function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
+  const history = useHistory();
   const apoverPromotion = async () => {
     try {
       const _resAppover = await axios.post(
@@ -18,17 +20,17 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
         }
       );
       if (_resAppover?.data?.statusCode === 0) {
-        showSuccessAlert("รายการสำเร็จ");
-        return
+        showSuccessAlert("รับโปรโมชั่นสำเร็จ");
+        history.push(Constant.DEPOSIT);
+        return;
       }
       showErrorAlert(_resAppover?.data?.statusDesc);
     } catch (error) {
-      showErrorAlert("รายการไม่สำเร็จ");
+      showErrorAlert("ทำรายการไม่สำเร็จ");
     }
   };
   return (
     <div
-    
       className="vfm vfm--fixed vfm--inset modal-top"
       onClick={(e) => {
         if (e.target.className === "vfm vfm--fixed vfm--inset modal-top") {
@@ -39,17 +41,21 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
       aria-modal="true"
       id="see-promotion-modal"
       title=""
-      style={{ Zindex: "10000", marginTop:'4rem'}}
+      style={{ Zindex: "10000", marginTop: "4rem" }}
     >
       <div
         className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
         aria-hidden="true"
       ></div>
-      <div className="vfm__content vfm--outline-none absolute inset-0" tabindex="0">
-        <div style={{overflowY:'scroll'}}
-        className="absolute inset-0 h-full overflow-hidden overflow-y-auto">
-          <div 
-          className="modal-top-body flex flex-col max-w-[540px] my-12 mx-auto p-4 rounded-lg relative &lt;sm:mx-4">
+      <div
+        className="vfm__content vfm--outline-none absolute inset-0"
+        tabindex="0"
+      >
+        <div
+          style={{ overflowY: "scroll" }}
+          className="absolute inset-0 h-full overflow-hidden overflow-y-auto"
+        >
+          <div className="modal-top-body flex flex-col max-w-[540px] my-12 mx-auto p-4 rounded-lg relative &lt;sm:mx-4">
             <span
               className="nuxt-icon nuxt-icon--fill absolute bg-[red] top-[-10px] right-[-10px] text-sm p-2 rounded-full z-10 text-xs cursor-pointer"
               v-if="true"
@@ -104,12 +110,9 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                       <p>&nbsp;</p>
                       <p>
                         🎀 ฝาก {dataPromotion?.f_max_amount} รับ{" "}
-                        {dataPromotion?.f_percen}{" "}
-                        🎀
+                        {dataPromotion?.f_percen} 🎀
                       </p>
-                      <p>
-                        🌈 จำกัด {dataPromotion?.i_per_day} ครั้ง/วัน 🌈
-                      </p>
+                      <p>🌈 จำกัด {dataPromotion?.i_per_day} ครั้ง/วัน 🌈</p>
                     </span>
                   </div>
                 }
@@ -122,7 +125,10 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
               type="submit"
               className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
             >
-              <div data-v-9dec3a92="" className="flex justify-center items-center">
+              <div
+                data-v-9dec3a92=""
+                className="flex justify-center items-center"
+              >
                 กดรับ
               </div>
             </button>

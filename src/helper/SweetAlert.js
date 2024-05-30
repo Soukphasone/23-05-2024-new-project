@@ -6,7 +6,7 @@ export const showErrorAlert = (message) => {
         icon: "error",
         title: message,
         showConfirmButton: false,
-        timer: 2000,
+        timer: 3000,
         background: 'var(--card-primary)',
         color: "#FFF",
     });

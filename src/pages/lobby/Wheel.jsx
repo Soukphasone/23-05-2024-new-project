@@ -144,7 +144,7 @@ function Wheel() {
                     </p>
                     <div
                       style={{
-                        color: "#FFE1A6",
+                        color: "red",
                         fontWeight: 500,
                         fontSize: 16,
                         textDecoration: "underline",
@@ -152,7 +152,7 @@ function Wheel() {
                     >
                       รายละเอียด
                     </div>
-                    <div style={{color:'red'}}>
+                    <div style={{color:'#FFE1A6'}}>
                     <p style={{ margin: "none", }}>
                       - หมุนวงล้อได้ทั้งหมด {limitSpinWheel?.i_max} ครั้ง
                     </p>

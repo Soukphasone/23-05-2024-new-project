@@ -1,24 +1,24 @@
 import React, { useEffect} from 'react';
 import { Route } from "react-router-dom";
 import { DataLocalStorage, TokenLocalStorage, LogoutClearLocalStorage} from "../helper";
-import { CheckTokenExpire } from "../api/getdatauser.js";
+// import { CheckTokenExpire } from "../api/getdatauser.js";
 import { useHistory } from "react-router-dom";
 import Constant from "../constant"
 import { isSessionExpired } from '../utils/sessionCheck';
 function PrivateRoute({ component: Component, headerTitle, ...rest }) {
   const History = useHistory();
-  const _token = TokenLocalStorage()
+  const sessionExpireDate = localStorage.getItem(Constant.TOKEN_EXPIRE);
   const isAuthenticated = DataLocalStorage();
   useEffect(() => {
     const getTokenExpire = async () => {
-      const sessionExpireDate = await CheckTokenExpire(_token);
+      // const sessionExpireDate = await CheckTokenExpire(_token);
     if (isSessionExpired(sessionExpireDate)) {
       LogoutClearLocalStorage();
     }else{
     }
     };
     getTokenExpire();
-  }, [_token]);
+  }, [sessionExpireDate]);
   if (!isAuthenticated) {
     History.push(Constant.LOGIN);
     return <div></div>;
