@@ -1,17 +1,16 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import {useRouteMatch, useHistory } from "react-router-dom";
 import { BackList } from "../constant/bankList";
 import Select from "react-select";
 import _LoginController from "../api/login";
-import { useHistory } from "react-router-dom";
 import { showErrorAlert, showSuccessAlert } from "../helper/SweetAlert";
 import { convertBankCode } from "../helper";
 import Constant from "../constant";
 
 function Login() {
   const history = useHistory();
-  const { data } = useParams();
+  const routeMatch = useRouteMatch();
   // bank account
   const { handleLogin, handleRegister } = _LoginController();
   const [bankCode, setBankCode] = useState(0);
@@ -27,7 +26,7 @@ function Login() {
   const [warningPassword, setWarningPassword] = useState("");
   const [warningFirstName, setWarningFirstName] = useState("");
   const [warningLastName, setWarningLastName] = useState("");
-  const [activeTab, setActiveTab] = useState("login");
+  const [activeTab, setActiveTab] = useState(routeMatch?.params?.route);
   const [warningPhone, setWarningPhone] = useState("");
   const [typePhone, setTypePhone] = useState("TH");
   const [selectedOption, setSelectedOption] = useState("เบอร์โทรศัพท์ไทย");
@@ -250,10 +249,13 @@ function Login() {
   };
   const handleLoginTab = (event) => {
     event.preventDefault();
+    history.push("/register")
+
     setActiveTab("login");
   };
   const handleRegisterTab = (event) => {
     event.preventDefault();
+    history.push("/register")
     setActiveTab("register");
   };
 
@@ -262,7 +264,6 @@ function Login() {
   });
 
   const checkBank = async () => {
-    console.log("NUMBER PHONE", inputPhonenumber.length);
     if (inputBank === "") {
       setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
       setTimeout(() => setWarningBank(""), 5000);
@@ -270,7 +271,6 @@ function Login() {
     }
 
     if (inputPhonenumber.length >= 13) {
-      console.log("WELCOME TO LAOS");
       const bankCodeText = convertBankCode(bankCode);
       const data = JSON.stringify({
         bankCode: bankCodeText,
@@ -341,7 +341,7 @@ function Login() {
                   <img
                     data-v-d8556cff=""
                     className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
-                    src="/assets/images/logoweb/logoweb.jpg"
+                    src="/assets/images/logoweb/live88.png"
                     alt="center menu"
                   />
                   <div

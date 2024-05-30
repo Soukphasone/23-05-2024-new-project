@@ -2,10 +2,10 @@ module.exports = {
   AGENT_CODE: "AG019",
   SERVER_URL:
     "https://2ov8dxycl0.execute-api.ap-southeast-1.amazonaws.com/api/v1",
-  LOGIN: "/login",
+  LOGIN: "/:route",
   PAGE_LOGIN_CAN_LOGIN_PLAY: "/api/v1/Authen/Token",
   // AFTER_LOGIN: "/lobby",
-  AFTER_LOGIN: "/",
+  AFTER_LOGIN: "/lobby/home",
   TYPE_GAME: "/lobby/type-game",
   PROFILE: "/lobby/profile",
   PROMOTION: "/lobby/promotion",

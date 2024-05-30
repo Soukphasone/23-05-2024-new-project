@@ -21,12 +21,17 @@ function Profile() {
     setBankList(lcsBankList);
     setOldPassword(userData?.password);
   }, []);
-  const _copyText = (text) => {
-    navigator.clipboard.writeText(text).then(() => {
-      showSuccessAlert("คัดลอกสำเร็จ");
-    }).catch(err => {
-     showErrorAlert("คัดลอกไม่สำเร็จ")
-    });
+  const _copyText = async (text) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText('text');
+        showSuccessAlert("คัดลอกสำเร็จ");
+      } catch (err) {
+      }
+    } else {
+        showErrorAlert("คัดลอกไม่สำเร็จ");
+    }
+
   };
   const handleButtonClick1 = () => {
     setOpenModal(false);
