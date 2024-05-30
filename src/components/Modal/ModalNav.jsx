@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import Constant from "../../constant";
 import { LogoutClearLocalStorage, DataLocalStorage } from "../../helper";
 import { showConfirmationAlert } from "../../helper/SweetAlert";
+import { useHistory } from "react-router-dom";
 function Modal({ closeModal }) {
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [contactUs, setContactUs] = useState("");
   const [logoweb, setLogoweb] = useState("");
 
   useEffect(() => {
     const userData = DataLocalStorage();
-    const _configLobby = JSON.parse(localStorage.getItem(Constant.CONFIG_LOBBY));
+    const _configLobby = JSON.parse(
+      localStorage.getItem(Constant.CONFIG_LOBBY)
+    );
 
     if (userData && _configLobby) {
       setUsername(userData?.username);
@@ -19,8 +23,8 @@ function Modal({ closeModal }) {
   }, []);
   const LogOut = () => {
     showConfirmationAlert(() => {
-    LogoutClearLocalStorage();
-  });
+      LogoutClearLocalStorage();
+    });
   };
   const NextToProfile = () => {
     window.location = Constant.PROFILE;

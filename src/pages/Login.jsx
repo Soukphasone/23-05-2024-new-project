@@ -249,8 +249,7 @@ function Login() {
   };
   const handleLoginTab = (event) => {
     event.preventDefault();
-    history.push("/register")
-
+    history.push("/login")
     setActiveTab("login");
   };
   const handleRegisterTab = (event) => {

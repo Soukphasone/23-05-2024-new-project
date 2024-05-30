@@ -167,6 +167,7 @@ const LoginController = () => {
 			});
 			if (data?.statusCode === 0) {
 				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, data.data.token);
+				localStorage.setItem(Constant.TOKEN_EXPIRE, data.data.d_session_expire);
 				localStorage.setItem(Constant.DATA_PROFILE, JSON.stringify(data?.data?.info?.profile))
 				localStorage.setItem(Constant.DATA_BANK_LIST, JSON.stringify(data?.data?.info?.bankList))
 				localStorage.setItem(Constant.DATA_PROMOTION, JSON.stringify(data?.data?.info?.promotionList))
