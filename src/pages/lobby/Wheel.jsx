@@ -5,22 +5,26 @@ import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { useHistory } from "react-router-dom";
 import Roulette from "../../components/Roulette";
-import { showSuccessAlert } from "../../helper/SweetAlert";
+import { showPopupLucky } from "../../helper/SweetAlert";
+import { DataUser } from "../../api/getdatauser";
 
 function Wheel() {
   const history = useHistory();
-  const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataSpinWheel, setDataSpinWheel] = useState([]);
   const [limitSpinWheel, setLimitSpinWheel] = useState({});
   const [outputSpin, setOutputSpin] = useState("");
-  const [currentPoint, setCurrentPoint] = useState({});
+  const [currentPoint, setCurrentPoint] = useState("");
+  const [notCurrentPoint, setNotCurrentPoint] = useState(0);
+  const [username, setUsername] = useState("");
+  const [agent, setAgent] = useState("");
   const Back = () => {
     history.push(Constant.BAG);
   };
   useEffect(() => {
     const userData = DataLocalStorage();
     if (userData) {
-      setDataFromLogin(userData);
+      setUsername(userData?.username);
+      setAgent(userData?.agent);
     }
     getSpinWheel();
   }, []);
@@ -51,14 +55,21 @@ function Wheel() {
       });
   };
   useEffect(() => {
-    if (!outputSpin) return;
-    if (outputSpin !== undefined || outputSpin !== "" || outputSpin === null) {
-      _ShowpopupSpin();
+    _getData();
+  }, [username]);
+  useEffect(() => {
+    if (outputSpin) {
+      showPopupLucky("ได้รับ" + outputSpin);
+      _getData();
     }
   }, [outputSpin]);
-
-  const _ShowpopupSpin = () => {
-    showSuccessAlert(outputSpin);
+  const _getData = async () => {
+    try {
+      const data = await DataUser({ agent, username });
+      setCurrentPoint(data?.cevent);
+    } catch (error) {
+    } finally {
+    }
   };
 
   return (
@@ -106,24 +117,29 @@ function Wheel() {
                   data-v-6307fb48=""
                   className="cash-back-content border border-primary bg-card-primary card-wrapper gap-y-2 w-full flex flex-col justify-center items-center"
                 >
-                  <h1>วงล้อลุ้นโชค</h1>
+                  <h1
+                    style={{ color: "#FFE1A6", fontWeight: 500, fontSize: 19 }}
+                  >
+                    วงล้อลุ้นโชค
+                  </h1>
                   <span
                     style={{ width: "100%", textAlign: "left" }}
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                    <p>แต้มทั้งหมด: {currentPoint?.currentPoint}</p>
+                    <p>แต้มทั้งหมด: {currentPoint || 0}</p>
                   </span>
                   {dataSpinWheel.length > 0 && (
                     <Roulette
                       data={dataSpinWheel}
                       setOutputSpin={setOutputSpin}
-                      username={dataFromLogin?.username}
+                      username={username}
                       setCurrentPoint={setCurrentPoint}
+                      setNotCurrentPoint={setNotCurrentPoint}
                     />
                   )}
                   <div style={{ width: "100%", textAlign: "left" }}>
-                    <p style={{ margin: "none", marginTop: 10 }}>
+                    <p style={{ margin: "none", marginTop: 10, color: "#09FF2B" }}>
                       เครดิตกงล้อ : {outputSpin}
                     </p>
                     <div
@@ -136,14 +152,19 @@ function Wheel() {
                     >
                       รายละเอียด
                     </div>
-                    <p style={{ margin: "none" }}>
-                      หมุนวงล้อได้ทั้งหมด {limitSpinWheel?.i_max} ครั้ง
-                      ใช้สิทธิไปแล้ว 3 ครั้ง
+                    <div style={{color:'red'}}>
+                    <p style={{ margin: "none", }}>
+                      - หมุนวงล้อได้ทั้งหมด {limitSpinWheel?.i_max} ครั้ง
                     </p>
                     <p style={{ margin: "none" }}>
-                      ภายในวันสามารถใข้สิทธิได้ {limitSpinWheel?.i_per_day}{" "}
+                      {" "}
+                      - ใช้สิทธิไปแล้ว {notCurrentPoint} ครั้ง
+                    </p>
+                    <p style={{ margin: "none" }}>
+                      - ภายในวันสามารถใข้สิทธิได้ {limitSpinWheel?.i_per_day}{" "}
                       ครั้ง
                     </p>
+                    </div>
                   </div>
                 </div>
               </div>

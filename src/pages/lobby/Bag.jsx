@@ -36,7 +36,7 @@ function Bag() {
     history.push(Constant.CASH_BACK);
   };
   const NextoWheel = () => {
-    history.push(Constant.WHEEL);
+    window.location = (Constant.WHEEL);
   };
   const NextoAffiliate = () => {
     history.push(Constant.AFFILIATE, dataFromLogin);

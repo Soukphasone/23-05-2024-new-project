@@ -6,7 +6,6 @@ import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
-
 function Withdraw() {
   const history = useHistory();
   const bank = "BANK";

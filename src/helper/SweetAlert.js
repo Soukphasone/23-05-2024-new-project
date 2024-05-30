@@ -17,6 +17,16 @@ export const showSuccessAlert = (message) => {
         icon: "success",
         title: message,
         showConfirmButton: false,
+        timer: 2000,
+        background: 'var(--card-primary)',
+        color: '#FFF'
+    });
+};
+export const showPopupLucky = (message) => {
+    Swal.fire({
+        icon: "success",
+        title: message,
+        showConfirmButton: false,
         timer: 3000,
         background: 'var(--card-primary)',
         color: '#FFF'
@@ -34,7 +44,6 @@ export const showConfirmationAlert = (onConfirm) => {
         cancelButtonText: 'ยกเลิก',
         confirmButtonText: 'ยืนยัน',
         didOpen: () => {
-            // Remove focus from both buttons
             Swal.getConfirmButton().blur();
             Swal.getCancelButton().blur();
         }
