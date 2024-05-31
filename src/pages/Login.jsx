@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import axios from "axios";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { BackList } from "../constant/bankList";
@@ -8,8 +8,6 @@ import _LoginController from "../api/login";
 import { showErrorAlert, showSuccessAlert } from "../helper/SweetAlert";
 import { convertBankCode } from "../helper";
 import Constant from "../constant";
-import { Dropdown } from "react-bootstrap";
-
 
 function Login() {
   const history = useHistory();
@@ -40,10 +38,18 @@ function Login() {
   const [warningPasswordLg, setWarningPasswordLg] = useState("");
   //bank
   const [textWarning, setTextWarning] = useState(false);
-  const [backgroundDropdown, setBackgroundDropdown] = useState('#FFF');
+  const [backgroundDropdown, setBackgroundDropdown] = useState("#6A6A6A");
   const [bankCode, setBankCode] = useState(0);
+  //Select dropdown
+  const [isActive, setIsActive] = useState(false);
+  const dropdownRef = useRef(null);
+  const toggleDropdown = () => {
+    setIsActive(!isActive);
+  };
 
-
+  const handleBlur = () => {
+    setIsActive(false);
+  };
 
   const _clickNextStep = () => {
     if (
@@ -67,13 +73,6 @@ function Login() {
     }
   };
   //handle bank
-
-  const _handlecheckphone = useCallback((event) => {
-    const re = /^[0-9\b]+$/;
-    if (event.target.value === "" || re.test(event.target.value)) {
-      setInputBank(event?.target?.value);
-    }
-  });
   const options = [
     {
       value: "เบอร์โทรศัพท์ไทย",
@@ -255,12 +254,12 @@ function Login() {
   };
   const handleLoginTab = (event) => {
     event.preventDefault();
-    history.push("/login")
+    history.push("/login");
     setActiveTab("login");
   };
   const handleRegisterTab = (event) => {
     event.preventDefault();
-    history.push("/register")
+    history.push("/register");
     setActiveTab("register");
   };
 
@@ -298,15 +297,15 @@ function Login() {
         const response = await axios.request(config);
         if (response.data.data.respDesc !== "Success") {
           setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
-          console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
+          // console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
           setTimeout(() => {
             setTextWarning("");
           }, 5000);
         } else {
-          console.log("RESPON_BANK_SUCCESS", response.data.data);
+          // console.log("RESPON_BANK_SUCCESS", response.data.data);
           setInputFirstname(response.data.data.receipient);
           CreateUser();
-          console.log("THIS ACCOUNT LAOS");
+          // console.log("THIS ACCOUNT LAOS");
         }
       } catch (error) {
         console.log(error);
@@ -330,19 +329,18 @@ function Login() {
       ? "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full active"
       : "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full";
 
-  const [bankNameOption, setBankNameOption] = useState('เลือกธนาคาร');
+  const [bankNameOption, setBankNameOption] = useState("เลือกธนาคาร");
 
   const handleSelectBank = (event) => {
-    setBankCode(event?.code)
-    setBankNameOption(event?.bankName)
-    setBackgroundDropdown(event?.backgroundColor)
-  }
+    setBankCode(event?.code);
+    setBankNameOption(event?.bankName);
+    setBackgroundDropdown(event?.backgroundColor);
+  };
   const _selectImageBank = (bank) => {
-    setBankCode(bank?.code)
-    setBankNameOption(bank?.bankName)
-    setBackgroundDropdown(bank?.backgroundColor)
-
-  }
+    setBankCode(bank?.code);
+    setBankNameOption(bank?.bankName);
+    setBackgroundDropdown(bank?.backgroundColor);
+  };
 
   return (
     <div className="overflow-x-hidden overflow-y-auto text-primary">
@@ -361,7 +359,7 @@ function Login() {
                   <img
                     data-v-d8556cff=""
                     className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
-                    src="/assets/images/logoweb/live88.png"
+                    src="/assets/images/logoweb/shunslot-logo.jpg"
                     alt="center menu"
                   />
                   <div
@@ -567,7 +565,7 @@ function Login() {
                                             src={image}
                                             alt={label}
                                             style={{
-                                              width: 30,
+                                              width: 40,
                                               marginRight: 10,
                                             }}
                                           />
@@ -597,8 +595,8 @@ function Login() {
                                           ? phoneCheck
                                           : ""
                                         : inputPhonenumber.length < 13
-                                          ? phoneCheck
-                                          : ""
+                                        ? phoneCheck
+                                        : ""
                                       : ""}
                                   </span>
                                 </div>
@@ -702,7 +700,6 @@ function Login() {
                                   </span>
                                 </div>
                                 <div
-                                  // style={{ marginBottom: "17px" }}
                                   onClick={() => _clickNextStep()}
                                   data-v-d8556cff=""
                                 >
@@ -730,324 +727,26 @@ function Login() {
                             </div>
                           ) : (
                             <div data-v-d8556cff="" className="w-full mt-4">
-                              {/* <div className="banking-list">
-                                <div
-                                  style={{ opacity: bankCode === 1 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 1 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(1)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/scb2.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 2 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 2 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(2)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/kbank1.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 3 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 3 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(3)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/ktb3.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 4 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 4 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(4)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/bbl4.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 5 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 5 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(5)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/bay5.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 6 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 6 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(6)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/tmb6.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 8 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 8 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(8)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/gsb8.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 10 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 10 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(10)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/uob10.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 11 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 11 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(11)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/kk11.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 12 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 12 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(12)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/lh12.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 13 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 13 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(13)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/ibank13.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 14 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 14 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(14)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/tisco14.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                
-                                <div
-                                  style={{ opacity: bankCode === 18 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 18 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(18)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/baac18.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 19 ? 1 : 0.5 }}
-                                >
-                                  <img
-                                    onClick={() => setBankCode(19)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/icbc19.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 20 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 20 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(20)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/bank/jdb.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 21 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 21 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(21)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/bank/lvb.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 22 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 22 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(22)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/idb1.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 23 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 23 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(23)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/bank/stb.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 24 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 24 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(24)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/apb.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 25 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 25 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(25)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/bank/ldb.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div
-                                  style={{ opacity: bankCode === 26 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 26 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(26)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/bank/bcel.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div>
-                              </div> */}
-                              <div className="banking-list">
+                              <div
+                                className="banking-list"
+                                style={{
+                                  width: "100%",
+                                  textAlign: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
                                 {NewBackList?.map((bank) => (
-                                  <div style={{ opacity: bankCode === bank?.code ? 1 : 0.5 }} className={bankCode === bank?.code ? "active-bank" : ""}>
+                                  <div
+                                    style={{
+                                      opacity:
+                                        bankCode === bank?.code ? 1 : 0.5,
+                                    }}
+                                    className={
+                                      bankCode === bank?.code
+                                        ? "active-bank"
+                                        : ""
+                                    }
+                                  >
                                     <img
                                       onClick={() => _selectImageBank(bank)}
                                       onKeyDown={() => ""}
@@ -1070,54 +769,81 @@ function Login() {
                                 >
                                   กรุณาเลือกธนาคารของคุณ
                                 </h5>
-                                {/* <select
+                                <div
                                   className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
-                                  id="nuid-1"
-                                  value={bankCode}
-                                  placeholder="เลขบัญชีธนาคาร"
-                                  onChange={(event) =>
-                                    setBankCode(
-                                      Number.parseInt(event?.target?.value)
-                                    )
-                                  }
                                 >
-                                  <option>กรุณาเลือกธนาคารของคุณ</option>
-                                  {BackList?.map((bank) => (
-                                    <option key={bank?.code} value={bank?.code}>
-                                      {bank?.bankName}
-                                    </option>
-                                  ))}
-                                </select> */}
-                                <div className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12" style={{ margin: 0, height: 40, zIndex: 20 }}>
-                                  <Dropdown
+                                  <div
+                                    style={{
+                                      background: `linear-gradient(90deg, ${backgroundDropdown} 0%, rgb(17, 17, 17) 100%)`,
+                                      color: bankCode === 6 ? "#000" : "#FFF",
+                                      borderRadius:'3px'
+                                    }}
+                                    className="dropdown"
+                                    tabIndex="1"
+                                    ref={dropdownRef}
+                                    onBlur={handleBlur}
+                                    onClick={toggleDropdown}
                                   >
-                                    <Dropdown.Toggle
-                                      align="start"
-                                      style={{ background: `linear-gradient(90deg, ${backgroundDropdown} 0%, rgb(17, 17, 17) 100%)`, width: 450, color: bankCode === 6 ? "#000" : "#FFF" }}>
-                                      {bankNameOption}
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu style={{ overflow: "scroll", height: 300 }}>
-                                      {NewBackList?.map((bank) => (
-                                        <Dropdown.Item
-                                          onClick={() => handleSelectBank(bank)}
-                                          style={{
-                                            // display: "none",
-                                            flip: true,
-                                            alignRight: false,
-                                            color: "#FFF",
-                                            height: 45,
-                                            display: "flex",
-                                            alignItems: "center",
-                                            background: `linear-gradient(90deg, ${bank?.backgroundColor} 0%, rgb(17, 17, 17) 100%)`
-                                          }}>
-                                          <img style={{ width: 35, height: 35, marginRight: 18 }} src={bank?.image} id="bank1" alt="icon" />
-                                          {bank?.bankName}
-                                        </Dropdown.Item>
-                                      ))}
-                                    </Dropdown.Menu>
-                                  </Dropdown>
+                                    <span style={{ padding: "10px" }}>
+                                      {bankNameOption ||
+                                        "กรุณาเลือกธนาคารของคุณ"}
+                                    </span>
+                                    <div
+                                      className="dropdown-menu"
+                                      style={{
+                                        display: isActive ? "block" : "none",
+                                        marginTop: "10px",
+                                      }}
+                                    >
+                                      <ul>
+                                        {NewBackList?.map((bank) => (
+                                          <li
+                                            onClick={() =>
+                                              handleSelectBank(bank)
+                                            }
+                                            style={{
+                                              background: `linear-gradient(90deg, ${bank?.backgroundColor} 0%, rgb(17, 17, 17) 100%)`,
+                                            }}
+                                          >
+                                            <img
+                                              style={{
+                                                width: 35,
+                                                height: 35,
+                                                marginRight: 18,
+                                              }}
+                                              src={bank?.image}
+                                              id="bank1"
+                                              alt="icon"
+                                            />
+                                            {bank?.bankName}
+                                            {/* Option 1 */}
+                                          </li>
+                                        ))}
+                                        {/* <li
+                                          onClick={() =>
+                                            handleItemClick("Option 2", "2")
+                                          }
+                                        >
+                                          Option 2
+                                        </li>
+                                        <li
+                                          onClick={() =>
+                                            handleItemClick("Option 3", "3")
+                                          }
+                                        >
+                                          Option 3
+                                        </li> */}
+                                        {/* Add more options as needed */}
+                                      </ul>
+                                    </div>
+                                    {/* {hiddenValue && (
+                                      <span className="msg">
+                                        Hidden input value:{" "}
+                                        <strong>{hiddenValue}</strong>
+                                      </span>
+                                    )} */}
+                                  </div>
                                 </div>
-
 
                                 <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
                                   <span
@@ -1194,7 +920,6 @@ function Login() {
                                 </button>
                                 <div style={{ width: "10px" }} />
                                 <button
-                                  // onClick={() => CreateUser()}
                                   onClick={() => checkBank()}
                                   data-v-9dec3a92=""
                                   data-v-d8556cff=""
