@@ -55,21 +55,40 @@ const LoginController = () => {
 		console.log("first: ", username)
 		console.log("second: ", password)
 		try {
-			let _res = await axios({
-				method: 'post',
-				url: `${Constant.SERVER_URL}/Authen/Login`,
-				data: {
-					"agentCode": Constant?.AGENT_CODE,
-					"username": username,
-					"password": password,
-					"ip": "1.2.3.4"
-				},
+			const { data } = await axios.post(`${Constant.SERVER_URL}/Authen/Login`, {
+				agentCode: Constant.AGENT_CODE,
+				username,
+				password,
+				ip: "1.2.3.4",
 			});
-			console.log("_res?.data.statusCode::: ", _res?.data)
-			if (_res?.data.statusCode === 0) {
-				history.push(Constant.AFTER_LOGIN, _res?.data?.data);
-			}
-		} catch (error) {
+			// console.log("data?.data: ", data?.data)
+			if (data?.statusCode === 0) {
+				localStorage.setItem(Constant.LOGIN_TOKEN_DATA, data.data.token);
+				localStorage.setItem(Constant.TOKEN_EXPIRE, data.data.d_session_expire);
+				localStorage.setItem(Constant.DATA_PROFILE, JSON.stringify(data?.data?.info?.profile))
+				localStorage.setItem(Constant.DATA_BANK_LIST, JSON.stringify(data?.data?.info?.bankList))
+				localStorage.setItem(Constant.DATA_PROMOTION, JSON.stringify(data?.data?.info?.promotionList))
+				localStorage.setItem(Constant.BRAND_LIST, JSON.stringify(data?.data?.info?.brandList))
+				localStorage.setItem(Constant.CASHBACK, JSON.stringify(data?.data?.info?.cashback))
+				localStorage.setItem(Constant.CONFIG_CASHBACK, JSON.stringify(data?.data?.info?.configCash))
+				localStorage.setItem(Constant.CONFIG_LINE, JSON.stringify(data?.data?.info?.configLine))
+				localStorage.setItem(Constant.CONFIG_LOBBY, JSON.stringify(data?.data?.info?.configLobby))
+				localStorage.setItem(Constant.CONFIG_WITHDRAW, JSON.stringify(data?.data?.info?.configWithdraw))
+				localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide))
+				localStorage.setItem(Constant.BANK_DEPOSIT, JSON.stringify(data?.data?.info?.bankDeposit))
+				localStorage.setItem(Constant.LOGIN_USER_DATA,
+					JSON.stringify({
+						agent: data?.data?.agent,
+						username: data?.data?.username,
+						password: password,
+						balance: data?.data?.balance,
+						shortUrl: data?.data?.info?.shorturl
+					}),
+				);
+				history.push(Constant.AFTER_LOGIN, data?.data);
+			} 
+			return data;
+		}  catch (error) {
 			console.log("🚀 ~ const_login= ~ error:", error)
 		}
 	}

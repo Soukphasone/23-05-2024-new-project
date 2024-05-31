@@ -23,7 +23,7 @@ function PrivateRoute({ component: Component, headerTitle, ...rest }) {
     getTokenExpire();
   }, [sessionExpireDate]);
   if (!isAuthenticated) {
-    window.location.href = (Constant.LOG_OUT);
+    // window.location.href = (Constant.LOG_OUT);
     // history.push('/login')
     return <div></div>;
   } else {
