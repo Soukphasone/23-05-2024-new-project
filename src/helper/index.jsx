@@ -70,9 +70,9 @@ export const TokenLocalStorage = () => {
 export const LogoutClearLocalStorage = () => {
   localStorage.removeItem(Constant.LOGIN_USER_DATA);
   localStorage.clear();
-  // window.location.href = ('/login');
+  window.location.href = ('/login');
   // window.location.reload();
-  window.location.href = (Constant.LOG_OUT);
+  // window.location.href = (Constant.LOG_OUT);
 };
 
 export const OpenNewTabWithHTML = (htmlContent) => {

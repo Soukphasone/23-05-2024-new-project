@@ -16,7 +16,7 @@ function PrivateRoute({ component: Component, headerTitle, ...rest }) {
   useEffect(() => {
     const getTokenExpire = async () => {
       if (isSessionExpired(sessionExpireDate)) {
-        // LogoutClearLocalStorage();
+        LogoutClearLocalStorage();
       } else {
       }
     };
@@ -24,6 +24,7 @@ function PrivateRoute({ component: Component, headerTitle, ...rest }) {
   }, [sessionExpireDate]);
   if (!isAuthenticated) {
     // window.location.href = (Constant.LOG_OUT);
+    window.location.href = ('/login');
     // history.push('/login')
     return <div></div>;
   } else {
