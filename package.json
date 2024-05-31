@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build && aws s3 sync ./build s3://shunslot.com",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build && aws s3 sync ./build s3://play.live88.me",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
