@@ -1,19 +1,21 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import {useRouteMatch, useHistory } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { BackList } from "../constant/bankList";
+import { NewBackList } from "../constant/newBankList";
 import Select from "react-select";
 import _LoginController from "../api/login";
 import { showErrorAlert, showSuccessAlert } from "../helper/SweetAlert";
 import { convertBankCode } from "../helper";
 import Constant from "../constant";
+import { Dropdown } from "react-bootstrap";
+
 
 function Login() {
   const history = useHistory();
   const routeMatch = useRouteMatch();
   // bank account
   const { handleLogin, handleRegister } = _LoginController();
-  const [bankCode, setBankCode] = useState(0);
   const [inputBank, setInputBank] = useState("");
   const [warningBank, setWarningBank] = useState("");
   const [warningBankCode, setWarningBankCode] = useState("");
@@ -38,6 +40,10 @@ function Login() {
   const [warningPasswordLg, setWarningPasswordLg] = useState("");
   //bank
   const [textWarning, setTextWarning] = useState(false);
+  const [backgroundDropdown, setBackgroundDropdown] = useState('#FFF');
+  const [bankCode, setBankCode] = useState(0);
+
+
 
   const _clickNextStep = () => {
     if (
@@ -323,6 +329,21 @@ function Login() {
     activeTab === "register"
       ? "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full active"
       : "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full";
+
+  const [bankNameOption, setBankNameOption] = useState('เลือกธนาคาร');
+
+  const handleSelectBank = (event) => {
+    setBankCode(event?.code)
+    setBankNameOption(event?.bankName)
+    setBackgroundDropdown(event?.backgroundColor)
+  }
+  const _selectImageBank = (bank) => {
+    setBankCode(bank?.code)
+    setBankNameOption(bank?.bankName)
+    setBackgroundDropdown(bank?.backgroundColor)
+
+  }
+
   return (
     <div className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
@@ -576,8 +597,8 @@ function Login() {
                                           ? phoneCheck
                                           : ""
                                         : inputPhonenumber.length < 13
-                                        ? phoneCheck
-                                        : ""
+                                          ? phoneCheck
+                                          : ""
                                       : ""}
                                   </span>
                                 </div>
@@ -709,7 +730,7 @@ function Login() {
                             </div>
                           ) : (
                             <div data-v-d8556cff="" className="w-full mt-4">
-                              <div className="banking-list">
+                              {/* <div className="banking-list">
                                 <div
                                   style={{ opacity: bankCode === 1 ? 1 : 0.5 }}
                                   className={
@@ -890,36 +911,7 @@ function Login() {
                                     alt="icon"
                                   />
                                 </div>
-                                {/* <div
-                                  style={{ opacity: bankCode === 15 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 15 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(15)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/ghb16.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div> */}
-                                {/* <div
-                                  style={{ opacity: bankCode === 16 ? 1 : 0.5 }}
-                                  className={
-                                    bankCode === 16 ? "active-bank" : ""
-                                  }
-                                >
-                                  <img
-                                    onClick={() => setBankCode(16)}
-                                    onKeyDown={() => ""}
-                                    className="bank-item"
-                                    src="/assets/images/icon-bank-active/cimb17.png"
-                                    id="bank1"
-                                    alt="icon"
-                                  />
-                                </div> */}
+                                
                                 <div
                                   style={{ opacity: bankCode === 18 ? 1 : 0.5 }}
                                   className={
@@ -1052,7 +1044,22 @@ function Login() {
                                     alt="icon"
                                   />
                                 </div>
+                              </div> */}
+                              <div className="banking-list">
+                                {NewBackList?.map((bank) => (
+                                  <div style={{ opacity: bankCode === bank?.code ? 1 : 0.5 }} className={bankCode === bank?.code ? "active-bank" : ""}>
+                                    <img
+                                      onClick={() => _selectImageBank(bank)}
+                                      onKeyDown={() => ""}
+                                      className="bank-item"
+                                      src={bank?.image}
+                                      id="bank1"
+                                      alt="icon"
+                                    />
+                                  </div>
+                                ))}
                               </div>
+
                               <div
                                 className="relative w-full"
                                 style={{ marginTop: "10px" }}
@@ -1063,7 +1070,7 @@ function Login() {
                                 >
                                   กรุณาเลือกธนาคารของคุณ
                                 </h5>
-                                <select
+                                {/* <select
                                   className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                                   id="nuid-1"
                                   value={bankCode}
@@ -1080,7 +1087,38 @@ function Login() {
                                       {bank?.bankName}
                                     </option>
                                   ))}
-                                </select>
+                                </select> */}
+                                <div className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12" style={{ margin: 0, height: 40, zIndex: 20 }}>
+                                  <Dropdown
+                                  >
+                                    <Dropdown.Toggle
+                                      align="start"
+                                      style={{ background: `linear-gradient(90deg, ${backgroundDropdown} 0%, rgb(17, 17, 17) 100%)`, width: 450, color: bankCode === 6 ? "#000" : "#FFF" }}>
+                                      {bankNameOption}
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu style={{ overflow: "scroll", height: 300 }}>
+                                      {NewBackList?.map((bank) => (
+                                        <Dropdown.Item
+                                          onClick={() => handleSelectBank(bank)}
+                                          style={{
+                                            // display: "none",
+                                            flip: true,
+                                            alignRight: false,
+                                            color: "#FFF",
+                                            height: 45,
+                                            display: "flex",
+                                            alignItems: "center",
+                                            background: `linear-gradient(90deg, ${bank?.backgroundColor} 0%, rgb(17, 17, 17) 100%)`
+                                          }}>
+                                          <img style={{ width: 35, height: 35, marginRight: 18 }} src={bank?.image} id="bank1" alt="icon" />
+                                          {bank?.bankName}
+                                        </Dropdown.Item>
+                                      ))}
+                                    </Dropdown.Menu>
+                                  </Dropdown>
+                                </div>
+
+
                                 <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
                                   <span
                                     className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
