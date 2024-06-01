@@ -12,31 +12,18 @@ function BankList() {
   const _copyText = async (text) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       try {
-        await navigator.clipboard.writeText('text');
+        await navigator.clipboard.writeText(text);
         showSuccessAlert("คัดลอกสำเร็จ");
-
       } catch (err) {
-        console.error('Failed to copy text: ', err);
       }
     } else {
-      console.error('Clipboard API not available');
-    }
-
-
-    console.log("text:: ", text)
-    navigator.clipboard.writeText(text)
-
-      .then(() => {
-        showSuccessAlert("คัดลอกสำเร็จ");
-      })
-      .catch((err) => {
         showErrorAlert("คัดลอกไม่สำเร็จ");
-      });
-  };
+    }
+  }
   const Back = () => {
     history.push(Constant.DEPOSIT);
   };
-  const UploadSleep = () => {
+  const UploadSlip = () => {
     history.push(Constant.UPLOAD_SLIP, banklist);
   };
   return (
@@ -183,7 +170,7 @@ function BankList() {
                   </div>
                   <div>
                     <div
-                      onClick={UploadSleep}
+                      onClick={UploadSlip}
                       className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2"
                     >
                       <div

@@ -69,7 +69,7 @@ function Login() {
         setWarningLastName("");
       }, 5000);
     } else {
-      setActiveTab("bank");
+      setActiveTab("register-bank");
     }
   };
   //handle bank
@@ -343,7 +343,16 @@ function Login() {
   };
 
   return (
-    <div className="overflow-x-hidden overflow-y-auto text-primary">
+    <div
+      className="overflow-x-hidden overflow-y-auto text-primary"
+      style={{
+        display:
+          routeMatch?.params?.route !== "login" &&
+          routeMatch?.params?.route !== "register"
+            ? "none"
+            : "",
+      }}
+    >
       <div id="__nuxt" data-v-app="">
         <div data-v-19df7d63="">
           <header data-v-19df7d63="" className="w-full z-10">
@@ -770,19 +779,19 @@ function Login() {
                                   กรุณาเลือกธนาคารของคุณ
                                 </h5>
                                 <div
+                                  onClick={toggleDropdown}
                                   className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                                 >
                                   <div
                                     style={{
                                       background: `linear-gradient(90deg, ${backgroundDropdown} 0%, rgb(17, 17, 17) 100%)`,
                                       color: bankCode === 6 ? "#000" : "#FFF",
-                                      borderRadius:'3px'
+                                      borderRadius: "3px",
                                     }}
                                     className="dropdown"
                                     tabIndex="1"
                                     ref={dropdownRef}
                                     onBlur={handleBlur}
-                                    onClick={toggleDropdown}
                                   >
                                     <span style={{ padding: "10px" }}>
                                       {bankNameOption ||

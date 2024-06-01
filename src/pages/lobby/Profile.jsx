@@ -24,7 +24,7 @@ function Profile() {
   const _copyText = async (text) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       try {
-        await navigator.clipboard.writeText('text');
+        await navigator.clipboard.writeText(text);
         showSuccessAlert("คัดลอกสำเร็จ");
       } catch (err) {
       }
