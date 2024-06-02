@@ -17,8 +17,7 @@ function PrivateRoute({ component: Component, headerTitle, ...rest }) {
     const getTokenExpire = async () => {
       if (isSessionExpired(sessionExpireDate)) {
         LogoutClearLocalStorage();
-      } else {
-      }
+      } 
     };
     getTokenExpire();
   }, [sessionExpireDate]);

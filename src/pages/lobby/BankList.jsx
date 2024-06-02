@@ -10,11 +10,13 @@ function BankList() {
   const banklist = history?.location?.state;
 
   const _copyText = async (text) => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
+    console.log("TEXT:  ", text)
+    if (navigator.clipboard || navigator.clipboard.writeText) {
       try {
         await navigator.clipboard.writeText(text);
         showSuccessAlert("คัดลอกสำเร็จ");
       } catch (err) {
+        console.log("error", err)
       }
     } else {
         showErrorAlert("คัดลอกไม่สำเร็จ");
