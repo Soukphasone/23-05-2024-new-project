@@ -8,18 +8,18 @@ function BankList() {
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
-
   const _copyText = async (text) => {
     console.log("TEXT:  ", text)
-    if (navigator.clipboard || navigator.clipboard.writeText) {
-      try {
-        await navigator.clipboard.writeText(text);
-        showSuccessAlert("คัดลอกสำเร็จ");
-      } catch (err) {
-        console.log("error", err)
-      }
-    } else {
-        showErrorAlert("คัดลอกไม่สำเร็จ");
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      showErrorAlert("คัดลอกไม่สำเร็จ");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      showSuccessAlert("คัดลอกสำเร็จ");
+    } catch (err) {
+      console.log("error", err);
+      showErrorAlert("คัดลอกไม่สำเร็จ: " + err.message);
     }
   }
   const Back = () => {
