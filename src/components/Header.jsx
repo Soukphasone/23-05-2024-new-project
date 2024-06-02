@@ -58,12 +58,14 @@ function Header() {
                 className="flex space-x-4 items-center justify-center w-full &lt;sm:justify-around"
               >
                 <a onClick={NextToHome}>
-                  <img
+                <div className="img-logoweb">
+                <img
                     data-v-4b602944=""
                     className="cursor-pointer object-contain h-auto max-h-[80px] max-w-[200px]"
                     src={`data:image/jpeg;base64,${logoweb}`}
                     alt="center menu"
                   />
+                </div>
                 </a>
                 <div
                   data-v-4b602944=""
@@ -101,7 +103,7 @@ function Header() {
                       </p>
                       <div
                         data-v-4b602944=""
-                        class="grid place-content-center rounded-full w-[20px] ml-2 transferIcon h-[20px] bg-[var(--primary)]"
+                        class="grid place-content-center rounded-full w-[20px] transferIcon h-[20px] bg-[var(--primary)]"
                       >
                         <span
                           data-v-4b602944=""

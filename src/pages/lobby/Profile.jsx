@@ -22,17 +22,27 @@ function Profile() {
     setOldPassword(userData?.password);
   }, []);
   const _copyText = async (text) => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
+    if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(text);
         showSuccessAlert("คัดลอกสำเร็จ");
       } catch (err) {
+        showErrorAlert("คัดลอกไม่สำเร็จ");
       }
     } else {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showSuccessAlert("คัดลอกสำเร็จ");
+      } catch (err) {
         showErrorAlert("คัดลอกไม่สำเร็จ");
+      }
+      document.body.removeChild(textArea);
     }
-
-  };
+  }
   const handleButtonClick1 = () => {
     setOpenModal(false);
   };

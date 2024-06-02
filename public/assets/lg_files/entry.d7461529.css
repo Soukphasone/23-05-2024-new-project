@@ -29688,7 +29688,7 @@ ul {
 }
 
 .h-\[3\.75rem\] {
-    height: 3.75rem
+    height: 4.5rem
 }
 
 .h-\[30px\] {
@@ -32452,4 +32452,11 @@ ul {
     position: fixed;
     z-index: 100;
     background-color: #252525;
+}
+
+
+@media (max-width: 400px) {
+   .img-logoweb img{
+    width: 150px;
+}
 }
