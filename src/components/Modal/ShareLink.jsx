@@ -1,17 +1,28 @@
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 function ShareLink({ closeModal, dataFromLogin }) {
   
-  const _copyText = (text) => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
+  const _copyText = async (text) => {
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(text);
         showSuccessAlert("คัดลอกสำเร็จ");
-        closeModal("close")
-      })
-      .catch((err) => {
+      } catch (err) {
         showErrorAlert("คัดลอกไม่สำเร็จ");
-      });
-  };
+      }
+    } else {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showSuccessAlert("คัดลอกสำเร็จ");
+      } catch (err) {
+        showErrorAlert("คัดลอกไม่สำเร็จ");
+      }
+      document.body.removeChild(textArea);
+    }
+  }
   return (
     <div
       className="vfm vfm--fixed vfm--inset flex justify-center items-center dialog"
