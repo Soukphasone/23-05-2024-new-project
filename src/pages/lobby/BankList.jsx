@@ -9,17 +9,25 @@ function BankList() {
   const history = useHistory();
   const banklist = history?.location?.state;
   const _copyText = async (text) => {
-    console.log("TEXT:  ", text)
-    if (!navigator.clipboard || !navigator.clipboard.writeText) {
-      showErrorAlert("คัดลอกไม่สำเร็จ");
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(text);
-      showSuccessAlert("คัดลอกสำเร็จ");
-    } catch (err) {
-      console.log("error", err);
-      showErrorAlert("คัดลอกไม่สำเร็จ: " + err.message);
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showSuccessAlert("คัดลอกสำเร็จ");
+      } catch (err) {
+        showErrorAlert("คัดลอกไม่สำเร็จ");
+      }
+    } else {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showSuccessAlert("คัดลอกสำเร็จ");
+      } catch (err) {
+        showErrorAlert("คัดลอกไม่สำเร็จ");
+      }
+      document.body.removeChild(textArea);
     }
   }
   const Back = () => {
