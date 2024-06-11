@@ -76,7 +76,7 @@ function Deposit() {
                               <img
                                 key={bank?.index}
                                 src={`/assets/images/bank/${bank?.s_icon}`}
-                                alt="scb"
+                                alt="bank"
                                 width="512"
                                 height="512"
                               />

@@ -144,7 +144,7 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                   {dataHistoryDeposit?.length > 0 &&
                     dataHistoryDeposit?.map((deposit, index) => (
                       <div
-                        key={deposit?.index}
+                        key={index}
                         className="deposit-withdraw-list"
                       >
                         <div className="h-list-left">

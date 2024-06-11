@@ -7,20 +7,19 @@ import Constant from "../../constant";
 function ModalCredit({ closeModal }) {
   const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
-  const [codeCupon, setCodeCupon] = useState("");
+  const [codeCoupon, setCodeCoupon] = useState("");
   useEffect(() => {
     const userData = DataLocalStorage();
     if (userData) {
       setDataFromLogin(userData);
     }
   }, []);
-  const _addCupon = async () => {
-    console.log("ADD_CUPON");
+  const _addCoupon = async () => {
     try {
       const _data = await axios.post(`${Constant.SERVER_URL}/Coupon/Receive`, {
         s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
-        s_code: codeCupon,
+        s_code: codeCoupon,
         actionBy: "ADM",
       });
       if (_data?.data?.statusCode === 0) {
@@ -80,7 +79,7 @@ function ModalCredit({ closeModal }) {
                   className="flex justify-center -mt-2 items-center pointer-events-none"
                 ></div>
                 <input
-                  onChange={(e) => setCodeCupon(e.target.value)}
+                  onChange={(e) => setCodeCoupon(e.target.value)}
                   data-v-d0ca5c5c=""
                   className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
                   type="text"
@@ -95,12 +94,12 @@ function ModalCredit({ closeModal }) {
               </div>
             </div>
             <button
-              onClick={() => _addCupon()}
+              onClick={() => _addCoupon()}
               data-v-9dec3a92=""
               data-v-e339f85c=""
               id="btn01"
               type="submit"
-              disabled={codeCupon === ''  ? true : false}
+              disabled={codeCoupon === ''  ? true : false}
               className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary cursor-pointer <sm:text-base sm:text-base md:text-lg"
             >
               <div data-v-9dec3a92="" className="flex justify-center items-center">

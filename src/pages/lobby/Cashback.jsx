@@ -13,7 +13,7 @@ function Cashback() {
   const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
   const [reMessage, setReMessage] = useState("");
-  const [maxLevel, setmaxLevel] = useState();
+  const [maxLevel, setmaxLevel] = useState();   
   const [historyCashBack, setHistoryCashBack] = useState([]);
   const [dataFromLogin, setDataFromLogin] = useState({});
   const _cashback = JSON.parse(localStorage.getItem(Constant.CASHBACK));
