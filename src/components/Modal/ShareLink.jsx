@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 function ShareLink({ closeModal, dataFromLogin }) {
   
@@ -50,9 +51,9 @@ function ShareLink({ closeModal, dataFromLogin }) {
       >
         <div data-v-e339f85c="">
           <div data-v-e339f85c="" className="text-center text-primary">
-           <p> ลิ้งค์แนะนำเพื่อน</p>
+           <p>{t("ReferAFriendLink")}</p>
             <p className="text-center mt-1 text-secondary text-xs">
-              คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน
+              {t("YouwillEarnFree")}
             </p>
             {/* <div style={{fontSize:'12px'}}>คุณจะได้รับรายได้ฟรีจากการแนะนำเพื่อน</div> */}
           </div>

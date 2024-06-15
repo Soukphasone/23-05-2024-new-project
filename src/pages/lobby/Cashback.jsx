@@ -7,7 +7,8 @@ import axios from "axios";
 import { DataLocalStorage, CheckLevelCashBack } from "../../helper";
 import Constant from "../../constant";
 import { useHistory } from "react-router-dom";
-
+import { t } from "i18next";
+import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 function Cashback() {
   const bag = "BAG"
   const history = useHistory();
@@ -63,10 +64,14 @@ function Cashback() {
         },
       });
       if (_res?.data) {
-        setReMessage(_res?.data?.statusDesc);
+        showSuccessAlert(t("Complete"));
+
       }
       if (_res?.data?.statusCode === 0) {
         _getData();
+      }
+      else{
+        showErrorAlert(_res?.data?.statusDesc);
       }
     } catch (error) {
       console.log("🚀 ~ const_login= ~ error:", error);
@@ -109,7 +114,7 @@ function Cashback() {
                       data-v-fe9de6ba=""
                       className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                     >
-                      <p>ย้อนกลับ</p>
+                      <p>{t("back")}</p>
                     </span>
                   </div>
                 </div>
@@ -119,7 +124,7 @@ function Cashback() {
                   className="cash-back-content bg-card-primary card-wrapper w-full flex-col justify-center flex items-center my-4"
                 >
                   <h3 data-v-82953e26="" className="mb-2">
-                    ยอดเสียสะสมของคุณ (คืนยอดเสีย {maxLevel} %)
+                    {t("YourAccumulatedLosses")} {maxLevel} %
                   </h3>
                   <h3
                     data-v-82953e26=""

@@ -1,7 +1,6 @@
 module.exports = {
   AGENT_CODE: "AG019",
-  SERVER_URL:
- "https://2ov8dxycl0.execute-api.ap-southeast-1.amazonaws.com/api/v1",
+  SERVER_URL: "https://prod.txtechserver.com/api/v1",
   LOG_OUT: "https://live88.me",
   LOGIN: "/:route",
   PAGE_LOGIN_CAN_LOGIN_PLAY: "/api/v1/Authen/Token",

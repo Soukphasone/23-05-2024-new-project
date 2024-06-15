@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
+import { t } from "i18next";
 function Deposit() {
   const bank = "BANK";
   const history = useHistory();
@@ -58,12 +59,12 @@ function Deposit() {
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                    <p>ย้อนกลับ</p>
+                    <p>{t("back")}</p>
                   </span>
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-3 justify-center w-full rounded-base bg-card-primary p-4 text-center">
-                  <span className="text-base text-active">เลือกธนาคาร</span>
+                  <span className="text-base text-active">{t("ChooseABank")}</span>
                   {depositBankList?.length > 0 &&
                     depositBankList?.map((bank) => (
                       <div
@@ -106,7 +107,7 @@ function Deposit() {
                 <div className="flex flex-col items-center justify-center w-full rounded-base bg-card-primary text-center mt-4 p-4">
                   <div className="flex flex-row w-full justify-between">
                     <div className="flex flex-col">
-                      <p className="text-sm">บัญชีของคุณ: </p>
+                      <p className="text-sm">{t("account")} </p>
                       <div className="w-[45px] h-[45px] mt-4 text-white">
                         <div
                           className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center"
@@ -143,7 +144,7 @@ function Deposit() {
                   </div>
                   <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2 mt-4">
                     <p className="text-danger text-lg" style={{textAlign:'center', width:'100%'}}>
-                      “กรุณาใช้บัญชีที่ท่านสมัครโอนมาเท่านั้น”
+                      “{t("WarnningAccountDeposit")}”
                     </p>
                     
                   </div>

@@ -1,52 +1,96 @@
-import React from 'react'
-
-function ModalLanguage() {
+import { t } from "i18next";
+import React from "react";
+function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
+  const _changeLanguage = (lng, img) => {
+    closeModal();
+    changeLanguage(lng, img);
+  };
   return (
-    <div className="vfm vfm--fixed vfm--inset flex justify-center items-center" role="dialog" aria-modal="true"
-    style={{Zindex: '1000'}}>
-    <div className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none" aria-hidden="true"></div>
     <div
-      className="vfm__content vfm--outline-none flex flex-col p-4 w-full max-w-[333px] items-center gap-y-4 bg-card-secondary rounded-[10px]"
-      tabindex="0"><span>เปลี่ยนภาษา</span>
+      className="vfm vfm--fixed vfm--inset flex justify-center items-center"
+      onClick={(e) => {
+        if (
+          e.target.className ===
+          "vfm vfm--fixed vfm--inset flex justify-center items-center"
+        ) {
+          closeModal();
+        }
+      }}
+      role="dialog"
+      aria-modal="true"
+      style={{ Zindex: "1000", color: "#fff" }}
+    >
       <div
-        className="bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center">
-        <img src="/assets/images/flag/en.c4311bc5.webp" alt="English"
-          className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"/><span className="mx-auto">English</span></div>
+        className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
+        aria-hidden="true"
+      ></div>
       <div
-        className="activeLang bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center">
-        <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAA6ZJREFUaEPlm01IVFEUx3/nTTbONAWtkiCiDxepTRRICQXtKhvcNFFkEdGiFlEbCWpR1qIg2hQtahERfVBkG5msdkGRRVBgZQv7IIKwVZDjjGbzTjx1JkcnnZk36oz3gSDMu+f+f/fcdz/OPVeYpKeNmmVgrVbsaoVKYClQASwAyoer7QN+AN3AZ4EuwXoP9pt63n2aDGlSSKMPWVn3B90osJ6hv3l52v8FPFN4Ngt5soW37XnaGVPMNXAby70JvNsspEGhHphbKHHDdnoE2my01UP//Xo+9rux7wZYItQ0KuwQCLkRkW1ZhYjA3RDvbgGabbmR7+UFHCG4AXQ/6N58KnVfRq6DXA3R8TRXWzkBO91XKT8AHFCoyrWyQr4v0AlcEfqu5NLNswZ+wIrFNlaTIIcKKdytLUUvWdjnt/Lhaza2sgJupbrWgqMg4WyMTv072mLDuQbev5qo7gmBWwmus9CToJsnMja9v8sjGznVQMeL8XSMCzzkWet08cMmER1o+8R4nv4vcPznz8X9A/Z5gSLtxpn9qNDiLbOafPPnZ/ymMwJ3dXV5KxYucmCLaoDK9pNRuNT9/VtTZWXlmEVKRuCeWN9hUS5kW0ExvqfCkbn+8oujtY0BjscHNiTsxGWmeZ4tQCN2eizPQZ+vLG1xkgasqtIb+31t+lZQBcBMMyHX5/hn7xOR1DI0DTgaje9G5Eahq51We6p7AgHfzdQ4nvxHVb29sf4WpmgjMIWNEJnj94ZFZHAAS3k4Go3vQsTZhcy8R7UxEPDdHg18B5EdM4/W2Ujq3UDAtzMFHIsN1CXsxGORgm/ei6L9VOnxWJ5Nfn9Z+2CXrqsNH1PkTFGomyQRgh5vf9VydhA4WBV6wFB4ZiY/bR2dka1SU7Nlmdie15J/wK0kGknhl1qJNRKsDoVR7pWEarcihe0SrAqdBJrd2iqR8s2yqip0U6GxRAS7kilwy/Hwc2egdmWpdAq3O9/wZ5QlpaPZhVLhi+PhXsDvwkwpFY05wAnAKiXVLrTaRgIb1qUNHLTMmpZMXHiYtbQ0bvNg3PbQuACAA7y2NnwMZUaHeBCOv0yGeIwL4jlejkbj5oRph4HNCsQbd9Qy7GVzDtMcYOOOSx1oow7Ek5EEo1IeHGjjkloGu3YqbalYs+8yR7YUzT1tKWnKqMS0f9AGpR6me9qQ5NIktFHpw0looxLER46JxlwBGDURmHPJYyS4Sdd4xsz8RlzU+t9JXrFexfsLeAiy7MYsDWkAAAAASUVORK5CYII="
-          alt="ภาษาไทย" className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"/><span
-          className="mx-auto">ภาษาไทย</span></div>
-      <div
-        className="bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center">
-        <img src="/assets/images/flag/flag-vi.f9c85994.png" alt="Tiếng Việt"
-          className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"/><span className="mx-auto">Tiếng Việt</span>
+        className="vfm__content vfm--outline-none flex flex-col p-4 w-full max-w-[333px] items-center gap-y-4 bg-card-secondary rounded-[10px]"
+        tabindex="0"
+      >
+        <span>{t("titleDropdown")}</span>
+        <div
+          onClick={() => {
+            _changeLanguage("en", "/assets/images/flag/flag-en.png");
+          }}
+          className={`${
+            activeLang === "en" ? "activeLang" : ""
+          }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+        >
+          <img
+            src="/assets/images/flag/flag-en.png"
+            alt="English"
+            className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
+          />
+          <span className="mx-auto">English</span>
+        </div>
+        <div
+          onClick={() => {
+            _changeLanguage("th", "/assets/images/flag/flag-th.png");
+          }}
+          className={`${
+            activeLang === "th" ? "activeLang" : ""
+          }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+        >
+          <img
+            src="/assets/images/flag/flag-th.png"
+            alt="ภาษาไทย"
+            className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
+          />
+          <span className="mx-auto">ภาษาไทย</span>
+        </div>
+        <div
+          onClick={() => {
+            _changeLanguage("my", "/assets/images/flag/flag-my.png");
+          }}
+          className={`${
+            activeLang === "my" ? "activeLang" : ""
+          }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+        >
+          <img
+            src="/assets/images/flag/flag-my.png"
+            alt="ဗမာဘာသာစကား"
+            className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
+          />
+          <span className="mx-auto">ဗမာဘာသာစကား</span>
+        </div>
+        <div
+          onClick={() => {
+            _changeLanguage("ch", "/assets/images/flag/flag-china.png");
+          }}
+          className={`${activeLang==='ch'? 'activeLang':''}  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+         
+        >
+          <img
+            src="/assets/images/flag/flag-china.png"
+            alt="中国"
+            className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
+          />
+          <span className="mx-auto">中国</span>
+        </div>
       </div>
-      <div
-        className="bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center">
-        <img src="/assets/images/flag/flag-km.d1c529c4.png" alt="ភាសាខ្មែរ"
-          className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"/><span className="mx-auto">ភាសាខ្មែរ</span></div>
-      <div
-        className="bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center">
-        <img src="/assets/images/flag/flag-my.5b3bd5fe.jpg" alt="ဗမာဘာသာစကား"
-          className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"/><span className="mx-auto">ဗမာဘာသာစကား</span>
-      </div>
-      <div
-        className="bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center">
-        <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASNSURBVHgBrVZdTBxVFD5z5+7fzA4z/AgEaFy2iKiFmE1rjNrS2tTUlDTUn/LQxERjjFUTrRq1L1pefDCRNsYYXkSbJhr0RRqaqA8mxhrlpS2haYVWWH4ElsXudNnZnf/x7iBblp39K3zJ5N4599zzzT3nuydDQZk4FagPSIrZus3jaqApMBtd9PzPsdTyF9HoVbKslxqHKsXpg/qavbsr2GNVGD93D8aCk8+CputgWT/+IcnfvDc7/22xmAWJTzfV790vcKcYhDqhDMiWFR6Ixnr7FqNf5/Oh89jRYMu2vl1+tp9FKABlAlOUsIv1dT/JccE/k/IVUdfFjT5OJxaGWwMDbV7PEdgCzKpqeEiM7TuzKIYLEp/d3jj0OOs/DFsIcuKwm9ZCHWMzsTUbWu8wtqPlo60mTUPAODApU9+vt2Vq/FWwqT3gdg8iqiSh5wXiLLDU3Bi1LhwkT+yXuDRi+60tUBT1A70JUrrWAP5YErgjqbw+T/Ncb7cgCBniE/U1nU+wTLBQYMRbUAzsQRW8j2jganbuIzxNCyHW91qG+Ggl/2KhgOnTCMelQi5AkTYW/ZCD+Hde0KZwXr9DPPtserQ9SIYPFgrq2aGD5yENEGuBKTmXQ19YrZo2tSobymUBqrTAWMrSL7A0Cr3AcdWop9r/QA3GdYWIfXtUm9TdVnIrBkujoPr9Fah6K5FlJ80F7uWYA7irUsghFV6VAJP0rsHTsUoovCyBfujOCVaGfKCMuhyJ/V0KiUF0YRk5mXqY8TVjyYCmjZvEfhYqelLA9WQrlK4z7cf4F8Gt035Qr+WvZWLYA9o8AuVS7ocxiKpBqmU57o4P+mC5lwNLyq6RNoFh6R2+IOkanEjT8JBmgeZU5Va+jfocDRRrZtnUSRrM+OaaTFTX42iPn7maz8HTodmjEUEgDXvtuW+3aiu2FHh3qo52jKhR1DUxE1FMU3TcGNIhccELS+/yIA4wEDkukNRT4L6/uLq5oykixiRUnSBCbTKy1s4uxsbSBZRGU8rljRsprwWpERfc/pLJKFInJ4+8zYMpF0+1RD6YIjLQiRDTJVtDVNPC5+Pxm7ZC2hjvx2TYt36jRYKnLrpzAlpJCrSbxYWV/vDIm3yOfSwlD6ZHW7KhsYmL04oahk0AVVhAV5vk/sr2e/rKpTO1/v7OqRpckpP9GWIC2UTUG7AZkDLWfhIH32MquIPOGoiZZm///38imeSfW47deKaSb62g6Xa4C7hbSIfiTNKzaUj9RkpkZuvgb1kJd02EnydT+35mFeuybL7OIOPRKkwHoUwo1zF5/IAbDLtPZ62Z1kIr401rKJOKrL/Mn0RRDrHu8zzC3QyNBLgLmCvZnS5hmMsjydRT+/+aHF9vz/m9vSAmxIRuDfEY39fgxq2wCSzo+o1xSet8KTw7vnGt4IX8/cHtr9RhfJJMA1AGVAuS/6hq34HxqU/Jq2NzKqXpVl1vbzu8pGknG4tk4FpSibEYfRb0mmear4TFQr5ldXsGoOFcS/POmKF3BL24QjcpN5nHphVjekZN/Pp55PZUqbH+A5wisNlVC8yyAAAAAElFTkSuQmCC"
-          alt="中国" className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"/><span className="mx-auto">中国</span>
-      </div>
-      <div
-        className="bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center">
-        <img
-          src="data:image/webp;base64,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"
-          alt="ພາສາລາວ" className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"/><span
-          className="mx-auto">ພາສາລາວ</span></div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default ModalLanguage
+export default ModalLanguage;

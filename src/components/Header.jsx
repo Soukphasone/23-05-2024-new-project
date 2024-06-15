@@ -3,6 +3,7 @@ import Modal from "./Modal/ModalNav";
 import { DataLocalStorage } from "../helper";
 import Constant from "../constant";
 import { DataUser } from "../api/getdatauser";
+import { useTranslation } from "react-i18next";
 
 function Header() {
   const [openModal, setOpenModal] = useState(false);
@@ -10,6 +11,9 @@ function Header() {
   const [dataUser, setDataUser] = useState([]);
   const [username, setUsername] = useState("");
   const [agent, setAgent] = useState("");
+  const { t, i18n } = useTranslation();
+  const [imageLang, setImageLang] = useState("/assets/images/flag/flag-th.png");
+  const [activeLang, setActiveLang] = useState("th");
 
   useEffect(() => {
     const _dataUser = JSON.parse(localStorage.getItem(Constant.CONFIG_LOBBY));
@@ -40,6 +44,11 @@ function Header() {
   const ButtonReload = ()=>{
     window.location.reload();
   }
+  const changeLanguage = (lng, img) => {
+    setImageLang(img);
+    i18n.changeLanguage(lng);
+    setActiveLang(lng);
+  };
   return (
     <div className="header">
       <header data-v-3c88d514="" className="w-full z-10">
@@ -72,7 +81,7 @@ function Header() {
                   className="walletWrapper px-4 flex items-center py-2 text-xs cursor-pointer"
                 >
                   <div
-                  onClick={ButtonReload}
+                  // onClick={ButtonReload}
                    data-v-4b602944="" className="">
                     <div
                       data-v-4b602944=""
@@ -160,7 +169,8 @@ function Header() {
                   ></path>
                 </svg>
               </span>
-              {openModal && <Modal closeModal={setOpenModal} />}
+              {openModal && <Modal closeModal={setOpenModal} changeLanguage={changeLanguage} imageLang={imageLang} activeLang={activeLang} />}
+              
             </div>
           </div>
         </div>

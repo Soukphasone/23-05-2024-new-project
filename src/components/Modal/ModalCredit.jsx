@@ -3,6 +3,7 @@ import axios from "axios";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
+import { t } from "i18next";
 
 function ModalCredit({ closeModal }) {
   const [reMessage, setReMessage] = useState("");
@@ -23,13 +24,12 @@ function ModalCredit({ closeModal }) {
         actionBy: "ADM",
       });
       if (_data?.data?.statusCode === 0) {
-        showSuccessAlert("สำเร็จ")
+        showSuccessAlert("สำเร็จ");
         closeModal("close");
-      }else{
+      } else {
         setReMessage(_data?.data?.statusDesc);
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
   return (
     <div
@@ -58,7 +58,7 @@ function ModalCredit({ closeModal }) {
       >
         <div data-v-e339f85c="">
           <div data-v-e339f85c="" className="text-center text-primary">
-            ใส่โค้ดรับเครดิตฟรี
+            {t("FreeCredit")}
           </div>
           <div data-v-e339f85c="" className="w-full flex justify-between mt-3">
             <div
@@ -83,7 +83,7 @@ function ModalCredit({ closeModal }) {
                   data-v-d0ca5c5c=""
                   className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
                   type="text"
-                  placeholder="ใส่โค้ดที่นี่"
+                  placeholder={t("EnterTheCode")}
                   autocomplete=""
                   maxlength="false"
                 />
@@ -99,11 +99,14 @@ function ModalCredit({ closeModal }) {
               data-v-e339f85c=""
               id="btn01"
               type="submit"
-              disabled={codeCoupon === ''  ? true : false}
+              disabled={codeCoupon === "" ? true : false}
               className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary cursor-pointer <sm:text-base sm:text-base md:text-lg"
             >
-              <div data-v-9dec3a92="" className="flex justify-center items-center">
-                ยืนยัน
+              <div
+                data-v-9dec3a92=""
+                className="flex justify-center items-center"
+              >
+               {t("confirm")}
               </div>
             </button>
           </div>

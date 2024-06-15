@@ -6,9 +6,9 @@ import axios from "axios";
 import Constant from "../../constant";
 import _LoginController from "../../api/login";
 import { FillerCategory2 } from "../../helper";
-import { showSuccessAlert } from "../../helper/SweetAlert";
 import _ from 'lodash';
 import { OpenNewTabWithHTML } from "../../helper";
+import { t } from "i18next";
 function GameType() {
   const history = useHistory();
   const [deviceType, setDeviceType] = useState(false);
@@ -18,7 +18,7 @@ function GameType() {
   const [activeTypeGame, setActiveTypeGame] = useState("");
   const [percentageData, setPercentageData] = useState([]);
   const [favoriteOption, setFavoriteOption] = useState("all");
-  const [balueBrandCode, setValueBrandCode] = useState("");
+  const [valueBrandCode, setValueBrandCode] = useState("");
 
   useEffect(() => {
     _clickCategoryGame(typeGame?.type);
@@ -140,7 +140,7 @@ function GameType() {
         url: `${Constant.SERVER_URL}/Game/ListGame`,
         data: {
           s_agent_code: Constant.AGENT_CODE,
-          s_brand_code: balueBrandCode,
+          s_brand_code: valueBrandCode,
           s_username: typeGame?.dataFromLogin?.username,
         },
       });
@@ -157,10 +157,6 @@ function GameType() {
 
       }
     }
-  };
-  const _copyAccountNo = (accountNo) => {
-    navigator.clipboard.writeText(accountNo);
-    showSuccessAlert("สำเร็จ");
   };
 
   const _getDataGame = async (value, activeTypeGame) => {
@@ -297,9 +293,9 @@ function GameType() {
                         onChange={(event) => _selectFavorite(event)}
                       >
                         <option value="all">
-                          หมวดหมู่เกม
+                          {t("GameCategory")}
                         </option>
-                        <option value="fav">เกมโปรด</option>
+                        <option value="fav">{t("FavoriteGame")}</option>
                       </select>
                       <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
                         <span

@@ -3,6 +3,7 @@ import { Wheel } from "react-custom-roulette";
 import Constant, { AGENT_CODE } from "../constant";
 import axios from "axios";
 import { showErrorAlert} from "../helper/SweetAlert";
+import { t } from "i18next";
 
 const Roulette = ({
   data,
@@ -108,7 +109,7 @@ const Roulette = ({
               data-v-9dec3a92=""
               className="flex justify-center items-center"
             >
-              หมุนกงล้อ
+              {t("spinTheWheel")}
             </div>
           </button>
         </div>

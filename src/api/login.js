@@ -4,7 +4,10 @@ import Constant from "../constant";
 import { EncriptBase64 } from "../helper";
 import { DataLocalStorage, TokenLocalStorage } from "../helper";
 import { showSuccessAlert } from "../helper/SweetAlert";
+import { useTranslation } from "react-i18next";
+
 const LoginController = () => {
+	const { t} = useTranslation();
 	const history = useHistory();
 	// ==================> handleLogin <=================
 	const handleLogin = async (username, password, setLoading) => {
@@ -207,7 +210,7 @@ const LoginController = () => {
 						shortUrl: data?.data?.info?.shorturl
 					}),
 				);
-				showSuccessAlert('สำเร็จ')
+				showSuccessAlert(t("Complete"))
 				history.push(Constant.AFTER_LOGIN, data?.data);
 				return null;
 			}

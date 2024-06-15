@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import Footer from "../../components/Footer";
 import ModalCredit from "../../components/Modal/ModalCredit";
-import { createPortal } from "react-dom";
 import Image_slide from "../../components/image_slide";
+import { t } from "i18next";
 
 function DepositWithdraw() {
   const history = useHistory();
@@ -75,7 +75,7 @@ function DepositWithdraw() {
                         </svg>
                       </span>
                       <p data-v-c1e135f9="" className="text">
-                        ฝากเงิน
+                        {t("Deposit")}
                       </p>
                     </div>
                   </div>
@@ -131,7 +131,7 @@ function DepositWithdraw() {
                           </svg>
                         </span>
                         <p data-v-33945a64="" className="text">
-                          ถอนเงิน
+                          {t("Withdraw")}
                         </p>
                       </div>
                     </div>
@@ -173,7 +173,7 @@ function DepositWithdraw() {
                         data-v-e339f85c=""
                         class="font-semibold <sm:text-sm sm:text-sm md:text-lg"
                       >
-                        ใส่โค้ดรับเครดิตฟรี
+                        {t("FreeCredit")}
                       </p>
                     </div>
                     <div
@@ -207,10 +207,8 @@ function DepositWithdraw() {
         </div>
       </div>
       {modalgetCredit &&
-        createPortal(
-          <ModalCredit closeModal={ModalGetCredit} />,
-          document.body
-        )}
+          <ModalCredit closeModal={ModalGetCredit} />
+        }
     </body>
   );
 }

@@ -3,18 +3,6 @@ import { dataCradGame } from "./listCardGame";
 import { dataCradGame2 } from "./gameTypeDetail";
 import moment from "moment";
 var Buffer = require("buffer/").Buffer;
-
-export const _clickTabDeposit = (tab, setTabs, setTabName) => {
-  setTabName(tab);
-  if (tab === "tab-deposit") {
-    setTabs("ประวัติฝาก");
-  } else if (tab === "tab-withdraw") {
-    setTabs("ประวัติถอน");
-  } else {
-    setTabs("ประวัติโบนัส");
-  }
-};
-
 export const FillerCategory = async (value, setCategoryGame) => {
   if (value === "ALL") setCategoryGame(dataCradGame?.ALL);
   if (value === "CASINO") setCategoryGame(dataCradGame?.CASINO);

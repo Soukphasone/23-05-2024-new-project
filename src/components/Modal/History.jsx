@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React, { useState } from "react";
 
 function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHistoryBonus }) {
@@ -96,7 +97,7 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                       data-v-ea58f736=""
                       className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                     >
-                      ฝาก
+                      {t("Deposit")}
                     </span>
                   </div>
                   <div
@@ -109,7 +110,7 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                       data-v-ea58f736=""
                       className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                     >
-                      ถอน
+                     {t("Withdraw")}
                     </span>
                   </div>
                   <div
@@ -122,7 +123,7 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                       data-v-ea58f736=""
                       className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                     >
-                      โบนัส
+                      {t("bonus")}
                     </span>
                   </div>
                 </div>
@@ -148,9 +149,9 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                         className="deposit-withdraw-list"
                       >
                         <div className="h-list-left">
-                          <p>รายการฝาก</p>
+                          <p>{t("DepositList")}</p>
                           <p> {deposit?.f_amount}</p>
-                          <p>หมายเหตุ : {deposit?.s_remark}</p>
+                          <p>{t("Remark")} : {deposit?.s_remark}</p>
                         </div>
                         <div className="h-right">
 
@@ -165,10 +166,10 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                           >
                             <p>
                               {deposit?.s_status === "Y"
-                                ? "สำเร็จ"
+                                ? `${t("Complete")}`
                                 : deposit?.s_status === "C"
-                                  ? "ยกเลิก"
-                                  : "ไม่สำเร็จ"}
+                                  ? `${t("cancel")}`
+                                  :`${t("unsuccessful")}`}
                             </p>
                             <p>
                               {deposit?.d_datetime}
@@ -184,13 +185,13 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                   {dataHistoryWithdraw?.length > 0 &&
                     dataHistoryWithdraw?.map((withdraw, index) => (
                       <div
-                        key={withdraw?.index}
+                        key={index}
                         className="deposit-withdraw-list"
                       >
                         <div className="h-list-left">
-                          <p>รายการถอน</p>
+                          <p>{t("WithdrawalList")}</p>
                           <p> {withdraw?.f_amount} บาท</p>
-                          <p>หมายเหตุ : {withdraw?.s_remark}</p>
+                          <p>{t("Remark")} : {withdraw?.s_remark}</p>
                         </div>
                         <div className="h-right">
 
@@ -203,12 +204,12 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                                   : "text-not-success"
                             }
                           >
-                            <p>
+                              <p>
                               {withdraw?.s_status === "Y"
-                                ? "สำเร็จ"
+                                ? `${t("Complete")}`
                                 : withdraw?.s_status === "C"
-                                  ? "ยกเลิก"
-                                  : "ไม่สำเร็จ"}
+                                  ? `${t("cancel")}`
+                                  :`${t("unsuccessful")}`}
                             </p>
                             <p>
                               {withdraw?.d_datetime}
@@ -223,12 +224,12 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                 {dataHistoryBonus?.length > 0 &&
                   dataHistoryBonus?.map((bonus, index) => (
                     <div
-                      key={bonus?.index}
+                      key={index}
                       className="deposit-withdraw-list"
                     >
                       <div className="h-list-left">
-                        <p>รายการโบนัส</p>
-                        <p>หมายเหตุ : {bonus?.s_remark}</p>
+                        <p>{t("BonusItems")}</p>
+                        <p>{t("Remark")} : {bonus?.s_remark}</p>
                       </div>
                       <div className="h-right">
 
@@ -237,7 +238,7 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                           className="text-success"
                         >
                           <p>
-                          สำเร็จ     
+                          {t("Complete")}
                           </p>
                           <p>
                             {bonus?.d_datetime}

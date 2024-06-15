@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import _LoginController from "../api/login";
-import { EncriptBase64 } from '../helper';
+import _LoginController from "../../api/login";
+import { EncriptBase64 } from '../../helper';
 
 export default function Home() {
 	const UseParams = useParams();

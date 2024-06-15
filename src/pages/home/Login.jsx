@@ -1,22 +1,28 @@
-import React, { useState, useCallback, useRef } from "react";
-import axios from "axios";
+import React, { useState, useCallback, useRef, useEffect } from "react";
+// import axios from "axios";
 import { useRouteMatch, useHistory } from "react-router-dom";
-import { BackList } from "../constant/bankList";
-import { NewBackList } from "../constant/newBankList";
-import Select from "react-select";
-import _LoginController from "../api/login";
-import { showErrorAlert, showSuccessAlert } from "../helper/SweetAlert";
-import { convertBankCode } from "../helper";
-import Constant from "../constant";
-
+import { NewBackList } from "../../constant/newBankList";
+// import Select from "react-select";
+import _LoginController from "../../api/login";
+import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
+// import { convertBankCode } from "../../helper";
+// import Constant from "../../constant";
+import ModalLanguage from "../../components/Modal/ModalLanguage";
+import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
+import Cookies from 'js-cookie';
 function Login() {
   const history = useHistory();
+  const { t, i18n } = useTranslation();
   const routeMatch = useRouteMatch();
+  const [openModalChangeLanguage, setOpenModalChangeLanguage] = useState(false);
+  const [imageLang, setImageLang] = useState("/assets/images/flag/flag-th.png");
+  const [activeLang, setActiveLang] = useState("th");
+  const [bankNameOption, setBankNameOption] = useState(t("ChooseABank"));
+
   // bank account
   const { handleLogin, handleRegister } = _LoginController();
   const [inputBank, setInputBank] = useState("");
-  const [warningBank, setWarningBank] = useState("");
-  const [warningBankCode, setWarningBankCode] = useState("");
 
   //register
   const [inputPhonenumber, setInputPhonenumber] = useState("");
@@ -29,8 +35,8 @@ function Login() {
   const [activeTab, setActiveTab] = useState(routeMatch?.params?.route);
   const [warningPhone, setWarningPhone] = useState("");
   const [typePhone, setTypePhone] = useState("TH");
-  const [selectedOption, setSelectedOption] = useState("เบอร์โทรศัพท์ไทย");
-  const [phoneCheck, setPhoneCheck] = useState("");
+  // const [selectedOption, setSelectedOption] = useState("เบอร์โทรศัพท์ไทย");
+  // const [phoneCheck, setPhoneCheck] = useState("");
   const [userNameInput, setUserNameInput] = useState(""); //for login
   const [passwordInput, setPasswordInput] = useState("");
   const [messageCreate, setMessageCreate] = useState("");
@@ -43,6 +49,7 @@ function Login() {
   //Select dropdown
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef(null);
+
   const toggleDropdown = () => {
     setIsActive(!isActive);
   };
@@ -58,50 +65,51 @@ function Login() {
       inputPassword === "" ||
       inputLastname === ""
     ) {
-      setWarningPhone("กรุณากรอกเบอร์โทร");
-      setWarningPassword("กรุณาป้อนรหัสผ่าน");
-      setWarningFirstName("กรุณาป้อนชื่อ");
-      setWarningLastName("กรุณาป้อนนามสกุล");
+      setWarningPhone(t("EnterYourPhoneNumber"));
+      setWarningPassword(t("PleaseEnterYourPassword"));
+      setWarningFirstName(t("PleaseEnterYourName"));
+      setWarningLastName(t("PleaseEnterLastYame"));
       setTimeout(() => {
         setWarningPhone("");
         setWarningPassword("");
         setWarningFirstName("");
         setWarningLastName("");
       }, 5000);
-    } else {
+    } 
+     else {
       setActiveTab("register-bank");
     }
   };
   //handle bank
-  const options = [
-    {
-      value: "เบอร์โทรศัพท์ไทย",
-      label: "TH",
-      image: "/assets/lg_files/thai-flag.png",
-    },
-    {
-      value: "เบอร์โทรศัพท์ลาว",
-      label: "LA",
-      image: "/assets/lg_files/laos-flag.png",
-    },
-  ];
-  const handleChangeSelect = (option) => {
-    setTypePhone(option.label);
-    setSelectedOption(option.value);
-    setInputPhonenumber("");
-  };
+  // const options = [
+  //   {
+  //     value: "เบอร์โทรศัพท์ไทย",
+  //     label: "TH",
+  //     image: "/assets/lg_files/thai-flag.png",
+  //   },
+  //   {
+  //     value: "เบอร์โทรศัพท์ลาว",
+  //     label: "LA",
+  //     image: "/assets/lg_files/laos-flag.png",
+  //   },
+  // ];
+  // const handleChangeSelect = (option) => {
+  //   setTypePhone(option.label);
+  //   setSelectedOption(option.value);
+  //   setInputPhonenumber("");
+  // };
 
-  const handleChangePhone = useCallback((event) => {
-    const re = /^[0-9\b]+$/;
-    if (event.target.value === "" || re.test(event.target.value)) {
-      setInputPhonenumber(event?.target?.value);
-    }
-    if (event.target.value.length < 10 && typePhone === "TH") {
-      setPhoneCheck("กรุณากรอกเบอร์โทรให้ครบ 10 หลัก");
-    } else {
-      setPhoneCheck("กรุณากรอกเบอร์โทรให้ครบ 13 หลัก");
-    }
-  });
+  // const handleChangePhone = useCallback((event) => {
+  //   const re = /^[0-9\b]+$/;
+  //   if (event.target.value === "" || re.test(event.target.value)) {
+  //     setInputPhonenumber(event?.target?.value);
+  //   }
+  //   if (event.target.value.length < 10 && typePhone === "TH") {
+  //     setPhoneCheck("กรุณากรอกเบอร์โทรให้ครบ 10 หลัก");
+  //   } else {
+  //     setPhoneCheck("กรุณากรอกเบอร์โทรให้ครบ 13 หลัก");
+  //   }
+  // });
   // style option
   const customStyles = {
     container: (provided, state) => ({
@@ -205,8 +213,8 @@ function Login() {
 
   const NextToHomeLobby = async () => {
     if (userNameInput === "" || warningPasswordLg === "") {
-      setUserNameWarning("กรุณากรอกเบอร์โทร");
-      setWarningPasswordLg("กรุณาป้อนรหัสผ่าน");
+      setUserNameWarning(t(t("EnterYourPhoneNumber")));
+      setWarningPasswordLg(t("PleaseEnterYourPassword"));
       setTimeout(() => {
         setUserNameWarning("");
         setWarningPasswordLg("");
@@ -218,9 +226,9 @@ function Login() {
         passwordInput,
         (response) => {
           if (response === false) {
-            showSuccessAlert("สำเร็จ");
+            showSuccessAlert(t("Complete"));
           } else {
-            showErrorAlert("ล็อกอินไม่สำเร็จ");
+            showErrorAlert(t("unsuccessful"));
           }
         }
       );
@@ -229,7 +237,7 @@ function Login() {
         setTimeout(() => setMessageCreate(""), 5000);
       }
     } catch (error) {
-      showErrorAlert("เกิดข้อผิดพลาด");
+      showErrorAlert(t("unsuccessful"));
     }
   };
   const CreateUser = async () => {
@@ -249,7 +257,7 @@ function Login() {
         }, 5000);
       }
     } catch (error) {
-      showErrorAlert("เกิดข้อผิดพลาด");
+      showErrorAlert(t("unsuccessful"));
     }
   };
   const handleLoginTab = (event) => {
@@ -267,54 +275,54 @@ function Login() {
     setInputBank(event?.target?.value);
   });
 
-  const checkBank = async () => {
-    if (inputBank === "") {
-      setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
-      setTimeout(() => setWarningBank(""), 5000);
-      return;
-    }
+  // const checkBank = async () => {
+  //   // if (inputBank === "") {
+  //   //   setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
+  //   //   setTimeout(() => setWarningBank(""), 5000);
+  //   //   return;
+  //   // }
 
-    if (inputPhonenumber.length >= 13) {
-      const bankCodeText = convertBankCode(bankCode);
-      const data = JSON.stringify({
-        bankCode: bankCodeText,
-        recipientAcctNo: inputBank,
-      });
+  //   if (inputPhonenumber.length >= 13) {
+  //     const bankCodeText = convertBankCode(bankCode);
+  //     const data = JSON.stringify({
+  //       bankCode: bankCodeText,
+  //       recipientAcctNo: inputBank,
+  //     });
 
-      const config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: `${Constant.SERVER_URL}/check-number-account`,
-        headers: {
-          "User-Agent": "Dart/3.1 (dart:io)",
-          "Accept-Encoding": "gzip, deflate, br",
-          Connection: "close",
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-      try {
-        const response = await axios.request(config);
-        if (response.data.data.respDesc !== "Success") {
-          setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
-          // console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
-          setTimeout(() => {
-            setTextWarning("");
-          }, 5000);
-        } else {
-          // console.log("RESPON_BANK_SUCCESS", response.data.data);
-          setInputFirstname(response.data.data.receipient);
-          CreateUser();
-          // console.log("THIS ACCOUNT LAOS");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      CreateUser();
-      console.log("THIS ACCOUNT THAILAND");
-    }
-  };
+  //     const config = {
+  //       method: "post",
+  //       maxBodyLength: Infinity,
+  //       url: `${Constant.SERVER_URL}/check-number-account`,
+  //       headers: {
+  //         "User-Agent": "Dart/3.1 (dart:io)",
+  //         "Accept-Encoding": "gzip, deflate, br",
+  //         Connection: "close",
+  //         "Content-Type": "application/json",
+  //       },
+  //       data: data,
+  //     };
+  //     try {
+  //       const response = await axios.request(config);
+  //       if (response.data.data.respDesc !== "Success") {
+  //         setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
+  //         // console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
+  //         setTimeout(() => {
+  //           setTextWarning("");
+  //         }, 5000);
+  //       } else {
+  //         // console.log("RESPON_BANK_SUCCESS", response.data.data);
+  //         setInputFirstname(response.data.data.receipient);
+  //         CreateUser();
+  //         // console.log("THIS ACCOUNT LAOS");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     CreateUser();
+  //     console.log("THIS ACCOUNT THAILAND");
+  //   }
+  // };
 
   const wrapperClass =
     activeTab === "login"
@@ -329,7 +337,6 @@ function Login() {
       ? "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full active"
       : "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full";
 
-  const [bankNameOption, setBankNameOption] = useState("เลือกธนาคาร");
 
   const handleSelectBank = (event) => {
     setBankCode(event?.code);
@@ -341,7 +348,17 @@ function Login() {
     setBankNameOption(bank?.bankName);
     setBackgroundDropdown(bank?.backgroundColor);
   };
-
+  // Change Language
+  const ModalChangeLanguage = () => {
+    setOpenModalChangeLanguage(false);
+  };
+  const changeLanguage = (lng, img) => {
+    setImageLang(img);
+    // i18n.changeLanguage(lng);
+    Cookies.set('changLanguage', i18n.changeLanguage(lng), { expires: 7 });
+    alert('changLanguage saved in cookie!');
+    setActiveLang(lng);
+  };
   return (
     <div
       className="overflow-x-hidden overflow-y-auto text-primary"
@@ -417,7 +434,7 @@ function Login() {
                                     data-v-ea58f736=""
                                     className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                                   >
-                                    เข้าสู่ระบบ
+                                    {t("Login")}
                                   </span>
                                 </div>
                                 <div
@@ -430,7 +447,7 @@ function Login() {
                                     data-v-ea58f736=""
                                     className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                                   >
-                                    สมัครสมาชิก
+                                    {t("Register")}
                                   </span>
                                 </div>
                               </div>
@@ -451,7 +468,7 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    เบอร์โทรศัพท์
+                                    {t("telephoneNumber")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
@@ -461,7 +478,7 @@ function Login() {
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="number"
-                                      placeholder="เบอร์โทรศัพท์"
+                                      placeholder={t("telephoneNumber")}
                                       onChange={(e) =>
                                         setUserNameInput(e?.target?.value)
                                       }
@@ -486,7 +503,7 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    รหัสผ่าน
+                                    {t("EnterPassword")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
@@ -496,7 +513,7 @@ function Login() {
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password"
-                                      placeholder="รหัสผ่าน"
+                                      placeholder={t("EnterPassword")}
                                       onChange={(e) =>
                                         setPasswordInput(e?.target?.value)
                                       }
@@ -531,7 +548,7 @@ function Login() {
                                         data-v-d8556cff=""
                                         className="text-[var(--btn-login)]"
                                       >
-                                        เข้าสู่ระบบ
+                                        {t("Login")}
                                       </span>
                                     </div>
                                   </button>
@@ -552,13 +569,13 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    เบอร์โทรศัพท์
+                                    {t("telephoneNumber")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
                                     className="main-input h-[44px] relative w-full border-[1px] border-transparent rounded-[10px] p-[10px] bg-[var(--card-secondary)] flex items-center text-[var(--primary)] w-full rounded-[10px] flex items-center"
                                   >
-                                    <Select
+                                    {/* <Select
                                       isSearchable={false}
                                       onChange={handleChangeSelect}
                                       options={options}
@@ -581,20 +598,26 @@ function Login() {
                                           {label}
                                         </div>
                                       )}
-                                    />
+                                    /> */}
                                     <input
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="text"
-                                      maxLength={typePhone === "TH" ? 10 : 13}
-                                      value={inputPhonenumber}
-                                      placeholder={selectedOption}
-                                      onChange={(event) =>
-                                        handleChangePhone(event)
+                                      // maxLength={typePhone === "TH" ? 10 : 13}
+                                      // value={inputPhonenumber}
+                                      // placeholder={selectedOption}
+                                      placeholder={t("telephoneNumber")}
+                                      onChange={(e) =>
+                                        setInputPhonenumber(e?.target?.value)
                                       }
                                     />
                                   </div>
                                   <span style={{ color: "red" }}>
+                                    {inputPhonenumber !== ""
+                                      ? ""
+                                      : warningPhone}
+                                  </span>
+                                  {/* <span style={{ color: "red" }}>
                                     {inputPhonenumber !== ""
                                       ? ""
                                       : warningPhone}
@@ -607,7 +630,7 @@ function Login() {
                                         ? phoneCheck
                                         : ""
                                       : ""}
-                                  </span>
+                                  </span> */}
                                 </div>
                                 <div
                                   data-v-d8556cff=""
@@ -617,7 +640,7 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    รหัสผ่าน
+                                    {t("EnterPassword")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
@@ -627,7 +650,7 @@ function Login() {
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password"
-                                      placeholder=" รหัสผ่าน"
+                                      placeholder={t("EnterPassword")}
                                       autocomplete="off"
                                       onChange={(e) =>
                                         setInputPassword(e?.target?.value)
@@ -648,7 +671,7 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    ชื่อ
+                                    {t("FirstName")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
@@ -661,7 +684,7 @@ function Login() {
                                       type="text"
                                       name="s_firstname"
                                       id="s_firstname"
-                                      placeholder="ชื่อ"
+                                      placeholder={t("FirstName")}
                                       autocomplete="off"
                                       onChange={(e) =>
                                         setInputFirstname(e?.target?.value)
@@ -682,7 +705,7 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    นามสกุล
+                                    {t("LastName")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
@@ -695,7 +718,7 @@ function Login() {
                                       name="s_lastname"
                                       id="s_lastname"
                                       type="text"
-                                      placeholder="นามสกุล"
+                                      placeholder={t("LastName")}
                                       autocomplete="off"
                                       onChange={(e) =>
                                         setInputLastname(e?.target?.value)
@@ -727,7 +750,7 @@ function Login() {
                                         data-v-d8556cff=""
                                         className="text-[var(--btn-login)]"
                                       >
-                                        ถัดไป
+                                        {t("Next")}
                                       </span>
                                     </div>
                                   </button>
@@ -776,7 +799,7 @@ function Login() {
                                   data-v-d8556cff=""
                                   className="text-sm mb-2 text-primary"
                                 >
-                                  กรุณาเลือกธนาคารของคุณ
+                                  {t("ChooseABank")}
                                 </h5>
                                 <div
                                   onClick={toggleDropdown}
@@ -794,8 +817,7 @@ function Login() {
                                     onBlur={handleBlur}
                                   >
                                     <span style={{ padding: "10px" }}>
-                                      {bankNameOption ||
-                                        "กรุณาเลือกธนาคารของคุณ"}
+                                      {bankNameOption}
                                     </span>
                                     <div
                                       className="dropdown-menu"
@@ -825,35 +847,12 @@ function Login() {
                                               alt="icon"
                                             />
                                             {bank?.bankName}
-                                            {/* Option 1 */}
                                           </li>
                                         ))}
-                                        {/* <li
-                                          onClick={() =>
-                                            handleItemClick("Option 2", "2")
-                                          }
-                                        >
-                                          Option 2
-                                        </li>
-                                        <li
-                                          onClick={() =>
-                                            handleItemClick("Option 3", "3")
-                                          }
-                                        >
-                                          Option 3
-                                        </li> */}
-                                        {/* Add more options as needed */}
                                       </ul>
                                     </div>
-                                    {/* {hiddenValue && (
-                                      <span className="msg">
-                                        Hidden input value:{" "}
-                                        <strong>{hiddenValue}</strong>
-                                      </span>
-                                    )} */}
                                   </div>
                                 </div>
-
                                 <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
                                   <span
                                     className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
@@ -873,7 +872,7 @@ function Login() {
                                   data-v-d8556cff=""
                                   className="text-sm mb-2 text-primary"
                                 >
-                                  เลขบัญชีธนาคาร
+                                  {t("AccountMumber")}
                                 </h5>
                                 <div
                                   data-v-d8556cff=""
@@ -885,14 +884,14 @@ function Login() {
                                     name="bank"
                                     id="bank"
                                     type="text"
-                                    placeholder=" กรุณากรอกเลขบัญชีธนาคาร"
+                                    placeholder={t("AccountMumber")}
                                     autocomplete="off"
                                     onChange={(e) => handleChangeBank(e)}
                                   />
                                 </div>
-                                <span style={{ color: "red" }}>
+                                {/* <span style={{ color: "red" }}>
                                   {inputBank !== "" ? "" : warningBank}
-                                </span>
+                                </span> */}
                                 <div style={{ padding: 10, color: "red" }}>
                                   {textWarning}
                                   {messageCreate}
@@ -923,17 +922,18 @@ function Login() {
                                       data-v-d8556cff=""
                                       className="text-[var(--btn-login)]"
                                     >
-                                      กลับ
+                                      {t("Back")}
                                     </span>
                                   </div>
                                 </button>
                                 <div style={{ width: "10px" }} />
                                 <button
-                                  onClick={() => checkBank()}
+                                  onClick={() => CreateUser()}
                                   data-v-9dec3a92=""
                                   data-v-d8556cff=""
                                   id="btn01"
                                   type="button"
+                                  disabled={inputBank === "" ? true : false}
                                   className="base-button-wrapper v-rounded btn-primary btn-lg btn-primary mt-4 w-full"
                                 >
                                   <div
@@ -944,7 +944,7 @@ function Login() {
                                       data-v-d8556cff=""
                                       className="text-[var(--btn-login)]"
                                     >
-                                      ยืนยัน
+                                      {t("confirm")}
                                     </span>
                                   </div>
                                 </button>
@@ -952,7 +952,8 @@ function Login() {
                             </div>
                           )}
                         </div>
-                        {/* <div
+                        <div
+                          onClick={() => setOpenModalChangeLanguage(true)}
                           data-v-cbca53d4=""
                           class="flex w-full mt-4 justify-center"
                         >
@@ -969,12 +970,12 @@ function Login() {
                                   data-v-704c3ab0=""
                                   alt="flat-img"
                                   class="w-8 h-8 object-cover rounded-full"
-                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAA6ZJREFUaEPlm01IVFEUx3/nTTbONAWtkiCiDxepTRRICQXtKhvcNFFkEdGiFlEbCWpR1qIg2hQtahERfVBkG5msdkGRRVBgZQv7IIKwVZDjjGbzTjx1JkcnnZk36oz3gSDMu+f+f/fcdz/OPVeYpKeNmmVgrVbsaoVKYClQASwAyoer7QN+AN3AZ4EuwXoP9pt63n2aDGlSSKMPWVn3B90osJ6hv3l52v8FPFN4Ngt5soW37XnaGVPMNXAby70JvNsspEGhHphbKHHDdnoE2my01UP//Xo+9rux7wZYItQ0KuwQCLkRkW1ZhYjA3RDvbgGabbmR7+UFHCG4AXQ/6N58KnVfRq6DXA3R8TRXWzkBO91XKT8AHFCoyrWyQr4v0AlcEfqu5NLNswZ+wIrFNlaTIIcKKdytLUUvWdjnt/Lhaza2sgJupbrWgqMg4WyMTv072mLDuQbev5qo7gmBWwmus9CToJsnMja9v8sjGznVQMeL8XSMCzzkWet08cMmER1o+8R4nv4vcPznz8X9A/Z5gSLtxpn9qNDiLbOafPPnZ/ymMwJ3dXV5KxYucmCLaoDK9pNRuNT9/VtTZWXlmEVKRuCeWN9hUS5kW0ExvqfCkbn+8oujtY0BjscHNiTsxGWmeZ4tQCN2eizPQZ+vLG1xkgasqtIb+31t+lZQBcBMMyHX5/hn7xOR1DI0DTgaje9G5Eahq51We6p7AgHfzdQ4nvxHVb29sf4WpmgjMIWNEJnj94ZFZHAAS3k4Go3vQsTZhcy8R7UxEPDdHg18B5EdM4/W2Ujq3UDAtzMFHIsN1CXsxGORgm/ei6L9VOnxWJ5Nfn9Z+2CXrqsNH1PkTFGomyQRgh5vf9VydhA4WBV6wFB4ZiY/bR2dka1SU7Nlmdie15J/wK0kGknhl1qJNRKsDoVR7pWEarcihe0SrAqdBJrd2iqR8s2yqip0U6GxRAS7kilwy/Hwc2egdmWpdAq3O9/wZ5QlpaPZhVLhi+PhXsDvwkwpFY05wAnAKiXVLrTaRgIb1qUNHLTMmpZMXHiYtbQ0bvNg3PbQuACAA7y2NnwMZUaHeBCOv0yGeIwL4jlejkbj5oRph4HNCsQbd9Qy7GVzDtMcYOOOSx1oow7Ek5EEo1IeHGjjkloGu3YqbalYs+8yR7YUzT1tKWnKqMS0f9AGpR6me9qQ5NIktFHpw0looxLER46JxlwBGDURmHPJYyS4Sdd4xsz8RlzU+t9JXrFexfsLeAiy7MYsDWkAAAAASUVORK5CYII="
+                                  src={imageLang}
                                 />
                               </div>
                             </div>
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -984,6 +985,15 @@ function Login() {
           </main>
         </div>
       </div>
+      {openModalChangeLanguage &&
+        createPortal(
+          <ModalLanguage
+            closeModal={ModalChangeLanguage}
+            changeLanguage={changeLanguage}
+            activeLang={activeLang}
+          />,
+          document.body
+        )}
     </div>
   );
 }

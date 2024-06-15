@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
+import { t } from "i18next";
 function BankList() {
   const bank = "BANK";
   const history = useHistory();
@@ -12,9 +13,9 @@ function BankList() {
     if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(text);
-        showSuccessAlert("คัดลอกสำเร็จ");
+        showSuccessAlert(t("Complete"));
       } catch (err) {
-        showErrorAlert("คัดลอกไม่สำเร็จ");
+        showErrorAlert(t("unsuccessful"));
       }
     } else {
       const textArea = document.createElement('textarea');
@@ -23,9 +24,10 @@ function BankList() {
       textArea.select();
       try {
         document.execCommand('copy');
-        showSuccessAlert("คัดลอกสำเร็จ");
+        showSuccessAlert(t("Complete"));
       } catch (err) {
-        showErrorAlert("คัดลอกไม่สำเร็จ");
+        showErrorAlert(t("unsuccessful"));
+
       }
       document.body.removeChild(textArea);
     }
@@ -75,7 +77,7 @@ function BankList() {
                       data-v-fe9de6ba=""
                       className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                     >
-                      <p>ย้อนกลับ</p>
+                      <p>{t("back")}</p>
                     </span>
                   </div>
                 </div>
@@ -104,7 +106,7 @@ function BankList() {
                             data-v-ea58f736=""
                             className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                           >
-                            โอนแบบบัญชี
+                            {t("AccountDeposit")}
                           </span>
                         </div>
                       </div>
@@ -116,7 +118,7 @@ function BankList() {
                         className="text-danger text-lg font-bold"
                         style={{ textAlign: "center", width: "100%" }}
                       >
-                        เติมเงินขั้นต่ำ 1 บาท
+                       {t("Minimum")}
                       </p>
                       <span className="nuxt-icon nuxt-icon--fill text-danger">
                         <svg
@@ -137,7 +139,7 @@ function BankList() {
                       <div className="flex flex-row w-full justify-between">
                         <div className="flex flex-col">
                           <p className="text-active text-sm">
-                            บัญชีที่ต้องโอน:{" "}
+                            {t("AccountToBeTransferred")}:{" "}
                           </p>
                           <div className="w-[45px] h-[45px] mt-4 text-white">
                             <div className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center">
@@ -173,7 +175,7 @@ function BankList() {
                           data-v-9dec3a92=""
                           className="flex justify-center items-center"
                         >
-                          คัดลอกบัญชี
+                        {t("Copy")}
                         </div>
                       </button>
                     </div>
@@ -192,7 +194,7 @@ function BankList() {
                       >
                         <p className="text-danger text-lg font-bold">
                           {" "}
-                          แจ้งเงินไม่เข้า/แบบสลีป{" "}
+                         {t("Slip")}
                         </p>
                       </div>
                       <span

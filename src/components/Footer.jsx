@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Constant from "../constant";
 import { DataLocalStorage } from "../helper";
+import { t } from "i18next";
 function Footer({ Active }) {
   const history = useHistory();
   const [contactUs, setContactUs] = useState("");
   const [activePageTab, setActivePageTab] = useState(Active);
   useEffect(() => {
     const userData = DataLocalStorage();
-    const _configLobby = JSON.parse(localStorage.getItem(Constant.CONFIG_LOBBY));
+    const _configLobby = JSON.parse(
+      localStorage.getItem(Constant.CONFIG_LOBBY)
+    );
 
     if (userData && _configLobby) {
       setContactUs(_configLobby?.s_line);
@@ -125,7 +128,7 @@ function Footer({ Active }) {
                     </svg>
                   </span>
                   <span className="text-[12px] gradientText text-[var(--primary)]">
-                    หน้าหลัก
+                    {t("MainPage")}
                   </span>
                 </div>
               ) : (
@@ -144,7 +147,7 @@ function Footer({ Active }) {
                       ></path>
                     </svg>
                   </span>
-                  <span className="text-[12px]">หน้าหลัก</span>
+                  <span className="text-[12px]"> {t("MainPage")}</span>
                 </div>
               )}
             </a>
@@ -198,7 +201,7 @@ function Footer({ Active }) {
                       </svg>
                     </span>
                     <span className="text-[var(--primary)] gradientText text-[12px]">
-                      โปรโมชั่น
+                      {t("Promotion")}
                     </span>
                   </div>
                 </a>
@@ -238,7 +241,7 @@ function Footer({ Active }) {
                         </defs>
                       </svg>
                     </span>
-                    <span className="text-[12px]">โปรโมชั่น</span>
+                    <span className="text-[12px]">{t("Promotion")}</span>
                   </div>
                 </a>
               )}
@@ -279,7 +282,7 @@ function Footer({ Active }) {
                       : "text-[12px]"
                   }
                 >
-                  ฝาก/ถอน
+                  {t("DepositWithdraw")}
                 </span>
               </div>
             </a>
@@ -355,7 +358,7 @@ function Footer({ Active }) {
                       </svg>
                     </span>
                     <span class="text-[var(--primary)] gradientText text-[12px]">
-                      กระเป่า
+                      {t("bag")}
                     </span>
                   </div>
                 </a>
@@ -380,7 +383,7 @@ function Footer({ Active }) {
                         ></path>
                       </svg>
                     </span>
-                    <span className="text-[12px]">กระเป๋า</span>
+                    <span className="text-[12px]">{t("bag")}</span>
                   </div>
                 </a>
               )}
@@ -417,7 +420,7 @@ function Footer({ Active }) {
                         </defs>
                       </svg>
                     </span>
-                    <span className="text-[12px]">ติดต่อแอดมิน</span>
+                    <span className="text-[12px]">{t("ContactUs")}</span>
                   </div>
                 </a>
               </div>

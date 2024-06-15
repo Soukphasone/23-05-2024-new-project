@@ -3,11 +3,15 @@ import Constant from "../../constant";
 import { LogoutClearLocalStorage, DataLocalStorage } from "../../helper";
 import { showConfirmationAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
-function Modal({ closeModal }) {
+import { useTranslation } from "react-i18next";
+import ModalLanguage from "./ModalLanguage";
+function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [contactUs, setContactUs] = useState("");
   const [logoweb, setLogoweb] = useState("");
+  const [openModalChangeLanguage, setOpenModalChangeLanguage] = useState(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const userData = DataLocalStorage();
@@ -21,23 +25,45 @@ function Modal({ closeModal }) {
       setLogoweb(_configLobby?.s_logo);
     }
   }, []);
-  const LogOut = () => {
-    showConfirmationAlert(() => {
-      LogoutClearLocalStorage();
-    });
+  const handleConfirm = () => {
+    LogoutClearLocalStorage();
   };
-  const NextToProfile = () => {
-    window.location = Constant.PROFILE;
+  const LogOut = () => {
+    showConfirmationAlert(
+      handleConfirm,
+      `${t("Yes")}`,
+      `${t("cancel")}`,
+      `${t("QtLogOut")}`
+    );
+  };
+  const NextToProfile = (e) => {
+    e.preventDefault();
+    // window.location = Constant.PROFILE;
+    history.push(Constant.PROFILE);
+    closeModal();
   };
   const NextToPromotion = () => {
-    window.location = Constant.PROMOTION;
+    history.push(Constant.PROMOTION);
+    closeModal();
   };
   const NextoDeposit = () => {
-    window.location = Constant.DEPOSIT;
+    history.push(Constant.DEPOSIT);
+    closeModal();
   };
   const NextoWithdraw = () => {
-    window.location = Constant.WITHDRAW;
+    history.push(Constant.WITHDRAW);
+    closeModal();
   };
+  // Change Language
+  const ModalChangeLanguage = () => {
+    console.log("ModalChange");
+    setOpenModalChangeLanguage(false);
+  };
+  // const changeLanguage = (lng, img) => {
+  //   setImageLang(img);
+  //   i18n.changeLanguage(lng);
+  //   setActiveLang(lng);
+  // };
   return (
     <div
       className="vfm vfm--fixed vfm--inset"
@@ -96,7 +122,7 @@ function Modal({ closeModal }) {
                 data-v-8bd2676d=""
                 className="flex justify-center items-center"
               >
-                ดูโปรไฟล์
+                {t("AccountInformation")}
               </div>
             </button>
           </div>
@@ -139,7 +165,7 @@ function Modal({ closeModal }) {
                   </svg>
                 </span>
                 <p data-v-c1e135f9="" className="text">
-                  ฝากเงิน
+                  {t("Deposit")}
                 </p>
               </div>
             </div>
@@ -196,7 +222,7 @@ function Modal({ closeModal }) {
                   </svg>
                 </span>
                 <p data-v-33945a64="" className="text">
-                  ถอนเงิน
+                  {t("Withdraw")}
                 </p>
               </div>
             </div>
@@ -221,7 +247,9 @@ function Modal({ closeModal }) {
                   ></path>
                 </svg>
               </span>
-              <p className="text-base text-primary font-normal">โปรโมชั่น</p>
+              <p className="text-base text-primary font-normal">
+                {t("Promotion")}
+              </p>
             </div>
             <a href={contactUs}>
               <div
@@ -244,7 +272,7 @@ function Modal({ closeModal }) {
                   </svg>
                 </span>
                 <p className="text-base text-primary font-normal">
-                  ติดต่อแอดมิน
+                  {t("ContactUs")}
                 </p>
               </div>
             </a>
@@ -278,11 +306,36 @@ function Modal({ closeModal }) {
                   </defs>
                 </svg>
               </span>
-              <p className="text-base text-primary font-normal">ออกจากระบบ</p>
+              <p className="text-base text-primary font-normal">
+                {t("Logout")}
+              </p>
             </div>
           </div>
         </div>
-
+        <div
+          onClick={() => setOpenModalChangeLanguage(true)}
+          data-v-cbca53d4=""
+          class="flex w-full mt-4 justify-center"
+        >
+          <div data-v-704c3ab0="" data-v-cbca53d4="" class="">
+            <div
+              data-v-704c3ab0=""
+              class="flex wrapper items-center justify-center"
+            >
+              <div
+                data-v-704c3ab0=""
+                class="bg-darkCard flex text-white py-[6px] px-4 rounded-[10px]"
+              >
+                <img
+                  data-v-704c3ab0=""
+                  alt="flat-img"
+                  class="w-8 h-8 object-cover rounded-full"
+                  src={imageLang}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
         <button
           data-v-910a7880=""
           className="absolute top-6 text-primary cursor-pointer right-1 px-2"
@@ -303,6 +356,13 @@ function Modal({ closeModal }) {
             </svg>
           </span>
         </button>
+        {openModalChangeLanguage && (
+          <ModalLanguage
+            closeModal={ModalChangeLanguage}
+            changeLanguage={changeLanguage}
+            activeLang={activeLang}
+          />
+        )}
       </div>
     </div>
   );

@@ -101,46 +101,46 @@ export const NewBackList = [
         backgroundColor: "#E71A26",
         image: "/assets/images/bank/icbc.png"
     },
-    {
-        code: 20,
-        bankName: "Joint Development Bank",
-        backgroundColor: "#0A509B",
-        image: "/assets/images/bank/jdb.png"
-    },
-    {
-        code: 21,
-        bankName: "Lao viet Bank",
-        backgroundColor: "#174598",
-        image: "/assets/images/bank/lvb.png"
-    },
-    {
-        code: 22,
-        bankName: "IB Cool",
-        backgroundColor: "#47027A",
-        image: "/assets/images/bank/idb.png"
-    },
-    {
-        code: 23,
-        bankName: "STB Bank",
-        backgroundColor: "#0903F7",
-        image: "/assets/images/bank/stb.png"
-    },
-    {
-        code: 24,
-        bankName: "Agricultural Promotion Bank",
-        backgroundColor: "#28857A",
-        image: "/assets/images/bank/apb.png"
-    },
-    {
-        code: 25,
-        bankName: "Lao Development Bank",
-        backgroundColor: "#0F8FD2",
-        image: "/assets/images/bank/ldb.png"
-    },
-    {
-        code: 26,
-        bankName: "BCEL One",
-        backgroundColor: "#E71A26",
-        image: "/assets/images/bank/bcel.png"
-    },
+    // {
+    //     code: 20,
+    //     bankName: "Joint Development Bank",
+    //     backgroundColor: "#0A509B",
+    //     image: "/assets/images/bank/jdb.png"
+    // },
+    // {
+    //     code: 21,
+    //     bankName: "Lao viet Bank",
+    //     backgroundColor: "#174598",
+    //     image: "/assets/images/bank/lvb.png"
+    // },
+    // {
+    //     code: 22,
+    //     bankName: "IB Cool",
+    //     backgroundColor: "#47027A",
+    //     image: "/assets/images/bank/idb.png"
+    // },
+    // {
+    //     code: 23,
+    //     bankName: "STB Bank",
+    //     backgroundColor: "#0903F7",
+    //     image: "/assets/images/bank/stb.png"
+    // },
+    // {
+    //     code: 24,
+    //     bankName: "Agricultural Promotion Bank",
+    //     backgroundColor: "#28857A",
+    //     image: "/assets/images/bank/apb.png"
+    // },
+    // {
+    //     code: 25,
+    //     bankName: "Lao Development Bank",
+    //     backgroundColor: "#0F8FD2",
+    //     image: "/assets/images/bank/ldb.png"
+    // },
+    // {
+    //     code: 26,
+    //     bankName: "BCEL One",
+    //     backgroundColor: "#E71A26",
+    //     image: "/assets/images/bank/bcel.png"
+    // },
 ]

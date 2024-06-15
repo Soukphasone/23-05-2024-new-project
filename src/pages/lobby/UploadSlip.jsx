@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 import jsQR from "jsqr";
+import { t } from "i18next";
 
 function Upslip() {
   const bank = "BANK";
@@ -34,7 +35,7 @@ function Upslip() {
     const _URL = window.URL || window.webkitURL;
     const url = _URL.createObjectURL(file);
     const imgData = await uploadSlip(url);
-    document.getElementById("fileslip").value = "";
+    document.getElementById("fileSlip").value = "";
     if (imgData != null) {
       try {
         console.log(dataFromLogin?.username);
@@ -108,10 +109,6 @@ function Upslip() {
       img.src = src;
     });
   };
-  const notify = (data) => {
-    console.log(data);
-  };
-
   const _getBankAgentCode = () => {
     let data = JSON.stringify({
       data: banklist?.id,
@@ -172,7 +169,7 @@ function Upslip() {
                       data-v-fe9de6ba=""
                       className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                     >
-                      <p>ย้อนกลับ</p>
+                      <p>{t("back")}</p>
                     </span>
                   </div>
                 </div>
@@ -187,10 +184,10 @@ function Upslip() {
                         style={{ textAlign: "left", width: "100%" }}
                       >
                         {" "}
-                        * หากเครดิตไม่เข้าภายใน 3-5 นาที
+                        * {t("WarnnigUploadSlip1")}
                         <br />
-                        * กรุณาอัพโหลดสลิป
-                        <br />* ติดต่อแอดมิน{" "}
+                        * {t("WarnnigUploadSlip2")}
+                        <br />* {t("ContactUs")}{" "}
                       </p>
                     </div>
                     <div
@@ -209,7 +206,7 @@ function Upslip() {
                           className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
                           id="nuid-1"
                         >
-                          <option>เลือกโปรโมชั่น</option>
+                          <option>{t("ChooseApromotion")}</option>
                           {_promotion?.length > 0 &&
                             _promotion?.map((promotion) => (
                               <option
@@ -233,7 +230,7 @@ function Upslip() {
                         <div className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12">
                           <input
                             style={{ borderRadius: "15px" }}
-                            id="fileslip"
+                            id="fileSlip"
                             onChange={handleFileChange}
                             type="file"
                             className="block w-full text-sm text-[var(--primary)-500
@@ -261,7 +258,7 @@ function Upslip() {
                           data-v-9dec3a92=""
                           className="flex justify-center items-center"
                         >
-                          ส่ง
+                     {t("Send")}
                         </div>
                       </button>
                     </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 import Constant from "../../constant";
 import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
+import { t } from "i18next";
 
 function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
   const history = useHistory();
@@ -20,13 +21,13 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
         }
       );
       if (_resAppover?.data?.statusCode === 0) {
-        showSuccessAlert("รับโปรโมชั่นสำเร็จ");
+        showSuccessAlert(t("Complete"));
         history.push(Constant.DEPOSIT);
         return;
       }
       showErrorAlert(_resAppover?.data?.statusDesc);
     } catch (error) {
-      showErrorAlert("ทำรายการไม่สำเร็จ");
+      showErrorAlert(t("unsuccessful"));
     }
   };
   return (
@@ -34,7 +35,7 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
       className="vfm vfm--fixed vfm--inset modal-top"
       onClick={(e) => {
         if (e.target.className === "vfm vfm--fixed vfm--inset modal-top") {
-          closeModal("close");
+          closeModal();
         }
       }}
       role="dialog"
@@ -100,7 +101,7 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                       data-v-ac0eeeb0=""
                       className="text-active font-medium &lt;sm:text-sm sm:text-sm md:text-base"
                     >
-                      รายละเอียด
+                      {t("detail")}
                     </span>
                     <span
                       data-v-ac0eeeb0=""
@@ -109,10 +110,10 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                       <p> {dataPromotion?.s_detail}</p>
                       <p>&nbsp;</p>
                       <p>
-                        🎀 ฝาก {dataPromotion?.f_max_amount} รับ{" "}
+                        🎀 {t("deposit")} {dataPromotion?.f_max_amount} {t("Get")}{" "}
                         {dataPromotion?.f_percen} 🎀
                       </p>
-                      <p>🌈 จำกัด {dataPromotion?.i_per_day} ครั้ง/วัน 🌈</p>
+                      <p>🌈 {t("Ltd")} {dataPromotion?.i_per_day} {t("time")}/{t("day")} 🌈</p>
                     </span>
                   </div>
                 }
@@ -129,7 +130,7 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                 data-v-9dec3a92=""
                 className="flex justify-center items-center"
               >
-                กดรับ
+                {t("Press")}
               </div>
             </button>
           </div>

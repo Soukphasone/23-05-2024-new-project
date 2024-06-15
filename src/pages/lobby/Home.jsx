@@ -11,6 +11,8 @@ import {
   OpenNewTabWithHTML,
   DataLocalStorage,TokenLocalStorage
 } from "../../helper";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 function HomePage() {
   //
@@ -21,6 +23,8 @@ function HomePage() {
   const [deviceType, setDeviceType] = useState(false);
   const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const { t, i18n } = useTranslation();
+
   const gameType = (TypeGame) => {
     history.push(Constant.TYPE_GAME, TypeGame);
   };
@@ -106,7 +110,7 @@ function HomePage() {
   };
 
   const _getDataGamePlayGame = async (value) => {
-    // console.log("PLAY_GAME_HOME", value)
+    console.log("PLAY_GAME_HOME", value)
     try {
       const _data = {
         s_game_code:
@@ -122,7 +126,7 @@ function HomePage() {
         ip_client: "184.22.14.167",
         s_lang: "th",
       };
-      // console.log("DATA 2 playgame", _data)
+      console.log("Fishing_game", _data)
       // Send the data to the server to get the game URL
       const _res = await axios({
         method: "post",
@@ -288,7 +292,7 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p className="text-sm text-center">หน้าหลัก</p>
+                            <p className="text-sm text-center">{t("MainPage")}</p>
                           </a>
                         </div>
                         <div
@@ -429,7 +433,7 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p className="text-sm text-center">สล็อต</p>
+                            <p className="text-sm text-center">{t("Slot")}</p>
                           </a>
                         </div>
                         <div
@@ -504,7 +508,7 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p className="text-sm text-center">คาสิโน</p>
+                            <p className="text-sm text-center">{t("Casino")}</p>
                           </a>
                         </div>
                         <div
@@ -830,7 +834,7 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p className="text-sm text-center">กีฬา</p>
+                            <p className="text-sm text-center">{t("Sport")}</p>
                           </a>
                         </div>
                         <div
@@ -905,7 +909,7 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p className="text-sm text-center">ยิงปลา</p>
+                            <p className="text-sm text-center">{t("Fishing")}</p>
                           </a>
                         </div>
                       </div>

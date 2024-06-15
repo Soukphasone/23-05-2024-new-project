@@ -6,6 +6,7 @@ import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
+import { t } from "i18next";
 function Withdraw() {
   const history = useHistory();
   const bank = "BANK";
@@ -57,14 +58,14 @@ function Withdraw() {
         data: _data,
     });
       if (_res?.data?.statusCode === 0) {
-        showSuccessAlert("ถอนสำเร็จ");
+        showSuccessAlert(t("Complete"));
         _getData();
         history.push(Constant.DEPOSIT_WITHDRAW);
       } else {
         setReMessage(_res?.data?.statusDesc);
       }
     } catch (error) {
-      showErrorAlert("การถอนล้มเหลว");
+      showErrorAlert(t("unsuccessful"));
     }
   };
 
@@ -105,7 +106,7 @@ function Withdraw() {
                       data-v-fe9de6ba=""
                       className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                     >
-                      <p>ย้อนกลับ</p>
+                      <p>{t("back")}</p>
                     </span>
                   </div>
                 </div>
@@ -113,7 +114,7 @@ function Withdraw() {
                   data-v-6307fb48=""
                   className="cash-back-content border border-primary bg-card-primary card-wrapper gap-y-2 w-full flex flex-col justify-center items-center"
                 >
-                  <h3 data-v-6307fb48="">จำนวนเงินที่ถอนได้</h3>
+                  <h3 data-v-6307fb48="">{t("AmountThatCanBeWithdrawn")}</h3>
                   <h3
                     data-v-6307fb48=""
                     className="text-xl text-active flex justify-center items-center"
@@ -139,7 +140,7 @@ function Withdraw() {
                   </h3>
                   <p data-v-6307fb48="" className="text-sm text-danger">
                     {" "}
-                    ถอนขั้นต่ำ 1.00 บาท{" "}
+                   {t("MinimumWithdrawalFieldBaht")}{" "}
                   </p>
                   <button
                     onClick={() => _withdrawMoney()}
@@ -156,7 +157,7 @@ function Withdraw() {
                       data-v-9dec3a92=""
                       className="flex justify-center items-center"
                     >
-                      ถอนเงิน
+                     {t("Withdraw")}
                     </div>
                   </button>
                 </div>

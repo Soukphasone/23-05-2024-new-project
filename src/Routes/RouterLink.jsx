@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
-import Const, { TYPE_GAME } from "../constant";
+import Const from "../constant";
 
 //------------ pages
-import Login from "../pages/Login";
+import Login from "../pages/home/Login";
 import Lobby from "../pages/lobby/Home";
 import GameType from "../pages/lobby/GameType";
 import Profile from "../pages/lobby/Profile";
@@ -20,7 +20,7 @@ import Cashback from "../pages/lobby/Cashback";
 import Upslip from "../pages/lobby/UploadSlip";
 import Wheel from "../pages/lobby/Wheel";
 import Affiliate from "../pages/lobby/Affiliate";
-import Home from "../pages/Home";
+import Home from "../pages/home/Home";
 function RouterLink() {
   return (
     <>

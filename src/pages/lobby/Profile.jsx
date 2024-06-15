@@ -6,6 +6,8 @@ import { createPortal } from "react-dom";
 import { DataLocalStorage } from "../../helper";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
+import { t } from "i18next";
+
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
   const [username, setUsername] = useState("");
@@ -25,9 +27,9 @@ function Profile() {
     if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(text);
-        showSuccessAlert("คัดลอกสำเร็จ");
+        showSuccessAlert(t("Complete"));
       } catch (err) {
-        showErrorAlert("คัดลอกไม่สำเร็จ");
+        showErrorAlert(t("unsuccessful"));
       }
     } else {
       const textArea = document.createElement('textarea');
@@ -36,9 +38,10 @@ function Profile() {
       textArea.select();
       try {
         document.execCommand('copy');
-        showSuccessAlert("คัดลอกสำเร็จ");
+        showSuccessAlert(t("Complete"));
       } catch (err) {
-        showErrorAlert("คัดลอกไม่สำเร็จ");
+        showErrorAlert(t("unsuccessful"));
+
       }
       document.body.removeChild(textArea);
     }
@@ -130,10 +133,10 @@ function Profile() {
                     <div className="space-y-[10px]">
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
-                          ยูสเซอร์เข้าเกม
+                        {t("UserGame")}
                         </span>
                         <div className="w-full flex items-center gap-x-4 justify-between">
-                          <span className="text-primary text-left w-full max-w-40 truncate text-sm">
+                          <span style={{marginLeft:'10px'}} className="text-primary text-left w-full max-w-40 truncate text-sm">
                             {username}
                           </span>
                           <span className="nuxt-icon nuxt-icon--fill cursor-pointer text-[var(--primary)]">
@@ -170,7 +173,7 @@ function Profile() {
                       </div>
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
-                          เปลี่ยนรหัสผ่าน
+                        {t("ChangePassword")}
                         </span>
                         <div className="w-full flex items-center gap-x-4 justify-between">
                           <span className="text-primary text-left w-full max-w-40 truncate text-sm">
@@ -247,7 +250,7 @@ function Profile() {
                     <div className="space-y-[10px]">
                       <div className="w-full flex justify-center items-center bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
-                          ธนาคาร
+                          {t("Bank")}
                         </span>
                         <div className="w-full flex items-center justify-center gap-x-4">
                           <span
@@ -270,7 +273,7 @@ function Profile() {
                       </div>
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
-                          ชื่อบัญชี
+                          {t("AccountName")}
                         </span>
                         <div className="w-full flex items-center gap-x-4 justify-between">
                           <span className="text-primary text-left w-full max-w-40 truncate text-sm">
@@ -280,7 +283,7 @@ function Profile() {
                       </div>
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
-                          เลขบัญชี
+                          {t("AccountMumber")}
                         </span>
                         <div className="w-full flex items-center gap-x-4 justify-between">
                           <span className="text-primary text-left w-full max-w-40 truncate text-sm">
@@ -298,13 +301,11 @@ function Profile() {
         </div>
       </div>
       {openModal &&
-        createPortal(
           <ChangePassword
             closeModal={handleButtonClick1}
             oldPassword={Password}
-          />,
-          document.body
-        )}
+          />
+        }
     </div>
   );
 }

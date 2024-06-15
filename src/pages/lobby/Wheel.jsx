@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
-import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { useHistory } from "react-router-dom";
 import Roulette from "../../components/Roulette";
 import { showPopupLucky } from "../../helper/SweetAlert";
 import { DataUser } from "../../api/getdatauser";
+import { t } from "i18next";
 
 function Wheel() {
   const history = useHistory();
-  const [dataSpinWheel, setDataSpinWheel] = useState([]);
-  const [limitSpinWheel, setLimitSpinWheel] = useState({});
+  const data = history?.location?.state;
   const [outputSpin, setOutputSpin] = useState("");
   const [currentPoint, setCurrentPoint] = useState("");
   const [notCurrentPoint, setNotCurrentPoint] = useState(0);
@@ -21,39 +20,12 @@ function Wheel() {
     history.push(Constant.BAG);
   };
   useEffect(() => {
-    const userData = DataLocalStorage();
-    if (userData) {
-      setUsername(userData?.username);
-      setAgent(userData?.agent);
+    if (data) {
+      setUsername(data?.username);
+      setAgent(data?.agent);
     }
-    getSpinWheel();
   }, []);
-  const getSpinWheel = async () => {
-    let data = JSON.stringify({
-      s_agent_code: Constant?.AGENT_CODE,
-    });
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: `${Constant.SERVER_URL}/LuckyWheel/Inquiry?XDEBUG_SESSION_START=netbeans-xdebug`,
-      headers: {
-        "authorization-agent": "{{AUTHEN-VALUE-AGENT}}",
-        "authorization-token": "{{AUTHEN-VALUE-TOKEN}}",
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
 
-    axios
-      .request(config)
-      .then((response) => {
-        setDataSpinWheel(response.data.data[0]?.eventItem);
-        setLimitSpinWheel(response.data.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   useEffect(() => {
     _getData();
   }, [username]);
@@ -109,7 +81,7 @@ function Wheel() {
                       data-v-fe9de6ba=""
                       className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                     >
-                      <p>ย้อนกลับ</p>
+                      <p>{t("back")}</p>
                     </span>
                   </div>
                 </div>
@@ -120,27 +92,33 @@ function Wheel() {
                   <h1
                     style={{ color: "#FFE1A6", fontWeight: 500, fontSize: 19 }}
                   >
-                    วงล้อลุ้นโชค
+                    {t("Wheel")}
                   </h1>
                   <span
                     style={{ width: "100%", textAlign: "left" }}
                     data-v-fe9de6ba=""
                     className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                   >
-                    <p>แต้มทั้งหมด: {currentPoint || 0}</p>
+                    <p>{t("TotalPoints")}: {currentPoint || 0}</p>
                   </span>
-                  {dataSpinWheel.length > 0 && (
+                  {data?.dataSpinWheel.length > 0 && (
                     <Roulette
-                      data={dataSpinWheel}
+                      data={data?.dataSpinWheel}
                       setOutputSpin={setOutputSpin}
-                      username={username}
+                      username={data?.username}
                       setCurrentPoint={setCurrentPoint}
                       setNotCurrentPoint={setNotCurrentPoint}
                     />
                   )}
                   <div style={{ width: "100%", textAlign: "left" }}>
-                    <p style={{ margin: "none", marginTop: 10, color: "#09FF2B" }}>
-                      เครดิตกงล้อ : {outputSpin}
+                    <p
+                      style={{
+                        margin: "none",
+                        marginTop: 10,
+                        color: "#09FF2B",
+                      }}
+                    >
+                      {t("creditWheel")} : {outputSpin}
                     </p>
                     <div
                       style={{
@@ -150,20 +128,21 @@ function Wheel() {
                         textDecoration: "underline",
                       }}
                     >
-                      รายละเอียด
+                      {t("details")}
                     </div>
-                    <div style={{color:'#FFE1A6'}}>
-                    <p style={{ margin: "none", }}>
-                      - หมุนวงล้อได้ทั้งหมด {limitSpinWheel?.i_max} ครั้ง
-                    </p>
-                    <p style={{ margin: "none" }}>
-                      {" "}
-                      - ใช้สิทธิไปแล้ว {notCurrentPoint} ครั้ง
-                    </p>
-                    <p style={{ margin: "none" }}>
-                      - ภายในวันสามารถใข้สิทธิได้ {limitSpinWheel?.i_per_day}{" "}
-                      ครั้ง
-                    </p>
+                    <div style={{ color: "#FFE1A6" }}>
+                      <p style={{ margin: "none" }}>
+                        - {t("SpinAllTheWheels")} {data?.limitSpinWheel?.i_max}{" "}
+                        {t("times")}
+                      </p>
+                      <p style={{ margin: "none" }}>
+                        {" "}
+                        - {t("RightsAlreadyExercised")} {notCurrentPoint} {t("times")}
+                      </p>
+                      <p style={{ margin: "none" }}>
+                        - {t("WithinTheDay")}{" "}
+                        {data?.limitSpinWheel?.i_per_day} {t("times")}
+                      </p>
                     </div>
                   </div>
                 </div>

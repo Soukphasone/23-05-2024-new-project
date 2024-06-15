@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import axios from "axios";
+import { t } from "i18next";
 function Affiliate() {
   const history = useHistory();
   const dataFromLogin = history?.location?.state;
@@ -170,7 +171,7 @@ function Affiliate() {
                       data-v-fe9de6ba=""
                       className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
                     >
-                      <p>ย้อนกลับ</p>
+                      <p>{t("back")}</p>
                     </span>
                   </div>
                 </div>
@@ -178,7 +179,7 @@ function Affiliate() {
                   data-v-6307fb48=""
                   className="cash-back-content border border-primary bg-card-primary card-wrapper gap-y-2 w-full flex flex-col justify-center items-center"
                 >
-                  <h1 style={{ color: "#ffe1a6" }}>ส่วนแบ่ง Affiliate</h1>
+                  <h1 style={{ color: "#ffe1a6" }}>{t("AffiliateShare")}</h1>
                   <div className="earn-modal-content">
                     <div className="earn-tab-container">
                       <div className="border-input-gold">
@@ -192,7 +193,7 @@ function Affiliate() {
                                 : "earn-tab-item"
                             }
                           >
-                            ภาพรวม
+                            {t("Overview")}
                           </div>
                           <div
                             className="border-input-gold earn-tab-item-2"
@@ -206,7 +207,7 @@ function Affiliate() {
                                   : "earn-tab-item"
                               }
                             >
-                              รายได้
+                              {t("income")}
                             </div>
                           </div>
                           <div
@@ -218,7 +219,7 @@ function Affiliate() {
                                 : "earn-tab-item"
                             }
                           >
-                            ถอนรายได้
+                            {t("WithdrawIncome")}
                           </div>
                         </div>
                       </div>
@@ -231,7 +232,7 @@ function Affiliate() {
                       }}
                     >
                       <div className="filter-date">
-                        <p className="filter-label">ภาพรวมวันที่</p>
+                        <p className="filter-label">{t("DateOverview")}</p>
                         <input
                           className="filter-date-input"
                           value={overviewDate}
@@ -245,13 +246,12 @@ function Affiliate() {
                         <div className="table-earn-date">
                           <div className="border-input-gold">
                             <div className="th-earn-container">
-                              <span className="th-earn">วันที่</span>
-                              <span className="th-earn">สมัคร</span>
-                              <span className="th-earn">ฝากเงิน</span>
-                              <span className="th-earn">รายได้</span>
+                              <span className="th-earn">{t("date")}</span>
+                              <span className="th-earn">{t("apply")}</span>
+                              <span className="th-earn">{t("Deposit")}</span>
+                              <span className="th-earn">{t("income")}</span>
                             </div>
                           </div>
-
                           <div className="tr-earn-container">
                             {dataOverview.length > 0 &&
                               dataOverview?.map((item, index) => (
@@ -267,17 +267,15 @@ function Affiliate() {
                       </div>
                       <br />
                       <div className="filter-date">
-                        <p className="filter-label">ภาพรวมทั้งเดือน</p>
+                        <p className="filter-label">{t("MonthlyOverview")}</p>
                         <select
                           className="filter-date-input"
                           onChange={(event) =>
                             _selectYear(event?.target?.value)
                           }
                         >
-                           <option value="">
-                            เลือกปี
-                           </option>
-                          {years.map((year) => ( 
+                          <option value="">{t("ChooseYear")}</option>
+                          {years.map((year) => (
                             <option key={year} value={year}>
                               {year}
                             </option>
@@ -288,10 +286,10 @@ function Affiliate() {
                         <div className="table-earn-date">
                           <div className="border-input-gold">
                             <div className="th-earn-container">
-                              <span className="th-earn">เดือน</span>
-                              <span className="th-earn">สมัคร</span>
-                              <span className="th-earn">ฝากเงิน</span>
-                              <span className="th-earn">รายได้</span>
+                              <span className="th-earn">{t("month")}</span>
+                              <span className="th-earn">{t("apply")}</span>
+                              <span className="th-earn">{t("Deposit")}</span>
+                              <span className="th-earn">{t("income")}</span>
                             </div>
                           </div>
 
@@ -323,7 +321,7 @@ function Affiliate() {
                       }}
                     >
                       <div className="filter-date">
-                        <p className="filter-label">ประวัติรายได้</p>
+                        <p className="filter-label">{t("IncomeHistory")}</p>
                         <div style={{ float: "right", display: "flex" }}>
                           <input
                             className="filter-date-input"
@@ -348,8 +346,8 @@ function Affiliate() {
                         <div className="table-earn-date">
                           <div className="border-input-gold">
                             <div className="th-earn-container">
-                              <span className="th-earn">รอบบิล</span>
-                              <span className="th-earn">จำนวนเงิน</span>
+                              <span className="th-earn">{t("BillingCycle")}</span>
+                              <span className="th-earn">{t("AmountOfMoney")}</span>
                             </div>
                           </div>
 
@@ -381,7 +379,7 @@ function Affiliate() {
                       <div className="border-input-gold">
                         <div className="form-withdraw-income">
                           <div className="form-withdraw-group">
-                            <p className="filter-label">รายได้ปัจจุบัน</p>
+                            <p className="filter-label">{t("CurrentIncome")}</p>
                             <input
                               style={{ color: "#000" }}
                               type="text"
@@ -403,14 +401,18 @@ function Affiliate() {
                               data-v-9dec3a92=""
                               id="btn01"
                               type="submit"
-                              disabled={dataFromLogin?.balance?.affiliate>0? false:true}
+                              disabled={
+                                dataFromLogin?.balance?.affiliate > 0
+                                  ? false
+                                  : true
+                              }
                               className="base-button-wrapper v-rounded btn-primary btn-md mt-4 font-medium text-base cursor-pointer border border-fontPrimary w-full rounded-base btn-primary h-[38px] flex items-center justify-center"
                             >
                               <div
                                 data-v-9dec3a92=""
                                 className="flex justify-center items-center"
                               >
-                                ถอน
+                                {t("withdraw")}
                               </div>
                             </button>
                           </div>
@@ -421,15 +423,15 @@ function Affiliate() {
                         className="filter-date"
                         style={{ marginBottom: "5px" }}
                       >
-                        <p className="filter-label">ประวัติรายได้</p>
+                        <p className="filter-label">{t("IncomeHistory")}</p>
                       </div>
 
                       <div className="border-input-gold">
                         <div className="table-earn-date">
                           <div className="border-input-gold">
                             <div className="th-earn-container">
-                              <span className="th-earn">วัน/เวลา</span>
-                              <span className="th-earn">จำนวนเงิน</span>
+                              <span className="th-earn">{t("DateTime")}</span>
+                              <span className="th-earn">{t("AmountOfMoney")}</span>
                             </div>
                           </div>
 

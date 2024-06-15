@@ -3,13 +3,14 @@ import axios from "axios";
 // import Letter_slide from "../../components/Letter_slide";
 import Header from "../../components/Header";
 import ModalCredit from "../../components/Modal/ModalCredit";
-import { createPortal } from "react-dom";
+
 import ShareLink from "../../components/Modal/ShareLink";
 import History from "../../components/Modal/History";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import { DataLocalStorage } from "../../helper";
+import { t } from "i18next";
 
 function Bag() {
   const bag = "BAG";
@@ -18,6 +19,8 @@ function Bag() {
   const [dataHistoryWithdraw, setDataHistoryWithdraw] = useState([]);
   const [dataHistoryDeposit, setDataHistoryDeposit] = useState([]);
   const [dataHistoryBonus, setDataHistoryBonus] = useState([]);
+  const [dataSpinWheel, setDataSpinWheel] = useState([]);
+  const [limitSpinWheel, setLimitSpinWheel] = useState({});
 
   const [openModalSharelink, setOpenModasharelink] = useState(false);
   const [openModalHis, setOpenModalHis] = useState(false);
@@ -36,7 +39,12 @@ function Bag() {
     history.push(Constant.CASH_BACK);
   };
   const NextoWheel = () => {
-    window.location = (Constant.WHEEL);
+    history.push(Constant.WHEEL, {
+      username: dataFromLogin?.username,
+      agent: dataFromLogin?.agent,
+      dataSpinWheel: dataSpinWheel,
+      limitSpinWheel: limitSpinWheel,
+    });
   };
   const NextoAffiliate = () => {
     history.push(Constant.AFFILIATE, dataFromLogin);
@@ -51,6 +59,7 @@ function Bag() {
   useEffect(() => {
     if (dataFromLogin) {
       _getData();
+      getSpinWheel();
     }
   }, [dataFromLogin]);
 
@@ -68,6 +77,34 @@ function Bag() {
       setDataHistoryBonus(_resHistoryMoney?.data?.data?.bonus);
       setDataHistoryWithdraw(_resHistoryMoney?.data?.data?.withdraw);
     }
+  };
+
+  // Wheel
+  const getSpinWheel = async () => {
+    let data = JSON.stringify({
+      s_agent_code: Constant?.AGENT_CODE,
+    });
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${Constant.SERVER_URL}/LuckyWheel/Inquiry?XDEBUG_SESSION_START=netbeans-xdebug`,
+      headers: {
+        "authorization-agent": "{{AUTHEN-VALUE-AGENT}}",
+        "authorization-token": "{{AUTHEN-VALUE-TOKEN}}",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        setDataSpinWheel(response.data.data[0]?.eventItem);
+        setLimitSpinWheel(response.data.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="overflow-x-hidden overflow-y-auto text-primary">
@@ -334,7 +371,7 @@ function Bag() {
                         </div>
                       </a>
                       <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
-                        สร้างรายได้
+                        {t("MakeMoney")}
                       </h5>
                     </div>
                     <div
@@ -713,7 +750,7 @@ function Bag() {
                         </div>
                       </a>
                       <h5 class="text-xs text-primary mt-1 truncate w-[75px]">
-                        วงล้อลุ้นโชค
+                        {t("Wheel")}
                       </h5>
                     </div>
                     <div
@@ -838,7 +875,7 @@ function Bag() {
                         </div>
                       </a>
                       <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
-                        คืนยอดเสีย
+                        {t("ReturnTheLostAmount")}
                       </h5>
                     </div>
                     <div
@@ -976,7 +1013,7 @@ function Bag() {
                         </div>
                       </a>
                       <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
-                        ประวัติ
+                        {t("history")}
                       </h5>
                     </div>
                     <div
@@ -1025,7 +1062,7 @@ function Bag() {
                         </div>
                       </a>
                       <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
-                        ถอน Affiliate
+                        {t("WithdrawAffiliate")}
                       </h5>
                     </div>
                   </div>
@@ -1036,24 +1073,17 @@ function Bag() {
           <Footer Active={bag} />
         </div>
       </div>
-      {openModalSharelink &&
-        createPortal(
-          <ShareLink
-            closeModal={ModalSharelink}
-            dataFromLogin={dataFromLogin}
-          />,
-          document.body
-        )}
-      {openModalHis &&
-        createPortal(
-          <History
-            closeModal={ModalHistory}
-            dataHistoryDeposit={dataHistoryDeposit}
-            dataHistoryWithdraw={dataHistoryWithdraw}
-            dataHistoryBonus={dataHistoryBonus}
-          />,
-          document.body
-        )}
+      {openModalSharelink && (
+        <ShareLink closeModal={ModalSharelink} dataFromLogin={dataFromLogin} />
+      )}
+      {openModalHis && (
+        <History
+          closeModal={ModalHistory}
+          dataHistoryDeposit={dataHistoryDeposit}
+          dataHistoryWithdraw={dataHistoryWithdraw}
+          dataHistoryBonus={dataHistoryBonus}
+        />
+      )}
     </div>
   );
 }
