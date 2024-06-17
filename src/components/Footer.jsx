@@ -390,8 +390,8 @@ function Footer({ Active }) {
               )}
             </div>
             <div className="item">
-              <div className="">
-                <a href={contactUs} className="">
+              <div >
+                <a href={contactUs} target="_blank" rel="noreferrer">
                   <div className="relative">
                     <span className="nuxt-icon nuxt-icon--fill text-[23px]">
                       <svg

@@ -271,7 +271,7 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
                 {t("Promotion")}
               </p>
             </div>
-            <a href={contactUs}>
+            <a href={contactUs} target="_blank" rel="noreferrer">
               <div
                 style={{ marginTop: "16px" }}
                 data-v-910a7880=""
