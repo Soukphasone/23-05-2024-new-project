@@ -148,7 +148,7 @@ function Cashback() {
                     {dataFromLogin?.balance?.cashback}
                   </h3>
                   <p>
-                    อัพเดทล่าสุด
+                    {t("LatestUpdate")}
                   </p>
                   <p>
                     {historyCashBack?.length > 0 &&
@@ -166,13 +166,13 @@ function Cashback() {
                       dataFromLogin?.balance?.cashback > 0 ? false : true
                     }
                     className="base-button-wrapper v-rounded btn-primary btn-md btn-primary mb-[10px] cursor-pointer"
-                    label="รับเครดิต"
+                    label={t("GetCredit")}
                   >
                     <div
                       data-v-9dec3a92=""
                       className="flex justify-center items-center"
                     >
-                      รับเครดิต
+                      {t("GetCredit")}
                     </div>
                   </button>
                   <div style={{ textAlign: "center", color: "red" }}>
@@ -191,7 +191,7 @@ function Cashback() {
                     data-v-c89fa524=""
                     className="&lt;sm:text-base sm:text-base md:text-lg"
                   >
-                    ประวัติการรับเครดิต
+                    {t("CreditReceivingHistory")}
                   </div>
                   <span data-v-c89fa524="" className="nuxt-icon text-[22px]">
                     <svg

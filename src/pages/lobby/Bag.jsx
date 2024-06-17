@@ -193,14 +193,14 @@ function Bag() {
                                   y2="20.4578"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -211,14 +211,14 @@ function Bag() {
                                   y2="17.0214"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -229,14 +229,14 @@ function Bag() {
                                   y2="17.0209"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -247,14 +247,14 @@ function Bag() {
                                   y2="20.4573"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -265,14 +265,14 @@ function Bag() {
                                   y2="11.1523"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -283,14 +283,14 @@ function Bag() {
                                   y2="32.4317"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -301,14 +301,14 @@ function Bag() {
                                   y2="4.51893"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -319,14 +319,14 @@ function Bag() {
                                   y2="12.2462"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -337,14 +337,14 @@ function Bag() {
                                   y2="21.8411"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -355,14 +355,14 @@ function Bag() {
                                   y2="23.8935"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                               </defs>
@@ -464,14 +464,14 @@ function Bag() {
                                   y2="5.15132"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -482,14 +482,14 @@ function Bag() {
                                   y2="10.5117"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -500,14 +500,14 @@ function Bag() {
                                   y2="25.0412"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -518,14 +518,14 @@ function Bag() {
                                   y2="12.9747"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -536,14 +536,14 @@ function Bag() {
                                   y2="15.9222"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -554,14 +554,14 @@ function Bag() {
                                   y2="10.5117"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -572,14 +572,14 @@ function Bag() {
                                   y2="12.9906"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -590,14 +590,14 @@ function Bag() {
                                   y2="13.2346"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -608,14 +608,14 @@ function Bag() {
                                   y2="15.9322"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -626,14 +626,14 @@ function Bag() {
                                   y2="17.2771"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -644,14 +644,14 @@ function Bag() {
                                   y2="23.9283"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -662,14 +662,14 @@ function Bag() {
                                   y2="19.8269"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -680,14 +680,14 @@ function Bag() {
                                   y2="19.827"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -698,14 +698,14 @@ function Bag() {
                                   y2="13.2347"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -716,14 +716,14 @@ function Bag() {
                                   y2="23.9283"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -734,14 +734,14 @@ function Bag() {
                                   y2="19.9354"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                               </defs>
@@ -749,7 +749,7 @@ function Bag() {
                           </span>
                         </div>
                       </a>
-                      <h5 class="text-xs text-primary mt-1 truncate w-[75px]">
+                      <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
                         {t("Wheel")}
                       </h5>
                     </div>
@@ -771,7 +771,7 @@ function Bag() {
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <g clip-path="url(#clip0_5853_103217)">
+                              <g clipPath="url(#clip0_5853_103217)">
                                 <path
                                   d="M3.04688 30H0.878906C0.393516 30 0 29.6065 0 29.1211V18.5742C0 18.0888 0.393516 17.6953 0.878906 17.6953H3.04688C3.53227 17.6953 3.92578 18.0888 3.92578 18.5742V29.1211C3.92578 29.6065 3.53227 30 3.04688 30Z"
                                   fill="url(#paint0_linear_5853_103217)"
@@ -798,14 +798,14 @@ function Bag() {
                                   y2="21.3566"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -816,14 +816,14 @@ function Bag() {
                                   y2="32.6147"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -834,14 +834,14 @@ function Bag() {
                                   y2="12.8174"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -852,14 +852,14 @@ function Bag() {
                                   y2="11.0259"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <clipPath id="clip0_5853_103217">
@@ -925,14 +925,14 @@ function Bag() {
                                   y2="10.3858"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -943,14 +943,14 @@ function Bag() {
                                   y2="9.94651"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -961,14 +961,14 @@ function Bag() {
                                   y2="4.61448"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -979,14 +979,14 @@ function Bag() {
                                   y2="8.68106"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                                 <linearGradient
@@ -997,14 +997,14 @@ function Bag() {
                                   y2="28.5114"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                               </defs>
@@ -1013,7 +1013,7 @@ function Bag() {
                         </div>
                       </a>
                       <h5 className="text-xs text-primary mt-1  w-[75px]">
-                        {t("history")}
+                        {t("TransactionHistory")}
                       </h5>
                     </div>
                     <div
@@ -1046,14 +1046,14 @@ function Bag() {
                                   y2="22.375"
                                   gradientUnits="userSpaceOnUse"
                                 >
-                                  <stop stop-color="var(--main-icon-1)"></stop>
+                                  <stop stopColor="var(--main-icon-1)"></stop>
                                   <stop
                                     offset="0.5"
-                                    stop-color="var(--main-icon-2)"
+                                    stopColor="var(--main-icon-2)"
                                   ></stop>
                                   <stop
                                     offset="1"
-                                    stop-color="var(--main-icon-3)"
+                                    stopColor="var(--main-icon-3)"
                                   ></stop>
                                 </linearGradient>
                               </defs>

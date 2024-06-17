@@ -349,14 +349,14 @@ function GameType() {
                                     y2="14.9062"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                 </defs>

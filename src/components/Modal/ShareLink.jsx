@@ -1,14 +1,19 @@
-import { t } from "i18next";
+
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
+import { useTranslation } from "react-i18next";
+
 function ShareLink({ closeModal, dataFromLogin }) {
-  
+  const { t } = useTranslation();
+  const configLobby = JSON.parse(
+    localStorage.getItem("CONFIG_LOBBY")
+  );
   const _copyText = async (text) => {
     if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(text);
-        showSuccessAlert("คัดลอกสำเร็จ");
+        showSuccessAlert(t("SuccessfullyCopiedLink"));
       } catch (err) {
-        showErrorAlert("คัดลอกไม่สำเร็จ");
+        showErrorAlert(t("FailedToCopyLink"));
       }
     } else {
       const textArea = document.createElement('textarea');
@@ -17,9 +22,9 @@ function ShareLink({ closeModal, dataFromLogin }) {
       textArea.select();
       try {
         document.execCommand('copy');
-        showSuccessAlert("คัดลอกสำเร็จ");
+        showSuccessAlert(t("SuccessfullyCopiedLink"));
       } catch (err) {
-        showErrorAlert("คัดลอกไม่สำเร็จ");
+        showErrorAlert(t("FailedToCopyLink"));
       }
       document.body.removeChild(textArea);
     }
@@ -36,8 +41,6 @@ function ShareLink({ closeModal, dataFromLogin }) {
         }
       }}
       style={{ zIndex: 1000 }}
-      role="dialog"
-      aria-modal="true"
       id="cash-back-history-modal"
       title=""
     >
@@ -51,7 +54,7 @@ function ShareLink({ closeModal, dataFromLogin }) {
       >
         <div data-v-e339f85c="">
           <div data-v-e339f85c="" className="text-center text-primary">
-           <p>{t("ReferAFriendLink")}</p>
+            <p>{t("ReferAFriendLink")}</p>
             <p className="text-center mt-1 text-secondary text-xs">
               {t("YouwillEarnFree")}
             </p>
@@ -68,19 +71,19 @@ function ShareLink({ closeModal, dataFromLogin }) {
                   <input
                     data-v-d0ca5c5c=""
                     className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
-                    value={dataFromLogin?.shortUrl}
+                    value={configLobby?.s_link_shorturl + dataFromLogin?.shortUrl.split("=")[1]}
                   />
                 </span>
                 <span className="nuxt-icon nuxt-icon--fill cursor-pointer text-[var(--primary)]">
                   <svg
-                    onClick={() => _copyText(dataFromLogin?.shortUrl)}
+                    onClick={() => _copyText(configLobby?.s_link_shorturl + dataFromLogin?.shortUrl.split("=")[1])}
                     width="16"
                     height="16"
                     viewBox="0 0 16 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0_268_1612)">
+                    <g clipPath="url(#clip0_268_1612)">
                       <path
                         d="M11.4286 2.85712H1.71428C0.767511 2.85712 0 3.62463 0 4.5714V14.2857C0 15.2324 0.767511 16 1.71428 16H11.4286C12.3753 16 13.1428 15.2324 13.1428 14.2857V4.5714C13.1428 3.62463 12.3753 2.85712 11.4286 2.85712Z"
                         fill="var(--primary)"

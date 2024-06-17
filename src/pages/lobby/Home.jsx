@@ -213,7 +213,7 @@ function HomePage() {
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
-                                <g clip-path="url(#clip0_5932_3335)">
+                                <g clipPath="url(#clip0_5932_3335)">
                                   <g filter="url(#filter0_d_5932_3335)">
                                     <path
                                       d="M18.1824 11.6372H17.8284C17.6072 11.6372 17.4744 11.8142 17.4744 11.9911V12.5221H16.6337V11.9911C16.6337 11.7699 16.4567 11.6372 16.2797 11.6372H15.9258C15.7045 11.6372 15.5718 11.8142 15.5718 11.9911V12.5221H14.6426V11.9911C14.6426 11.7699 14.4656 11.6372 14.2886 11.6372H13.5364V9.0708H14.3771C14.5541 9.0708 14.7311 8.9823 14.7754 8.80531C14.8639 8.62832 14.8196 8.45133 14.6869 8.31858L10.4391 4.15929C10.3949 4.11504 10.3064 4.0708 10.2179 4.02655V2.38938H13.1825C13.4479 2.38938 13.6249 2.16814 13.6249 1.9469V0.707965C13.6249 0.442478 13.4037 0.265487 13.1825 0.265487H10.2179V0.176991C10.2179 0.0884956 10.1294 0 10.0409 0H9.90813C9.81963 0 9.73114 0.0884956 9.73114 0.176991V4.02655C9.64264 4.0708 9.59839 4.11504 9.55414 4.15929L5.39478 8.31858C5.26204 8.45133 5.21779 8.62832 5.30629 8.80531C5.39478 8.9823 5.52753 9.0708 5.70452 9.0708H6.54522V11.6372H5.83726C5.61602 11.6372 5.48328 11.8142 5.48328 11.9911V12.5221H4.55407V11.9911C4.55407 11.7699 4.37708 11.6372 4.20009 11.6372H3.80186C3.58062 11.6372 3.44788 11.8142 3.44788 11.9911V12.5221H2.56292V11.9911C2.56292 11.7699 2.38593 11.6372 2.20894 11.6372H1.85496C1.63372 11.6372 1.50098 11.8142 1.50098 11.9911V14.5575C1.50098 14.7787 1.67797 14.9115 1.85496 14.9115H2.69567V19.646C2.69567 19.8673 2.87266 20 3.04965 20H7.60717V15.885C7.60717 15 8.31514 14.2921 9.20009 14.2921H10.8373C11.7222 14.2921 12.4302 15 12.4302 15.885V20H16.9435C17.1647 20 17.2974 19.823 17.2974 19.646V14.9115H18.1381C18.3594 14.9115 18.4921 14.7345 18.4921 14.5575V11.9912C18.5364 11.7699 18.3594 11.6372 18.1824 11.6372Z"
@@ -271,14 +271,14 @@ function HomePage() {
                                     y2="15.2161"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <clipPath id="clip0_5932_3335">
@@ -347,14 +347,14 @@ function HomePage() {
                                     y2="8.80881"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -365,14 +365,14 @@ function HomePage() {
                                     y2="3.66596"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -383,14 +383,14 @@ function HomePage() {
                                     y2="17.7285"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -401,14 +401,14 @@ function HomePage() {
                                     y2="8.84457"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -419,14 +419,14 @@ function HomePage() {
                                     y2="8.84457"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                 </defs>
@@ -476,14 +476,14 @@ function HomePage() {
                                     y2="17.4999"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -494,14 +494,14 @@ function HomePage() {
                                     y2="14.2683"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                 </defs>
@@ -534,7 +534,7 @@ function HomePage() {
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
-                                <g clip-path="url(#clip0_5932_3539)">
+                                <g clipPath="url(#clip0_5932_3539)">
                                   <path
                                     d="M19.1867 5.04081V9.54156C17.9379 8.17574 16.1428 7.31718 14.1461 7.31718C10.3804 7.31718 7.31694 10.3806 7.31694 14.1464C7.31694 15.2586 7.58356 16.3122 8.05838 17.2357H1.78856C0.799938 17.2357 0 16.4357 0 15.4472V5.04081C0 4.05218 0.8 3.25224 1.78856 3.25224H17.3981C18.3867 3.25224 19.1867 4.05224 19.1867 5.04081Z"
                                     fill="url(#paint0_linear_5932_3539)"
@@ -597,14 +597,14 @@ function HomePage() {
                                     y2="18.5206"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -615,14 +615,14 @@ function HomePage() {
                                     y2="3.20399"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -633,14 +633,14 @@ function HomePage() {
                                     y2="3.20391"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -651,14 +651,14 @@ function HomePage() {
                                     y2="10.666"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -669,14 +669,14 @@ function HomePage() {
                                     y2="13.0655"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -687,14 +687,14 @@ function HomePage() {
                                     y2="14.1885"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -705,14 +705,14 @@ function HomePage() {
                                     y2="14.2213"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -723,14 +723,14 @@ function HomePage() {
                                     y2="13.0659"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -741,14 +741,14 @@ function HomePage() {
                                     y2="20.4395"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -759,14 +759,14 @@ function HomePage() {
                                     y2="18.783"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -777,14 +777,14 @@ function HomePage() {
                                     y2="18.7834"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -795,14 +795,14 @@ function HomePage() {
                                     y2="14.2213"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -813,14 +813,14 @@ function HomePage() {
                                     y2="20.7119"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <clipPath id="clip0_5932_3539">
@@ -877,14 +877,14 @@ function HomePage() {
                                     y2="18.4508"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                   <linearGradient
@@ -895,14 +895,14 @@ function HomePage() {
                                     y2="3.68638"
                                     gradientUnits="userSpaceOnUse"
                                   >
-                                    <stop stop-color="var(--main-icon-1)"></stop>
+                                    <stop stopColor="var(--main-icon-1)"></stop>
                                     <stop
                                       offset="0.5"
-                                      stop-color="var(--main-icon-2)"
+                                      stopColor="var(--main-icon-2)"
                                     ></stop>
                                     <stop
                                       offset="1"
-                                      stop-color="var(--main-icon-3)"
+                                      stopColor="var(--main-icon-3)"
                                     ></stop>
                                   </linearGradient>
                                 </defs>

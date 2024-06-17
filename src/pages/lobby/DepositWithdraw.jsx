@@ -144,16 +144,16 @@ function DepositWithdraw() {
                 >
                   <div
                     data-v-e339f85c=""
-                    class="bg-[var(--card-primary)] text-primary flex light-theme-box-shadow cursor-pointer rounded-base flex-row w-full h-[54px] Wrapper mt-3 items-center justify-between"
+                    className="bg-[var(--card-primary)] text-primary flex light-theme-box-shadow cursor-pointer rounded-base flex-row w-full h-[54px] Wrapper mt-3 items-center justify-between"
                   >
-                    <div data-v-e339f85c="" class="flex space-x-2 items-center">
+                    <div data-v-e339f85c="" className="flex space-x-2 items-center">
                       <div
                         data-v-e339f85c=""
-                        class="bg-darkCard w-[36px] h-[36px] grid place-content-center rounded-full"
+                        className="bg-darkCard w-[36px] h-[36px] grid place-content-center rounded-full"
                       >
                         <span
                           data-v-e339f85c=""
-                          class="nuxt-icon nuxt-icon--fill text-active text-2xl"
+                          className="nuxt-icon nuxt-icon--fill text-active text-2xl"
                         >
                           <svg
                             width="21"
@@ -171,18 +171,18 @@ function DepositWithdraw() {
                       </div>
                       <p
                         data-v-e339f85c=""
-                        class="font-semibold <sm:text-sm sm:text-sm md:text-lg"
+                        className="font-semibold <sm:text-sm sm:text-sm md:text-lg"
                       >
                         {t("FreeCredit")}
                       </p>
                     </div>
                     <div
                       data-v-d9762dab=""
-                      class="icon-arrow-card flex justify-center items-center p-2 cursor-pointer"
+                      className="icon-arrow-card flex justify-center items-center p-2 cursor-pointer"
                     >
                       <span
                         data-v-d9762dab=""
-                        class="nuxt-icon nuxt-icon--fill text-2xl text-active icon-arrow rounded-full"
+                        className="nuxt-icon nuxt-icon--fill text-2xl text-active icon-arrow rounded-full"
                       >
                         <svg
                           width="7"

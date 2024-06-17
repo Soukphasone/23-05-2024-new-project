@@ -17,8 +17,6 @@ function Header() {
   const [activeLang, setActiveLang] = useState("th");
 
   useEffect(() => {
-    const _dataUser = JSON.parse(localStorage.getItem(Constant.CONFIG_LOBBY));
-    console.log("_dataUser:: ", _dataUser)
     const Data = DataLocalStorage();
     if (Data) {
       setUsername(Data?.username);
@@ -132,11 +130,11 @@ function Header() {
                       </p>
                       <div
                         data-v-4b602944=""
-                        class="grid place-content-center rounded-full w-[20px] transferIcon h-[20px] bg-[var(--primary)]"
+                        className="grid place-content-center rounded-full w-[20px] transferIcon h-[20px] bg-[var(--primary)]"
                       >
                         <span
                           data-v-4b602944=""
-                          class="nuxt-icon nuxt-icon--fill text-[var(--main-icon-color)]"
+                          className="nuxt-icon nuxt-icon--fill text-[var(--main-icon-color)]"
                         >
                           <svg
                             width="16"

@@ -29,7 +29,7 @@ function ModalCredit({ closeModal }) {
       } else {
         setReMessage(_data?.data?.statusDesc);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   return (
     <div
@@ -43,8 +43,6 @@ function ModalCredit({ closeModal }) {
         }
       }}
       style={{ zIndex: 1000 }}
-      role="dialog"
-      aria-modal="true"
       id="cash-back-history-modal"
       title=""
     >
@@ -106,7 +104,7 @@ function ModalCredit({ closeModal }) {
                 data-v-9dec3a92=""
                 className="flex justify-center items-center"
               >
-               {t("confirm")}
+                {t("confirm")}
               </div>
             </button>
           </div>

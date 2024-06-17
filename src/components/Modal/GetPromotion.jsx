@@ -38,10 +38,7 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
           closeModal();
         }
       }}
-      role="dialog"
-      aria-modal="true"
       id="see-promotion-modal"
-      title=""
       style={{ Zindex: "10000", marginTop: "4rem" }}
     >
       <div
@@ -69,7 +66,7 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_1401_15474)">
+                <g clipPath="url(#clip0_1401_15474)">
                   <path
                     d="M4.88369 100C3.91784 100 2.97363 99.7139 2.17049 99.1774C1.36735 98.6409 0.741374 97.8782 0.371733 96.9859C0.00209162 96.0936 -0.0946053 95.1117 0.0938733 94.1644C0.282352 93.2171 0.747538 92.347 1.43059 91.6641L91.6644 1.43032C92.5802 0.514502 93.8223 0 95.1175 0C96.4126 0 97.6548 0.514502 98.5706 1.43032C99.4864 2.34614 100.001 3.58826 100.001 4.88342C100.001 6.17859 99.4864 7.42071 98.5706 8.33653L8.3368 98.5703C7.88375 99.0243 7.34547 99.3843 6.75288 99.6297C6.16029 99.875 5.52506 100.001 4.88369 100Z"
                     fill="white"

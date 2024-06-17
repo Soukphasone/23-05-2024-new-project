@@ -90,8 +90,6 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
     <div
       className="vfm vfm--fixed vfm--inset"
       style={{ zIndex: 1000 }}
-      role="dialog"
-      aria-modal="true"
     >
       <div
         className="vfm__content vfm--outline-none w-full h-full flex bg-[var(--body)] flex-col space-y-2"
@@ -311,7 +309,7 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g clip-path="url(#clip0_859_53346)">
+                  <g clipPath="url(#clip0_859_53346)">
                     <path
                       d="M11.8749 10.2918C11.4371 10.2918 11.0833 10.6465 11.0833 11.0834V14.2501C11.0833 14.6863 10.7286 15.0417 10.2915 15.0417H7.91654V3.16683C7.91654 2.49075 7.48587 1.88671 6.83835 1.66189L6.60395 1.58346H10.2915C10.7286 1.58346 11.0833 1.9389 11.0833 2.37522V4.75019C11.0833 5.1871 11.4371 5.5418 11.8749 5.5418C12.3126 5.5418 12.6665 5.1871 12.6665 4.75019V2.37522C12.6665 1.06582 11.6009 0.000244141 10.2915 0.000244141H1.78123C1.75108 0.000244141 1.72586 0.0137252 1.69658 0.017639C1.65845 0.0144499 1.62207 0.000244141 1.58337 0.000244141C0.710144 0.000244141 0 0.710243 0 1.58346V15.8333C0 16.5094 0.430667 17.1134 1.07819 17.3383L5.84249 18.9264C6.00397 18.9763 6.16459 19 6.33332 19C7.20654 19 7.91654 18.2899 7.91654 17.4167V16.6251H10.2915C11.6009 16.6251 12.6665 15.5595 12.6665 14.2501V11.0834C12.6665 10.6465 12.3126 10.2918 11.8749 10.2918Z"
                       fill="#ECECEC"
@@ -337,21 +335,21 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
         <div
           onClick={() => setOpenModalChangeLanguage(true)}
           data-v-cbca53d4=""
-          class="flex w-full mt-4 justify-center"
+          className="flex w-full mt-4 justify-center"
         >
-          <div data-v-704c3ab0="" data-v-cbca53d4="" class="">
+          <div data-v-704c3ab0="" data-v-cbca53d4="">
             <div
               data-v-704c3ab0=""
-              class="flex wrapper items-center justify-center"
+              className="flex wrapper items-center justify-center"
             >
               <div
                 data-v-704c3ab0=""
-                class="bg-darkCard flex text-white py-[6px] px-4 rounded-[10px]"
+                className="bg-darkCard flex text-white py-[6px] px-4 rounded-[10px]"
               >
                 <img
                   data-v-704c3ab0=""
                   alt="flat-img"
-                  class="w-8 h-8 object-cover rounded-full"
+                  className="w-8 h-8 object-cover rounded-full"
                   src={imageLang}
                 />
               </div>

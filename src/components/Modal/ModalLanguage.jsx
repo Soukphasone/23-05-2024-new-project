@@ -16,8 +16,6 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
           closeModal();
         }
       }}
-      role="dialog"
-      aria-modal="true"
       style={{ Zindex: "1000", color: "#fff" }}
     >
       <div
@@ -33,9 +31,8 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
           onClick={() => {
             _changeLanguage("en", "/assets/images/flag/flag-en.png");
           }}
-          className={`${
-            activeLang === "en" ? "activeLang" : ""
-          }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+          className={`${activeLang === "en" ? "activeLang" : ""
+            }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
         >
           <img
             src="/assets/images/flag/flag-en.png"
@@ -48,9 +45,8 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
           onClick={() => {
             _changeLanguage("th", "/assets/images/flag/flag-th.png");
           }}
-          className={`${
-            activeLang === "th" ? "activeLang" : ""
-          }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+          className={`${activeLang === "th" ? "activeLang" : ""
+            }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
         >
           <img
             src="/assets/images/flag/flag-th.png"
@@ -63,9 +59,8 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
           onClick={() => {
             _changeLanguage("my", "/assets/images/flag/flag-my.png");
           }}
-          className={`${
-            activeLang === "my" ? "activeLang" : ""
-          }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+          className={`${activeLang === "my" ? "activeLang" : ""
+            }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
         >
           <img
             src="/assets/images/flag/flag-my.png"
@@ -78,8 +73,8 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
           onClick={() => {
             _changeLanguage("ch", "/assets/images/flag/flag-china.png");
           }}
-          className={`${activeLang==='ch'? 'activeLang':''}  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
-         
+          className={`${activeLang === 'ch' ? 'activeLang' : ''}  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+
         >
           <img
             src="/assets/images/flag/flag-china.png"

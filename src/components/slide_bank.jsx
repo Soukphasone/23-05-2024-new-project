@@ -26,8 +26,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone"
                 id="splide03-clone01"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="23 of 24"
                 style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
@@ -48,8 +47,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-prev"
                 id="splide03-clone02"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="24 of 24"
                 style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
@@ -71,8 +69,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-active"
                 id="splide03-clone03"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="1 of 24"
                 style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
@@ -93,8 +90,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone"
                 id="splide03-clone04"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="2 of 24"
                 style={{ marginRight: '3px', width: 'calc(100% + 0px)' }}
                 aria-hidden="true"
@@ -139,9 +135,6 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-visible is-active"
                 id="splide04-clone01"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="19 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
@@ -160,9 +153,6 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-visible"
                 id="splide04-clone02"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="20 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
@@ -181,9 +171,6 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-visible"
                 id="splide04-clone03"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="21 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
@@ -202,8 +189,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-visible"
                 id="splide04-clone04"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="22 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
@@ -224,9 +210,6 @@ function Slide_bank() {
               <li
                 className="splide__slide is-visible"
                 id="splide04-slide01"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="1 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
                 <div className="">
@@ -245,8 +228,7 @@ function Slide_bank() {
               <li
                 className="splide__slide is-visible"
                 id="splide04-slide02"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="2 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
@@ -266,8 +248,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-visible"
                 id="splide04-clone07"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="1 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
@@ -287,8 +268,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-visible"
                 id="splide04-clone08"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="2 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >
@@ -308,8 +288,7 @@ function Slide_bank() {
               <li
                 className="splide__slide splide__slide--clone is-visible"
                 id="splide04-clone09"
-                role="group"
-                aria-roledescription="slide"
+
                 aria-label="3 of 24"
                 style={{ marginRight: '4px', width: 'calc(33.3333% - 2.66667px)' }}
               >

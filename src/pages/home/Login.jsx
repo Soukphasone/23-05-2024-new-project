@@ -1,12 +1,9 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
-// import axios from "axios";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useCallback, useRef } from "react";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { NewBackList } from "../../constant/newBankList";
-// import Select from "react-select";
 import _LoginController from "../../api/login";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
-// import { convertBankCode } from "../../helper";
-// import Constant from "../../constant";
 import ModalLanguage from "../../components/Modal/ModalLanguage";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -33,10 +30,7 @@ function Login() {
   const [warningLastName, setWarningLastName] = useState("");
   const [activeTab, setActiveTab] = useState(routeMatch?.params?.route);
   const [warningPhone, setWarningPhone] = useState("");
-  const [typePhone, setTypePhone] = useState("TH");
-  // const [selectedOption, setSelectedOption] = useState("เบอร์โทรศัพท์ไทย");
-  // const [phoneCheck, setPhoneCheck] = useState("");
-  const [userNameInput, setUserNameInput] = useState(""); //for login
+  const [userNameInput, setUserNameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [messageCreate, setMessageCreate] = useState("");
   const [warningUsername, setUserNameWarning] = useState("");
@@ -79,136 +73,6 @@ function Login() {
       setActiveTab("register-bank");
     }
   };
-  //handle bank
-  // const options = [
-  //   {
-  //     value: "เบอร์โทรศัพท์ไทย",
-  //     label: "TH",
-  //     image: "/assets/lg_files/thai-flag.png",
-  //   },
-  //   {
-  //     value: "เบอร์โทรศัพท์ลาว",
-  //     label: "LA",
-  //     image: "/assets/lg_files/laos-flag.png",
-  //   },
-  // ];
-  // const handleChangeSelect = (option) => {
-  //   setTypePhone(option.label);
-  //   setSelectedOption(option.value);
-  //   setInputPhonenumber("");
-  // };
-
-  // const handleChangePhone = useCallback((event) => {
-  //   const re = /^[0-9\b]+$/;
-  //   if (event.target.value === "" || re.test(event.target.value)) {
-  //     setInputPhonenumber(event?.target?.value);
-  //   }
-  //   if (event.target.value.length < 10 && typePhone === "TH") {
-  //     setPhoneCheck("กรุณากรอกเบอร์โทรให้ครบ 10 หลัก");
-  //   } else {
-  //     setPhoneCheck("กรุณากรอกเบอร์โทรให้ครบ 13 หลัก");
-  //   }
-  // });
-  // style option
-  const customStyles = {
-    container: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    control: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      boxShadow: "none",
-      borderColor: state.isFocused ? "transparent" : provided.borderColor,
-      "&:hover": {
-        borderColor: "transparent",
-      },
-    }),
-    menu: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    menuList: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    menuPortal: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    multiValue: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    multiValueLabel: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    multiValueRemove: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    noOptionsMessage: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      background: state.isSelected ? "#A7A7A7" : "#A7A7A7",
-      border: state.isSelected ? "none" : "none",
-    }),
-    placeholder: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-    valueContainer: (provided, state) => ({
-      ...provided,
-      background: state.isSelected
-        ? "rgb(var(--color-primary-DEFAULT)/.4)"
-        : "rgb(var(--color-primary-DEFAULT)/.4)",
-      border: state.isSelected ? "none" : "none",
-    }),
-  };
-  //
 
   const NextToHomeLobby = async () => {
     if (userNameInput === "" || warningPasswordLg === "") {
@@ -356,13 +220,21 @@ function Login() {
     i18n.changeLanguage(lng);
     setActiveLang(lng);
   };
+
+  const handleChangePassword = useCallback((event) => {
+    if (event.target.value.length < 4) {
+      setWarningPassword(t("TheSecurityCode4"));
+    }
+    setInputPassword(event?.target?.value);
+  });
   return (
     <div
       className="overflow-x-hidden overflow-y-auto text-primary"
       style={{
         display:
           routeMatch?.params?.route !== "login" &&
-            routeMatch?.params?.route !== "register"
+            routeMatch?.params?.route !== "register" &&
+            routeMatch?.params?.route !== "affiliate"
             ? "none"
             : "",
       }}
@@ -509,7 +381,7 @@ function Login() {
                                     <input
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      type="password"
+                                      type="password" // Login
                                       placeholder={t("EnterPassword")}
                                       onChange={(e) =>
                                         setPasswordInput(e?.target?.value)
@@ -552,7 +424,7 @@ function Login() {
                                 </div>
                               </form>
                             </div>
-                          ) : activeTab === "register" ? (
+                          ) : activeTab === "register" || activeTab === "affiliate" ? (
                             <div data-v-d8556cff="" className="w-full mt-4">
                               <form
                                 data-v-d8556cff=""
@@ -647,17 +519,17 @@ function Login() {
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password"
-                                      placeholder={t("EnterPassword")}
+                                      placeholder={t("TheSecurityCode4")}
                                       autocomplete="off"
+                                      value={inputPassword}
                                       onChange={(e) =>
-                                        setInputPassword(e?.target?.value)
+                                        handleChangePassword(e)
                                       }
                                     />
                                   </div>
                                   <span style={{ color: "red" }}>
-                                    {inputPassword !== ""
-                                      ? ""
-                                      : warningPassword}
+                                    {inputPassword !== "" ? "" : warningPassword}
+                                    {inputPassword !== "" && (inputPassword.length < 4 ? warningPassword : "")}
                                   </span>
                                 </div>
                                 <div
@@ -809,9 +681,7 @@ function Login() {
                                       borderRadius: "3px",
                                     }}
                                     className="dropdown"
-                                    tabIndex="1"
                                     ref={dropdownRef}
-                                    onBlur={handleBlur}
                                   >
                                     <span style={{ padding: "10px" }}>
                                       {bankNameOption}
@@ -952,21 +822,21 @@ function Login() {
                         <div
                           onClick={() => setOpenModalChangeLanguage(true)}
                           data-v-cbca53d4=""
-                          class="flex w-full mt-4 justify-center"
+                          className="flex w-full mt-4 justify-center"
                         >
-                          <div data-v-704c3ab0="" data-v-cbca53d4="" class="">
+                          <div data-v-704c3ab0="" data-v-cbca53d4="" >
                             <div
                               data-v-704c3ab0=""
-                              class="flex wrapper items-center justify-center"
+                              className="flex wrapper items-center justify-center"
                             >
                               <div
                                 data-v-704c3ab0=""
-                                class="bg-darkCard flex text-white py-[6px] px-4 rounded-[10px]"
+                                className="bg-darkCard flex text-white py-[6px] px-4 rounded-[10px]"
                               >
                                 <img
                                   data-v-704c3ab0=""
                                   alt="flat-img"
-                                  class="w-8 h-8 object-cover rounded-full"
+                                  className="w-8 h-8 object-cover rounded-full"
                                   src={imageLang}
                                 />
                               </div>

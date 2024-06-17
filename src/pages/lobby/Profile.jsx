@@ -109,7 +109,7 @@ function Profile() {
                             data-v-ea58f736=""
                             className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                           >
-                            ข้อมูลส่วนตัว
+                            {t("PersonalInformation")}
                           </span>
                         </div>
                         <div
@@ -122,7 +122,7 @@ function Profile() {
                             data-v-ea58f736=""
                             className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
                           >
-                            บัญชีธนาคาร
+                            {t("bankAccount")}
                           </span>
                         </div>
                       </div>
@@ -147,7 +147,7 @@ function Profile() {
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <g clip-path="url(#clip0_268_1612)">
+                              <g clipPath="url(#clip0_268_1612)">
                                 <path
                                   d="M11.4286 2.85712H1.71428C0.767511 2.85712 0 3.62463 0 4.5714V14.2857C0 15.2324 0.767511 16 1.71428 16H11.4286C12.3753 16 13.1428 15.2324 13.1428 14.2857V4.5714C13.1428 3.62463 12.3753 2.85712 11.4286 2.85712Z"
                                   fill="var(--primary)"
@@ -187,7 +187,7 @@ function Profile() {
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <g clip-path="url(#clip0_4810_15761)">
+                              <g clipPath="url(#clip0_4810_15761)">
                                 <path
                                   d="M12.6666 8.03064C12.298 8.03064 12 8.32935 12 8.69727V14.0306C12 14.3979 11.7013 14.6973 11.3334 14.6973H2C1.63196 14.6973 1.33337 14.3979 1.33337 14.0306V4.69727C1.33337 4.32996 1.63196 4.03064 2 4.03064H7.33337C7.70203 4.03064 8 3.73193 8 3.36401C8 2.99597 7.70203 2.69727 7.33337 2.69727H2C0.897339 2.69727 0 3.5946 0 4.69727V14.0306C0 15.1333 0.897339 16.0306 2 16.0306H11.3334C12.436 16.0306 13.3334 15.1333 13.3334 14.0306V8.69727C13.3334 8.32861 13.0353 8.03064 12.6666 8.03064Z"
                                   fill="#FFD15C"
@@ -221,7 +221,7 @@ function Profile() {
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <g clip-path="url(#clip0_268_1612)">
+                              <g clipPath="url(#clip0_268_1612)">
                                 <path
                                   d="M11.4286 2.85712H1.71428C0.767511 2.85712 0 3.62463 0 4.5714V14.2857C0 15.2324 0.767511 16 1.71428 16H11.4286C12.3753 16 13.1428 15.2324 13.1428 14.2857V4.5714C13.1428 3.62463 12.3753 2.85712 11.4286 2.85712Z"
                                   fill="var(--primary)"
