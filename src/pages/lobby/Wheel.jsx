@@ -6,9 +6,9 @@ import { useHistory } from "react-router-dom";
 import Roulette from "../../components/Roulette";
 import { showPopupLucky } from "../../helper/SweetAlert";
 import { DataUser } from "../../api/getdatauser";
-import { t } from "i18next";
-
+import { useTranslation } from "react-i18next";
 function Wheel() {
+  const { t } = useTranslation();
   const history = useHistory();
   const data = history?.location?.state;
   const [outputSpin, setOutputSpin] = useState("");

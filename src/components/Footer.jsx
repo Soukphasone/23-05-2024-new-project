@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Constant from "../constant";
 import { DataLocalStorage } from "../helper";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 function Footer({ Active }) {
+  const { t } = useTranslation();
   const history = useHistory();
   const [contactUs, setContactUs] = useState("");
   const [activePageTab, setActivePageTab] = useState(Active);

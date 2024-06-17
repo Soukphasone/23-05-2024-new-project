@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ChangePassword from "../../components/Modal/ChangePassword";
-import { createPortal } from "react-dom";
 import { DataLocalStorage } from "../../helper";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
-import { t } from "i18next";
-
+import { useTranslation } from "react-i18next";
 function Profile() {
+  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const [username, setUsername] = useState("");
   const [bankList, setBankList] = useState("");
@@ -133,10 +132,10 @@ function Profile() {
                     <div className="space-y-[10px]">
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
-                        {t("UserGame")}
+                          {t("UserGame")}
                         </span>
                         <div className="w-full flex items-center gap-x-4 justify-between">
-                          <span style={{marginLeft:'10px'}} className="text-primary text-left w-full max-w-40 truncate text-sm">
+                          <span style={{ marginLeft: '10px' }} className="text-primary text-left w-full max-w-40 truncate text-sm">
                             {username}
                           </span>
                           <span className="nuxt-icon nuxt-icon--fill cursor-pointer text-[var(--primary)]">
@@ -173,7 +172,7 @@ function Profile() {
                       </div>
                       <div className="w-full flex bg-[var(--card-secondary)] px-4 py-[11px] rounded-[10px]">
                         <span className="text-sm text-left w-[60%] text-[var(--text-link)]">
-                        {t("ChangePassword")}
+                          {t("ChangePassword")}
                         </span>
                         <div className="w-full flex items-center gap-x-4 justify-between">
                           <span className="text-primary text-left w-full max-w-40 truncate text-sm">
@@ -261,7 +260,7 @@ function Profile() {
                               textTransform: "uppercase",
                             }}
                           >
-                            {bankList[0]?.s_icon.split(".")[0]==='kk'?'kkp':bankList[0]?.s_icon.split(".")[0]}{" "} 
+                            {bankList[0]?.s_icon.split(".")[0] === 'kk' ? 'kkp' : bankList[0]?.s_icon.split(".")[0]}{" "}
                             <img
                               src={`/assets/images/bank/${bankList[0]?.s_icon}`}
                               alt="logo bank"
@@ -301,11 +300,11 @@ function Profile() {
         </div>
       </div>
       {openModal &&
-          <ChangePassword
-            closeModal={handleButtonClick1}
-            oldPassword={Password}
-          />
-        }
+        <ChangePassword
+          closeModal={handleButtonClick1}
+          oldPassword={Password}
+        />
+      }
     </div>
   );
 }

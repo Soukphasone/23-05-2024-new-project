@@ -50,7 +50,7 @@ function Promotion() {
             >
               {/* <Letter_slide /> */}
               <div
-              style={{ marginTop: "5rem" }}
+                style={{ marginTop: "5rem" }}
                 data-v-ac0eeeb0=""
                 className="promotion-wrapper animate__animated animate__slideInLeft animate__fast base-container-small space-y-2 flex flex-col justify-center"
               >
@@ -129,7 +129,7 @@ function Promotion() {
               </div>
             </div>
           </main>
-          {openModal?'':(<Footer Active={promotion} style/>)}
+          {openModal ? '' : (<Footer Active={promotion} style />)}
         </div>
       </div>
       {openModal &&

@@ -3,12 +3,12 @@ import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
-import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
+import { showErrorAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
 import jsQR from "jsqr";
-import { t } from "i18next";
-
+import { useTranslation } from "react-i18next";
 function Upslip() {
+  const { t } = useTranslation();
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
@@ -52,7 +52,7 @@ function Upslip() {
           }
         );
         showErrorAlert(response?.data?.statusDesc);
-      } catch (error) {}
+      } catch (error) { }
     }
   };
 
@@ -258,7 +258,7 @@ function Upslip() {
                           data-v-9dec3a92=""
                           className="flex justify-center items-center"
                         >
-                     {t("Send")}
+                          {t("Send")}
                         </div>
                       </button>
                     </div>

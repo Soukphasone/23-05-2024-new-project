@@ -7,14 +7,15 @@ import axios from "axios";
 import { DataLocalStorage, CheckLevelCashBack } from "../../helper";
 import Constant from "../../constant";
 import { useHistory } from "react-router-dom";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 function Cashback() {
+  const { t } = useTranslation();
   const bag = "BAG"
   const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
   const [reMessage, setReMessage] = useState("");
-  const [maxLevel, setmaxLevel] = useState();   
+  const [maxLevel, setmaxLevel] = useState();
   const [historyCashBack, setHistoryCashBack] = useState([]);
   const [dataFromLogin, setDataFromLogin] = useState({});
   const _cashback = JSON.parse(localStorage.getItem(Constant.CASHBACK));
@@ -44,7 +45,7 @@ function Cashback() {
       data: {
         s_agent_code: dataFromLogin?.agent,
         s_username: dataFromLogin?.username,
-       
+
       },
     });
     if (_resHistoryCashBack?.data?.statusCode === 0) {
@@ -70,14 +71,14 @@ function Cashback() {
       if (_res?.data?.statusCode === 0) {
         _getData();
       }
-      else{
+      else {
         showErrorAlert(_res?.data?.statusDesc);
       }
     } catch (error) {
       console.log("🚀 ~ const_login= ~ error:", error);
     }
   };
-  const Back =()=>{
+  const Back = () => {
     history.push(Constant.BAG)
   }
   return (
@@ -91,11 +92,11 @@ function Cashback() {
           >
             <div data-v-a828f7ed="" className="w-full mx-auto base-container pb-2">
               <div
-              style={{marginTop:'5rem'}}
+                style={{ marginTop: '5rem' }}
                 data-v-82953e26=""
                 className="base-container-small flex flex-col justify-center"
               >
-                   <div
+                <div
                   onClick={Back}
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
@@ -119,7 +120,7 @@ function Cashback() {
                   </div>
                 </div>
                 <div
-                style={{marginTop:'-5px'}}
+                  style={{ marginTop: '-5px' }}
                   data-v-82953e26=""
                   className="cash-back-content bg-card-primary card-wrapper w-full flex-col justify-center flex items-center my-4"
                 >
@@ -215,7 +216,7 @@ function Cashback() {
       </div>
       {openModal &&
         createPortal(
-          <ModalHistoryCashBack closeModal={handleButtonClick1} historyCashBack ={historyCashBack} />,
+          <ModalHistoryCashBack closeModal={handleButtonClick1} historyCashBack={historyCashBack} />,
           document.body
         )}
     </div>

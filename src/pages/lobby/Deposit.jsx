@@ -4,8 +4,9 @@ import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 function Deposit() {
+  const { t } = useTranslation();
   const bank = "BANK";
   const history = useHistory();
   const [depositBankList, setDepositBankList] = useState({});
@@ -37,30 +38,30 @@ function Deposit() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
-              <div 
-              style={{marginTop:'5rem'}}
-              className="base-container-small">
+              <div
+                style={{ marginTop: '5rem' }}
+                className="base-container-small">
                 <div
                   onClick={Back}
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
-                  <div style={{display:'flex'}}>
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
-                  >
-                    <img
-                      src="/assets/images/icons/icon-arrow-left.png"
-                      alt="arrow-lft"
-                    />
-                  </span>
-                  <span
-                    data-v-fe9de6ba=""
-                    className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
-                  >
-                    <p>{t("back")}</p>
-                  </span>
+                  <div style={{ display: 'flex' }}>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <img
+                        src="/assets/images/icons/icon-arrow-left.png"
+                        alt="arrow-lft"
+                      />
+                    </span>
+                    <span
+                      data-v-fe9de6ba=""
+                      className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
+                    >
+                      <p>{t("back")}</p>
+                    </span>
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-3 justify-center w-full rounded-base bg-card-primary p-4 text-center">
@@ -143,10 +144,10 @@ function Deposit() {
                     </div>
                   </div>
                   <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2 mt-4">
-                    <p className="text-danger text-lg" style={{textAlign:'center', width:'100%'}}>
+                    <p className="text-danger text-lg" style={{ textAlign: 'center', width: '100%' }}>
                       “{t("WarnningAccountDeposit")}”
                     </p>
-                    
+
                   </div>
                 </div>
               </div>

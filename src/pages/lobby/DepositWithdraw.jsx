@@ -4,10 +4,10 @@ import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import Footer from "../../components/Footer";
 import ModalCredit from "../../components/Modal/ModalCredit";
-import Image_slide from "../../components/image_slide";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 function DepositWithdraw() {
+  const { t } = useTranslation();
   const history = useHistory();
   const bank = "BANK";
   const [modalgetCredit, setOpenModalgetcredit] = useState(false);
@@ -207,8 +207,8 @@ function DepositWithdraw() {
         </div>
       </div>
       {modalgetCredit &&
-          <ModalCredit closeModal={ModalGetCredit} />
-        }
+        <ModalCredit closeModal={ModalGetCredit} />
+      }
     </body>
   );
 }

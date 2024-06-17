@@ -4,8 +4,9 @@ import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import axios from "axios";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 function Affiliate() {
+  const { t } = useTranslation();
   const history = useHistory();
   const dataFromLogin = history?.location?.state;
   const [dataOverview, setDataOverview] = useState([]);

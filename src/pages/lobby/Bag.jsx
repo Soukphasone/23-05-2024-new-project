@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import Letter_slide from "../../components/Letter_slide";
 import Header from "../../components/Header";
-import ModalCredit from "../../components/Modal/ModalCredit";
 
 import ShareLink from "../../components/Modal/ShareLink";
 import History from "../../components/Modal/History";
@@ -10,9 +9,10 @@ import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import { DataLocalStorage } from "../../helper";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 function Bag() {
+  const { t } = useTranslation();
   const bag = "BAG";
   const history = useHistory();
   const [dataFromLogin, setDataFromLogin] = useState({});
@@ -874,7 +874,7 @@ function Bag() {
                           </span>
                         </div>
                       </a>
-                      <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
+                      <h5 className="text-xs text-primary mt-1 w-[75px]">
                         {t("ReturnTheLostAmount")}
                       </h5>
                     </div>
@@ -1012,7 +1012,7 @@ function Bag() {
                           </span>
                         </div>
                       </a>
-                      <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
+                      <h5 className="text-xs text-primary mt-1  w-[75px]">
                         {t("history")}
                       </h5>
                     </div>
@@ -1061,7 +1061,7 @@ function Bag() {
                           </span>
                         </div>
                       </a>
-                      <h5 className="text-xs text-primary mt-1 truncate w-[75px]">
+                      <h5 className="text-xs text-primary mt-1 w-[75px]">
                         {t("WithdrawAffiliate")}
                       </h5>
                     </div>

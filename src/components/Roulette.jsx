@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
 import Constant, { AGENT_CODE } from "../constant";
 import axios from "axios";
-import { showErrorAlert} from "../helper/SweetAlert";
-import { t } from "i18next";
-
+import { showErrorAlert } from "../helper/SweetAlert";
+import { useTranslation } from "react-i18next";
 const Roulette = ({
   data,
   setOutputSpin,
@@ -12,6 +11,7 @@ const Roulette = ({
   setCurrentPoint,
   setNotCurrentPoint,
 }) => {
+  const { t } = useTranslation();
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [rouletteData, setRouletteData] = useState(data);

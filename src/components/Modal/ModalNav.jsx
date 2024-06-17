@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Constant from "../../constant";
 import { LogoutClearLocalStorage, DataLocalStorage } from "../../helper";
 import { showConfirmationAlert } from "../../helper/SweetAlert";
@@ -22,12 +23,14 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
     if (userData && _configLobby) {
       setUsername(userData?.username);
       setContactUs(_configLobby?.s_line);
-      setLogoweb(_configLobby?.s_logo);
+      getDataBackOffice();
     }
   }, []);
+
   const handleConfirm = () => {
     LogoutClearLocalStorage();
   };
+
   const LogOut = () => {
     showConfirmationAlert(
       handleConfirm,
@@ -35,6 +38,25 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
       `${t("cancel")}`,
       `${t("QtLogOut")}`
     );
+  };
+  const getDataBackOffice = async () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${Constant.SERVER_URL}/agent/${Constant?.AGENT_CODE}`,
+      headers: {},
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        if (response?.data?.data) {
+          setLogoweb(response?.data?.data?.logos?.logo);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const NextToProfile = (e) => {
     e.preventDefault();
@@ -79,7 +101,7 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
           <img
             data-v-910a7880=""
             className="cursor-pointer h-[3.75rem] md:h-20 mt-5 mx-auto"
-            src={`data:image/jpeg;base64,${logoweb}`}
+            src={`${Constant?.SERVER_URL_IMAGE}/images/${logoweb}`}
             alt="center menu"
           />
           <div

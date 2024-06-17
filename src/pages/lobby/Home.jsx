@@ -9,9 +9,8 @@ import _LoginController from "../../api/login";
 import {
   FillerCategory,
   OpenNewTabWithHTML,
-  DataLocalStorage,TokenLocalStorage
+  DataLocalStorage, TokenLocalStorage
 } from "../../helper";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 function HomePage() {
@@ -23,7 +22,7 @@ function HomePage() {
   const [deviceType, setDeviceType] = useState(false);
   const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
   const [activeCategory, setActiveCategory] = useState("ALL");
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const gameType = (TypeGame) => {
     history.push(Constant.TYPE_GAME, TypeGame);
@@ -32,10 +31,10 @@ function HomePage() {
     const _dataUser = DataLocalStorage();
     const _Token = TokenLocalStorage();
     // console.log("Token", _Token)
-    if(_dataUser)
-    setDataFromLogin(_dataUser);
+    if (_dataUser)
+      setDataFromLogin(_dataUser);
   }, []);
- 
+
   useEffect(() => {
     _clickCategoryGame("ALL");
   }, [dataFromLogin]);
@@ -117,8 +116,8 @@ function HomePage() {
           value?.s_type === "CASINO"
             ? "B001"
             : value?.s_type === "SPORT"
-            ? "B001"
-            : value?.s_game_code,
+              ? "B001"
+              : value?.s_game_code,
         s_brand_code: value?.s_brand_code,
         s_username: dataFromLogin?.username,
         s_agent_code: Constant?.AGENT_CODE,
@@ -164,7 +163,7 @@ function HomePage() {
               {/* <Letter_slide /> */}
               <div className="flex flex-col gap-y-2">
                 <Image_slide />
-                <div style={{marginTop:'2px'}} className="text-[red] flex space-x-2">
+                <div style={{ marginTop: '2px' }} className="text-[red] flex space-x-2">
                   {/* <div className="relative w-full">
                     <select
                       className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
@@ -931,8 +930,8 @@ function HomePage() {
                                 onKeyDown={() => ""}
                                 onClick={() =>
                                   dataGameType === "FAVORITE" ||
-                                  // dataGameType === "HOTHIT" ||
-                                  dataGameType === "FISHING"
+                                    // dataGameType === "HOTHIT" ||
+                                    dataGameType === "FISHING"
                                     ? _getDataGamePlayGame(item, "FISHING")
                                     : _getDataGame(item)
                                 }
@@ -948,20 +947,20 @@ function HomePage() {
                                 onClick={() =>
                                   dataGameType === "FAVORITE"
                                     ? // dataGameType === "HOTHIT"
-                                      _getDataGamePlayGame(item)
+                                    _getDataGamePlayGame(item)
                                     : _getDataGame(item)
                                 }
                               />
                             )}
                             {item?.s_img !== undefined &&
-                            item?.status === "Y" ? (
+                              item?.status === "Y" ? (
                               <div className="absolute z-[20] flex flex-col space-y-1 text-center text-[10px] top-0 right-2">
                                 <span
                                   // onClick={() =>
                                   //   _addFavorite(game, activeTypeGame)
                                   // }
                                   onKeyDown={() => ""}
-                                  className= "nuxt-icon nuxt-icon--fill text-danger text-2xl"
+                                  className="nuxt-icon nuxt-icon--fill text-danger text-2xl"
                                 >
                                   <div className="favorite-svg">
                                     <svg

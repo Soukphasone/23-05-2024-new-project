@@ -4,12 +4,12 @@ import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Constant from "../../constant";
-import _LoginController from "../../api/login";
 import { FillerCategory2 } from "../../helper";
 import _ from 'lodash';
 import { OpenNewTabWithHTML } from "../../helper";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 function GameType() {
+  const { t } = useTranslation();
   const history = useHistory();
   const [deviceType, setDeviceType] = useState(false);
   const typeGame = history?.location?.state;

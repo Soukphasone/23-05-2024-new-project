@@ -6,8 +6,9 @@ import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 function Withdraw() {
+  const { t } = useTranslation();
   const history = useHistory();
   const bank = "BANK";
   const [reMessage, setReMessage] = useState("");
@@ -56,7 +57,7 @@ function Withdraw() {
         method: "post",
         url: `${Constant.SERVER_URL}/Withdraw/CreateTransaction`,
         data: _data,
-    });
+      });
       if (_res?.data?.statusCode === 0) {
         showSuccessAlert(t("Complete"));
         _getData();
@@ -140,7 +141,7 @@ function Withdraw() {
                   </h3>
                   <p data-v-6307fb48="" className="text-sm text-danger">
                     {" "}
-                   {t("MinimumWithdrawalFieldBaht")}{" "}
+                    {t("MinimumWithdrawalFieldBaht")}{" "}
                   </p>
                   <button
                     onClick={() => _withdrawMoney()}
@@ -157,7 +158,7 @@ function Withdraw() {
                       data-v-9dec3a92=""
                       className="flex justify-center items-center"
                     >
-                     {t("Withdraw")}
+                      {t("Withdraw")}
                     </div>
                   </button>
                 </div>

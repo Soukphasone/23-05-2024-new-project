@@ -27,15 +27,16 @@ function RouterLink() {
       <Router>
         <Switch>
           <PublicRoute exact path={Const.LOGIN} component={Login} />
+          <PublicRoute exact path={Const.PAGE_LOGIN_CAN_LOGIN_PLAY + "/:token"} component={Home} />
           <Route
             render={({ location, history }) => (
               <React.Fragment>
                 <>
-                  <PublicRoute
+                  {/* <PublicRoute
                     exact
                     path={Const.PAGE_LOGIN_CAN_LOGIN_PLAY + "/:token"}
                     component={Home}
-                  />
+                  /> */}
 
                   <PrivateRoute
                     exact

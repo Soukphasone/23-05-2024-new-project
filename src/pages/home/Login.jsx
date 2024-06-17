@@ -10,7 +10,6 @@ import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import ModalLanguage from "../../components/Modal/ModalLanguage";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import Cookies from 'js-cookie';
 function Login() {
   const history = useHistory();
   const { t, i18n } = useTranslation();
@@ -75,8 +74,8 @@ function Login() {
         setWarningFirstName("");
         setWarningLastName("");
       }, 5000);
-    } 
-     else {
+    }
+    else {
       setActiveTab("register-bank");
     }
   };
@@ -354,9 +353,7 @@ function Login() {
   };
   const changeLanguage = (lng, img) => {
     setImageLang(img);
-    // i18n.changeLanguage(lng);
-    Cookies.set('changLanguage', i18n.changeLanguage(lng), { expires: 7 });
-    alert('changLanguage saved in cookie!');
+    i18n.changeLanguage(lng);
     setActiveLang(lng);
   };
   return (
@@ -365,7 +362,7 @@ function Login() {
       style={{
         display:
           routeMatch?.params?.route !== "login" &&
-          routeMatch?.params?.route !== "register"
+            routeMatch?.params?.route !== "register"
             ? "none"
             : "",
       }}

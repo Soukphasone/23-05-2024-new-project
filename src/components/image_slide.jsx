@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DataLocalStorage } from "../helper";
+import axios from "axios";
 import Constant from "../constant";
+import { SlideDemo } from "../constant/demoSlide"
 
 function Image_slide() {
   const [imageSlide, setImageSlide] = useState([]);
@@ -13,12 +15,13 @@ function Image_slide() {
     const userData = DataLocalStorage();
     const _slide = JSON.parse(localStorage.getItem(Constant.SLIDE));
 
-    if (userData) {
-      const slideArray = _slide
-        ? Object.values(_slide)
-        : [];
-      setSliderData(slideArray);
-    }
+    // if (userData) {
+    //   const slideArray = _slide
+    //     ? Object.values(_slide)
+    //     : [];
+    //   setSliderData(slideArray);
+    // }
+    getDataBackOffice()
   }, []);
 
   useEffect(() => {
@@ -49,6 +52,30 @@ function Image_slide() {
       clearInterval(interval);
     };
   }, [sliderData.length]);
+
+  const getDataBackOffice = async () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${Constant.SERVER_URL}/agent/${Constant?.AGENT_CODE}`,
+      headers: {},
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        if (response?.data?.data) {
+          if (response?.data?.data?.slide?.wallet?.length > 0) {
+            setSliderData(response?.data?.data?.slide?.wallet);
+          } else {
+            setSliderData(SlideDemo);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const length = sliderData.length;
 
@@ -93,11 +120,7 @@ function Image_slide() {
                     >
                       {index === current && (
                         <img
-                          src={
-                            slide?.s_image
-                              ? `data:image/jpeg;base64,${slide?.s_image}`
-                              : "/assets/images/Cardgame/image70.png"
-                          }
+                          src={`${Constant?.SERVER_URL_IMAGE}/images/${slide?.name}`}
                           alt="travel"
                           style={{ width: "100%" }}
                         />
@@ -136,11 +159,7 @@ function Image_slide() {
                     >
                       {index === current && (
                         <img
-                          src={
-                            slide?.s_image
-                              ? `data:image/jpeg;base64,${slide?.s_image}`
-                              : "/assets/images/Cardgame/image70.png"
-                          }
+                          src={`${Constant?.SERVER_URL_IMAGE}/images/${slide?.name}`}
                           alt="travel"
                           style={{ width: "100%" }}
                         />

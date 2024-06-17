@@ -3,6 +3,7 @@ import Modal from "./Modal/ModalNav";
 import { DataLocalStorage } from "../helper";
 import Constant from "../constant";
 import { DataUser } from "../api/getdatauser";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 
 function Header() {
@@ -11,16 +12,14 @@ function Header() {
   const [dataUser, setDataUser] = useState([]);
   const [username, setUsername] = useState("");
   const [agent, setAgent] = useState("");
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [imageLang, setImageLang] = useState("/assets/images/flag/flag-th.png");
   const [activeLang, setActiveLang] = useState("th");
 
   useEffect(() => {
     const _dataUser = JSON.parse(localStorage.getItem(Constant.CONFIG_LOBBY));
+    console.log("_dataUser:: ", _dataUser)
     const Data = DataLocalStorage();
-    if (_dataUser?.s_logo) {
-      setLogoweb(_dataUser?.s_logo);
-    }
     if (Data) {
       setUsername(Data?.username);
       setAgent(Data?.agent);
@@ -28,6 +27,7 @@ function Header() {
   }, []);
   useEffect(() => {
     _fetchData();
+    getDataBackOffice();
   }, [username]);
 
   const _fetchData = async () => {
@@ -38,10 +38,30 @@ function Header() {
     } finally {
     }
   };
+
+  const getDataBackOffice = async () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${Constant.SERVER_URL}/agent/${Constant?.AGENT_CODE}`,
+      headers: {},
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        if (response?.data?.data) {
+          setLogoweb(response?.data?.data?.logos?.logo);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const NextToHome = () => {
     window.location = Constant.AFTER_LOGIN;
   };
-  const ButtonReload = ()=>{
+  const ButtonReload = () => {
     window.location.reload();
   }
   const changeLanguage = (lng, img) => {
@@ -67,22 +87,22 @@ function Header() {
                 className="flex space-x-4 items-center justify-center w-full &lt;sm:justify-around"
               >
                 <a onClick={NextToHome}>
-                <div className="img-logoweb">
-                <img
-                    data-v-4b602944=""
-                    className="cursor-pointer object-contain h-auto max-h-[80px] max-w-[200px]"
-                    src={`data:image/jpeg;base64,${logoweb}`}
-                    alt="center menu"
-                  />
-                </div>
+                  <div className="img-logoweb">
+                    <img
+                      data-v-4b602944=""
+                      className="cursor-pointer object-contain h-auto max-h-[80px] max-w-[200px]"
+                      src={`${Constant?.SERVER_URL_IMAGE}/images/${logoweb}`}
+                      alt="center menu"
+                    />
+                  </div>
                 </a>
                 <div
                   data-v-4b602944=""
                   className="walletWrapper px-4 flex items-center py-2 text-xs cursor-pointer"
                 >
                   <div
-                  // onClick={ButtonReload}
-                   data-v-4b602944="" className="">
+                    // onClick={ButtonReload}
+                    data-v-4b602944="" className="">
                     <div
                       data-v-4b602944=""
                       className="text-[var(--balance-wrapper-text1)] justify-between flex gap-x-2"
@@ -91,7 +111,7 @@ function Header() {
                         data-v-4b602944=""
                         className="text-right flex justify-center items-center"
                       >
-                          {dataUser?.amount || 0}
+                        {dataUser?.amount || 0}
                         <span
                           data-v-4b602944=""
                           className="nuxt-icon nuxt-icon--fill"
@@ -170,7 +190,7 @@ function Header() {
                 </svg>
               </span>
               {openModal && <Modal closeModal={setOpenModal} changeLanguage={changeLanguage} imageLang={imageLang} activeLang={activeLang} />}
-              
+
             </div>
           </div>
         </div>

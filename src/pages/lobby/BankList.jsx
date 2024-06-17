@@ -4,8 +4,9 @@ import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
 import { showSuccessAlert, showErrorAlert } from "../../helper/SweetAlert";
 import Constant from "../../constant";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 function BankList() {
+  const { t } = useTranslation();
   const bank = "BANK";
   const history = useHistory();
   const banklist = history?.location?.state;
@@ -118,7 +119,7 @@ function BankList() {
                         className="text-danger text-lg font-bold"
                         style={{ textAlign: "center", width: "100%" }}
                       >
-                       {t("Minimum")}
+                        {t("Minimum")}
                       </p>
                       <span className="nuxt-icon nuxt-icon--fill text-danger">
                         <svg
@@ -145,6 +146,7 @@ function BankList() {
                             <div className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center">
                               <span className="nuxt-icon text-[2.4rem] text-white">
                                 <img
+                                  alt=""
                                   src={`/assets/images/bank/${banklist && banklist?.s_icon
                                     }`}
                                   width="512"
@@ -175,7 +177,7 @@ function BankList() {
                           data-v-9dec3a92=""
                           className="flex justify-center items-center"
                         >
-                        {t("Copy")}
+                          {t("Copy")}
                         </div>
                       </button>
                     </div>
@@ -194,7 +196,7 @@ function BankList() {
                       >
                         <p className="text-danger text-lg font-bold">
                           {" "}
-                         {t("Slip")}
+                          {t("Slip")}
                         </p>
                       </div>
                       <span
