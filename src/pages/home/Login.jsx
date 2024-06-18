@@ -50,7 +50,21 @@ function Login() {
   const handleBlur = () => {
     setIsActive(false);
   };
+  const handleLoginTab = () => {
+    console.log("Login")
+     setInputPassword("");
+    setInputPhonenumber("");
+    history.push("/login");
+    setActiveTab("login");
+   
+  };
+  const handleRegisterTab = () => {
+    setPasswordInput("");
+    setUserNameInput("");
+    history.push("/register");
+    setActiveTab("register");
 
+  };
   const _clickNextStep = () => {
     if (
       inputPhonenumber === "" ||
@@ -68,8 +82,7 @@ function Login() {
         setWarningFirstName("");
         setWarningLastName("");
       }, 5000);
-    }
-    else {
+    } else {
       setActiveTab("register-bank");
     }
   };
@@ -123,16 +136,7 @@ function Login() {
       showErrorAlert(t("unsuccessful"));
     }
   };
-  const handleLoginTab = (event) => {
-    event.preventDefault();
-    history.push("/login");
-    setActiveTab("login");
-  };
-  const handleRegisterTab = (event) => {
-    event.preventDefault();
-    history.push("/register");
-    setActiveTab("register");
-  };
+
 
   const handleChangeBank = useCallback((event) => {
     setInputBank(event?.target?.value);
@@ -200,7 +204,6 @@ function Login() {
       ? "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full active"
       : "tabslinks relative cursor-pointer flex items-center justify-center btn-register w-full";
 
-
   const handleSelectBank = (event) => {
     setBankCode(event?.code);
     setBankNameOption(event?.bankName);
@@ -233,8 +236,8 @@ function Login() {
       style={{
         display:
           routeMatch?.params?.route !== "login" &&
-            routeMatch?.params?.route !== "register" &&
-            routeMatch?.params?.route !== "affiliate"
+          routeMatch?.params?.route !== "register" &&
+          routeMatch?.params?.route !== "affiliate"
             ? "none"
             : "",
       }}
@@ -346,7 +349,8 @@ function Login() {
                                     <input
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      type="number"
+                                      type="number" //login
+                                      value={userNameInput}
                                       placeholder={t("telephoneNumber")}
                                       onChange={(e) =>
                                         setUserNameInput(e?.target?.value)
@@ -382,6 +386,7 @@ function Login() {
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password" // Login
+                                      value={passwordInput}
                                       placeholder={t("EnterPassword")}
                                       onChange={(e) =>
                                         setPasswordInput(e?.target?.value)
@@ -424,7 +429,8 @@ function Login() {
                                 </div>
                               </form>
                             </div>
-                          ) : activeTab === "register" || activeTab === "affiliate" ? (
+                          ) : activeTab === "register" ||
+                            activeTab === "affiliate" ? (
                             <div data-v-d8556cff="" className="w-full mt-4">
                               <form
                                 data-v-d8556cff=""
@@ -473,7 +479,7 @@ function Login() {
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="text"
                                       // maxLength={typePhone === "TH" ? 10 : 13}
-                                      // value={inputPhonenumber}
+                                      value={inputPhonenumber}
                                       // placeholder={selectedOption}
                                       placeholder={t("telephoneNumber")}
                                       onChange={(e) =>
@@ -522,14 +528,17 @@ function Login() {
                                       placeholder={t("TheSecurityCode4")}
                                       autocomplete="off"
                                       value={inputPassword}
-                                      onChange={(e) =>
-                                        handleChangePassword(e)
-                                      }
+                                      onChange={(e) => handleChangePassword(e)}
                                     />
                                   </div>
                                   <span style={{ color: "red" }}>
-                                    {inputPassword !== "" ? "" : warningPassword}
-                                    {inputPassword !== "" && (inputPassword.length < 4 ? warningPassword : "")}
+                                    {inputPassword !== ""
+                                      ? ""
+                                      : warningPassword}
+                                    {inputPassword !== "" &&
+                                      (inputPassword.length < 4
+                                        ? warningPassword
+                                        : "")}
                                   </span>
                                 </div>
                                 <div
@@ -824,7 +833,7 @@ function Login() {
                           data-v-cbca53d4=""
                           className="flex w-full mt-4 justify-center"
                         >
-                          <div data-v-704c3ab0="" data-v-cbca53d4="" >
+                          <div data-v-704c3ab0="" data-v-cbca53d4="">
                             <div
                               data-v-704c3ab0=""
                               className="flex wrapper items-center justify-center"
