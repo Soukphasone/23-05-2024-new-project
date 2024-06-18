@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import _LoginController from "../../api/login";
 import { LogoutClearLocalStorage } from "../../helper";
-import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
-
+import { showSuccessAlert } from "../../helper/SweetAlert";
+import { useTranslation } from "react-i18next";
 function ChangePassword({ closeModal, oldPassword }) {
+  const { t } = useTranslation();
   const { ChangePassword } = _LoginController();
   const [reMessage, setReMessage] = useState("");
   const [NewPassword, setNewPassword] = useState("");
@@ -38,8 +39,6 @@ function ChangePassword({ closeModal, oldPassword }) {
         }
       }}
       style={{ Zindex: "1000" }}
-      role="dialog"
-      aria-modal="true"
     >
       <div
         className="vfm__overlay vfm--overlay vfm--absolute vfm--inset vfm--prevent-none"
@@ -50,10 +49,10 @@ function ChangePassword({ closeModal, oldPassword }) {
         tabindex="0"
       >
         <p className="text-center text-primary text-base">
-          เปลี่ยนรหัสผ่านเข้าเกม
+          {t("ChangePassword")}
         </p>
         <p className="text-center mt-1 text-secondary text-xs">
-          กรุณากรอกรหัสผ่านใหม่และกดยืนยัน
+          {t("pleaseSpendANewPass")}
         </p>
         <div
           style={{ display: 'none' }}
@@ -75,7 +74,7 @@ function ChangePassword({ closeModal, oldPassword }) {
               className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
               type="password"
               value={oldPassword}
-              placeholder="กรุณากรอกรหัสเก่า"
+              placeholder={t("PleaseEnterOldPassword")}
               autocomplete=""
               maxlength="false"
             />
@@ -101,7 +100,7 @@ function ChangePassword({ closeModal, oldPassword }) {
               className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
               type="password"
               onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="กรุณากรอกรหัสผ่านใหม่"
+              placeholder={t("PleaseEnterNewPassword")}
               autocomplete=""
               maxlength="false"
             />
@@ -127,7 +126,7 @@ function ChangePassword({ closeModal, oldPassword }) {
               className="w-full h-full text-base !bg-[var(--input-bg)] text-primary outline-none placeholder-[var(--input-placeholder)]"
               type="password"
               onChange={(e) => setNewPasswordVery(e.target.value)}
-              placeholder="กรุณายืนยันรหัสผ่านใหม่"
+              placeholder={t("PleaseConfirmYourNewPassword")}
               autocomplete=""
               maxlength="false"
             />
@@ -147,7 +146,7 @@ function ChangePassword({ closeModal, oldPassword }) {
               data-v-9dec3a92=""
               className="flex justify-center items-center"
             >
-              ปิด
+              {t("close")}
             </div>
           </button>
           <button
@@ -166,7 +165,7 @@ function ChangePassword({ closeModal, oldPassword }) {
               data-v-9dec3a92=""
               className="flex justify-center items-center"
             >
-              ยืนยัน
+              {t("confirm")}
             </div>
           </button>
         </div>

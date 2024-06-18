@@ -1,7 +1,12 @@
-import { t } from "i18next";
-import React from "react";
+import { useTranslation } from "react-i18next";
+import React from "react"
+
 function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
+  const { t, i18n } = useTranslation();
+  console.log("i18n: ", i18n)
   const _changeLanguage = (lng, img) => {
+    console.log("lng: ", lng)
+    console.log("img: ", img)
     closeModal();
     changeLanguage(lng, img);
   };
@@ -29,13 +34,13 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
         <span>{t("titleDropdown")}</span>
         <div
           onClick={() => {
-            _changeLanguage("en", "/assets/images/flag/flag-en.png");
+            _changeLanguage("en", "/assets/images/flag/en.png");
           }}
           className={`${activeLang === "en" ? "activeLang" : ""
             }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
         >
           <img
-            src="/assets/images/flag/flag-en.png"
+            src="/assets/images/flag/en.png"
             alt="English"
             className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
           />
@@ -43,13 +48,13 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
         </div>
         <div
           onClick={() => {
-            _changeLanguage("th", "/assets/images/flag/flag-th.png");
+            _changeLanguage("th", "/assets/images/flag/th.png");
           }}
           className={`${activeLang === "th" ? "activeLang" : ""
             }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
         >
           <img
-            src="/assets/images/flag/flag-th.png"
+            src="/assets/images/flag/th.png"
             alt="ภาษาไทย"
             className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
           />
@@ -57,13 +62,13 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
         </div>
         <div
           onClick={() => {
-            _changeLanguage("my", "/assets/images/flag/flag-my.png");
+            _changeLanguage("my", "/assets/images/flag/my.png");
           }}
           className={`${activeLang === "my" ? "activeLang" : ""
             }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
         >
           <img
-            src="/assets/images/flag/flag-my.png"
+            src="/assets/images/flag/my.png"
             alt="ဗမာဘာသာစကား"
             className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
           />
@@ -71,13 +76,13 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
         </div>
         <div
           onClick={() => {
-            _changeLanguage("ch", "/assets/images/flag/flag-china.png");
+            _changeLanguage("ch", "/assets/images/flag/ch.png");
           }}
           className={`${activeLang === 'ch' ? 'activeLang' : ''}  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
 
         >
           <img
-            src="/assets/images/flag/flag-china.png"
+            src="/assets/images/flag/ch.png"
             alt="中国"
             className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
           />

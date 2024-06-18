@@ -1,18 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useRouteMatch, useHistory } from "react-router-dom";
+import axios from "axios";
 import { NewBackList } from "../../constant/newBankList";
 import _LoginController from "../../api/login";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import ModalLanguage from "../../components/Modal/ModalLanguage";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
+import Constant from "../../constant";
+
 function Login() {
   const history = useHistory();
   const { t, i18n } = useTranslation();
   const routeMatch = useRouteMatch();
   const [openModalChangeLanguage, setOpenModalChangeLanguage] = useState(false);
-  const [imageLang, setImageLang] = useState("/assets/images/flag/flag-th.png");
+  const [imageLang, setImageLang] = useState("/assets/images/flag/th.png");
   const [activeLang, setActiveLang] = useState("th");
   const [bankNameOption, setBankNameOption] = useState(t("ChooseABank"));
 
@@ -39,9 +42,13 @@ function Login() {
   const [textWarning, setTextWarning] = useState(false);
   const [backgroundDropdown, setBackgroundDropdown] = useState("#6A6A6A");
   const [bankCode, setBankCode] = useState(0);
+  const [logoweb, setLogoweb] = useState({});
   //Select dropdown
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef(null);
+  useEffect(() => {
+    getDataBackOffice();
+  }, [])
 
   const toggleDropdown = () => {
     setIsActive(!isActive);
@@ -103,6 +110,7 @@ function Login() {
       showErrorAlert(t("unsuccessful"));
     }
   };
+
   const CreateUser = async () => {
     try {
       const _res = await handleRegister(
@@ -124,11 +132,15 @@ function Login() {
     }
   };
   const handleLoginTab = (event) => {
+    setUserNameInput("")
+    setPasswordInput("")
     event.preventDefault();
     history.push("/login");
     setActiveTab("login");
   };
   const handleRegisterTab = (event) => {
+    setInputPhonenumber("")
+    setInputPassword("")
     event.preventDefault();
     history.push("/register");
     setActiveTab("register");
@@ -138,54 +150,6 @@ function Login() {
     setInputBank(event?.target?.value);
   });
 
-  // const checkBank = async () => {
-  //   // if (inputBank === "") {
-  //   //   setWarningBank("กรุณากรอกเลขบัญชีธนาคาร");
-  //   //   setTimeout(() => setWarningBank(""), 5000);
-  //   //   return;
-  //   // }
-
-  //   if (inputPhonenumber.length >= 13) {
-  //     const bankCodeText = convertBankCode(bankCode);
-  //     const data = JSON.stringify({
-  //       bankCode: bankCodeText,
-  //       recipientAcctNo: inputBank,
-  //     });
-
-  //     const config = {
-  //       method: "post",
-  //       maxBodyLength: Infinity,
-  //       url: `${Constant.SERVER_URL}/check-number-account`,
-  //       headers: {
-  //         "User-Agent": "Dart/3.1 (dart:io)",
-  //         "Accept-Encoding": "gzip, deflate, br",
-  //         Connection: "close",
-  //         "Content-Type": "application/json",
-  //       },
-  //       data: data,
-  //     };
-  //     try {
-  //       const response = await axios.request(config);
-  //       if (response.data.data.respDesc !== "Success") {
-  //         setTextWarning("ไม่มีเลขบัญชีนี้ในธนาคาร");
-  //         // console.log("RESPON_BANK_NOT_SUCCESS", response.data.data);
-  //         setTimeout(() => {
-  //           setTextWarning("");
-  //         }, 5000);
-  //       } else {
-  //         // console.log("RESPON_BANK_SUCCESS", response.data.data);
-  //         setInputFirstname(response.data.data.receipient);
-  //         CreateUser();
-  //         // console.log("THIS ACCOUNT LAOS");
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   } else {
-  //     CreateUser();
-  //     console.log("THIS ACCOUNT THAILAND");
-  //   }
-  // };
 
   const wrapperClass =
     activeTab === "login"
@@ -227,6 +191,27 @@ function Login() {
     }
     setInputPassword(event?.target?.value);
   });
+
+  const getDataBackOffice = async () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${Constant.SERVER_URL}/agent/${Constant?.AGENT_CODE}`,
+      headers: {},
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        if (response?.data?.data) {
+          setLogoweb(response?.data?.data?.logos?.logo);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div
       className="overflow-x-hidden overflow-y-auto text-primary"
@@ -254,7 +239,7 @@ function Login() {
                   <img
                     data-v-d8556cff=""
                     className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
-                    src="/assets/images/logoweb/shunslot-logo.jpg"
+                    src={`${Constant?.SERVER_URL_IMAGE}/images/${logoweb}`}
                     alt="center menu"
                   />
                   <div
@@ -262,7 +247,7 @@ function Login() {
                     className="w-full max-w-[500px] bg-card-primary mb-24 border-0 rounded-base mx-auto px-4 py-2"
                   >
                     <div data-v-d8556cff="" className="mt-0">
-                      <div data-v-d8556cff="" className="">
+                      <div data-v-d8556cff="">
                         <div
                           data-v-d8556cff=""
                           className="w-full flex flex-col items-center justify-center"
@@ -301,7 +286,7 @@ function Login() {
                                 >
                                   <span
                                     data-v-ea58f736=""
-                                    className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                                    className="font-semibold &lt;sm:text-base sm:text-base md:text-lg"
                                   >
                                     {t("Login")}
                                   </span>
@@ -314,7 +299,7 @@ function Login() {
                                 >
                                   <span
                                     data-v-ea58f736=""
-                                    className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                                    className="font-semibold &lt;sm:text-base sm:text-base md:text-lg"
                                   >
                                     {t("Register")}
                                   </span>
@@ -346,7 +331,8 @@ function Login() {
                                     <input
                                       data-v-d8556cff=""
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
-                                      type="number"
+                                      type="number" // login
+                                      value={userNameInput}
                                       placeholder={t("telephoneNumber")}
                                       onChange={(e) =>
                                         setUserNameInput(e?.target?.value)
@@ -372,7 +358,7 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    {t("EnterPassword")}
+                                    {t("Password")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
@@ -383,6 +369,7 @@ function Login() {
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password" // Login
                                       placeholder={t("EnterPassword")}
+                                      value={passwordInput}
                                       onChange={(e) =>
                                         setPasswordInput(e?.target?.value)
                                       }
@@ -415,7 +402,8 @@ function Login() {
                                     >
                                       <span
                                         data-v-d8556cff=""
-                                        className="text-[var(--btn-login)]"
+
+                                        className="font-semibold text-[var(--btn-login)]"
                                       >
                                         {t("Login")}
                                       </span>
@@ -475,7 +463,8 @@ function Login() {
                                       // maxLength={typePhone === "TH" ? 10 : 13}
                                       // value={inputPhonenumber}
                                       // placeholder={selectedOption}
-                                      placeholder={t("telephoneNumber")}
+                                      value={inputPhonenumber}
+                                      placeholder={t("telephoneNumber")} // Register
                                       onChange={(e) =>
                                         setInputPhonenumber(e?.target?.value)
                                       }
@@ -509,7 +498,7 @@ function Login() {
                                     data-v-d8556cff=""
                                     className="text-sm mb-2 text-primary"
                                   >
-                                    {t("EnterPassword")}
+                                    {t("Password")}
                                   </h5>
                                   <div
                                     data-v-d8556cff=""
@@ -520,7 +509,7 @@ function Login() {
                                       className="w-full h-full text-base text-primary outline-none placeholder-[var(--input-placeholder)]"
                                       type="password"
                                       placeholder={t("TheSecurityCode4")}
-                                      autocomplete="off"
+                                      autocomplete="off" // Register
                                       value={inputPassword}
                                       onChange={(e) =>
                                         handleChangePassword(e)
@@ -617,7 +606,7 @@ function Login() {
                                     >
                                       <span
                                         data-v-d8556cff=""
-                                        className="text-[var(--btn-login)]"
+                                        className="font-semibold text-[var(--btn-login)]"
                                       >
                                         {t("Next")}
                                       </span>

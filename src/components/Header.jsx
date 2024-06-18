@@ -13,8 +13,8 @@ function Header() {
   const [username, setUsername] = useState("");
   const [agent, setAgent] = useState("");
   const { i18n } = useTranslation();
-  const [imageLang, setImageLang] = useState("/assets/images/flag/flag-th.png");
-  const [activeLang, setActiveLang] = useState("th");
+  const [imageLang, setImageLang] = useState(`/assets/images/flag/${i18n?.language}.png`);
+  const [activeLang, setActiveLang] = useState(i18n?.language);
 
   useEffect(() => {
     const Data = DataLocalStorage();
