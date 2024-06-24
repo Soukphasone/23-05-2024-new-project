@@ -37,7 +37,7 @@ function ModalHistoryCashBack({ closeModal, historyCashBack }) {
           className="w-full flex justify-center items-center gap-2 mb-4"
         >
           <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
-            <p>{t("date")}</p>
+            <p>{t("Date")}</p>
             <p>{t("AmountOfMoney")}</p>
           </div>
         </div>

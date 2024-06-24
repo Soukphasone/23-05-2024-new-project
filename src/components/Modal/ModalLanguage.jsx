@@ -2,11 +2,8 @@ import { useTranslation } from "react-i18next";
 import React from "react"
 
 function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
-  const { t, i18n } = useTranslation();
-  console.log("i18n: ", i18n)
+  const { t } = useTranslation();
   const _changeLanguage = (lng, img) => {
-    console.log("lng: ", lng)
-    console.log("img: ", img)
     closeModal();
     changeLanguage(lng, img);
   };
@@ -59,6 +56,20 @@ function ModalLanguage({ closeModal, changeLanguage, activeLang }) {
             className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
           />
           <span className="mx-auto">ภาษาไทย</span>
+        </div>
+        <div
+          onClick={() => {
+            _changeLanguage("la", "/assets/images/flag/la.png");
+          }}
+          className={`${activeLang === "la" ? "activeLang" : ""
+            }  bg-darkCard cursor-pointer hover:activeLang w-full relative flex items-center text-sm py-[11px] rounded-[50px] text-center`}
+        >
+          <img
+            src="/assets/images/flag/la.png"
+            alt="ພາສາລາວ"
+            className="w-[30px] absolute rounded-full object-cover h-[30px] ml-4"
+          />
+          <span className="mx-auto">ພາສາລາວ</span>
         </div>
         <div
           onClick={() => {
