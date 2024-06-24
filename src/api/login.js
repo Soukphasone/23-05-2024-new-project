@@ -31,7 +31,7 @@ const LoginController = () => {
         localStorage.setItem(Constant.CONFIG_LINE, JSON.stringify(data?.data?.info?.configLine));
         localStorage.setItem(Constant.CONFIG_LOBBY, JSON.stringify(data?.data?.info?.configLobby));
         localStorage.setItem(Constant.CONFIG_WITHDRAW, JSON.stringify(data?.data?.info?.configWithdraw));
-        localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide));
+        // localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide));
         localStorage.setItem(Constant.BANK_DEPOSIT, JSON.stringify(data?.data?.info?.bankDeposit));
         localStorage.setItem(
           Constant.LOGIN_USER_DATA,
@@ -78,7 +78,7 @@ const LoginController = () => {
         localStorage.setItem(Constant.CONFIG_LINE, JSON.stringify(data?.data?.info?.configLine));
         localStorage.setItem(Constant.CONFIG_LOBBY, JSON.stringify(data?.data?.info?.configLobby));
         localStorage.setItem(Constant.CONFIG_WITHDRAW, JSON.stringify(data?.data?.info?.configWithdraw));
-        localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide));
+        // localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide));
         localStorage.setItem(Constant.BANK_DEPOSIT, JSON.stringify(data?.data?.info?.bankDeposit));
         localStorage.setItem(
           Constant.LOGIN_USER_DATA,
@@ -178,7 +178,7 @@ const LoginController = () => {
         localStorage.setItem(Constant.CONFIG_LINE, JSON.stringify(data?.data?.info?.configLine));
         localStorage.setItem(Constant.CONFIG_LOBBY, JSON.stringify(data?.data?.info?.configLobby));
         localStorage.setItem(Constant.CONFIG_WITHDRAW, JSON.stringify(data?.data?.info?.configWithdraw));
-        localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide));
+        // localStorage.setItem(Constant.SLIDE, JSON.stringify(data?.data?.info?.slide));
         localStorage.setItem(Constant.BANK_DEPOSIT, JSON.stringify(data?.data?.info?.bankDeposit));
         localStorage.setItem(
           Constant.LOGIN_USER_DATA,

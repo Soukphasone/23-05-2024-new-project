@@ -13,7 +13,9 @@ function Header() {
   const [username, setUsername] = useState("");
   const [agent, setAgent] = useState("");
   const { i18n } = useTranslation();
-  const [imageLang, setImageLang] = useState(`/assets/images/flag/${i18n?.language}.png`);
+  const [imageLang, setImageLang] = useState(
+    `/assets/images/flag/${i18n?.language}.png`
+  );
   const [activeLang, setActiveLang] = useState(i18n?.language);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ function Header() {
   };
   const ButtonReload = () => {
     window.location.reload();
-  }
+  };
   const changeLanguage = (lng, img) => {
     setImageLang(img);
     i18n.changeLanguage(lng);
@@ -100,7 +102,9 @@ function Header() {
                 >
                   <div
                     // onClick={ButtonReload}
-                    data-v-4b602944="" className="">
+                    data-v-4b602944=""
+                    className=""
+                  >
                     <div
                       data-v-4b602944=""
                       className="text-[var(--balance-wrapper-text1)] justify-between flex gap-x-2"
@@ -137,6 +141,16 @@ function Header() {
                           className="nuxt-icon nuxt-icon--fill text-[var(--main-icon-color)]"
                         >
                           <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            x="0px"
+                            y="0px"
+                            width="100"
+                            height="100"
+                            viewBox="0 0 30 30"
+                          >
+                            <path d="M 15 3 C 12.053086 3 9.3294211 4.0897803 7.2558594 5.8359375 A 1.0001 1.0001 0 1 0 8.5449219 7.3652344 C 10.27136 5.9113916 12.546914 5 15 5 C 20.226608 5 24.456683 8.9136179 24.951172 14 L 22 14 L 26 20 L 30 14 L 26.949219 14 C 26.441216 7.8348596 21.297943 3 15 3 z M 4.3007812 9 L 0.30078125 15 L 3 15 C 3 21.635519 8.3644809 27 15 27 C 17.946914 27 20.670579 25.91022 22.744141 24.164062 A 1.0001 1.0001 0 1 0 21.455078 22.634766 C 19.72864 24.088608 17.453086 25 15 25 C 9.4355191 25 5 20.564481 5 15 L 8.3007812 15 L 4.3007812 9 z"></path>
+                          </svg>
+                          {/* <svg
                             width="16"
                             height="16"
                             viewBox="0 0 16 16"
@@ -151,7 +165,7 @@ function Header() {
                               d="M12.5 9.49999H4.99999V7.99999C4.99999 7.79799 4.87849 7.61549 4.69149 7.53799C4.50449 7.46049 4.28999 7.50299 4.14649 7.64649L1.14649 10.6465C0.951494 10.8415 0.951494 11.1585 1.14649 11.3535L4.14649 14.3535C4.28899 14.496 4.50349 14.5395 4.69149 14.462C4.87849 14.3845 4.99999 14.202 4.99999 14V12.5H12.5C13.3285 12.5 14 11.8285 14 11C14 10.1715 13.3285 9.49999 12.5 9.49999Z"
                               fill="black"
                             ></path>
-                          </svg>
+                          </svg> */}
                         </span>
                       </div>
                     </div>
@@ -187,8 +201,14 @@ function Header() {
                   ></path>
                 </svg>
               </span>
-              {openModal && <Modal closeModal={setOpenModal} changeLanguage={changeLanguage} imageLang={imageLang} activeLang={activeLang} />}
-
+              {openModal && (
+                <Modal
+                  closeModal={setOpenModal}
+                  changeLanguage={changeLanguage}
+                  imageLang={imageLang}
+                  activeLang={activeLang}
+                />
+              )}
             </div>
           </div>
         </div>
