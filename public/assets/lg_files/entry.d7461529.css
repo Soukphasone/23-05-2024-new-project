@@ -32460,3 +32460,16 @@ ul {
     width: 150px;
 }
 }
+
+.refresh-balance{
+    cursor:pointer;
+    width: 10px;
+    height: 10px;
+  }
+  
+  .refresh-balance:hover{
+      -webkit-animation-name: spin;
+      -webkit-animation-duration: 1000ms;
+      -webkit-animation-iteration-count: 1;
+  }
+  

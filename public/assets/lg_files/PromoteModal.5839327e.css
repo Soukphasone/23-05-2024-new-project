@@ -1,6 +1,6 @@
 .centent-promote {
     background: transparent !important;
-    max-width: 300px !important
+    max-width: 500px !important
 }
 
 @media (max-width:768px) {
@@ -20,3 +20,6 @@
         max-width: 240px !important
     }
 }
+
+
+  

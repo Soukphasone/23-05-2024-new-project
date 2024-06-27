@@ -11,10 +11,11 @@ function Withdraw() {
   const { t } = useTranslation();
   const history = useHistory();
   const bank = "BANK";
+  const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
   const [reMessage, setReMessage] = useState("");
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataUser, setDataUser] = useState();
-  const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
+  const [chooseBankDeposit, setChooseBankDeposit] = useState("");
   const Back = () => {
     history.push(Constant.DEPOSIT_WITHDRAW);
   };
@@ -49,7 +50,8 @@ function Withdraw() {
         s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
         f_amount: dataUser?.amount,
-        i_bank: _bankList?.[0]?.id,
+        // i_bank: _bankList?.[0]?.id,
+        i_bank: chooseBankDeposit,
         i_ip: "1.2.3.4",
         actionBy: "adm",
       };
@@ -143,13 +145,44 @@ function Withdraw() {
                     {" "}
                     {t("MinimumWithdrawalFieldBaht")}{" "}
                   </p>
+
+                  <div class="text-[red] flex space-x-2">
+                    <div class="relative w-full">
+                      <select
+                        style={{ textTransform: "uppercase" }}
+                        onChange={(event) =>
+                          setChooseBankDeposit(event?.target?.value)
+                        }
+                        class="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
+                        id="nuid-14"
+                      >
+                        <option value="">
+                        {t("ChooseABank")}
+                        </option>
+                        {_bankList?.length > 0 &&
+                          _bankList?.map((bank, index) => (
+                            <option key={index} value={bank?.id}>
+                              {bank?.s_icon.split(".")[0] === "kk"
+                                ? "kkp"
+                                : bank?.s_icon.split(".")[0]}{" "}
+                            </option>
+                          ))}
+                      </select>
+                      <span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
+                        <span
+                          class="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
+                          aria-hidden="true"
+                        ></span>
+                      </span>
+                    </div>
+                  </div>
                   <button
                     onClick={() => _withdrawMoney()}
                     onKeyDown={() => ""}
                     data-v-9dec3a92=""
                     data-v-6307fb48=""
                     id="btn-withdraw"
-                    disabled={dataUser?.amount >= 1 ? false : true}
+                    disabled={dataUser?.amount >= 1 && chooseBankDeposit !== ''? false : true}
                     type="submit"
                     className="base-button-wrapper v-rounded btn-primary btn-md btn-primary mb-[10px] cursor-pointer w-full"
                     label="ถอนเงิน"

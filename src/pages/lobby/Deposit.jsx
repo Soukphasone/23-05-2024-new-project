@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useHistory } from "react-router-dom";
-import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import { useTranslation } from "react-i18next";
 function Deposit() {
@@ -11,16 +10,19 @@ function Deposit() {
   const history = useHistory();
   const [depositBankList, setDepositBankList] = useState({});
   const [bankList, setBankList] = useState("");
-  const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
-  const _bankDeposit = JSON.parse(localStorage.getItem(Constant.BANK_DEPOSIT));
 
   useEffect(() => {
-    const userData = DataLocalStorage();
-    if (userData) {
-      setDepositBankList(_bankDeposit);
+    const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
+    const _bankDeposit = JSON.parse(
+      localStorage.getItem(Constant.BANK_DEPOSIT)
+    );
+    if (_bankList) {
       setBankList(_bankList?.[0]);
     }
-  }, [_bankDeposit, _bankList]);
+    if (_bankDeposit) {
+      setDepositBankList(_bankDeposit);
+    }
+  }, []);
 
   const NextoBankList = (bank) => {
     history.push(Constant.BANK_LIST, bank);
@@ -37,16 +39,20 @@ function Deposit() {
             data-v-3c88d514=""
             className="min-h-screen overflow-scroll pb-[80px]"
           >
-            <div data-v-3c88d514="" className="w-full mx-auto base-container pb-2">
+            <div
+              data-v-3c88d514=""
+              className="w-full mx-auto base-container pb-2"
+            >
               <div
-                style={{ marginTop: '5rem' }}
-                className="base-container-small">
+                style={{ marginTop: "5rem" }}
+                className="base-container-small"
+              >
                 <div
                   onClick={Back}
                   data-v-fe9de6ba=""
                   className="breadcrumb-wrapper py-3 w-max overflow-hidden"
                 >
-                  <div style={{ display: 'flex' }}>
+                  <div style={{ display: "flex" }}>
                     <span
                       data-v-fe9de6ba=""
                       className="breadcrumb-wrapper__item font-medium text-sm cursor-pointer flex-shrink-0"
@@ -65,7 +71,9 @@ function Deposit() {
                   </div>
                 </div>
                 <div className="flex flex-col items-center space-y-3 justify-center w-full rounded-base bg-card-primary p-4 text-center">
-                  <span className="text-base text-active">{t("ChooseABank")}</span>
+                  <span className="text-base text-active">
+                    {t("ChooseABank")}
+                  </span>
                   {depositBankList?.length > 0 &&
                     depositBankList?.map((bank) => (
                       <div
@@ -110,16 +118,15 @@ function Deposit() {
                     <div className="flex flex-col">
                       <p className="text-sm">{t("account")} </p>
                       <div className="w-[45px] h-[45px] mt-4 text-white">
-                        <div
-                          className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center"
-                        >
+                        <div className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center">
                           <span
                             className="nuxt-icon text-[2.4rem] text-white"
                             id="kbank"
                           >
                             <img
-                              src={`/assets/images/bank/${bankList && bankList?.s_icon
-                                }`}
+                              src={`/assets/images/bank/${
+                                bankList && bankList?.s_icon
+                              }`}
                               alt="scb"
                               id="image0_5_3"
                               width="512"
@@ -130,8 +137,9 @@ function Deposit() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm"
-                        style={{ textTransform: 'uppercase' }}
+                      <p
+                        className="text-sm"
+                        style={{ textTransform: "uppercase" }}
                       >
                         {bankList?.s_icon?.split(".")[0]}
                       </p>
@@ -144,10 +152,12 @@ function Deposit() {
                     </div>
                   </div>
                   <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2 mt-4">
-                    <p className="text-danger text-lg" style={{ textAlign: 'center', width: '100%' }}>
+                    <p
+                      className="text-danger text-lg"
+                      style={{ textAlign: "center", width: "100%" }}
+                    >
                       “{t("WarnningAccountDeposit")}”
                     </p>
-
                   </div>
                 </div>
               </div>

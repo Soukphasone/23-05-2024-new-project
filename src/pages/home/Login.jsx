@@ -9,7 +9,6 @@ import ModalLanguage from "../../components/Modal/ModalLanguage";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import Constant from "../../constant";
-
 function Login() {
   const history = useHistory();
   const { t, i18n } = useTranslation();

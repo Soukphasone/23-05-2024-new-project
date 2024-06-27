@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -9,10 +9,11 @@ import _LoginController from "../../api/login";
 import {
   FillerCategory,
   OpenNewTabWithHTML,
-  DataLocalStorage, TokenLocalStorage
+  DataLocalStorage,
 } from "../../helper";
 import { useTranslation } from "react-i18next";
-
+import ModalNews from "../../components/Modal/ModalNews";
+import { GetNews } from "../../api/getdatauser";
 function HomePage() {
   //
   const history = useHistory();
@@ -22,21 +23,26 @@ function HomePage() {
   const [deviceType, setDeviceType] = useState(false);
   const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [newsPromotion, setNewsPromotion] = useState([]);
   const { t } = useTranslation();
-
+  const [openModalNews, setOpenModalNews] = useState(false);
+  const _ModalNews = () => {
+    setOpenModalNews(false);
+  };
   const gameType = (TypeGame) => {
     history.push(Constant.TYPE_GAME, TypeGame);
   };
   useEffect(() => {
     const _dataUser = DataLocalStorage();
-    const _Token = TokenLocalStorage();
-    // console.log("Token", _Token)
-    if (_dataUser)
+    if (_dataUser) {
       setDataFromLogin(_dataUser);
+    }
   }, []);
 
   useEffect(() => {
     _clickCategoryGame("ALL");
+    setOpenModalNews(true);
+    _getNews();
   }, [dataFromLogin]);
 
   useEffect(() => {
@@ -69,6 +75,9 @@ function HomePage() {
   }, []);
   const _clickCategoryGame = async (value) => {
     // console.log("CATEGORY_ACTIVE: ", value);
+    if (value === "ALL") {
+      setOpenModalNews(true);
+    }
     setActiveCategory(value);
     setDataGameType(value);
     FillerCategory(value, setCategoryGame);
@@ -109,15 +118,15 @@ function HomePage() {
   };
 
   const _getDataGamePlayGame = async (value) => {
-    console.log("PLAY_GAME_HOME", value)
+    // console.log("PLAY_GAME_HOME", value);
     try {
       const _data = {
         s_game_code:
           value?.s_type === "CASINO"
             ? "B001"
             : value?.s_type === "SPORT"
-              ? "B001"
-              : value?.s_game_code,
+            ? "B001"
+            : value?.s_game_code,
         s_brand_code: value?.s_brand_code,
         s_username: dataFromLogin?.username,
         s_agent_code: Constant?.AGENT_CODE,
@@ -125,7 +134,7 @@ function HomePage() {
         ip_client: "184.22.14.167",
         s_lang: "th",
       };
-      console.log("Fishing_game", _data)
+      // console.log("Fishing_game", _data);
       // Send the data to the server to get the game URL
       const _res = await axios({
         method: "post",
@@ -147,6 +156,21 @@ function HomePage() {
       console.error("Error playing the game:", error);
     }
   };
+  const _getNews = async () => {
+    try {
+      const data = await GetNews();
+      if (data) {
+        const getData = data.map((item) => ({
+          news: item?.aftterLogin?.[0],
+        }));
+        const getDataNews = getData.map(item => item?.news?.image)
+        .filter(news => news !== undefined)
+        setNewsPromotion(getDataNews);
+      }
+    } catch (error) {
+    } finally {
+    }
+  };
   return (
     <div className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
@@ -163,7 +187,10 @@ function HomePage() {
               {/* <Letter_slide /> */}
               <div className="flex flex-col gap-y-2">
                 <Image_slide />
-                <div style={{ marginTop: '2px' }} className="text-[red] flex space-x-2">
+                <div
+                  style={{ marginTop: "2px" }}
+                  className="text-[red] flex space-x-2"
+                >
                   {/* <div className="relative w-full">
                     <select
                       className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
@@ -291,7 +318,9 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p className="text-sm text-center">{t("MainPage")}</p>
+                            <p className="text-sm text-center">
+                              {t("MainPage")}
+                            </p>
                           </a>
                         </div>
                         <div
@@ -908,7 +937,9 @@ function HomePage() {
                                 </defs>
                               </svg>
                             </span>
-                            <p className="text-sm text-center">{t("Fishing")}</p>
+                            <p className="text-sm text-center">
+                              {t("Fishing")}
+                            </p>
                           </a>
                         </div>
                       </div>
@@ -917,7 +948,7 @@ function HomePage() {
                       {categoryGame?.length > 0 &&
                         categoryGame?.map((item, index) => (
                           <div
-                            key={item?.index}
+                            key={index}
                             className="z-1 min-h-14 cursor-pointer animate__animated animate__fadeInUp animate__faster relative overflow-hidden rounded-[10px]"
                           >
                             {item?.s_img !== undefined ? (
@@ -930,8 +961,8 @@ function HomePage() {
                                 onKeyDown={() => ""}
                                 onClick={() =>
                                   dataGameType === "FAVORITE" ||
-                                    // dataGameType === "HOTHIT" ||
-                                    dataGameType === "FISHING"
+                                  // dataGameType === "HOTHIT" ||
+                                  dataGameType === "FISHING"
                                     ? _getDataGamePlayGame(item, "FISHING")
                                     : _getDataGame(item)
                                 }
@@ -947,18 +978,15 @@ function HomePage() {
                                 onClick={() =>
                                   dataGameType === "FAVORITE"
                                     ? // dataGameType === "HOTHIT"
-                                    _getDataGamePlayGame(item)
+                                      _getDataGamePlayGame(item)
                                     : _getDataGame(item)
                                 }
                               />
                             )}
                             {item?.s_img !== undefined &&
-                              item?.status === "Y" ? (
+                            item?.status === "Y" ? (
                               <div className="absolute z-[20] flex flex-col space-y-1 text-center text-[10px] top-0 right-2">
                                 <span
-                                  // onClick={() =>
-                                  //   _addFavorite(game, activeTypeGame)
-                                  // }
                                   onKeyDown={() => ""}
                                   className="nuxt-icon nuxt-icon--fill text-danger text-2xl"
                                 >
@@ -1053,6 +1081,9 @@ function HomePage() {
           <Footer Active={home} />
         </div>
       </div>
+      {openModalNews && (
+        <ModalNews closeModal={_ModalNews} newsPromotion={newsPromotion} />
+      )}
     </div>
   );
 }

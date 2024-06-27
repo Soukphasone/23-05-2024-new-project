@@ -1,7 +1,8 @@
 module.exports = {
-  AGENT_CODE: "AG002",
+  // AGENT_CODE: "AG002",
   // AGENT_CODE: "AG021",
-  // AGENT_CODE: "AG019",
+  AGENT_CODE: "AG019",
+  // AGENT_CODE: "AG022",
   SERVER_URL: "https://prod.txtechserver.com/api/v1",
   SERVER_URL_IMAGE: "https://img.txtechserver.com",
   LOG_OUT: "https://shunslot.com",
@@ -18,7 +19,7 @@ module.exports = {
   BANK_LIST: "/lobby/deposit/bank-list",
   BAG: "/lobby/bag",
   CASH_BACK: "/lobby/bag/cashback",
-  UPLOAD_SLIP: '/lobby/bank-list/upload',
+  UPLOAD_SLIP: "/lobby/bank-list/upload",
   GAME_LIST: "/game-list",
   WHEEL: "/lobby/bag/wheel",
   AFFILIATE: "/lobby/bag/affiliate",
@@ -36,5 +37,4 @@ module.exports = {
   CONFIG_WITHDRAW: "CONFIG_WITHDRAW",
   SLIDE: "SLIDE",
   BANK_DEPOSIT: "BANK_DEPOSIT",
-
 };

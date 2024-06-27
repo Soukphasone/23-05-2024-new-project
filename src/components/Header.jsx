@@ -5,8 +5,9 @@ import Constant from "../constant";
 import { DataUser } from "../api/getdatauser";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-
+import { useHistory } from "react-router-dom";
 function Header() {
+  const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
   const [logoweb, setLogoweb] = useState({});
   const [dataUser, setDataUser] = useState([]);
@@ -17,6 +18,7 @@ function Header() {
     `/assets/images/flag/${i18n?.language}.png`
   );
   const [activeLang, setActiveLang] = useState(i18n?.language);
+  const [animationRefresh, setAnimationRefresh] = useState(false);
 
   useEffect(() => {
     const Data = DataLocalStorage();
@@ -33,7 +35,10 @@ function Header() {
   const _fetchData = async () => {
     try {
       const data = await DataUser({ agent, username });
-      setDataUser(data);
+      if(data){
+        setDataUser(data);
+        setAnimationRefresh(false)
+      }
     } catch (error) {
     } finally {
     }
@@ -59,15 +64,17 @@ function Header() {
       });
   };
   const NextToHome = () => {
-    window.location = Constant.AFTER_LOGIN;
-  };
-  const ButtonReload = () => {
-    window.location.reload();
+    history.push(Constant.AFTER_LOGIN);
   };
   const changeLanguage = (lng, img) => {
     setImageLang(img);
     i18n.changeLanguage(lng);
     setActiveLang(lng);
+  };
+  const refreshBalance = (e) => {
+    e.stopPropagation();
+    setAnimationRefresh(true);
+    _fetchData();
   };
   return (
     <div className="header">
@@ -101,7 +108,6 @@ function Header() {
                   className="walletWrapper px-4 flex items-center py-2 text-xs cursor-pointer"
                 >
                   <div
-                    // onClick={ButtonReload}
                     data-v-4b602944=""
                     className=""
                   >
@@ -118,7 +124,8 @@ function Header() {
                           data-v-4b602944=""
                           className="nuxt-icon nuxt-icon--fill"
                         >
-                          <svg
+                         
+                          {/* <svg
                             width="100"
                             height="100"
                             viewBox="0 0 100 100"
@@ -129,7 +136,7 @@ function Header() {
                               d="M76.9458 67.02C76.9458 74.6368 74.8257 80.4083 70.5854 84.3345C66.4236 88.1822 60.0632 90.263 51.5041 90.5771V100H42.1991V90.5771H23V8.12721H42.1991V0H51.5041V8.36278C66.2666 9.77621 73.6478 16.2937 73.6478 27.9152C73.6478 32.5481 72.627 36.3565 70.5854 39.3404C68.5438 42.3243 65.3636 44.6407 61.0448 46.2897V46.6431C66.5414 48.1351 70.5461 50.53 73.0589 53.828C75.6502 57.0475 76.9458 61.4448 76.9458 67.02ZM33.8363 42.874H47.4994C52.5249 42.874 56.3333 41.6961 58.9246 39.3404C61.5159 36.9062 62.8115 33.3726 62.8115 28.7397C62.8115 24.5779 61.3981 21.5548 58.5713 19.6702C55.7444 17.7856 51.2685 16.8433 45.1437 16.8433H33.8363V42.874ZM49.7373 81.861C60.7307 81.861 66.2273 76.8355 66.2273 66.7844C66.2273 61.3663 64.4998 57.4009 61.0448 54.8881C57.6682 52.3753 52.2894 51.119 44.9081 51.119H33.8363V81.861H49.7373Z"
                               fill="#FFD15C"
                             ></path>
-                          </svg>
+                          </svg> */}
                         </span>{" "}
                       </p>
                       <div
@@ -140,32 +147,19 @@ function Header() {
                           data-v-4b602944=""
                           className="nuxt-icon nuxt-icon--fill text-[var(--main-icon-color)]"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0px"
-                            y="0px"
-                            width="100"
-                            height="100"
-                            viewBox="0 0 30 30"
-                          >
-                            <path d="M 15 3 C 12.053086 3 9.3294211 4.0897803 7.2558594 5.8359375 A 1.0001 1.0001 0 1 0 8.5449219 7.3652344 C 10.27136 5.9113916 12.546914 5 15 5 C 20.226608 5 24.456683 8.9136179 24.951172 14 L 22 14 L 26 20 L 30 14 L 26.949219 14 C 26.441216 7.8348596 21.297943 3 15 3 z M 4.3007812 9 L 0.30078125 15 L 3 15 C 3 21.635519 8.3644809 27 15 27 C 17.946914 27 20.670579 25.91022 22.744141 24.164062 A 1.0001 1.0001 0 1 0 21.455078 22.634766 C 19.72864 24.088608 17.453086 25 15 25 C 9.4355191 25 5 20.564481 5 15 L 8.3007812 15 L 4.3007812 9 z"></path>
-                          </svg>
-                          {/* <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M14.8535 4.64649L11.8535 1.64649C11.7105 1.50349 11.496 1.46149 11.3085 1.53799C11.1215 1.61549 11 1.79799 11 1.99999V3.49999H3.5C2.6715 3.49999 2 4.17149 2 4.99999C2 5.82849 2.6715 6.49999 3.5 6.49999H11V7.99999C11 8.20199 11.1215 8.38449 11.3085 8.46199C11.4965 8.53949 11.711 8.49599 11.8535 8.35349L14.8535 5.35349C15.049 5.15849 15.049 4.84149 14.8535 4.64649Z"
-                              fill="black"
-                            ></path>
-                            <path
-                              d="M12.5 9.49999H4.99999V7.99999C4.99999 7.79799 4.87849 7.61549 4.69149 7.53799C4.50449 7.46049 4.28999 7.50299 4.14649 7.64649L1.14649 10.6465C0.951494 10.8415 0.951494 11.1585 1.14649 11.3535L4.14649 14.3535C4.28899 14.496 4.50349 14.5395 4.69149 14.462C4.87849 14.3845 4.99999 14.202 4.99999 14V12.5H12.5C13.3285 12.5 14 11.8285 14 11C14 10.1715 13.3285 9.49999 12.5 9.49999Z"
-                              fill="black"
-                            ></path>
-                          </svg> */}
+                           <img
+                            src="/assets/images/icons/icons8-refresh-30.png"
+                            onClick={(e) => refreshBalance(e)}
+                            alt="fresh"
+                            className={
+                              animationRefresh === true ? "refresh-balance" : ""
+                            }
+                            style={{
+                              width: 20,
+                              height: 20,
+                              cursor: "pointer",
+                            }}
+                          />
                         </span>
                       </div>
                     </div>

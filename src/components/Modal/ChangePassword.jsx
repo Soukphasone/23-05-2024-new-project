@@ -35,7 +35,7 @@ function ChangePassword({ closeModal, oldPassword }) {
           e.target.className ===
           "vfm vfm--fixed vfm--inset flex justify-center items-center dialog"
         ) {
-          closeModal("close");
+          closeModal();
         }
       }}
       style={{ Zindex: "1000" }}
