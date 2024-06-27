@@ -36,7 +36,7 @@ export const Language = [
     lang: "ch",
   },
   {
-      id: 6,
+      id: 7,
       image: "/assets/images/lang/la.webp",
       name: "ພາສາລາວ", // ລາວ
       lang: "la"
