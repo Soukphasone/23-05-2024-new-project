@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Constant from "../../constant";
-
-function ModalNews({ closeModal, newsPromotion }) {
+function ModalNews({ closeModal, News}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === newsPromotion.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
-
-    return () => clearInterval(interval);
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) =>
+          prevIndex === News.length - 1 ? 0 : prevIndex + 1
+        );
+      }, 6000);
+      return () => clearInterval(interval);
+    
   }, []);
   return (
     <div
@@ -75,7 +74,7 @@ function ModalNews({ closeModal, newsPromotion }) {
                 >
                   <img
                     className="w-full centent-promote"
-                    src={`${Constant?.SERVER_URL_IMAGE}/images/${newsPromotion[currentImageIndex]}`}
+                    src={`${Constant?.SERVER_URL_IMAGE}/images/${News[currentImageIndex]}`}
                     alt={`Slide ${currentImageIndex + 1}`}
                   />
                 </div>

@@ -20,23 +20,24 @@ function Footer({ Active }) {
   }, []);
   const _activePage = (value) => {
     setActivePageTab(value);
-    if (value === "HOME") {
-      history.push(Constant.AFTER_LOGIN);
-      setActivePageTab(value);
-    }
-    if (value === "PROMOTION") {
-      history.push(Constant.PROMOTION);
-      setActivePageTab(value);
-    }
-    if (value === "BANK") {
-      history.push(Constant.DEPOSIT_WITHDRAW);
-      setActivePageTab(value);
-    }
-    if (value === "BAG") {
-      history.push(Constant.BAG);
-      setActivePageTab(value);
+    switch (value) {
+      case "HOME":
+        history.push(Constant.AFTER_LOGIN);
+        break;
+      case "PROMOTION":
+        history.push(Constant.PROMOTION);
+        break;
+      case "BANK":
+        history.push(Constant.DEPOSIT_WITHDRAW);
+        break;
+      case "BAG":
+        history.push(Constant.BAG);
+        break;
+      default:
+        break;
     }
   };
+  
 
   return (
     <footer data-v-3c88d514="" className="fixed bottom-[-2px] w-full z-10">

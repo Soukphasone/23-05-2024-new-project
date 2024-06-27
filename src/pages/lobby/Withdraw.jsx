@@ -1,77 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { DataLocalStorage } from "../../helper";
-import Constant from "../../constant";
-import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import { useHistory } from "react-router-dom";
+import Constant from "../../constant";
 import { useTranslation } from "react-i18next";
 function Withdraw() {
   const { t } = useTranslation();
-  const history = useHistory();
   const bank = "BANK";
-  const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
-  const [reMessage, setReMessage] = useState("");
-  const [dataFromLogin, setDataFromLogin] = useState({});
-  const [dataUser, setDataUser] = useState();
-  const [chooseBankDeposit, setChooseBankDeposit] = useState("");
+  const history = useHistory();
+  const [bankList, setBankList] = useState("");
+  useEffect(() => {
+    const _bankList = JSON.parse(localStorage.getItem(Constant.DATA_BANK_LIST));
+    if (_bankList) {
+      setBankList(_bankList?.[0]);
+    }
+  }, []);
+
+  const NextoBankList = () => {
+    history.push(Constant.WITHDRAW_BANK_LIST, bankList);
+  };
   const Back = () => {
     history.push(Constant.DEPOSIT_WITHDRAW);
   };
-  useEffect(() => {
-    const userData = DataLocalStorage();
-    if (userData) {
-      setDataFromLogin(userData);
-    }
-  }, []);
-  useEffect(() => {
-    if (dataFromLogin) {
-      _getData();
-    }
-  }, [dataFromLogin]);
-  const _getData = async () => {
-    const _res = await axios({
-      method: "post",
-      url: `${Constant.SERVER_URL}/Member/Balance`,
-      data: {
-        s_agent_code: Constant?.AGENT_CODE,
-        s_username: dataFromLogin?.username,
-      },
-    });
-    if (_res?.data?.statusCode === 0) {
-      setDataUser(_res?.data?.data);
-    }
-  };
-
-  const _withdrawMoney = async () => {
-    try {
-      const _data = {
-        s_agent_code: Constant?.AGENT_CODE,
-        s_username: dataFromLogin?.username,
-        f_amount: dataUser?.amount,
-        // i_bank: _bankList?.[0]?.id,
-        i_bank: chooseBankDeposit,
-        i_ip: "1.2.3.4",
-        actionBy: "adm",
-      };
-      const _res = await axios({
-        method: "post",
-        url: `${Constant.SERVER_URL}/Withdraw/CreateTransaction`,
-        data: _data,
-      });
-      if (_res?.data?.statusCode === 0) {
-        showSuccessAlert(t("Complete"));
-        _getData();
-        history.push(Constant.DEPOSIT_WITHDRAW);
-      } else {
-        setReMessage(_res?.data?.statusDesc);
-      }
-    } catch (error) {
-      showErrorAlert(t("unsuccessful"));
-    }
-  };
-
   return (
     <div className="overflow-x-hidden overflow-y-auto text-primary" style={{}}>
       <div id="__nuxt" data-v-app="">
@@ -87,8 +37,7 @@ function Withdraw() {
             >
               <div
                 style={{ marginTop: "5rem" }}
-                data-v-6307fb48=""
-                className="base-container-small flex flex-col justify-center"
+                className="base-container-small"
               >
                 <div
                   onClick={Back}
@@ -113,89 +62,104 @@ function Withdraw() {
                     </span>
                   </div>
                 </div>
-                <div
-                  data-v-6307fb48=""
-                  className="cash-back-content border border-primary bg-card-primary card-wrapper gap-y-2 w-full flex flex-col justify-center items-center"
-                >
-                  <h3 data-v-6307fb48="">{t("AmountThatCanBeWithdrawn")}</h3>
-                  <h3
-                    data-v-6307fb48=""
-                    className="text-xl text-active flex justify-center items-center"
+                <div className="flex flex-col items-center space-y-3 justify-center w-full rounded-base bg-card-primary p-4 text-center">
+                  <span className="text-base text-active">
+                    {t("ChooseABank")}
+                  </span>
+                  {/* {depositBankList?.length > 0 &&
+                    depositBankList?.map((bank) => ( */}
+                  <div
+                    onClick={()=>NextoBankList()}
+                    className="flex flex-row cursor-pointer w-full h-[60px] rounded-[5px] overflow-hidden bg-card-secondary px-[10px] items-center justify-between"
                   >
-                    <span
-                      data-v-6307fb48=""
-                      className="nuxt-icon nuxt-icon--fill"
+                    <div className="w-[45px] h-[45px]">
+                      <div className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center">
+                        <span className="nuxt-icon text-[2.4rem] text-white">
+                          <img
+                            // key={bank?.index}
+                            src={`/assets/images/bank/${
+                              bankList && bankList?.s_icon
+                            }`}
+                            alt="bank"
+                            width="512"
+                            height="512"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                    <p
+                      style={{ textTransform: "uppercase" }}
+                      className="text-sm"
                     >
-                      <svg
-                        width="100"
-                        height="100"
-                        viewBox="0 0 100 100"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M76.9458 67.02C76.9458 74.6368 74.8257 80.4083 70.5854 84.3345C66.4236 88.1822 60.0632 90.263 51.5041 90.5771V100H42.1991V90.5771H23V8.12721H42.1991V0H51.5041V8.36278C66.2666 9.77621 73.6478 16.2937 73.6478 27.9152C73.6478 32.5481 72.627 36.3565 70.5854 39.3404C68.5438 42.3243 65.3636 44.6407 61.0448 46.2897V46.6431C66.5414 48.1351 70.5461 50.53 73.0589 53.828C75.6502 57.0475 76.9458 61.4448 76.9458 67.02ZM33.8363 42.874H47.4994C52.5249 42.874 56.3333 41.6961 58.9246 39.3404C61.5159 36.9062 62.8115 33.3726 62.8115 28.7397C62.8115 24.5779 61.3981 21.5548 58.5713 19.6702C55.7444 17.7856 51.2685 16.8433 45.1437 16.8433H33.8363V42.874ZM49.7373 81.861C60.7307 81.861 66.2273 76.8355 66.2273 66.7844C66.2273 61.3663 64.4998 57.4009 61.0448 54.8881C57.6682 52.3753 52.2894 51.119 44.9081 51.119H33.8363V81.861H49.7373Z"
-                          fill="#FFD15C"
-                        ></path>
-                      </svg>
-                    </span>
-                    {dataUser?.amount}
-                  </h3>
-                  <p data-v-6307fb48="" className="text-sm text-danger">
-                    {" "}
-                    {t("MinimumWithdrawalFieldBaht")}{" "}
-                  </p>
-
-                  <div class="text-[red] flex space-x-2">
-                    <div class="relative w-full">
-                      <select
-                        style={{ textTransform: "uppercase" }}
-                        onChange={(event) =>
-                          setChooseBankDeposit(event?.target?.value)
-                        }
-                        class="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
-                        id="nuid-14"
-                      >
-                        <option value="">
-                        {t("ChooseABank")}
-                        </option>
-                        {_bankList?.length > 0 &&
-                          _bankList?.map((bank, index) => (
-                            <option key={index} value={bank?.id}>
-                              {bank?.s_icon.split(".")[0] === "kk"
-                                ? "kkp"
-                                : bank?.s_icon.split(".")[0]}{" "}
-                            </option>
-                          ))}
-                      </select>
-                      <span class="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
-                        <span
-                          class="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
-                          aria-hidden="true"
-                        ></span>
+                      {" "}
+                      {bankList?.s_icon?.split(".")[0]}
+                    </p>
+                    <div className="">
+                      <span className="nuxt-icon nuxt-icon--fill">
+                        <svg
+                          width="7"
+                          height="12"
+                          viewBox="0 0 7 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0.631342 11.9047L0.0951745 11.3682C-0.0317249 11.2413 -0.0317249 11.0354 0.0951744 10.9084L4.9886 6L0.0951736 1.09165C-0.0317258 0.964665 -0.0317258 0.758771 0.0951735 0.631761L0.631341 0.0952377C0.75824 -0.031746 0.963998 -0.031746 1.09092 0.0952376L6.76197 5.77004C6.88887 5.89703 6.88887 6.10292 6.76197 6.22993L1.09093 11.9047C0.963999 12.0318 0.758241 12.0318 0.631342 11.9047Z"
+                            fill="#ECECEC"
+                          ></path>
+                        </svg>
                       </span>
                     </div>
                   </div>
-                  <button
-                    onClick={() => _withdrawMoney()}
-                    onKeyDown={() => ""}
-                    data-v-9dec3a92=""
-                    data-v-6307fb48=""
-                    id="btn-withdraw"
-                    disabled={dataUser?.amount >= 1 && chooseBankDeposit !== ''? false : true}
-                    type="submit"
-                    className="base-button-wrapper v-rounded btn-primary btn-md btn-primary mb-[10px] cursor-pointer w-full"
-                    label="ถอนเงิน"
-                  >
-                    <div
-                      data-v-9dec3a92=""
-                      className="flex justify-center items-center"
-                    >
-                      {t("Withdraw")}
-                    </div>
-                  </button>
+                  {/* ))} */}
                 </div>
-                <span className="text-message-warning">{reMessage}</span>
+                {/* <div className="flex flex-col items-center justify-center w-full rounded-base bg-card-primary text-center mt-4 p-4">
+                  <div className="flex flex-row w-full justify-between">
+                    <div className="flex flex-col">
+                      <p className="text-sm">{t("account")} </p>
+                      <div className="w-[45px] h-[45px] mt-4 text-white">
+                        <div className="w-[45px] h-[45px] rounded-base overflow-hidden grid place-content-center">
+                          <span
+                            className="nuxt-icon text-[2.4rem] text-white"
+                            id="kbank"
+                          >
+                            <img
+                              src={`/assets/images/bank/${
+                                bankList && bankList?.s_icon
+                              }`}
+                              alt="scb"
+                              id="image0_5_3"
+                              width="512"
+                              height="512"
+                            />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p
+                        className="text-sm"
+                        style={{ textTransform: "uppercase" }}
+                      >
+                        {bankList?.s_icon?.split(".")[0]}
+                      </p>
+                      <p className="text-lg mt-2 text-active font-bold">
+                        {bankList?.s_account_no}
+                      </p>
+                      <p className="text-sm mt-[10px]">
+                        {bankList?.s_account_name}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="w-full h-[34px] flex items-center gap-x-2 justify-center bg-card-secondary rounded-[5px] p-2 &lt;sm:h-auto &lt;sm:text-center &lt;sm:justify-start &lt;sm:p-2 mt-4">
+                    <p
+                      className="text-danger text-lg"
+                      style={{ textAlign: "center", width: "100%" }}
+                    >
+                      “{t("WarnningAccountDeposit")}”
+                    </p>
+                  </div>
+                </div> */}
               </div>
             </div>
           </main>

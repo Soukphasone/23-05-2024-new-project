@@ -23,8 +23,8 @@ function HomePage() {
   const [deviceType, setDeviceType] = useState(false);
   const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
   const [activeCategory, setActiveCategory] = useState("ALL");
-  const [newsPromotion, setNewsPromotion] = useState([]);
   const { t } = useTranslation();
+  const [newsPromotion, setNewsPromotion] = useState(false);
   const [openModalNews, setOpenModalNews] = useState(false);
   const _ModalNews = () => {
     setOpenModalNews(false);
@@ -40,11 +40,14 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    _clickCategoryGame("ALL");
-    setOpenModalNews(true);
-    _getNews();
-  }, [dataFromLogin]);
+    const fetchDataAndSetModal = async () => {
+      await _clickCategoryGame("ALL");
+      await _getNews();
+      setOpenModalNews(true);
+    };
 
+    fetchDataAndSetModal();
+  }, [dataFromLogin]);
   useEffect(() => {
     let hasTouchScreen = false;
     if ("maxTouchPoints" in navigator) {
@@ -74,10 +77,6 @@ function HomePage() {
     }
   }, []);
   const _clickCategoryGame = async (value) => {
-    // console.log("CATEGORY_ACTIVE: ", value);
-    if (value === "ALL") {
-      setOpenModalNews(true);
-    }
     setActiveCategory(value);
     setDataGameType(value);
     FillerCategory(value, setCategoryGame);
@@ -163,8 +162,9 @@ function HomePage() {
         const getData = data.map((item) => ({
           news: item?.aftterLogin?.[0],
         }));
-        const getDataNews = getData.map(item => item?.news?.image)
-        .filter(news => news !== undefined)
+        const getDataNews = getData
+          .map((item) => item?.news?.image)
+          .filter((news) => news !== undefined);
         setNewsPromotion(getDataNews);
       }
     } catch (error) {
@@ -184,33 +184,12 @@ function HomePage() {
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
-              {/* <Letter_slide /> */}
               <div className="flex flex-col gap-y-2">
                 <Image_slide />
                 <div
                   style={{ marginTop: "2px" }}
                   className="text-[red] flex space-x-2"
-                >
-                  {/* <div className="relative w-full">
-                    <select
-                      className="relative block w-full min-h-[44px] !rounded-base disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-select rounded-md text-base px-3.5 py-2.5 shadow-sm bg-[var(--card-secondary)] text-[var(--primary)] ring-1 ring-inset ring-[var(--card-tertiary)] pe-12"
-                      id="nuid-1"
-                      value={selectedFav}
-                      onChange={_selectFavorite}
-                    >
-                      <option value="">
-                        หมวดหมู่เกม
-                      </option>
-                      <option value="fav">เกมโปรด</option>
-                    </select>
-                    <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
-                      <span
-                        className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
-                        aria-hidden="true"
-                      ></span>
-                    </span>
-                  </div> */}
-                </div>
+                ></div>
                 <div>
                   <div className="flex-row flex">
                     <div className="block">
@@ -1082,7 +1061,7 @@ function HomePage() {
         </div>
       </div>
       {openModalNews && (
-        <ModalNews closeModal={_ModalNews} newsPromotion={newsPromotion} />
+        <ModalNews closeModal={_ModalNews} News={newsPromotion} />
       )}
     </div>
   );

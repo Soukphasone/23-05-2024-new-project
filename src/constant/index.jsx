@@ -16,6 +16,7 @@ module.exports = {
   DEPOSIT_WITHDRAW: "/lobby/deposit-withdraw",
   DEPOSIT: "/lobby/deposit-withdraw/deposit",
   WITHDRAW: "/lobby/deposit-withdraw/withdraw",
+  WITHDRAW_BANK_LIST: "/lobby/deposit-withdraw/withdraw-bank-list",
   BANK_LIST: "/lobby/deposit/bank-list",
   BAG: "/lobby/bag",
   CASH_BACK: "/lobby/bag/cashback",
@@ -37,4 +38,5 @@ module.exports = {
   CONFIG_WITHDRAW: "CONFIG_WITHDRAW",
   SLIDE: "SLIDE",
   BANK_DEPOSIT: "BANK_DEPOSIT",
+  NEWS: "NEWS"
 };

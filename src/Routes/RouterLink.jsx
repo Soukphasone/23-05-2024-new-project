@@ -21,6 +21,7 @@ import Upslip from "../pages/lobby/UploadSlip";
 import Wheel from "../pages/lobby/Wheel";
 import Affiliate from "../pages/lobby/Affiliate";
 import Home from "../pages/home/Home";
+import WdBankList from "../pages/lobby/WithdrawBankList";
 function RouterLink() {
   return (
     <>
@@ -73,6 +74,11 @@ function RouterLink() {
                     exact
                     path={Const.WITHDRAW}
                     component={Withdraw}
+                  />
+                  <PrivateRoute
+                    exact
+                    path={Const.WITHDRAW_BANK_LIST}
+                    component={WdBankList}
                   />
                   <PrivateRoute
                     exact
