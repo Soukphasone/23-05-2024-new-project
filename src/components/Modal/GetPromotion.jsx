@@ -105,12 +105,12 @@ function GetPromotion({ closeModal, dataPromotion, dataFromLogin }) {
                       className="mt-2 text-primary overflow-scroll font-normal &lt;sm:text-sm sm:text-sm md:text-base"
                     >
                       <p> {dataPromotion?.s_detail}</p>
-                      <p>&nbsp;</p>
+                      {/* <p>&nbsp;</p>
                       <p>
                         🎀 {t("deposit")} {dataPromotion?.f_max_amount} {t("Get")}{" "}
                         {dataPromotion?.f_percen} 🎀
                       </p>
-                      <p>🌈 {t("Ltd")} {dataPromotion?.i_per_day} {t("time")}/{t("day")} 🌈</p>
+                      <p>🌈 {t("Ltd")} {dataPromotion?.i_per_day} {t("time")}/{t("day")} 🌈</p> */}
                     </span>
                   </div>
                 }

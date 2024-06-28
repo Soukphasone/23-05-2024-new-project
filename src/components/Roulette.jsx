@@ -64,6 +64,7 @@ const Roulette = ({
       setTimeout(() => {
         setOutputSpin(rouletteData[prizeNumber].completeOption);
       }, 3000);
+      return
     } 
   };
   return (
