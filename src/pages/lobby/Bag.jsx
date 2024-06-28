@@ -99,7 +99,9 @@ function Bag() {
     axios
       .request(config)
       .then((response) => {
-        const getDataSpin = response.data.data[0]?.eventItem.filter((data) => data.s_agent_code === Constant?.AGENT_CODE);
+        const getDataSpin = response.data.data[0]?.eventItem.filter(
+          (data) => data.s_agent_code === Constant?.AGENT_CODE
+        );
         setDataSpinWheel(getDataSpin);
         setLimitSpinWheel(response.data.data[0]);
       })
@@ -125,6 +127,58 @@ function Bag() {
                 style={{ marginTop: "5rem" }}
                 className="events-wrapper animate__animated animate__slideInLeft animate__fast base-container-small"
               >
+                <div
+                  className="splide splide--slide splide--ltr splide--draggable is-active is-initialized"
+                  id="splide01"
+                  role="region"
+                  aria-roledescription="carousel"
+                >
+                  <div
+                    className="splide__track splide__track--slide splide__track--ltr splide__track--draggable"
+                    id="splide01-track"
+                    aria-live="polite"
+                    aria-atomic="true"
+                    style={{paddingLeft: '0px', paddingRight: '0px'}}
+                  >
+                    <ul
+                      className="splide__list"
+                      id="splide01-list"
+                      role="presentation"
+                      style={{transform: 'translateX(0px)'}}
+                    >
+                      <li
+                        className="splide__slide is-active is-visible"
+                        id="splide01-slide01"
+                        role="tabpanel"
+                        aria-roledescription="slide"
+                        aria-label="1 of 1"
+                        style={{width: 'calc(100%)'}}
+                      >
+                        <img
+                          alt="ชวนเพื่อนรับ 8%"
+                          className="rounded-base w-full h-auto cursor-pointer"
+                          src="https://d29xpgmn3rqne6.cloudfront.net/lucabet88/promote/1673529686335"
+                        />
+                      </li>
+                    </ul>
+                  </div>
+                  <ul
+                    className="splide__pagination splide__pagination--ltr"
+                    role="tablist"
+                    aria-label="Select a slide to show"
+                  >
+                    <li role="presentation">
+                      <button
+                        className="splide__pagination__page is-active"
+                        type="button"
+                        role="tab"
+                        aria-controls="splide01-slide01"
+                        aria-label="Go to slide 1"
+                        aria-selected="true"
+                      ></button>
+                    </li>
+                  </ul>
+                </div>
                 <div>
                   <div className="grid-cols-4 md:grid-cols-6 grid my-4 gap-3">
                     <div

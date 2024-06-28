@@ -9,6 +9,8 @@ import ModalLanguage from "../../components/Modal/ModalLanguage";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import Constant from "../../constant";
+import queryString from "query-string";
+
 function Login() {
   const history = useHistory();
   const { t, i18n } = useTranslation();
@@ -24,6 +26,8 @@ function Login() {
   const [inputBank, setInputBank] = useState("");
 
   //register
+  const parsed = queryString.parse(history?.location?.search);
+  const [inputRef, setInputRef] = useState(parsed?.ref)
   const [inputPhonenumber, setInputPhonenumber] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const [inputFirstname, setInputFirstname] = useState("");
@@ -65,6 +69,7 @@ function Login() {
       inputPassword === "" ||
       inputLastname === ""
     ) {
+      
       setWarningPhone(t("EnterYourPhoneNumber"));
       setWarningPassword(t("PleaseEnterYourPassword"));
       setWarningFirstName(t("PleaseEnterYourName"));
@@ -117,6 +122,7 @@ function Login() {
         inputLastname,
         inputPhonenumber,
         inputPassword,
+        inputRef,
         inputBank,
         bankCode.toString()
       );

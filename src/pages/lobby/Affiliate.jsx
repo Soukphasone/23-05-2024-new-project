@@ -75,7 +75,7 @@ function Affiliate() {
       data: {
         s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
-        d_date: year,
+        d_year: year,
         page_start: 0,
       },
     });
@@ -247,7 +247,7 @@ function Affiliate() {
                         <div className="table-earn-date">
                           <div className="border-input-gold">
                             <div className="th-earn-container">
-                              <span className="th-earn">{t("Date")}</span>
+                              <span className="th-earn">{t("date")}</span>
                               <span className="th-earn">{t("apply")}</span>
                               <span className="th-earn">{t("Deposit")}</span>
                               <span className="th-earn">{t("income")}</span>
@@ -257,10 +257,18 @@ function Affiliate() {
                             {dataOverview.length > 0 &&
                               dataOverview?.map((item, index) => (
                                 <div className="tr-earn">
-                                  <span className="td-earn">1/01/66</span>
-                                  <span className="td-earn">110</span>
-                                  <span className="td-earn">40</span>
-                                  <span className="td-earn">11,668</span>
+                                  <span className="td-earn">
+                                    {item?.d_create}
+                                  </span>
+                                  <span className="td-earn">
+                                    {item?.regisCount}
+                                  </span>
+                                  <span className="td-earn">
+                                    {item?.deposit}
+                                  </span>
+                                  <span className="td-earn">
+                                    {item?.f_affiliate_credit}
+                                  </span>
                                 </div>
                               ))}
                           </div>
@@ -287,7 +295,7 @@ function Affiliate() {
                         <div className="table-earn-date">
                           <div className="border-input-gold">
                             <div className="th-earn-container">
-                              <span className="th-earn">{t("Month")}</span>
+                              <span className="th-earn">{t("month")}</span>
                               <span className="th-earn">{t("apply")}</span>
                               <span className="th-earn">{t("Deposit")}</span>
                               <span className="th-earn">{t("income")}</span>
@@ -347,8 +355,12 @@ function Affiliate() {
                         <div className="table-earn-date">
                           <div className="border-input-gold">
                             <div className="th-earn-container">
-                              <span className="th-earn">{t("BillingCycle")}</span>
-                              <span className="th-earn">{t("AmountOfMoney")}</span>
+                              <span className="th-earn">
+                                {t("BillingCycle")}
+                              </span>
+                              <span className="th-earn">
+                                {t("AmountOfMoney")}
+                              </span>
                             </div>
                           </div>
 
@@ -432,7 +444,9 @@ function Affiliate() {
                           <div className="border-input-gold">
                             <div className="th-earn-container">
                               <span className="th-earn">{t("DateTime")}</span>
-                              <span className="th-earn">{t("AmountOfMoney")}</span>
+                              <span className="th-earn">
+                                {t("AmountOfMoney")}
+                              </span>
                             </div>
                           </div>
 
