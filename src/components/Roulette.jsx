@@ -35,10 +35,10 @@ const Roulette = ({
         setCurrentPoint(_res?.data?.data?.currentPoint)
         setNotCurrentPoint(_res?.data?.data?.day)
     } else {
+      setMustSpin(true);
       showErrorAlert(_res.data.statusDesc);
-
     }
-    setMustSpin(true);
+   
 
 };
   useEffect(() => {
