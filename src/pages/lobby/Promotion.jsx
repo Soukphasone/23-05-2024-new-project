@@ -31,6 +31,8 @@ function Promotion() {
     );
     if (userData) {
       setDataFromLogin(userData);
+    }
+    if (_promotion) {
       setDataPromotion(_promotion);
     }
   }, []);

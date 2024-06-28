@@ -25,7 +25,7 @@ function ModalCredit({ closeModal }) {
       });
       if (_data?.data?.statusCode === 0) {
         showSuccessAlert("สำเร็จ");
-        closeModal("close");
+        closeModal();
       } else {
         setReMessage(_data?.data?.statusDesc);
       }

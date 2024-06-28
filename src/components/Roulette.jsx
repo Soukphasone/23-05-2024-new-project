@@ -17,30 +17,29 @@ const Roulette = ({
   const [rouletteData, setRouletteData] = useState(data);
   const handleSpinClick = async () => {
     const _res = await axios({
-        method: "post",
-        url: `${Constant.SERVER_URL}/LuckyWheel/RandomPrize`,
-        data: {
-            "s_username": username,
-            "s_agent_code": AGENT_CODE,
-            "eventCode": rouletteData[0].codeEvent
-        },
+      method: "post",
+      url: `${Constant.SERVER_URL}/LuckyWheel/RandomPrize`,
+      data: {
+        s_username: username,
+        s_agent_code: AGENT_CODE,
+        eventCode: rouletteData[0].codeEvent,
+      },
     });
 
     if (_res.data.statusCode === 0) {
-        for (let index = 0; index < data.length; index++) {
-            if (data[index]?.id === _res?.data?.data?.id) {
-                setPrizeNumber(index)
-            }
+      for (let index = 0; index < data.length; index++) {
+        if (data[index]?.id === _res?.data?.data?.id) {
+          setPrizeNumber(index);
         }
-        setCurrentPoint(_res?.data?.data?.currentPoint)
-        setNotCurrentPoint(_res?.data?.data?.day)
-    } else {
+      }
+      setCurrentPoint(_res?.data?.data?.currentPoint);
+      setNotCurrentPoint(_res?.data?.data?.day);
       setMustSpin(true);
+    } else {
+      setMustSpin(false);
       showErrorAlert(_res.data.statusDesc);
     }
-   
-
-};
+  };
   useEffect(() => {
     if (mustSpin === true) {
       setOutputSpin("");
@@ -58,14 +57,14 @@ const Roulette = ({
     });
     setRouletteData(addShortString);
   }, [data]);
-  
+
   const randomPrice = async (eventCode) => {
     if (eventCode) {
       setTimeout(() => {
         setOutputSpin(rouletteData[prizeNumber].completeOption);
       }, 3000);
-      return
-    } 
+      return;
+    }
   };
   return (
     <>

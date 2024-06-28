@@ -24,7 +24,7 @@ function HomePage() {
   const [dataGameType, setDataGameType] = useState("SLOT"); // FAVORITE || HOTHIT
   const [activeCategory, setActiveCategory] = useState("ALL");
   const { t } = useTranslation();
-  const [newsPromotion, setNewsPromotion] = useState(false);
+  const [newsPromotion, setNewsPromotion] = useState([]);
   const [openModalNews, setOpenModalNews] = useState(false);
   const _ModalNews = () => {
     setOpenModalNews(false);
@@ -43,11 +43,18 @@ function HomePage() {
     const fetchDataAndSetModal = async () => {
       await _clickCategoryGame("ALL");
       await _getNews();
-      setOpenModalNews(true);
+      if (newsPromotion.length > 0) {
+        setOpenModalNews(true);
+      }
     };
-
     fetchDataAndSetModal();
+   
   }, [dataFromLogin]);
+  useEffect(() => {
+      if (newsPromotion.length > 0) {
+        setOpenModalNews(true);
+      }
+  }, [newsPromotion]);
   useEffect(() => {
     let hasTouchScreen = false;
     if ("maxTouchPoints" in navigator) {

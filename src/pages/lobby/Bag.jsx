@@ -99,7 +99,8 @@ function Bag() {
     axios
       .request(config)
       .then((response) => {
-        setDataSpinWheel(response.data.data[0]?.eventItem);
+        const getDataSpin = response.data.data[0]?.eventItem.filter((data) => data.s_agent_code === Constant?.AGENT_CODE);
+        setDataSpinWheel(getDataSpin);
         setLimitSpinWheel(response.data.data[0]);
       })
       .catch((error) => {
