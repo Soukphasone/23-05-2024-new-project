@@ -99,7 +99,7 @@ const LoginController = () => {
   };
   // ==================> handleRegister <=================
   const handleRegister = async (inputFirstname, inputLastname, inputPhonenumber, inputPassword, inputBank, iBank, ref, setLoading) => {
-    // console.log("REGISTER");
+    console.log("REGISTER", ref );
     try {
       const _date = {
         s_agent_code: Constant.AGENT_CODE,

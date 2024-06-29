@@ -122,9 +122,9 @@ function Login() {
         inputLastname,
         inputPhonenumber,
         inputPassword,
-        inputRef,
         inputBank,
-        bankCode.toString()
+        bankCode.toString(),
+        inputRef,
       );
       if (_res) {
         setMessageCreate(_res?.statusDesc);

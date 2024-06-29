@@ -1,9 +1,9 @@
 module.exports = {
   // AGENT_CODE: "AG002",
-  // AGENT_CODE: "AG021",
-  // AGENT_CODE: "AG019",
-  // AGENT_CODE: "AG022",
   AGENT_CODE: "AG006",
+  // AGENT_CODE: "AG019",
+  // AGENT_CODE: "AG021",
+  // AGENT_CODE: "AG022",
 
   SERVER_URL: "https://prod.txtechserver.com/api/v1",
   SERVER_URL_IMAGE: "https://img.txtechserver.com",
@@ -40,5 +40,5 @@ module.exports = {
   CONFIG_WITHDRAW: "CONFIG_WITHDRAW",
   SLIDE: "SLIDE",
   BANK_DEPOSIT: "BANK_DEPOSIT",
-  NEWS: "NEWS"
+  NEWS: "NEWS",
 };
