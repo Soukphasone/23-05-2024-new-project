@@ -16,7 +16,9 @@ function Affiliate() {
   const [dataHistoryAffiliate, setDataHistoryAffiliate] = useState([]);
   const [dataIncome, setDataIncome] = useState([]);
   const [years, setYears] = useState([]);
-  const [overviewDate, setOverviewDate] = useState(formatMontYear(new Date()));
+  // const [overviewDate, setOverviewDate] = useState(formatMontYear(new Date()));
+  const [overviewDate, setOverviewDate] = useState();
+
   const [incomeDateStart, setIncomeDateStart] = useState(
     formatMontYear(new Date())
   );
@@ -27,6 +29,7 @@ function Affiliate() {
     history.push(Constant.BAG);
   };
   useEffect(() => {
+    setOverviewDate(formatMontYear(new Date()));
     const currentYear = new Date().getFullYear();
     const yearArray = [];
     for (let year = 2020; year <= currentYear; year++) {
@@ -52,15 +55,18 @@ function Affiliate() {
   const _selectYear = (event) => {
     _getRegisterByYear(event);
   };
-
-  const _getRegister = async () => {
+  const _getOverview = (date) => {
+    _getRegister(date);
+    setOverviewDate(date);
+  };
+  const _getRegister = async (overviewDate) => {
     const _res = await axios({
       method: "post",
       url: `${Constant.SERVER_URL}/Affiliate/Inquiry/Register`,
       data: {
         s_agent_code: Constant?.AGENT_CODE,
         s_username: dataFromLogin?.username,
-        d_date: "2023-09",
+        d_date: overviewDate,
         page_start: 0,
       },
     });
@@ -234,13 +240,7 @@ function Affiliate() {
                     >
                       <div className="filter-date">
                         <p className="filter-label">{t("DateOverview")}</p>
-                        <input
-                          className="filter-date-input"
-                          value={overviewDate}
-                          type="month"
-                          name=""
-                          id=""
-                        />
+                      <input className="filter-date-input" value={overviewDate} onChange={(e) => _getOverview(e.target.value)} type="month" />
                       </div>
 
                       <div className="border-input-gold">

@@ -32456,20 +32456,25 @@ ul {
 
 
 @media (max-width: 400px) {
-   .img-logoweb img{
-    width: 150px;
-}
+    .img-logoweb img {
+        width: 150px;
+    }
 }
 
-.refresh-balance{
-    cursor:pointer;
+.refresh-balance {
+    cursor: pointer;
     width: 10px;
     height: 10px;
-  }
-  
-  .refresh-balance:hover{
-      -webkit-animation-name: spin;
-      -webkit-animation-duration: 1000ms;
-      -webkit-animation-iteration-count: 1;
-  }
-  
+}
+
+.refresh-balance:hover {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 1000ms;
+    -webkit-animation-iteration-count: 1;
+}
+
+@media (min-width: 768px) {
+    .md\:min-h-\[167px\] {
+        min-height: 167px;
+    }
+}

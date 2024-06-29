@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import Constant from "../../constant";
 import { DataLocalStorage } from "../../helper";
 import { useTranslation } from "react-i18next";
+import ModalCredit from "../../components/Modal/ModalCredit";
 
 function Bag() {
   const { t } = useTranslation();
@@ -22,20 +23,20 @@ function Bag() {
   const [dataSpinWheel, setDataSpinWheel] = useState([]);
   const [limitSpinWheel, setLimitSpinWheel] = useState({});
 
-  const [openModalSharelink, setOpenModasharelink] = useState(false);
+  const [openModalSharelink, setOpenModalShareLink] = useState(false);
   const [openModalHis, setOpenModalHis] = useState(false);
-  const [openModalAffiliate, setOpenAffiliate] = useState(false);
-  const ModalSharelink = () => {
-    setOpenModasharelink(false);
+  const [openModalCredit, setOpenModalCredit] = useState(false);
+  const ModalShareLink = () => {
+    setOpenModalShareLink(false);
   };
   const ModalHistory = () => {
     setOpenModalHis(false);
   };
-  const ModalAffiliate = () => {
-    setOpenAffiliate(false);
+  const ModalCredit1 = () => {
+    setOpenModalCredit(false);
   };
 
-  const NextoCahsback = () => {
+  const NexToCashback = () => {
     history.push(Constant.CASH_BACK);
   };
   const NextoWheel = () => {
@@ -138,13 +139,13 @@ function Bag() {
                     id="splide01-track"
                     aria-live="polite"
                     aria-atomic="true"
-                    style={{paddingLeft: '0px', paddingRight: '0px'}}
+                    style={{ paddingLeft: "0px", paddingRight: "0px" }}
                   >
                     <ul
                       className="splide__list"
                       id="splide01-list"
                       role="presentation"
-                      style={{transform: 'translateX(0px)'}}
+                      style={{ transform: "translateX(0px)" }}
                     >
                       <li
                         className="splide__slide is-active is-visible"
@@ -152,7 +153,7 @@ function Bag() {
                         role="tabpanel"
                         aria-roledescription="slide"
                         aria-label="1 of 1"
-                        style={{width: 'calc(100%)'}}
+                        style={{ width: "calc(100%)" }}
                       >
                         <img
                           alt="ชวนเพื่อนรับ 8%"
@@ -182,7 +183,7 @@ function Bag() {
                 <div>
                   <div className="grid-cols-4 md:grid-cols-6 grid my-4 gap-3">
                     <div
-                      onClick={() => setOpenModasharelink(true)}
+                      onClick={() => setOpenModalShareLink(true)}
                       className="flex flex-col text-center justify-center items-center cursor-pointer"
                       id="btn-referral"
                     >
@@ -192,7 +193,7 @@ function Bag() {
                           className="borderGradient w-full gradient-border w-[75px] rounded-full h-[75px] bg-card-primary flex light-theme-box-shadow justify-center items-center"
                         >
                           <span className="nuxt-icon text-4xl text-[var(--primary)]">
-                            <svg
+                            {/* <svg
                               width="30"
                               height="30"
                               viewBox="0 0 30 30"
@@ -421,7 +422,12 @@ function Bag() {
                                   ></stop>
                                 </linearGradient>
                               </defs>
-                            </svg>
+                            </svg> */}
+                            <img
+                              className="bag-menu-icon"
+                              src="/assets/images/icons/icon-earn-money.svg"
+                              alt=""
+                            />
                           </span>
                         </div>
                       </a>
@@ -429,6 +435,7 @@ function Bag() {
                         {t("MakeMoney")}
                       </h5>
                     </div>
+
                     <div
                       className="flex flex-col text-center justify-center items-center cursor-pointer"
                       id="btn-luckywheel"
@@ -439,7 +446,7 @@ function Bag() {
                           className="borderGradient w-full gradient-border w-[75px] rounded-full h-[75px] bg-card-primary flex light-theme-box-shadow justify-center items-center"
                         >
                           <span className="nuxt-icon text-4xl text-[var(--primary)]">
-                            <svg
+                            {/* <svg
                               width="26"
                               height="30"
                               viewBox="0 0 26 30"
@@ -800,7 +807,12 @@ function Bag() {
                                   ></stop>
                                 </linearGradient>
                               </defs>
-                            </svg>
+                            </svg> */}
+                            <img
+                              className="bag-menu-icon"
+                              src="/assets/images/icons/icon-spinner.svg"
+                              alt=""
+                            />
                           </span>
                         </div>
                       </a>
@@ -809,7 +821,7 @@ function Bag() {
                       </h5>
                     </div>
                     <div
-                      onClick={NextoCahsback}
+                      onClick={NexToCashback}
                       className="flex flex-col text-center justify-center items-center cursor-pointer"
                       id="btn-activity"
                     >
@@ -819,7 +831,7 @@ function Bag() {
                           className="borderGradient w-full gradient-border w-[75px] rounded-full h-[75px] bg-card-primary flex light-theme-box-shadow justify-center items-center"
                         >
                           <span className="nuxt-icon text-4xl text-[var(--primary)]">
-                            <svg
+                            {/* <svg
                               width="30"
                               height="30"
                               viewBox="0 0 30 30"
@@ -925,7 +937,12 @@ function Bag() {
                                   ></rect>
                                 </clipPath>
                               </defs>
-                            </svg>
+                            </svg> */}
+                            <img
+                              className="bag-menu-icon"
+                              src="/assets/images/icons/icon-back-cash.svg"
+                              alt=""
+                            />
                           </span>
                         </div>
                       </a>
@@ -944,7 +961,7 @@ function Bag() {
                           className="borderGradient w-full gradient-border w-[75px] rounded-full h-[75px] bg-card-primary flex light-theme-box-shadow justify-center items-center"
                         >
                           <span className="nuxt-icon text-4xl text-[var(--primary)]">
-                            <svg
+                            {/* <svg
                               width="30"
                               height="30"
                               viewBox="0 0 30 30"
@@ -1063,7 +1080,12 @@ function Bag() {
                                   ></stop>
                                 </linearGradient>
                               </defs>
-                            </svg>
+                            </svg> */}
+                             <img
+                              className="bag-menu-icon"
+                              src="/assets/images/icons/icon-withdraw.svg"
+                              alt=""
+                            />
                           </span>
                         </div>
                       </a>
@@ -1081,43 +1103,38 @@ function Bag() {
                           className="borderGradient w-full gradient-border w-[75px] rounded-full h-[75px] bg-card-primary flex light-theme-box-shadow justify-center items-center"
                         >
                           <span className="nuxt-icon text-4xl text-[var(--primary)]">
-                            <svg
-                              width="26"
-                              height="26"
-                              viewBox="0 0 26 26"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M13 0.5C10.5277 0.5 8.11099 1.23311 6.05538 2.60663C3.99976 3.98015 2.39761 5.93238 1.45151 8.21646C0.505416 10.5005 0.257874 13.0139 0.74019 15.4386C1.2225 17.8634 2.41301 20.0907 4.16117 21.8388C5.90933 23.587 8.13661 24.7775 10.5614 25.2598C12.9861 25.7421 15.4995 25.4946 17.7836 24.5485C20.0676 23.6024 22.0199 22.0002 23.3934 19.9446C24.7669 17.889 25.5 15.4723 25.5 13C25.5 11.3585 25.1767 9.73303 24.5485 8.21646C23.9203 6.69989 22.9996 5.3219 21.8388 4.16117C20.6781 3.00043 19.3001 2.07969 17.7836 1.45151C16.267 0.823322 14.6415 0.5 13 0.5ZM20.1 12.425L17.4375 15.15L18.0625 19.025C18.1058 19.2606 18.0805 19.5036 17.9897 19.7252C17.8988 19.9468 17.7462 20.1376 17.55 20.275C17.3573 20.4087 17.1308 20.4855 16.8965 20.4965C16.6622 20.5076 16.4295 20.4525 16.225 20.3375L13 18.525L9.75 20.3125C9.56822 20.4195 9.36097 20.4757 9.15001 20.475C8.89086 20.477 8.63751 20.3983 8.42501 20.25C8.2288 20.1126 8.0762 19.9218 7.98534 19.7002C7.89448 19.4786 7.8692 19.2356 7.91251 19L8.55 15.125L5.87501 12.425C5.7133 12.2602 5.60039 12.0538 5.54881 11.8288C5.49722 11.6037 5.50898 11.3688 5.58276 11.15C5.65655 10.9313 5.78949 10.7372 5.96684 10.5894C6.14419 10.4415 6.35902 10.3457 6.58751 10.3125L10.225 9.75L11.8625 6.275C11.9555 6.04867 12.1128 5.8546 12.315 5.71684C12.5172 5.57907 12.7554 5.50368 13 5.5C13.2377 5.4983 13.471 5.56443 13.6725 5.69063C13.874 5.81682 14.0353 5.99786 14.1375 6.2125L15.7625 9.75L19.4 10.3125C19.6276 10.3465 19.8415 10.4427 20.0179 10.5905C20.1944 10.7382 20.3266 10.9319 20.4 11.15C20.4728 11.3695 20.4833 11.6048 20.4304 11.8299C20.3774 12.055 20.2631 12.261 20.1 12.425Z"
-                                fill="url(#paint0_linear_5853_103182)"
-                              ></path>
-                              <defs>
-                                <linearGradient
-                                  id="paint0_linear_5853_103182"
-                                  x1="3.83333"
-                                  y1="4.66667"
-                                  x2="21.5417"
-                                  y2="22.375"
-                                  gradientUnits="userSpaceOnUse"
-                                >
-                                  <stop stopColor="var(--main-icon-1)"></stop>
-                                  <stop
-                                    offset="0.5"
-                                    stopColor="var(--main-icon-2)"
-                                  ></stop>
-                                  <stop
-                                    offset="1"
-                                    stopColor="var(--main-icon-3)"
-                                  ></stop>
-                                </linearGradient>
-                              </defs>
-                            </svg>
+                              <img
+                              className="bag-menu-icon"
+                              src="/assets/images/icons/affiliate-image.svg"
+                              alt=""
+                            />
                           </span>
                         </div>
                       </a>
                       <h5 className="text-xs text-primary mt-1 w-[75px]">
                         {t("WithdrawAffiliate")}
+                      </h5>
+                    </div>
+                    <div
+                      onClick={() => setOpenModalCredit(true)}
+                      className="flex flex-col text-center justify-center items-center cursor-pointer"
+                    >
+                      <a className="">
+                        <div
+                          data-v-d320b445=""
+                          className="borderGradient w-full gradient-border w-[75px] rounded-full h-[75px] bg-card-primary flex light-theme-box-shadow justify-center items-center"
+                        >
+                          <span className="nuxt-icon text-4xl text-[var(--primary)]">
+                              <img
+                              className="bag-menu-icon"
+                              src="/assets/images/icons/icon-ticket.svg"
+                              alt=""
+                            />
+                          </span>
+                        </div>
+                      </a>
+                      <h5 className="text-xs text-primary mt-1 w-[75px]">
+                      {t("EnterTheCode")}
                       </h5>
                     </div>
                   </div>
@@ -1129,7 +1146,7 @@ function Bag() {
         </div>
       </div>
       {openModalSharelink && (
-        <ShareLink closeModal={ModalSharelink} dataFromLogin={dataFromLogin} />
+        <ShareLink closeModal={ModalShareLink} dataFromLogin={dataFromLogin} />
       )}
       {openModalHis && (
         <History
@@ -1137,6 +1154,11 @@ function Bag() {
           dataHistoryDeposit={dataHistoryDeposit}
           dataHistoryWithdraw={dataHistoryWithdraw}
           dataHistoryBonus={dataHistoryBonus}
+        />
+      )}
+      {openModalCredit && (
+        <ModalCredit
+          closeModal={ModalCredit1}
         />
       )}
     </div>

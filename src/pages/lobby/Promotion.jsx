@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
+import ImageSlideWallet from "../../components/ImageSlideWallet";
 
 function Promotion() {
   const [dataFromLogin, setDataFromLogin] = useState({});
@@ -56,6 +57,7 @@ function Promotion() {
                 data-v-ac0eeeb0=""
                 className="promotion-wrapper animate__animated animate__slideInLeft animate__fast base-container-small space-y-2 flex flex-col justify-center"
               >
+               <ImageSlideWallet/>
                 <div
                   data-v-ac0eeeb0=""
                   className="animate__animated animate__fadeIn animate__fast"
@@ -131,7 +133,7 @@ function Promotion() {
               </div>
             </div>
           </main>
-          {openModal ? '' : (<Footer Active={promotion} style />)}
+          {openModal ? "" : <Footer Active={promotion} style />}
         </div>
       </div>
       {openModal &&

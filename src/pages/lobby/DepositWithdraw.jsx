@@ -5,6 +5,7 @@ import Constant from "../../constant";
 import Footer from "../../components/Footer";
 import ModalCredit from "../../components/Modal/ModalCredit";
 import { useTranslation } from "react-i18next";
+import ImageSlideWallet from "../../components/ImageSlideWallet";
 
 function DepositWithdraw() {
   const { t } = useTranslation();
@@ -37,8 +38,11 @@ function DepositWithdraw() {
             >
               {/* <Letter_slide /> */}
               <div className="bank-wrapper animate__animated animate__slideInLeft animate__fast base-container-small">
-                {/* <Slide_bank/> */}
-                <div className="flex w-full gap-x-3">
+                <ImageSlideWallet />
+                <div
+                  style={{ marginTop: "20px" }}
+                  className="flex w-full gap-x-3"
+                >
                   <div
                     onClick={NextoDeposit}
                     data-v-c1e135f9=""
@@ -140,13 +144,16 @@ function DepositWithdraw() {
                 <div
                   onClick={() => setOpenModalgetcredit(true)}
                   data-v-e339f85c=""
-                  style={{ marginTop: "30px" }}
+                  style={{ marginTop: "20px" }}
                 >
                   <div
                     data-v-e339f85c=""
                     className="bg-[var(--card-primary)] text-primary flex light-theme-box-shadow cursor-pointer rounded-base flex-row w-full h-[54px] Wrapper mt-3 items-center justify-between"
                   >
-                    <div data-v-e339f85c="" className="flex space-x-2 items-center">
+                    <div
+                      data-v-e339f85c=""
+                      className="flex space-x-2 items-center"
+                    >
                       <div
                         data-v-e339f85c=""
                         className="bg-darkCard w-[36px] h-[36px] grid place-content-center rounded-full"
@@ -206,9 +213,7 @@ function DepositWithdraw() {
           <Footer Active={bank} />
         </div>
       </div>
-      {modalgetCredit &&
-        <ModalCredit closeModal={ModalGetCredit} />
-      }
+      {modalgetCredit && <ModalCredit closeModal={ModalGetCredit} />}
     </body>
   );
 }
