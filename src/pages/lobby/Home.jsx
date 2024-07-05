@@ -14,6 +14,8 @@ import {
 import { useTranslation } from "react-i18next";
 import ModalNews from "../../components/Modal/ModalNews";
 import { GetNews } from "../../api/getdatauser";
+import Contact from "../../components/Contact";
+import ModalContact from "../../components/Modal/ModalContact";
 function HomePage() {
   //
   const history = useHistory();
@@ -26,8 +28,16 @@ function HomePage() {
   const { t } = useTranslation();
   const [newsPromotion, setNewsPromotion] = useState([]);
   const [openModalNews, setOpenModalNews] = useState(false);
+  const [openModalContact, setOpenModalContact] = useState(false);
   const _ModalNews = () => {
     setOpenModalNews(false);
+  };
+  const _ModalContact = (value) => {
+    if (value === "open") {
+      setOpenModalContact(true);
+    } else {
+      setOpenModalContact(false);
+    }
   };
   const gameType = (TypeGame) => {
     history.push(Constant.TYPE_GAME, TypeGame);
@@ -48,12 +58,11 @@ function HomePage() {
       }
     };
     fetchDataAndSetModal();
-   
   }, [dataFromLogin]);
   useEffect(() => {
-      if (newsPromotion.length > 0) {
-        setOpenModalNews(true);
-      }
+    if (newsPromotion.length > 0) {
+      setOpenModalNews(true);
+    }
   }, [newsPromotion]);
   useEffect(() => {
     let hasTouchScreen = false;
@@ -181,6 +190,7 @@ function HomePage() {
   return (
     <div className="overflow-x-hidden overflow-y-auto text-primary">
       <div id="__nuxt" data-v-app="">
+        {/* {openModalContact === false && <Contact ModalContact={_ModalContact} />} */}
         <div data-v-3c88d514="">
           <Header />
           <main
@@ -1070,6 +1080,7 @@ function HomePage() {
       {openModalNews && (
         <ModalNews closeModal={_ModalNews} News={newsPromotion} />
       )}
+      {openModalContact && <ModalContact closeModal={_ModalContact} />}
     </div>
   );
 }

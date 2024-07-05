@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 function Header() {
   const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
-  const [logoweb, setLogoweb] = useState({});
+  const [logoWeb, setLogoweb] = useState({});
   const [dataUser, setDataUser] = useState([]);
   const [username, setUsername] = useState("");
   const [agent, setAgent] = useState("");
@@ -35,9 +35,9 @@ function Header() {
   const _fetchData = async () => {
     try {
       const data = await DataUser({ agent, username });
-      if(data){
+      if (data) {
         setDataUser(data);
-        setAnimationRefresh(false)
+        setAnimationRefresh(false);
       }
     } catch (error) {
     } finally {
@@ -95,22 +95,28 @@ function Header() {
               >
                 <a onClick={NextToHome}>
                   <div className="img-logoweb">
-                    <img
-                      data-v-4b602944=""
-                      className="cursor-pointer object-contain h-auto max-h-[80px] max-w-[200px]"
-                      src={`${Constant?.SERVER_URL_IMAGE}/images/${logoweb}`}
-                      alt="center menu"
-                    />
+                    {logoWeb !== "" && logoWeb !== undefined ? (
+                      <img
+                        data-v-4b602944=""
+                        className="cursor-pointer object-contain h-auto max-h-[80px] max-w-[200px]"
+                        src={`${Constant?.SERVER_URL_IMAGE}/images/${logoWeb}`}
+                        alt="center menu"
+                      />
+                    ) : (
+                      <img
+                        data-v-4b602944=""
+                        className="cursor-pointer object-contain h-auto max-h-[80px] max-w-[200px]"
+                        src="https://via.placeholder.com/1000x200/cbcbd2/808080?text=Logo-Website "
+                        alt="center menu"
+                      />
+                    )}
                   </div>
                 </a>
                 <div
                   data-v-4b602944=""
                   className="walletWrapper px-4 flex items-center py-2 text-xs cursor-pointer"
                 >
-                  <div
-                    data-v-4b602944=""
-                    className=""
-                  >
+                  <div data-v-4b602944="" className="">
                     <div
                       data-v-4b602944=""
                       className="text-[var(--balance-wrapper-text1)] justify-between flex gap-x-2"
@@ -124,7 +130,6 @@ function Header() {
                           data-v-4b602944=""
                           className="nuxt-icon nuxt-icon--fill"
                         >
-                         
                           {/* <svg
                             width="100"
                             height="100"
@@ -147,7 +152,7 @@ function Header() {
                           data-v-4b602944=""
                           className="nuxt-icon nuxt-icon--fill text-[var(--main-icon-color)]"
                         >
-                           <img
+                          <img
                             src="/assets/images/icons/icons8-refresh-30.png"
                             onClick={(e) => refreshBalance(e)}
                             alt="fresh"

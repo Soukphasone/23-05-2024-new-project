@@ -16,7 +16,7 @@ function Affiliate() {
   const [dataHistoryAffiliate, setDataHistoryAffiliate] = useState([]);
   const [dataIncome, setDataIncome] = useState([]);
   const [years, setYears] = useState([]);
-  // const [overviewDate, setOverviewDate] = useState(formatMontYear(new Date()));
+  const thisYear = new Date().getFullYear();
   const [overviewDate, setOverviewDate] = useState();
 
   const [incomeDateStart, setIncomeDateStart] = useState(
@@ -36,13 +36,14 @@ function Affiliate() {
       yearArray.push(year);
     }
     setYears(yearArray);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    _getOverview(formatMontYear(new Date()));
+    _selectYear(thisYear);
   }, []);
   const _tabAffiliate = (tabAffiliate) => {
     // console.log("tabAffiliate:: ", tabAffiliate);
     setTabNameAffiliate(tabAffiliate);
     if (tabAffiliate === "overview") {
-      _getRegister();
+      _getOverview(formatMontYear(new Date()));
       setTapAffiliate("ภาพรวม");
     } else if (tabAffiliate === "income") {
       _getIncome(incomeDateStart, incomeDateEnd);
@@ -240,7 +241,12 @@ function Affiliate() {
                     >
                       <div className="filter-date">
                         <p className="filter-label">{t("DateOverview")}</p>
-                      <input className="filter-date-input" value={overviewDate} onChange={(e) => _getOverview(e.target.value)} type="month" />
+                        <input
+                          className="filter-date-input"
+                          value={overviewDate}
+                          onChange={(e) => _getOverview(e.target.value)}
+                          type="month"
+                        />
                       </div>
 
                       <div className="border-input-gold">
@@ -253,25 +259,51 @@ function Affiliate() {
                               <span className="th-earn">{t("income")}</span>
                             </div>
                           </div>
-                          <div className="tr-earn-container">
-                            {dataOverview.length > 0 &&
-                              dataOverview?.map((item, index) => (
-                                <div className="tr-earn">
-                                  <span className="td-earn">
-                                    {item?.d_create}
-                                  </span>
-                                  <span className="td-earn">
-                                    {item?.regisCount}
-                                  </span>
-                                  <span className="td-earn">
-                                    {item?.deposit}
-                                  </span>
-                                  <span className="td-earn">
-                                    {item?.f_affiliate_credit}
-                                  </span>
-                                </div>
-                              ))}
-                          </div>
+                          {dataOverview.length > 0 ? (
+                            <div className="tr-earn-container">
+                              {dataOverview.length > 0 &&
+                                dataOverview?.map((item, index) => (
+                                  <div key={index} className="tr-earn">
+                                    <span className="td-earn">
+                                      {item?.d_create}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.regisCount}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.deposit}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.f_affiliate_credit}
+                                    </span>
+                                  </div>
+                                ))}
+                            </div>
+                          ) : (
+                            <div
+                              style={{ marginTop: "3rem" }}
+                              data-v-82953e26=""
+                              class="w-full flex justify-center items-center gap-2 mb-4"
+                            >
+                              <span class="nuxt-icon nuxt-icon--fill icon-not-item">
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 14 14"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M7 0C3.13111 0 0 3.13075 0 7C0 10.8688 3.13075 14 7 14C10.8689 14 14 10.8693 14 7C14 3.13116 10.8693 0 7 0ZM7.71884 9.7787C7.71884 9.99986 7.39635 10.221 7.00014 10.221C6.5855 10.221 6.29068 9.99986 6.29068 9.7787V6.26812C6.29068 6.01013 6.58552 5.83502 7.00014 5.83502C7.39635 5.83502 7.71884 6.01013 7.71884 6.26812V9.7787ZM7.00016 4.98739C6.57631 4.98739 6.24463 4.67411 6.24463 4.32395C6.24463 3.97381 6.57634 3.66975 7.00016 3.66975C7.4148 3.66975 7.74654 3.97381 7.74654 4.32395C7.74654 4.67411 7.41478 4.98739 7.00016 4.98739Z"
+                                    fill="#8E8E8E"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span class="text-primary font-medium <sm:text-base sm:text-base md:text-lg">
+                                No Item
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <br />
@@ -283,7 +315,8 @@ function Affiliate() {
                             _selectYear(event?.target?.value)
                           }
                         >
-                          <option value="">{t("ChooseYear")}</option>
+                          {/* <option value="">{t("ChooseYear")}</option> */}
+                          <option value="">{thisYear}</option>
                           {years.map((year) => (
                             <option key={year} value={year}>
                               {year}
@@ -302,23 +335,51 @@ function Affiliate() {
                             </div>
                           </div>
 
-                          <div className="tr-earn-container">
-                            {dataOverviewYears?.length > 0 &&
-                              dataOverviewYears?.map((item, index) => (
-                                <div className="tr-earn">
-                                  <span className="td-earn">{item?.month}</span>
-                                  <span className="td-earn">
-                                    {item?.regisCount}
-                                  </span>
-                                  <span className="td-earn">
-                                    {item?.f_affiliate_credit}
-                                  </span>
-                                  <span className="td-earn">
-                                    {item?.deposit}
-                                  </span>
-                                </div>
-                              ))}
-                          </div>
+                          {dataOverviewYears.length > 0 ? (
+                            <div className="tr-earn-container">
+                              {dataOverviewYears?.length > 0 &&
+                                dataOverviewYears?.map((item, index) => (
+                                  <div key={index} className="tr-earn">
+                                    <span className="td-earn">
+                                      {item?.month}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.regisCount}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.f_affiliate_credit}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.deposit}
+                                    </span>
+                                  </div>
+                                ))}
+                            </div>
+                          ) : (
+                            <div
+                              style={{ marginTop: "3rem" }}
+                              data-v-82953e26=""
+                              class="w-full flex justify-center items-center gap-2 mb-4"
+                            >
+                              <span class="nuxt-icon nuxt-icon--fill icon-not-item">
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 14 14"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M7 0C3.13111 0 0 3.13075 0 7C0 10.8688 3.13075 14 7 14C10.8689 14 14 10.8693 14 7C14 3.13116 10.8693 0 7 0ZM7.71884 9.7787C7.71884 9.99986 7.39635 10.221 7.00014 10.221C6.5855 10.221 6.29068 9.99986 6.29068 9.7787V6.26812C6.29068 6.01013 6.58552 5.83502 7.00014 5.83502C7.39635 5.83502 7.71884 6.01013 7.71884 6.26812V9.7787ZM7.00016 4.98739C6.57631 4.98739 6.24463 4.67411 6.24463 4.32395C6.24463 3.97381 6.57634 3.66975 7.00016 3.66975C7.4148 3.66975 7.74654 3.97381 7.74654 4.32395C7.74654 4.67411 7.41478 4.98739 7.00016 4.98739Z"
+                                    fill="#8E8E8E"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span class="text-primary font-medium <sm:text-base sm:text-base md:text-lg">
+                                No Item
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -363,20 +424,45 @@ function Affiliate() {
                               </span>
                             </div>
                           </div>
-
-                          <div className="tr-earn-container">
-                            {dataIncome?.length > 0 &&
-                              dataIncome?.map((item, index) => (
-                                <div className="tr-earn" key={index}>
-                                  <span className="td-earn">
-                                    {item?.d_date}
-                                  </span>
-                                  <span className="td-earn">
-                                    {item?.f_affiliate}
-                                  </span>
-                                </div>
-                              ))}
-                          </div>
+                          {dataIncome?.length > 0 ? (
+                            <div className="tr-earn-container">
+                              {dataIncome?.length > 0 &&
+                                dataIncome?.map((item, index) => (
+                                  <div className="tr-earn" key={index}>
+                                    <span className="td-earn">
+                                      {item?.d_date}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.f_affiliate}
+                                    </span>
+                                  </div>
+                                ))}
+                            </div>
+                          ) : (
+                            <div
+                              style={{ marginTop: "3rem" }}
+                              data-v-82953e26=""
+                              class="w-full flex justify-center items-center gap-2 mb-4"
+                            >
+                              <span class="nuxt-icon nuxt-icon--fill icon-not-item">
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 14 14"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M7 0C3.13111 0 0 3.13075 0 7C0 10.8688 3.13075 14 7 14C10.8689 14 14 10.8693 14 7C14 3.13116 10.8693 0 7 0ZM7.71884 9.7787C7.71884 9.99986 7.39635 10.221 7.00014 10.221C6.5855 10.221 6.29068 9.99986 6.29068 9.7787V6.26812C6.29068 6.01013 6.58552 5.83502 7.00014 5.83502C7.39635 5.83502 7.71884 6.01013 7.71884 6.26812V9.7787ZM7.00016 4.98739C6.57631 4.98739 6.24463 4.67411 6.24463 4.32395C6.24463 3.97381 6.57634 3.66975 7.00016 3.66975C7.4148 3.66975 7.74654 3.97381 7.74654 4.32395C7.74654 4.67411 7.41478 4.98739 7.00016 4.98739Z"
+                                    fill="#8E8E8E"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span class="text-primary font-medium <sm:text-base sm:text-base md:text-lg">
+                                No Item
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -450,19 +536,45 @@ function Affiliate() {
                             </div>
                           </div>
 
-                          <div className="tr-earn-container">
-                            {dataHistoryAffiliate?.length > 0 &&
-                              dataHistoryAffiliate?.map((item, index) => (
-                                <div className="tr-earn">
-                                  <span className="td-earn">
-                                    {item?.d_create}
-                                  </span>
-                                  <span className="td-earn">
-                                    {item?.f_amount}
-                                  </span>
-                                </div>
-                              ))}
-                          </div>
+                          {dataHistoryAffiliate?.length > 0 ? (
+                            <div className="tr-earn-container">
+                              {dataHistoryAffiliate?.length > 0 &&
+                                dataHistoryAffiliate?.map((item, index) => (
+                                  <div className="tr-earn">
+                                    <span className="td-earn">
+                                      {item?.d_create}
+                                    </span>
+                                    <span className="td-earn">
+                                      {item?.f_amount}
+                                    </span>
+                                  </div>
+                                ))}
+                            </div>
+                          ) : (
+                            <div
+                              style={{ marginTop: "3rem" }}
+                              data-v-82953e26=""
+                              class="w-full flex justify-center items-center gap-2 mb-4"
+                            >
+                              <span class="nuxt-icon nuxt-icon--fill icon-not-item">
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 14 14"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M7 0C3.13111 0 0 3.13075 0 7C0 10.8688 3.13075 14 7 14C10.8689 14 14 10.8693 14 7C14 3.13116 10.8693 0 7 0ZM7.71884 9.7787C7.71884 9.99986 7.39635 10.221 7.00014 10.221C6.5855 10.221 6.29068 9.99986 6.29068 9.7787V6.26812C6.29068 6.01013 6.58552 5.83502 7.00014 5.83502C7.39635 5.83502 7.71884 6.01013 7.71884 6.26812V9.7787ZM7.00016 4.98739C6.57631 4.98739 6.24463 4.67411 6.24463 4.32395C6.24463 3.97381 6.57634 3.66975 7.00016 3.66975C7.4148 3.66975 7.74654 3.97381 7.74654 4.32395C7.74654 4.67411 7.41478 4.98739 7.00016 4.98739Z"
+                                    fill="#8E8E8E"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span class="text-primary font-medium <sm:text-base sm:text-base md:text-lg">
+                                No Item
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

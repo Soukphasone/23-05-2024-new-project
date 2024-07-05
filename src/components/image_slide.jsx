@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { DataLocalStorage } from "../helper";
 import axios from "axios";
 import Constant from "../constant";
-import { SlideDemo } from "../constant/demoSlide"
+import { SlideDemo } from "../constant/demoSlide";
 
 function Image_slide() {
   const [imageSlide, setImageSlide] = useState([]);
@@ -21,7 +21,7 @@ function Image_slide() {
     //     : [];
     //   setSliderData(slideArray);
     // }
-    getDataBackOffice()
+    getDataBackOffice();
   }, []);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function Image_slide() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev === sliderData.length - 1 ? 0 : prev + 1));
-    }, 3000); // Change slide every 3 seconds
+    }, 3000);
 
     return () => {
       clearInterval(interval);
@@ -94,82 +94,118 @@ function Image_slide() {
   return (
     <div>
       <div className="hidden md:block">
-        <div className="brand">
-          <div className="slideshow-container-after-login-pc">
-            <div className="mySlides">
-              <div
-                className="left-arrow"
-                onClick={() => prevSlide()}
-                onKeyDown={() => ""}
-              >
-                ❮
+        {sliderData.length > 0 ? (
+          <div className="brand">
+            <div className="slideshow-container-after-login-pc">
+              <div className="mySlides">
+                <div
+                  className="left-arrow"
+                  onClick={() => prevSlide()}
+                  onKeyDown={() => ""}
+                >
+                  ❮
+                </div>
+                <div
+                  className="right-arrow"
+                  onClick={() => nextSlide()}
+                  onKeyDown={() => ""}
+                >
+                  ❯
+                </div>
+                {sliderData.length > 0 &&
+                  sliderData.map((slide, index) => {
+                    return (
+                      <div
+                        className={
+                          index === current ? "slide1 active" : "slide1"
+                        }
+                        key={slide?.i_index}
+                      >
+                        {index === current && (
+                          <img
+                            src={`${Constant?.SERVER_URL_IMAGE}/images/${slide?.name}`}
+                            alt="travel"
+                            style={{ width: "100%" }}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
               </div>
-              <div
-                className="right-arrow"
-                onClick={() => nextSlide()}
-                onKeyDown={() => ""}
-              >
-                ❯
-              </div>
-              {sliderData.length > 0 &&
-                sliderData.map((slide, index) => {
-                  return (
-                    <div
-                      className={index === current ? "slide1 active" : "slide1"}
-                      key={slide?.i_index}
-                    >
-                      {index === current && (
-                        <img
-                          src={`${Constant?.SERVER_URL_IMAGE}/images/${slide?.name}`}
-                          alt="travel"
-                          style={{ width: "100%" }}
-                        />
-                      )}
-                    </div>
-                  );
-                })}
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="brand">
+            <div className="slideshow-container-after-login-pc">
+              <div className="mySlides">
+                <div className="slide1">
+                  <img
+                    src="https://via.placeholder.com/1000x300/cbcbd2/808080?text=Image-Slide"
+                    alt="travel"
+                    style={{ width: "100%", height: "250px" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="block md:hidden">
-        <div className="brand">
-          <div className="slideshow-container-after-login">
-            <div className="mySlides">
-              <div
-                className="left-arrow"
-                onClick={() => prevSlide()}
-                onKeyDown={() => ""}
-              >
-                ❮
+        {sliderData.length > 0 ? (
+          <div className="brand">
+            <div className="slideshow-container-after-login">
+              <div className="mySlides">
+                <div
+                  className="left-arrow"
+                  onClick={() => prevSlide()}
+                  onKeyDown={() => ""}
+                >
+                  ❮
+                </div>
+                <div
+                  className="right-arrow"
+                  onClick={() => nextSlide()}
+                  onKeyDown={() => ""}
+                >
+                  ❯
+                </div>
+                {sliderData.length > 0 &&
+                  sliderData.map((slide, index) => {
+                    return (
+                      <div
+                        className={
+                          index === current ? "slide1 active" : "slide1"
+                        }
+                        key={slide?.i_index}
+                      >
+                        {index === current && (
+                          <img
+                            src={`${Constant?.SERVER_URL_IMAGE}/images/${slide?.name}`}
+                            alt="travel"
+                            style={{ width: "100%" }}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
               </div>
-              <div
-                className="right-arrow"
-                onClick={() => nextSlide()}
-                onKeyDown={() => ""}
-              >
-                ❯
-              </div>
-              {sliderData.length > 0 &&
-                sliderData.map((slide, index) => {
-                  return (
-                    <div
-                      className={index === current ? "slide1 active" : "slide1"}
-                      key={slide?.i_index}
-                    >
-                      {index === current && (
-                        <img
-                          src={`${Constant?.SERVER_URL_IMAGE}/images/${slide?.name}`}
-                          alt="travel"
-                          style={{ width: "100%" }}
-                        />
-                      )}
-                    </div>
-                  );
-                })}
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="brand">
+            <div className="slideshow-container-after-login">
+              <div className="mySlides">
+                <div className="slide1">
+                  <img
+                    src="https://via.placeholder.com/700x400/cbcbd2/808080?text=Image-Slide"
+                    alt="travel"
+                    style={{ width: "100%" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

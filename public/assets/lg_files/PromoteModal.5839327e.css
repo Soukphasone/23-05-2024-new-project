@@ -11,13 +11,15 @@
 
 @media (max-width:479px) {
     .centent-promote {
-        max-width: 340px !important
+        /* max-width: 340px !important */
+        max-width: 300px !important
     }
 }
 
 @media (max-width:320px) {
     .centent-promote {
-        max-width: 240px !important
+        /* max-width: 240px !important */
+        max-width: 200px !important
     }
 }
 

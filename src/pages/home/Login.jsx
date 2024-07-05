@@ -6,10 +6,12 @@ import { NewBackList } from "../../constant/newBankList";
 import _LoginController from "../../api/login";
 import { showErrorAlert, showSuccessAlert } from "../../helper/SweetAlert";
 import ModalLanguage from "../../components/Modal/ModalLanguage";
-import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import Constant from "../../constant";
 import queryString from "query-string";
+import Contact from "../../components/Contact";
+import ModalContact from "../../components/Modal/ModalContact";
+import Spinner from "../../helper/Loading";
 
 function Login() {
   const history = useHistory();
@@ -19,7 +21,9 @@ function Login() {
   const [imageLang, setImageLang] = useState("/assets/images/flag/th.png");
   const [activeLang, setActiveLang] = useState("th");
   const [bankNameOption, setBankNameOption] = useState(t("ChooseABank"));
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);  
+  const [openModalContact, setOpenModalContact] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // bank account
   const { handleLogin, handleRegister } = _LoginController();
@@ -27,11 +31,11 @@ function Login() {
 
   //register
   const parsed = queryString.parse(history?.location?.search);
-  const [inputRef, setInputRef] = useState(parsed?.ref)
-  const [inputPhonenumber, setInputPhonenumber] = useState("");
+  const inputRef = useState(parsed?.ref);
+  const [inputPhoneNumber, setInputPhoneNumber] = useState("");
   const [inputPassword, setInputPassword] = useState("");
-  const [inputFirstname, setInputFirstname] = useState("");
-  const [inputLastname, setInputLastname] = useState("");
+  const [inputFirstName, setInputFirstName] = useState("");
+  const [inputLastName, setInputLastName] = useState("");
   const [warningPassword, setWarningPassword] = useState("");
   const [warningFirstName, setWarningFirstName] = useState("");
   const [warningLastName, setWarningLastName] = useState("");
@@ -40,13 +44,13 @@ function Login() {
   const [userNameInput, setUserNameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [messageCreate, setMessageCreate] = useState("");
-  const [warningUsername, setUserNameWarning] = useState("");
-  const [warningPasswordLg, setWarningPasswordLg] = useState("");
+  const warningUsername = useState("");
+  const warningPasswordLg = useState("");
   //bank
-  const [textWarning, setTextWarning] = useState(false);
   const [backgroundDropdown, setBackgroundDropdown] = useState("#6A6A6A");
   const [bankCode, setBankCode] = useState(0);
-  const [logoweb, setLogoweb] = useState({});
+  const [warningBankCode, setWarningBankCode] = useState("");
+  const [logoWeb, setLogoWeb] = useState("");
   //Select dropdown
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef(null);
@@ -58,22 +62,18 @@ function Login() {
     setIsActive(!isActive);
   };
 
-  const handleBlur = () => {
-    setIsActive(false);
-  };
-
   const _clickNextStep = () => {
+    setActiveTab("register-bank");
     if (
-      inputPhonenumber === "" ||
-      inputFirstname === "" ||
+      inputPhoneNumber === "" ||
+      inputFirstName === "" ||
       inputPassword === "" ||
-      inputLastname === ""
+      inputLastName === ""
     ) {
-      
       setWarningPhone(t("EnterYourPhoneNumber"));
       setWarningPassword(t("PleaseEnterYourPassword"));
       setWarningFirstName(t("PleaseEnterYourName"));
-      setWarningLastName(t("PleaseEnterLastYame"));
+      setWarningLastName(t("PleaseEnterLastName"));
       setTimeout(() => {
         setWarningPhone("");
         setWarningPassword("");
@@ -86,14 +86,7 @@ function Login() {
   };
 
   const NextToHomeLobby = async () => {
-    if (userNameInput === "" || warningPasswordLg === "") {
-      setUserNameWarning(t(t("EnterYourPhoneNumber")));
-      setWarningPasswordLg(t("PleaseEnterYourPassword"));
-      setTimeout(() => {
-        setUserNameWarning("");
-        setWarningPasswordLg("");
-      }, 5000);
-    }
+    setLoading(true);
     try {
       const _res = await handleLogin(
         userNameInput,
@@ -107,6 +100,7 @@ function Login() {
         }
       );
       if (_res) {
+        setLoading(false)
         setMessageCreate(_res?.statusDesc);
         setTimeout(() => setMessageCreate(""), 5000);
       }
@@ -114,21 +108,29 @@ function Login() {
       showErrorAlert(t("unsuccessful"));
     }
   };
-
   const CreateUser = async () => {
+    setLoading(true);
+    if (bankCode === 0) {
+      setWarningBankCode(t("PleaseChooseBank"));
+      setTimeout(() => {
+        setLoading(false);
+        setWarningBankCode("");
+      }, 5000);
+    }
     try {
       const _res = await handleRegister(
-        inputFirstname,
-        inputLastname,
-        inputPhonenumber,
+        inputFirstName,
+        inputLastName,
+        inputPhoneNumber,
         inputPassword,
         inputBank,
         bankCode.toString(),
-        inputRef,
+        inputRef
       );
       if (_res) {
         setMessageCreate(_res?.statusDesc);
         setTimeout(() => {
+          setLoading(false);
           setMessageCreate("");
         }, 5000);
       }
@@ -145,7 +147,7 @@ function Login() {
     setShowPassword(false);
   };
   const handleRegisterTab = (event) => {
-    setInputPhonenumber("");
+    setInputPhoneNumber("");
     setInputPassword("");
     event.preventDefault();
     history.push("/register");
@@ -209,7 +211,7 @@ function Login() {
       .request(config)
       .then((response) => {
         if (response?.data?.data) {
-          setLogoweb(response?.data?.data?.logos?.logo);
+          setLogoWeb(response?.data?.data?.logos?.logo);
         }
       })
       .catch((error) => {
@@ -218,6 +220,14 @@ function Login() {
   };
   const _showPassword = () => {
     setShowPassword(!showPassword);
+  };
+  // ModalContact
+  const _ModalContact = (value) => {
+    if (value === "open") {
+      setOpenModalContact(true);
+    } else {
+      setOpenModalContact(false);
+    }
   };
   return (
     <div
@@ -232,6 +242,8 @@ function Login() {
       }}
     >
       <div id="__nuxt" data-v-app="">
+        {openModalContact === false && <Contact ModalContact={_ModalContact} />}
+
         <div data-v-19df7d63="">
           <header data-v-19df7d63="" className="w-full z-10">
             <div data-v-19df7d63="" className="w-full mx-auto"></div>
@@ -243,12 +255,21 @@ function Login() {
                   data-v-d8556cff=""
                   className="flex flex-col items-center justify-start min-h-screen relative overflow-hidden bg-wrapper px-4 pt-12 md:pt-24"
                 >
-                  <img
-                    data-v-d8556cff=""
-                    className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
-                    src={`${Constant?.SERVER_URL_IMAGE}/images/${logoweb}`}
-                    alt="center menu"
-                  />
+                  {logoWeb !== "" && logoWeb !== undefined ? (
+                    <img
+                      data-v-d8556cff=""
+                      className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
+                      src={`${Constant?.SERVER_URL_IMAGE}/images/${logoWeb}`}
+                      alt="center menu"
+                    />
+                  ) : (
+                    <img
+                      data-v-d8556cff=""
+                      className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
+                      src="https://via.placeholder.com/1000x200/cbcbd2/808080?text=Logo-Website "
+                      alt="center menu"
+                    />
+                  )}
                   <div
                     data-v-d8556cff=""
                     className="w-full max-w-[500px] bg-card-primary mb-24 border-0 rounded-base mx-auto px-4 py-2"
@@ -467,12 +488,16 @@ function Login() {
                                       data-v-9dec3a92=""
                                       className="flex justify-center items-center"
                                     >
-                                      <span
-                                        data-v-d8556cff=""
-                                        className="font-semibold text-[var(--btn-login)]"
-                                      >
-                                        {t("Login")}
-                                      </span>
+                                      {loading ? (
+                                        <Spinner />
+                                      ) : (
+                                        <span
+                                          data-v-d8556cff=""
+                                          className="font-semibold text-[var(--btn-login)]"
+                                        >
+                                          {t("Login")}
+                                        </span>
+                                      )}
                                     </div>
                                   </button>
                                 </div>
@@ -530,15 +555,15 @@ function Login() {
                                       // maxLength={typePhone === "TH" ? 10 : 13}
                                       // value={inputPhonenumber}
                                       // placeholder={selectedOption}
-                                      value={inputPhonenumber}
+                                      value={inputPhoneNumber}
                                       placeholder={t("telephoneNumber")} // Register
                                       onChange={(e) =>
-                                        setInputPhonenumber(e?.target?.value)
+                                        setInputPhoneNumber(e?.target?.value)
                                       }
                                     />
                                   </div>
                                   <span style={{ color: "red" }}>
-                                    {inputPhonenumber !== ""
+                                    {inputPhoneNumber !== ""
                                       ? ""
                                       : warningPhone}
                                   </span>
@@ -675,12 +700,12 @@ function Login() {
                                       placeholder={t("FirstName")}
                                       autocomplete="off"
                                       onChange={(e) =>
-                                        setInputFirstname(e?.target?.value)
+                                        setInputFirstName(e?.target?.value)
                                       }
                                     />
                                   </div>
                                   <span style={{ color: "red" }}>
-                                    {inputFirstname !== ""
+                                    {inputFirstName !== ""
                                       ? ""
                                       : warningFirstName}
                                   </span>
@@ -709,12 +734,12 @@ function Login() {
                                       placeholder={t("LastName")}
                                       autocomplete="off"
                                       onChange={(e) =>
-                                        setInputLastname(e?.target?.value)
+                                        setInputLastName(e?.target?.value)
                                       }
                                     />
                                   </div>
                                   <span style={{ color: "red" }}>
-                                    {inputLastname !== ""
+                                    {inputLastName !== ""
                                       ? ""
                                       : warningLastName}
                                   </span>
@@ -839,6 +864,9 @@ function Login() {
                                     </div>
                                   </div>
                                 </div>
+                                <span style={{ color: "red" }}>
+                                  {bankCode === 0 ? warningBankCode : ""}
+                                </span>
                                 <span className="absolute inset-y-0 end-0 flex items-center pointer-events-none px-3.5 pe-3.5">
                                   <span
                                     className="i-heroicons-chevron-down-20-solid flex-shrink-0 dark:text-gray-500 flex-shrink-0 text-gray-400 dark:text-primary-400 text-primary-500 h-6 w-6"
@@ -879,7 +907,6 @@ function Login() {
                                   {inputBank !== "" ? "" : warningBank}
                                 </span> */}
                                 <div style={{ padding: 10, color: "red" }}>
-                                  {textWarning}
                                   {messageCreate}
                                 </div>
 
@@ -926,12 +953,16 @@ function Login() {
                                     data-v-9dec3a92=""
                                     className="flex justify-center items-center"
                                   >
-                                    <span
-                                      data-v-d8556cff=""
-                                      className="text-[var(--btn-login)]"
-                                    >
-                                      {t("confirm")}
-                                    </span>
+                                    {loading ? (
+                                      <Spinner />
+                                    ) : (
+                                      <span
+                                        data-v-d8556cff=""
+                                        className="text-[var(--btn-login)]"
+                                      >
+                                        {t("confirm")}
+                                      </span>
+                                    )}
                                   </div>
                                 </button>
                               </div>
@@ -971,15 +1002,14 @@ function Login() {
           </main>
         </div>
       </div>
-      {openModalChangeLanguage &&
-        createPortal(
-          <ModalLanguage
-            closeModal={ModalChangeLanguage}
-            changeLanguage={changeLanguage}
-            activeLang={activeLang}
-          />,
-          document.body
-        )}
+      {openModalChangeLanguage && (
+        <ModalLanguage
+          closeModal={ModalChangeLanguage}
+          changeLanguage={changeLanguage}
+          activeLang={activeLang}
+        />
+      )}
+      {openModalContact && <ModalContact closeModal={_ModalContact} />}
     </div>
   );
 }

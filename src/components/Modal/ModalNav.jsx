@@ -10,9 +10,9 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [contactUs, setContactUs] = useState("");
-  const [logoweb, setLogoweb] = useState("");
+  const [logoWeb, setLogoWeb] = useState("");
   const [openModalChangeLanguage, setOpenModalChangeLanguage] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const userData = DataLocalStorage();
@@ -51,7 +51,7 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
       .request(config)
       .then((response) => {
         if (response?.data?.data) {
-          setLogoweb(response?.data?.data?.logos?.logo);
+          setLogoWeb(response?.data?.data?.logos?.logo);
         }
       })
       .catch((error) => {
@@ -87,10 +87,7 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
   //   setActiveLang(lng);
   // };
   return (
-    <div
-      className="vfm vfm--fixed vfm--inset"
-      style={{ zIndex: 1000 }}
-    >
+    <div className="vfm vfm--fixed vfm--inset" style={{ zIndex: 1000 }}>
       <div
         className="vfm__content vfm--outline-none w-full h-full flex bg-[var(--body)] flex-col space-y-2"
         tabindex="0"
@@ -99,7 +96,7 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
           <img
             data-v-910a7880=""
             className="cursor-pointer h-[3.75rem] md:h-20 mt-5 mx-auto"
-            src={`${Constant?.SERVER_URL_IMAGE}/images/${logoweb}`}
+            src={`${Constant?.SERVER_URL_IMAGE}/images/${logoWeb}`}
             alt="center menu"
           />
           <div

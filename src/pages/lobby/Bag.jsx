@@ -11,6 +11,7 @@ import Constant from "../../constant";
 import { DataLocalStorage } from "../../helper";
 import { useTranslation } from "react-i18next";
 import ModalCredit from "../../components/Modal/ModalCredit";
+import ImageSlideWallet from "../../components/ImageSlideWallet";
 
 function Bag() {
   const { t } = useTranslation();
@@ -125,10 +126,10 @@ function Bag() {
             >
               {/* <Letter_slide /> */}
               <div
-                style={{ marginTop: "5rem" }}
+                style={{ marginTop: "6rem" }}
                 className="events-wrapper animate__animated animate__slideInLeft animate__fast base-container-small"
               >
-                <div
+                {/* <div
                   className="splide splide--slide splide--ltr splide--draggable is-active is-initialized"
                   id="splide01"
                   role="region"
@@ -179,7 +180,8 @@ function Bag() {
                       ></button>
                     </li>
                   </ul>
-                </div>
+                </div> */}
+                <ImageSlideWallet/>
                 <div>
                   <div className="grid-cols-4 md:grid-cols-6 grid my-4 gap-3">
                     <div

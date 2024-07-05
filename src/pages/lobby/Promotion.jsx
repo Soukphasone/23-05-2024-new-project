@@ -7,7 +7,6 @@ import Footer from "../../components/Footer";
 import { DataLocalStorage } from "../../helper";
 import Constant from "../../constant";
 import ImageSlideWallet from "../../components/ImageSlideWallet";
-
 function Promotion() {
   const [dataFromLogin, setDataFromLogin] = useState({});
   const [dataPromotion, setDataPromotion] = useState([]);
@@ -53,7 +52,7 @@ function Promotion() {
             >
               {/* <Letter_slide /> */}
               <div
-                style={{ marginTop: "5rem" }}
+                style={{ marginTop: "6rem" }}
                 data-v-ac0eeeb0=""
                 className="promotion-wrapper animate__animated animate__slideInLeft animate__fast base-container-small space-y-2 flex flex-col justify-center"
               >

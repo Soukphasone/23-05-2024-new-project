@@ -1,7 +1,12 @@
 import { t } from "i18next";
 import React, { useState } from "react";
 
-function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHistoryBonus }) {
+function History({
+  closeModal,
+  dataHistoryDeposit,
+  dataHistoryWithdraw,
+  dataHistoryBonus,
+}) {
   const [active, setActive] = useState("deposit");
   const handleDeposit = () => {
     setActive("deposit");
@@ -12,7 +17,7 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
   const handleBonus = () => {
     setActive("bonus");
   };
-  const Class_Depodit =
+  const Class_Deposit =
     active === "deposit"
       ? "tabslinks relative cursor-pointer flex items-center justify-center history mx-2 active"
       : "tabslinks relative cursor-pointer flex items-center justify-center history mx-2 ";
@@ -71,9 +76,14 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
             </defs>
           </svg>
         </span>
+
         <div className="scroll-container ">
           <div>
-            <div data-v-ea58f736="" id="affiliate-advance-tab" className="w-full">
+            <div
+              data-v-ea58f736=""
+              id="affiliate-advance-tab"
+              className="w-full"
+            >
               <div data-v-ea58f736="" className="tabsWrapper">
                 <div
                   style={{
@@ -86,168 +96,210 @@ function History({ closeModal, dataHistoryDeposit, dataHistoryWithdraw, dataHist
                   className="tabs relative flex items-center justify-center tab-primary w-max"
                 >
                   <div
-                    onClick={handleDeposit}
-                    data-v-ea58f736=""
-                    id="affiliate-advance-tab"
-                    className={Class_Depodit}
+                    className={active === "deposit" ? "underline-active-h" : ""}
                   >
-                    <span
+                    <div
+                      onClick={handleDeposit}
                       data-v-ea58f736=""
-                      className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                      id="affiliate-advance-tab"
+                      className={Class_Deposit}
                     >
-                      {t("Deposit")}
-                    </span>
+                      <span
+                        data-v-ea58f736=""
+                        className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                      >
+                        {t("Deposit")}
+                      </span>
+                    </div>
                   </div>
                   <div
-                    onClick={handleWithdraw}
-                    data-v-ea58f736=""
-                    id="affiliate-advance-tab"
-                    className={Class_Withdraw}
+                    className={
+                      active === "withdraw" ? "underline-active-h" : ""
+                    }
                   >
-                    <span
+                    <div
+                      onClick={handleWithdraw}
                       data-v-ea58f736=""
-                      className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                      id="affiliate-advance-tab"
+                      className={Class_Withdraw}
                     >
-                      {t("Withdraw")}
-                    </span>
+                      <span
+                        data-v-ea58f736=""
+                        className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                      >
+                        {t("Withdraw")}
+                      </span>
+                    </div>
                   </div>
                   <div
-                    onClick={handleBonus}
-                    data-v-ea58f736=""
-                    id="affiliate-advance-tab"
-                    className={Class_Bonus}
+                    className={active === "bonus" ? "underline-active-h" : ""}
                   >
-                    <span
+                    <div
+                      onClick={handleBonus}
                       data-v-ea58f736=""
-                      className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                      id="affiliate-advance-tab"
+                      className={Class_Bonus}
                     >
-                      {t("bonus")}
-                    </span>
+                      <span
+                        data-v-ea58f736=""
+                        className="font-normal &lt;sm:text-base sm:text-base md:text-lg"
+                      >
+                        {t("bonus")}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className="flex justify-center mb-4">
-            <span className="text-red-500">( 5 รายการล่าสุด )</span>
-          </div> */}
           <div className="w-full my-2 min-h-[356px] flex flex-col items-center">
-            <div
-              className="text-base mx-auto text-secondary flex flex-col justify-center items-center"
-              style={{
-                width: "100%",
-              }}
-            >
-              {active === "deposit" ? (
-                <div className="history-list">
-                  {dataHistoryDeposit?.length > 0 &&
-                    dataHistoryDeposit?.map((deposit, index) => (
-                      <div
-                        key={index}
-                        className="deposit-withdraw-list"
-                      >
-                        <div className="h-list-left">
-                          <p>{t("DepositList")}</p>
-                          <p> {deposit?.f_amount}</p>
-                          <p>{t("Remark")} : {deposit?.s_remark}</p>
-                        </div>
-                        <div className="h-right">
-
-                          <div
-                            className={
-                              deposit?.s_status === "Y"
-                                ? "text-success"
-                                : deposit?.s_status === "C"
+            {dataHistoryBonus.length > 0 ||
+            dataHistoryWithdraw.length > 0 ||
+            dataHistoryDeposit.length > 0 ? (
+              <div
+                className="text-base mx-auto text-secondary flex flex-col justify-center items-center"
+                style={{
+                  width: "100%",
+                }}
+              >
+                {active === "deposit" ? (
+                  <div className="history-list">
+                    {dataHistoryDeposit?.length > 0 &&
+                      dataHistoryDeposit?.map((deposit, index) => (
+                        <div
+                          key={index}
+                          style={{ padding: "10px 10px" }}
+                          className="deposit-withdraw-list"
+                        >
+                          <div className="h-list-left">
+                            <p>{t("DepositList")}</p>
+                            <p className="text-h-amount">
+                              {" "}
+                              {deposit?.f_amount} {t("baht")}
+                            </p>
+                            <p>
+                              {t("Remark")} : {deposit?.s_remark}
+                            </p>
+                          </div>
+                          <div className="h-right">
+                            <div
+                              className={
+                                deposit?.s_status === "Y"
+                                  ? "text-success"
+                                  : deposit?.s_status === "C"
                                   ? "text-cancel"
                                   : "not-success"
-                            }
-                          >
-                            <p>
-                              {deposit?.s_status === "Y"
-                                ? `${t("Complete")}`
-                                : deposit?.s_status === "C"
+                              }
+                            >
+                              <p>
+                                {deposit?.s_status === "Y"
+                                  ? `${t("Complete")}`
+                                  : deposit?.s_status === "C"
                                   ? `${t("cancel")}`
                                   : `${t("unsuccessful")}`}
-                            </p>
-                            <p>
-                              {deposit?.d_datetime}
-                            </p>
+                              </p>
+                              <p>{deposit?.d_datetime}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                </div>
-
-              ) : active === "withdraw" ? (
-                <div className="history-list">
-                  {dataHistoryWithdraw?.length > 0 &&
-                    dataHistoryWithdraw?.map((withdraw, index) => (
-                      <div
-                        key={index}
-                        className="deposit-withdraw-list"
-                      >
-                        <div className="h-list-left">
-                          <p>{t("WithdrawalList")}</p>
-                          <p> {withdraw?.f_amount} บาท</p>
-                          <p>{t("Remark")} : {withdraw?.s_remark}</p>
-                        </div>
-                        <div className="h-right">
-
-                          <div
-                            className={
-                              withdraw?.s_status === "Y"
-                                ? "text-success"
-                                : withdraw?.s_status === "C"
+                      ))}
+                  </div>
+                ) : active === "withdraw" ? (
+                  <div className="history-list">
+                    {dataHistoryWithdraw?.length > 0 &&
+                      dataHistoryWithdraw?.map((withdraw, index) => (
+                        <div
+                          key={index}
+                          style={{ padding: "10px 10px" }}
+                          className="deposit-withdraw-list"
+                        >
+                          <div className="h-list-left">
+                            <p>{t("WithdrawalList")}</p>
+                            <p className="text-h-amount">
+                              {" "}
+                              {withdraw?.f_amount} {t("baht")}
+                            </p>
+                            <p>
+                              {t("Remark")} : {withdraw?.s_remark}
+                            </p>
+                          </div>
+                          <div className="h-right">
+                            <div
+                              className={
+                                withdraw?.s_status === "Y"
+                                  ? "text-success"
+                                  : withdraw?.s_status === "C"
                                   ? "text-cancel"
                                   : "text-not-success"
-                            }
-                          >
-                            <p>
-                              {withdraw?.s_status === "Y"
-                                ? `${t("Complete")}`
-                                : withdraw?.s_status === "C"
+                              }
+                            >
+                              <p>
+                                {withdraw?.s_status === "Y"
+                                  ? `${t("Complete")}`
+                                  : withdraw?.s_status === "C"
                                   ? `${t("cancel")}`
                                   : `${t("unsuccessful")}`}
-                            </p>
-                            <p>
-                              {withdraw?.d_datetime}
-                            </p>
+                              </p>
+                              <p>{withdraw?.d_datetime}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                </div>
-              ) : active === "bonus" ? (
-                <div className="history-list">
-                  {dataHistoryBonus?.length > 0 &&
-                    dataHistoryBonus?.map((bonus, index) => (
-                      <div
-                        key={index}
-                        className="deposit-withdraw-list"
-                      >
-                        <div className="h-list-left">
-                          <p>{t("BonusItems")}</p>
-                          <p>{t("Remark")} : {bonus?.s_remark}</p>
-                        </div>
-                        <div className="h-right">
-
-                          <div
-                            style={{ marginTop: '-20px' }}
-                            className="text-success"
-                          >
+                      ))}
+                  </div>
+                ) : active === "bonus" ? (
+                  <div className="history-list">
+                    {dataHistoryBonus?.length > 0 &&
+                      dataHistoryBonus?.map((bonus, index) => (
+                        <div
+                          key={index}
+                          style={{ padding: "10px 10px" }}
+                          className="deposit-withdraw-list"
+                        >
+                          <div className="h-list-left">
+                            <p>{t("BonusItems")}</p>
                             <p>
-                              {t("Complete")}
-                            </p>
-                            <p>
-                              {bonus?.d_datetime}
+                              {t("Remark")} : {bonus?.s_remark}
                             </p>
                           </div>
+                          <div className="h-right">
+                            <div
+                              style={{ marginTop: "-20px" }}
+                              className="text-success"
+                            >
+                              <p>{t("Complete")}</p>
+                              <p>{bonus?.d_datetime}</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                </div>
-              ) : null}
-            </div>
+                      ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : (
+              <div
+                style={{ marginTop: "5rem" }}
+                data-v-82953e26=""
+                class="w-full flex justify-center items-center gap-2 mb-4"
+              >
+                <span class="nuxt-icon nuxt-icon--fill icon-not-item">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7 0C3.13111 0 0 3.13075 0 7C0 10.8688 3.13075 14 7 14C10.8689 14 14 10.8693 14 7C14 3.13116 10.8693 0 7 0ZM7.71884 9.7787C7.71884 9.99986 7.39635 10.221 7.00014 10.221C6.5855 10.221 6.29068 9.99986 6.29068 9.7787V6.26812C6.29068 6.01013 6.58552 5.83502 7.00014 5.83502C7.39635 5.83502 7.71884 6.01013 7.71884 6.26812V9.7787ZM7.00016 4.98739C6.57631 4.98739 6.24463 4.67411 6.24463 4.32395C6.24463 3.97381 6.57634 3.66975 7.00016 3.66975C7.4148 3.66975 7.74654 3.97381 7.74654 4.32395C7.74654 4.67411 7.41478 4.98739 7.00016 4.98739Z"
+                      fill="#8E8E8E"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="text-primary font-medium <sm:text-base sm:text-base md:text-lg">
+                  No Item
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

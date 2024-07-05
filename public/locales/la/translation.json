@@ -242,7 +242,7 @@
 	"BankName": "ซื่อธนาคาร",
 	"TimesDay": "ຄັ້ງ/ວັນ",
 	"PleaseEnterYourName": "ກະລຸນາປ້ອນຊື່",
-	"PleaseEnterLastYame": "ກະລຸນາປ້ອນນາມສະກຸນ",
+	"PleaseEnterLastName": "ກະລຸນາປ້ອນນາມສະກຸນ",
 	"Next": "ຖັດໄປ",
 	"Back": "ຍ້ອນກັບ",
 	"bankAccount": "ບັນຊີທະນາຄານ",
@@ -250,6 +250,8 @@
 	"Slot": "ສະລ໋ອດ",
 	"Sport": "ກິລາ",
 	"Casino": "ຄາຊິໂນ",
-	"Fishing": "ຍິງປາ"
+	"Fishing": "ຍິງປາ",
+	"PleaseChooseBank":"ກະລຸນາເລືອກທະນາຄານ"
+
   }
   

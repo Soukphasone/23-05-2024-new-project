@@ -899,7 +899,7 @@
   "PleaseEnterComplete13": "请输入完整的 13 位电话号码。",
   "YouAlreadyHaveAnAccount": "您已经有一个帐户。",
   "PleaseEnterYourName": "请输入你的名字。",
-  "PleaseEnterLastYame": "请输入姓氏。",
+  "PleaseEnterLastName": "请输入姓氏。",
   "Next": "下一个",
   "Back": "回去",
   "bankAccount": "銀行帳戶",
@@ -907,5 +907,7 @@
   "Slot": "投币口",
   "Sport": "运动",
   "Casino": "赌场",
-  "Fishing": "射击"
+  "Fishing": "射击",
+  "PleaseChooseBank":"请选择银行"
+
 }

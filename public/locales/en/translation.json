@@ -889,7 +889,7 @@
   "PleaseEnterComplete13": "Please enter a complete 13 digit phone number.",
   "YouAlreadyHaveAnAccount": "You already have an account. Log in.",
   "PleaseEnterYourName": "Please enter your name.",
-  "PleaseEnterLastYame": "Please enter last name.",
+  "PleaseEnterLastName": "Please enter last name.",
   "Next": "Next",
   "Back": "Back",
   "bankAccount": "Bank account",
@@ -897,5 +897,7 @@
   "Slot": "Slot",
   "Sport": "Sport",
   "Casino": "Casino",
-  "Fishing": "Fishing"
+  "Fishing": "Fishing",
+  "PleaseChooseBank":"Please choose a bank"
+
 }

@@ -11,9 +11,9 @@ function DepositWithdraw() {
   const { t } = useTranslation();
   const history = useHistory();
   const bank = "BANK";
-  const [modalgetCredit, setOpenModalgetcredit] = useState(false);
+  const [modalgetCredit, setOpenModalGetCredit] = useState(false);
   const ModalGetCredit = () => {
-    setOpenModalgetcredit(false);
+    setOpenModalGetCredit(false);
   };
   // const depositBankList = history?.location?.state;
   const NextoDeposit = () => {
@@ -142,7 +142,7 @@ function DepositWithdraw() {
                   </a>
                 </div>
                 <div
-                  onClick={() => setOpenModalgetcredit(true)}
+                  onClick={() => setOpenModalGetCredit(true)}
                   data-v-e339f85c=""
                   style={{ marginTop: "20px" }}
                 >
