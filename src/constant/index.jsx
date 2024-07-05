@@ -1,7 +1,7 @@
 module.exports = {
   // AGENT_CODE: "AG002",
-  AGENT_CODE: "AG006",
-  // AGENT_CODE: "AG019",
+  // AGENT_CODE: "AG006",
+  AGENT_CODE: "AG019",
   // AGENT_CODE: "AG021",
   // AGENT_CODE: "AG022",
 

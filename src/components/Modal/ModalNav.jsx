@@ -78,7 +78,6 @@ function Modal({ closeModal, imageLang, changeLanguage, activeLang }) {
   };
   // Change Language
   const ModalChangeLanguage = () => {
-    console.log("ModalChange");
     setOpenModalChangeLanguage(false);
   };
   // const changeLanguage = (lng, img) => {
