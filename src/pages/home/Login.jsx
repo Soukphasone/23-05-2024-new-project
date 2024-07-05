@@ -63,7 +63,6 @@ function Login() {
   };
 
   const _clickNextStep = () => {
-    setActiveTab("register-bank");
     if (
       inputPhoneNumber === "" ||
       inputFirstName === "" ||
