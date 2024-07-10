@@ -7,6 +7,7 @@ import Constant from "../../constant";
 import { FillerCategory2 } from "../../helper";
 import _ from 'lodash';
 import { OpenNewTabWithHTML } from "../../helper";
+import { showWarningAlert } from "../../helper/SweetAlert";
 import { useTranslation } from "react-i18next";
 function GameType() {
   const { t } = useTranslation();
@@ -19,8 +20,11 @@ function GameType() {
   const [percentageData, setPercentageData] = useState([]);
   const [favoriteOption, setFavoriteOption] = useState("all");
   const [valueBrandCode, setValueBrandCode] = useState("");
+  const [dataBalance, setDataBalance] = useState(0);
 
   useEffect(() => {
+    const balance = JSON.parse(localStorage.getItem(Constant.LOGIN_USER_DATA));
+    setDataBalance(balance?.balance?.amount)
     _clickCategoryGame(typeGame?.type);
     _getDataGame(typeGame?.dataGame);
     setActiveTypeGame(typeGame?.dataGame?.s_brand_name);
@@ -62,6 +66,9 @@ function GameType() {
 
   const _getDataGamePlayGame = async (value) => {
     try {
+          if(dataBalance < 1.00) {
+            showWarningAlert("กรุณาเติมเงินก่อน!")
+    }else{
       const _data = {
         s_game_code:
           value?.s_type === "CASINO"
@@ -96,6 +103,7 @@ function GameType() {
           window.open(URL_HTML, "_blank");
         });
       }
+    }
     } catch (error) {
       console.error("Error playing the game:", error);
     }

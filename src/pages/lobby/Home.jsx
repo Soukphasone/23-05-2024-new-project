@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import ModalNews from "../../components/Modal/ModalNews";
 import { GetNews } from "../../api/getdatauser";
 import Contact from "../../components/Contact";
+import { showWarningAlert } from "../../helper/SweetAlert";
 import ModalContact from "../../components/Modal/ModalContact";
 function HomePage() {
   //
@@ -29,6 +30,7 @@ function HomePage() {
   const [newsPromotion, setNewsPromotion] = useState([]);
   const [openModalNews, setOpenModalNews] = useState(false);
   const [openModalContact, setOpenModalContact] = useState(false);
+  const [dataBalance, setDataBalance] = useState(0);
   const _ModalNews = () => {
     setOpenModalNews(false);
   };
@@ -43,6 +45,8 @@ function HomePage() {
     history.push(Constant.TYPE_GAME, TypeGame);
   };
   useEffect(() => {
+    const balance = JSON.parse(localStorage.getItem(Constant.LOGIN_USER_DATA));
+    setDataBalance(balance?.balance?.amount)
     const _dataUser = DataLocalStorage();
     if (_dataUser) {
       setDataFromLogin(_dataUser);
@@ -135,37 +139,41 @@ function HomePage() {
   const _getDataGamePlayGame = async (value) => {
     // console.log("PLAY_GAME_HOME", value);
     try {
-      const _data = {
-        s_game_code:
-          value?.s_type === "CASINO"
-            ? "B001"
-            : value?.s_type === "SPORT"
-            ? "B001"
-            : value?.s_game_code,
-        s_brand_code: value?.s_brand_code,
-        s_username: dataFromLogin?.username,
-        s_agent_code: Constant?.AGENT_CODE,
-        isMobile: deviceType === "Mobile" ? "true" : "false",
-        ip_client: "184.22.14.167",
-        s_lang: "th",
-      };
-      // console.log("Fishing_game", _data);
-      // Send the data to the server to get the game URL
-      const _res = await axios({
-        method: "post",
-        url: `${Constant.SERVER_URL}/Game/Access`,
-        data: _data,
-      });
+      if (dataBalance < 1.00) {
+        showWarningAlert("กรุณาเติมเงินก่อน!")
+      } else {
+        const _data = {
+          s_game_code:
+            value?.s_type === "CASINO"
+              ? "B001"
+              : value?.s_type === "SPORT"
+                ? "B001"
+                : value?.s_game_code,
+          s_brand_code: value?.s_brand_code,
+          s_username: dataFromLogin?.username,
+          s_agent_code: Constant?.AGENT_CODE,
+          isMobile: deviceType === "Mobile" ? "true" : "false",
+          ip_client: "184.22.14.167",
+          s_lang: "th",
+        };
+        // console.log("Fishing_game", _data);
+        // Send the data to the server to get the game URL
+        const _res = await axios({
+          method: "post",
+          url: `${Constant.SERVER_URL}/Game/Access`,
+          data: _data,
+        });
 
-      if (_res?.data?.url) {
-        setTimeout(() => {
-          window.open(_res?.data?.url, "_blank");
-        });
-      }
-      if (_res?.data?.res_html) {
-        setTimeout(() => {
-          OpenNewTabWithHTML(_res?.data?.res_html);
-        });
+        if (_res?.data?.url) {
+          setTimeout(() => {
+            window.open(_res?.data?.url, "_blank");
+          });
+        }
+        if (_res?.data?.res_html) {
+          setTimeout(() => {
+            OpenNewTabWithHTML(_res?.data?.res_html);
+          });
+        }
       }
     } catch (error) {
       console.error("Error playing the game:", error);
@@ -957,8 +965,8 @@ function HomePage() {
                                 onKeyDown={() => ""}
                                 onClick={() =>
                                   dataGameType === "FAVORITE" ||
-                                  // dataGameType === "HOTHIT" ||
-                                  dataGameType === "FISHING"
+                                    // dataGameType === "HOTHIT" ||
+                                    dataGameType === "FISHING"
                                     ? _getDataGamePlayGame(item, "FISHING")
                                     : _getDataGame(item)
                                 }
@@ -974,13 +982,13 @@ function HomePage() {
                                 onClick={() =>
                                   dataGameType === "FAVORITE"
                                     ? // dataGameType === "HOTHIT"
-                                      _getDataGamePlayGame(item)
+                                    _getDataGamePlayGame(item)
                                     : _getDataGame(item)
                                 }
                               />
                             )}
                             {item?.s_img !== undefined &&
-                            item?.status === "Y" ? (
+                              item?.status === "Y" ? (
                               <div className="absolute z-[20] flex flex-col space-y-1 text-center text-[10px] top-0 right-2">
                                 <span
                                   onKeyDown={() => ""}

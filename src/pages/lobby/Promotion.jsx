@@ -56,7 +56,7 @@ function Promotion() {
                 data-v-ac0eeeb0=""
                 className="promotion-wrapper animate__animated animate__slideInLeft animate__fast base-container-small space-y-2 flex flex-col justify-center"
               >
-               <ImageSlideWallet/>
+               {/* <ImageSlideWallet/> */}
                 <div
                   data-v-ac0eeeb0=""
                   className="animate__animated animate__fadeIn animate__fast"

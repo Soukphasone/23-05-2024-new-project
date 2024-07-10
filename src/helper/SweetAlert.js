@@ -11,6 +11,16 @@ export const showErrorAlert = (message) => {
         color: "#FFF",
     });
 };
+export const showWarningAlert = (message) => {
+    Swal.fire({
+        icon: "warning",
+        title: message,
+        showConfirmButton: false,
+        timer: 3000,
+        background: 'var(--card-primary)',
+        color: "#FFF",
+    });
+};
 
 export const showSuccessAlert = (message) => {
     Swal.fire({

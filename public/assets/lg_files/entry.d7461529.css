@@ -23117,6 +23117,9 @@ body {
 .nuxt-icon svg {
     margin-bottom: unset !important
 }
+.nuxt-icon img {
+    margin-bottom: unset !important
+}
 
 .toggle-container:focus {
     box-shadow: unset !important
@@ -27558,6 +27561,12 @@ select {
 }
 
 .nuxt-icon svg {
+    height: 1em;
+    margin-bottom: .125em;
+    vertical-align: middle;
+    width: 1em
+}
+.nuxt-icon img {
     height: 1em;
     margin-bottom: .125em;
     vertical-align: middle;
