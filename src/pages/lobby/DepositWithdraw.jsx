@@ -11,7 +11,7 @@ function DepositWithdraw() {
   const { t } = useTranslation();
   const history = useHistory();
   const bank = "BANK";
-  const [modalgetCredit, setOpenModalGetCredit] = useState(false);
+  const [MDetCredit, setOpenModalGetCredit] = useState(false);
   const ModalGetCredit = () => {
     setOpenModalGetCredit(false);
   };
@@ -32,7 +32,7 @@ function DepositWithdraw() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div
-              style={{ marginTop: "6rem" }}
+              style={{ marginTop: "7.4rem" }}
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >
@@ -213,7 +213,7 @@ function DepositWithdraw() {
           <Footer Active={bank} />
         </div>
       </div>
-      {modalgetCredit && <ModalCredit closeModal={ModalGetCredit} />}
+      {MDetCredit && <ModalCredit closeModal={ModalGetCredit} />}
     </body>
   );
 }
