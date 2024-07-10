@@ -32,7 +32,7 @@ function DepositWithdraw() {
             className="min-h-screen overflow-scroll pb-[80px]"
           >
             <div
-              style={{ marginTop: "7rem" }}
+              style={{ marginTop: "7.4rem" }}
               data-v-3c88d514=""
               className="w-full mx-auto base-container pb-2"
             >

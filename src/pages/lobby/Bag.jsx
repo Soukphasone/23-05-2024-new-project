@@ -126,7 +126,7 @@ function Bag() {
             >
               {/* <Letter_slide /> */}
               <div
-                style={{ marginTop: "7rem" }}
+                style={{ marginTop: "7.4rem" }}
                 className="events-wrapper animate__animated animate__slideInLeft animate__fast base-container-small"
               >
                 {/* <div

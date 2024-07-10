@@ -52,7 +52,7 @@ function Promotion() {
             >
               {/* <Letter_slide /> */}
               <div
-                style={{ marginTop: "6rem" }}
+                style={{ marginTop: "7.4rem" }}
                 data-v-ac0eeeb0=""
                 className="promotion-wrapper animate__animated animate__slideInLeft animate__fast base-container-small space-y-2 flex flex-col justify-center"
               >
