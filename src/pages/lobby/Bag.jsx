@@ -181,7 +181,7 @@ function Bag() {
                     </li>
                   </ul>
                 </div> */}
-                {/* <ImageSlideWallet/> */}
+                <ImageSlideWallet/>
                 <div>
                   <div className="grid-cols-4 md:grid-cols-6 grid my-4 gap-3">
                     <div
