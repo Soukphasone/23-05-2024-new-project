@@ -265,7 +265,7 @@ function Login() {
                     <img
                       data-v-d8556cff=""
                       className="h-30 my-8 w-auto z-20 mx-auto cursor-pointer"
-                      src="https://via.placeholder.com/1000x200/cbcbd2/808080?text=Logo-Website "
+                      src="https://via.placeholder.com/1000x200/323234/eaeaea/?text=Logo-Website "
                       alt="center menu"
                     />
                   )}
